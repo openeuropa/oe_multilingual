@@ -17,7 +17,7 @@ services:
     environment:
       - PLUGIN_ENDPOINT=web:8080
       - PLUGIN_GEN_AUTH=yes
-      - PLUGIN_DOMAIN=oetheme-${DRONE_BUILD_NUMBER}-${DRONE_JOB_NUMBER}.ci.fpfis.tech.ec.europa.eu
+      - PLUGIN_DOMAIN=oe_multilingual-${DRONE_BUILD_NUMBER}-${DRONE_JOB_NUMBER}.ci.fpfis.tech.ec.europa.eu
       - PLUGIN_URL_OUTPUT_FILE=/test/oe_multilingual/.frpc
 
 matrix:
