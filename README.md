@@ -1,5 +1,8 @@
 # OpenEuropa Multilingual
 
+[![Build Status](https://drone.fpfis.eu/api/badges/openeuropa/oe_multilingual/status.svg?branch=master)](https://drone.fpfis.eu/openeuropa/oe_multilingual)
+
+
 ## Development setup
 
 You can build the test site by running the following steps.
