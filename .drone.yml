@@ -27,13 +27,6 @@ matrix:
 
 pipeline:
 
-  npm-build:
-    group: prepare
-    image: node
-    commands: 
-      - npm install
-      - npm run build
-
   composer-install:
     group: prepare
     image: fpfis/php71-build
