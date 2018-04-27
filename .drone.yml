@@ -1,0 +1,67 @@
+workspace:
+  base: /test
+  path: oe_multilingual
+
+services:
+  web:
+    image: fpfis/php71-build:latest
+    environment:
+     - DOCUMENT_ROOT=/test/oe_multilingual
+  mysql:
+    image: fpfis/mysql56
+  frpc-tunnel:
+    image: fpfis/drone-frpc-plugin:latest
+    when:
+      event: [ push, tag ]
+    secrets: [ frpc_token, frpc_server ]
+    environment:
+      - PLUGIN_ENDPOINT=web:8080
+      - PLUGIN_GEN_AUTH=yes
+      - PLUGIN_DOMAIN=oetheme-${DRONE_BUILD_NUMBER}-${DRONE_JOB_NUMBER}.ci.fpfis.tech.ec.europa.eu
+      - PLUGIN_URL_OUTPUT_FILE=/test/oe_multilingual/.frpc
+
+matrix:
+  DRUPAL_VERSION:
+    - 8.6.x
+    - 8.5.x
+
+pipeline:
+
+  npm-build:
+    group: prepare
+    image: node
+    commands: 
+      - npm install
+      - npm run build
+
+  composer-install:
+    group: prepare
+    image: fpfis/php71-build
+    volumes:
+      - /cache:/cache
+    commands:
+      - composer require webflo/drupal-core-require-dev:${DRUPAL_VERSION}
+
+  site-install:
+    image: fpfis/php71-build
+    commands:
+      - ./vendor/bin/run drupal:site-setup
+      - ./vendor/bin/run drupal:site-install
+
+  grumphp:
+    group: test
+    image: fpfis/php71-build
+    commands:
+      - ./vendor/bin/grumphp run
+
+  phpunit:
+    group: test
+    image: fpfis/php71-build
+    commands:
+      - ./vendor/bin/phpunit
+
+  behat:
+    group: test
+    image: fpfis/php71-build
+    commands:
+      - ./vendor/bin/behat
