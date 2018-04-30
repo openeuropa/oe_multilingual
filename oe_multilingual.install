@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Install, update and uninstall functions for the oe_multilingual module.
@@ -6,16 +7,46 @@
 
 declare(strict_types = 1);
 
+use Drupal\administration_language_negotiation\Plugin\LanguageNegotiation\LanguageNegotiationAdministrationLanguage;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
+use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationSelected;
+
 /**
- * Implement hook_install().
+ * Implements hook_install().
  */
 function oe_multilingual_install() {
-  $config = \Drupal::configFactory()->getEditable('locale.settings');
-
-  // Make sure that English language is translatable.
-  $config->set('translate_english', true);
-
   // Disable remote translation downloading from Drupal localisation service.
-  $config->set('translation.import_enabled', false);
-  $config->save();
+  // Also make sure that English language is translatable.
+  \Drupal::configFactory()
+    ->getEditable('locale.settings')
+    ->set('translation.import_enabled', FALSE)
+    ->set('translate_english', TRUE)
+    ->save();
+
+  // Enable default language negotiation methods with related weights.
+  $type = LanguageInterface::TYPE_INTERFACE;
+  $negotiations = [
+    LanguageNegotiationAdministrationLanguage::METHOD_ID => -20,
+    LanguageNegotiationUrl::METHOD_ID => -19,
+    LanguageNegotiationSelected::METHOD_ID => 20,
+  ];
+
+  \Drupal::configFactory()
+    ->getEditable('language.types')
+    ->set("negotiation.{$type}.enabled", $negotiations)
+    ->set("negotiation.{$type}.method_weights", $negotiations)
+    ->save();
+
+  // Configure administrative language negotiation.
+  \Drupal::configFactory()
+    ->getEditable('administration_language_negotiation.negotiation')
+    ->set('default_language', 'en')
+    ->set('paths', [
+      '/admin',
+      '/admin/*',
+      '/node/add/*',
+      '/node/*/edit',
+      '/node/*/translations',
+    ])->save();
 }
