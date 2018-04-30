@@ -5,17 +5,19 @@ type: module
 core: 8.x
 
 dependencies:
-  - content_translation
-  - language
+  - administration_language_negotiation:administration_language_negotiation
+  - drupal:content_translation
+  - drupal:language
+  - pathauto:pathauto
 
 config_devel:
   install:
+    # Official EU languages
     - language.entity.bg
     - language.entity.cs
     - language.entity.da
     - language.entity.de
     - language.entity.el
-    - language.entity.en
     - language.entity.es
     - language.entity.et
     - language.entity.fi

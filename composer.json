@@ -6,6 +6,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
+        "drupal/pathauto": "1.2",
+        "drupal/administration_language_negotiation": "1.4",
         "php": "^7.1"
     },
     "require-dev": {

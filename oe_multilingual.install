@@ -1,0 +1,21 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the oe_multilingual module.
+ */
+
+declare(strict_types = 1);
+
+/**
+ * Implement hook_install().
+ */
+function oe_multilingual_install() {
+  $config = \Drupal::configFactory()->getEditable('locale.settings');
+
+  // Make sure that English language is translatable.
+  $config->set('translate_english', true);
+
+  // Disable remote translation downloading from Drupal localisation service.
+  $config->set('translation.import_enabled', false);
+  $config->save();
+}
