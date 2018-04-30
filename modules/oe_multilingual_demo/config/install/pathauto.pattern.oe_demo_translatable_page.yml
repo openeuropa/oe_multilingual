@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: oe_demo_translatable_page
+label: 'Demo translatable page'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  4c3dfef3-a556-41cf-8639-2d381e6ea498:
+    id: node_type
+    bundles:
+      oe_demo_translatable_page: oe_demo_translatable_page
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 4c3dfef3-a556-41cf-8639-2d381e6ea498
+selection_logic: and
+weight: -5
+relationships: {  }
