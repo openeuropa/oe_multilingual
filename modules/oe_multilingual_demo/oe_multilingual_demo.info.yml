@@ -9,7 +9,8 @@ dependencies:
 
 config_devel:
   install:
-    - field.field.node.oe_demo_translatable_page.body
+    - field.storage.node.field_oe_demo_translatable_body
+    - field.field.node.oe_demo_translatable_page.field_oe_demo_translatable_body
     - language.content_settings.node.oe_demo_translatable_page
     - node.type.oe_demo_translatable_page
     - pathauto.pattern.oe_demo_translatable_page

@@ -2,12 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.body
+    - field.storage.node.field_oe_demo_translatable_body
     - node.type.oe_demo_translatable_page
   module:
     - text
-id: node.oe_demo_translatable_page.body
-field_name: body
+id: node.oe_demo_translatable_page.field_oe_demo_translatable_body
+field_name: field_oe_demo_translatable_body
 entity_type: node
 bundle: oe_demo_translatable_page
 label: Body
@@ -16,6 +16,5 @@ required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
-settings:
-  display_summary: true
-field_type: text_with_summary
+settings: {  }
+field_type: text_long
