@@ -36,3 +36,7 @@ config_devel:
     - language.entity.sk
     - language.entity.sl
     - language.entity.sv
+
+  optional:
+    # Language switcher block
+    - block.block.oe_multilingual_language_switcher

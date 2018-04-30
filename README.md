@@ -13,8 +13,20 @@ Install all the composer dependencies:
 $ composer install
 ```
 
-Customize build settings by copying `runner.yml.dist` to `runner.yml` and
-changing relevant values, like your database credentials.
+In `./build/themes/contrib/oe_theme` install required Node.js dependencies by running:
+
+```
+$ npm install
+```
+
+To build the final artifacts run:
+
+```
+$ npm run build
+```
+
+In project root customize build settings by copying `runner.yml.dist` to `runner.yml` and
+change relevant values, like your database credentials.
 
 Setup test site by running:
 
@@ -52,6 +64,8 @@ Then:
 
 ```
 $ docker-compose exec -u web web composer install
+$ docker-compose exec -u node node npm install
+$ docker-compose exec -u node node npm run build
 $ docker-compose exec -u web web ./vendor/bin/run drupal:site-setup
 $ docker-compose exec -u web web ./vendor/bin/run drupal:site-install
 ```
