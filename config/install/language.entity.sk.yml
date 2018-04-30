@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: sk
+label: Slovak
+direction: ltr
+weight: 10
+locked: false

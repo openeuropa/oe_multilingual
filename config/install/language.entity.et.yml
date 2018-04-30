@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: et
+label: Estonian
+direction: ltr
+weight: -6
+locked: false

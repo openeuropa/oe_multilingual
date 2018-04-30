@@ -7,3 +7,30 @@ core: 8.x
 dependencies:
   - content_translation
   - language
+
+config_devel:
+  install:
+    - language.entity.bg
+    - language.entity.cs
+    - language.entity.da
+    - language.entity.de
+    - language.entity.el
+    - language.entity.en
+    - language.entity.es
+    - language.entity.et
+    - language.entity.fi
+    - language.entity.fr
+    - language.entity.ga
+    - language.entity.hr
+    - language.entity.hu
+    - language.entity.it
+    - language.entity.lt
+    - language.entity.lv
+    - language.entity.mt
+    - language.entity.nl
+    - language.entity.pl
+    - language.entity.pt
+    - language.entity.ro
+    - language.entity.sk
+    - language.entity.sl
+    - language.entity.sv
