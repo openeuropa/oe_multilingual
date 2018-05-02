@@ -14,4 +14,4 @@ id: node.oe_demo_translatable_page
 target_entity_type_id: node
 target_bundle: oe_demo_translatable_page
 default_langcode: site_default
-language_alterable: false
+language_alterable: true
