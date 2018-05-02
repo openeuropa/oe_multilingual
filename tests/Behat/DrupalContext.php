@@ -20,16 +20,57 @@ class DrupalContext extends RawDrupalContext {
    *
    * @Given the following :arg1 content item:
    */
-  public function createContent(string $label, TableNode $table): void {
-    $entity_type = $this->getEntityTypeByLabel($label);
+  public function createContent(string $entity_type_label, TableNode $table): void {
+    $entity_type = $this->getEntityTypeByLabel($entity_type_label);
     $node = (object) [
       'type' => $entity_type,
     ];
-    foreach ($table->getRowsHash() as $label => $value) {
-      $name = $this->getFieldNameByLabel($entity_type, $label);
+    foreach ($table->getRowsHash() as $field_label => $value) {
+      $name = $this->getFieldNameByLabel($entity_type, $field_label);
       $node->{$name} = $value;
     }
     $this->nodeCreate($node);
+  }
+
+  /**
+   * Create translation for given content.
+   *
+   * @Given the following :language translation for the :entity_type_label with title :title:
+   */
+  public function createTranslation(string $language, string $entity_type_label, string $title, TableNode $table): void {
+    $entity_type = $this->getEntityTypeByLabel($entity_type_label);
+
+    $values = [];
+    $values['type'] = $entity_type;
+    foreach ($table->getRowsHash() as $field_label => $value) {
+      $name = $this->getFieldNameByLabel($entity_type, $field_label);
+      $values[$name] = $value;
+    }
+
+    /** @var \Drupal\Core\Entity\ContentEntityInterface $translation */
+    $translation = \Drupal::entityTypeManager()->getStorage('node')->create($values);
+    $entity = $this->getEntityByLabel('node', $title);
+
+    // Add the translation to the entity.
+    $entity->addTranslation($language, $translation->toArray());
+    $entity->save();
+  }
+
+  /**
+   * Assert viewing content given its type and title.
+   *
+   * @param string $title
+   *   Content title.
+   *
+   * @Given I am visiting the :title content
+   * @Given I visit the :title content
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  public function iAmViewingTheContent($title) {
+    $nid = $this->getEntityByLabel('node', $title)->id();
+    $this->visitPath("node/$nid");
   }
 
   /**
@@ -47,9 +88,9 @@ class DrupalContext extends RawDrupalContext {
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   protected function getEntityByLabel(string $entity_type_id, string $label): ContentEntityInterface {
-    $entity_type_manager = \Drupal::entityTypeManager();
-    $label_field = $entity_type_manager->getDefinition($entity_type_id)->getKey('label');
-    $entity_list = $entity_type_manager->getStorage($entity_type_id)->loadByProperties([$label_field => $label]);
+    $manager = \Drupal::entityTypeManager();
+    $label_field = $manager->getDefinition($entity_type_id)->getKey('label');
+    $entity_list = $manager->getStorage($entity_type_id)->loadByProperties([$label_field => $label]);
     return array_shift($entity_list);
   }
 
