@@ -37,6 +37,13 @@ pipeline:
     commands:
       - composer require webflo/drupal-core-require-dev:${DRUPAL_VERSION}
 
+  npm-build:
+    group: prepare
+    image: node
+    commands:
+      - npm install
+      - npm run build
+
   site-install:
     image: fpfis/php71-build
     commands:
