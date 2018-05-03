@@ -35,7 +35,7 @@ pipeline:
     volumes:
       - /cache:/cache
     commands:
-      - composer require webflo/drupal-core-require-dev:${DRUPAL_VERSION}
+      - composer require webflo/drupal-core-require-dev:${DRUPAL_VERSION=8.6.x}
 
   npm-build:
     group: prepare
