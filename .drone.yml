@@ -30,7 +30,6 @@ matrix:
 pipeline:
 
   composer-install:
-    group: prepare
     image: fpfis/php71-build
     volumes:
       - /cache:/cache
@@ -38,9 +37,9 @@ pipeline:
       - composer require webflo/drupal-core-require-dev:${DRUPAL_VERSION=8.6.x}
 
   npm-build:
-    group: prepare
     image: node
     commands:
+      - cd build/themes/contrib/oe_theme
       - npm install
       - npm run build
 
