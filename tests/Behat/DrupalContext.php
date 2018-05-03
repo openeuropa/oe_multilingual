@@ -22,13 +22,13 @@ class DrupalContext extends RawDrupalContext {
    */
   public function createContent(string $entity_type_label, TableNode $table): void {
     $entity_type = $this->getEntityTypeByLabel($entity_type_label);
-    $node = (object) [
-      'type' => $entity_type,
-    ];
+
+    $node = new \stdClass();
     foreach ($table->getRowsHash() as $field_label => $value) {
       $name = $this->getFieldNameByLabel($entity_type, $field_label);
       $node->{$name} = $value;
     }
+    $node->type = $entity_type;
     $this->nodeCreate($node);
   }
 
@@ -39,9 +39,9 @@ class DrupalContext extends RawDrupalContext {
    */
   public function createTranslation(string $language, string $entity_type_label, string $title, TableNode $table): void {
     $entity_type = $this->getEntityTypeByLabel($entity_type_label);
+    $language = $this->getLanguageIdByName($language);
 
-    $values = [];
-    $values['type'] = $entity_type;
+    $values = ['type' => $entity_type];
     foreach ($table->getRowsHash() as $field_label => $value) {
       $name = $this->getFieldNameByLabel($entity_type, $field_label);
       $values[$name] = $value;
@@ -52,8 +52,11 @@ class DrupalContext extends RawDrupalContext {
     $entity = $this->getEntityByLabel('node', $title);
 
     // Add the translation to the entity.
-    $entity->addTranslation($language, $translation->toArray());
-    $entity->save();
+    $entity->addTranslation($language, $translation->toArray())->save();
+
+    // Make sure URL alias is correctly generated for given translation.
+    $translation = $entity->getTranslation($language);
+    \Drupal::service('pathauto.generator')->createEntityAlias($translation, 'insert');
   }
 
   /**
@@ -139,8 +142,26 @@ class DrupalContext extends RawDrupalContext {
       }
     }
 
-    // If no field has been found then return label.
-    return $label;
+    throw new \InvalidArgumentException("Field '{$label}' not found.");
+  }
+
+  /**
+   * Get language ID given its name.
+   *
+   * @param string $name
+   *   Language name.
+   *
+   * @return string
+   *   Language ID.
+   */
+  protected function getLanguageIdByName(string $name): string {
+    foreach (\Drupal::languageManager()->getLanguages() as $language) {
+      if ($language->getName() === $name) {
+        return $language->getId();
+      }
+    }
+
+    throw new \InvalidArgumentException("Language '{$name}' not found.");
   }
 
 }

@@ -18,13 +18,6 @@ default:
       drupal:
         drupal_root: "build"
       region_map:
-        page: "body"
-        header: ".ecl-site-header"
-        navigation: ".ecl-navigation-menu"
-        about dropdown menu: "#nav-menu-expandable-group-2"
-        priorities dropdown menu: "#nav-menu-expandable-group-3"
-        identity footer: ".ecl-footer__site-identity"
-        corporate footer: ".ecl-footer__site-corporate"
-        contacts footer: ".ecl-footer__ec"
+        language switcher: "#block-oe-multilingual-language-switcher"
   formatters:
     progress: ~

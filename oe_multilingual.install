@@ -24,21 +24,7 @@ function oe_multilingual_install() {
     ->set('translate_english', TRUE)
     ->save();
 
-  // Enable default language negotiation methods with related weights.
-  $type = LanguageInterface::TYPE_INTERFACE;
-  $negotiations = [
-    LanguageNegotiationAdministrationLanguage::METHOD_ID => -20,
-    LanguageNegotiationUrl::METHOD_ID => -19,
-    LanguageNegotiationSelected::METHOD_ID => 20,
-  ];
-
-  \Drupal::configFactory()
-    ->getEditable('language.types')
-    ->set("negotiation.{$type}.enabled", $negotiations)
-    ->set("negotiation.{$type}.method_weights", $negotiations)
-    ->save();
-
-  // Configure administrative language negotiation.
+  // Configure administrative language negotiation method.
   \Drupal::configFactory()
     ->getEditable('administration_language_negotiation.negotiation')
     ->set('default_language', 'en')
@@ -49,4 +35,30 @@ function oe_multilingual_install() {
       '/node/*/edit',
       '/node/*/translations',
     ])->save();
+
+  // For interface negotiation make sure administrative pages are in English.
+  $interface_settings = [
+    LanguageNegotiationAdministrationLanguage::METHOD_ID => -20,
+    LanguageNegotiationUrl::METHOD_ID => -19,
+    LanguageNegotiationSelected::METHOD_ID => 20,
+  ];
+
+  // For content negotiation make sure that content respects URL language.
+  $content_settings = [
+    LanguageNegotiationUrl::METHOD_ID => -19,
+    LanguageNegotiationSelected::METHOD_ID => 20,
+  ];
+
+  // Set default language negotiation methods with related weights.
+  \Drupal::configFactory()
+    ->getEditable('language.types')
+    ->set('configurable', [
+      LanguageInterface::TYPE_INTERFACE,
+      LanguageInterface::TYPE_CONTENT,
+    ])
+    ->set('negotiation.' . LanguageInterface::TYPE_INTERFACE . '.enabled', $interface_settings)
+    ->set('negotiation.' . LanguageInterface::TYPE_INTERFACE . '.method_weights', $interface_settings)
+    ->set('negotiation.' . LanguageInterface::TYPE_CONTENT . '.enabled', $content_settings)
+    ->set('negotiation.' . LanguageInterface::TYPE_CONTENT . '.method_weights', $content_settings)
+    ->save();
 }
