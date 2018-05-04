@@ -21,14 +21,7 @@ class DrupalContext extends RawDrupalContext {
    * @Given the following :arg1 content item:
    */
   public function createContent(string $entity_type_label, TableNode $table): void {
-    $entity_type = $this->getEntityTypeByLabel($entity_type_label);
-
-    $node = new \stdClass();
-    foreach ($table->getRowsHash() as $field_label => $value) {
-      $name = $this->getFieldNameByLabel($entity_type, $field_label);
-      $node->{$name} = $value;
-    }
-    $node->type = $entity_type;
+    $node = (object) $this->getContentValues($entity_type_label, $table);
     $this->nodeCreate($node);
   }
 
@@ -38,20 +31,15 @@ class DrupalContext extends RawDrupalContext {
    * @Given the following :language translation for the :entity_type_label with title :title:
    */
   public function createTranslation(string $language, string $entity_type_label, string $title, TableNode $table): void {
-    $entity_type = $this->getEntityTypeByLabel($entity_type_label);
+    // Build translation entity.
+    $values = $this->getContentValues($entity_type_label, $table);
     $language = $this->getLanguageIdByName($language);
-
-    $values = ['type' => $entity_type];
-    foreach ($table->getRowsHash() as $field_label => $value) {
-      $name = $this->getFieldNameByLabel($entity_type, $field_label);
-      $values[$name] = $value;
-    }
-
-    /** @var \Drupal\Core\Entity\ContentEntityInterface $translation */
-    $translation = \Drupal::entityTypeManager()->getStorage('node')->create($values);
-    $entity = $this->getEntityByLabel('node', $title);
+    $translation = \Drupal::entityTypeManager()
+      ->getStorage('node')
+      ->create($values);
 
     // Add the translation to the entity.
+    $entity = $this->getEntityByLabel('node', $title);
     $entity->addTranslation($language, $translation->toArray())->save();
 
     // Make sure URL alias is correctly generated for given translation.
@@ -67,13 +55,33 @@ class DrupalContext extends RawDrupalContext {
    *
    * @Given I am visiting the :title content
    * @Given I visit the :title content
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function iAmViewingTheContent($title) {
+  public function iAmViewingTheContent($title): void {
     $nid = $this->getEntityByLabel('node', $title)->id();
     $this->visitPath("node/$nid");
+  }
+
+  /**
+   * Return content fields array suitable for Drupal API.
+   *
+   * @param string $entity_type_label
+   *   Content type label.
+   * @param \Behat\Gherkin\Node\TableNode $table
+   *   TableNode containing a list of fields keyed by their labels.
+   *
+   * @return array
+   *   Content fields array.
+   */
+  private function getContentValues(string $entity_type_label, TableNode $table): array {
+    $entity_type = $this->getEntityTypeByLabel($entity_type_label);
+
+    $values = ['type' => $entity_type];
+    foreach ($table->getRowsHash() as $field_label => $value) {
+      $name = $this->getFieldNameByLabel($entity_type, $field_label);
+      $values[$name] = $value;
+    }
+
+    return $values;
   }
 
   /**
