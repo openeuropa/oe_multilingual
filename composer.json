@@ -2,13 +2,14 @@
     "name": "openeuropa/oe_multilingual",
     "description": "OpenEuropa Multilingual module.",
     "type": "drupal-module",
-    "license": "EUPL-1.1",
+    "license": "EUPL-1.2",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^7.1",
         "drupal/administration_language_negotiation": "1.4",
-        "drupal/pathauto": "1.2"
+        "drupal/core": "~8.6",
+        "drupal/pathauto": "1.2",
+        "php": "^7.1"
     },
     "_todo": "Remove dev dependency on Composer once https://github.com/composer/composer/issues/7268 is fixed.",
     "require-dev": {
@@ -47,11 +48,20 @@
         }
     },
     "extra": {
+        "composer-exit-on-patch-failure": true,
         "patches": {
             "drupal/core": {
                 "https://www.drupal.org/project/drupal/issues/474684": "https://www.drupal.org/files/issues/2018-05-02/474684-165.patch",
-                "https://www.drupal.org/project/drupal/issues/2943172": "https://www.drupal.org/files/issues/2943172-kernel-test-base-2.patch",
+                "https://www.drupal.org/project/drupal/issues/2943172": "https://www.drupal.org/files/issues/2018-04-15/2943172-kernel-test-base-2.patch",
                 "https://www.drupal.org/project/drupal/issues/2599228": "https://www.drupal.org/files/issues/2599228-31-tests-only.patch"
+            }
+        },
+        "patches-ignore": {
+            "openeuropa/oe_theme": {
+                "drupal/core": {
+                    "https://www.drupal.org/project/drupal/issues/474684": "https://www.drupal.org/files/issues/474684-151.patch",
+                    "https://www.drupal.org/project/drupal/issues/2943172": "https://www.drupal.org/files/issues/2943172-kernel-test-base.patch"
+                }
             }
         },
         "installer-paths": {
