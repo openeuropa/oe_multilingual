@@ -1,5 +1,5 @@
-name: Drupal module template
-description: OpenEuropa Drupal module template.
+name: OpenEuropa Multilingual
+description: Multilingual features for the OpenEuropa project.
 package: OpenEuropa
 type: module
 core: 8.x

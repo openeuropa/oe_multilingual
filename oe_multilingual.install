@@ -16,7 +16,7 @@ use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationSelected;
  * Implements hook_install().
  */
 function oe_multilingual_install() {
-  // Disable remote translation downloading from Drupal localisation service.
+  // Disable remote translations downloading from Drupal localisation service.
   // Also make sure that English language is translatable.
   \Drupal::configFactory()
     ->getEditable('locale.settings')

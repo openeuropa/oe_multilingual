@@ -48,15 +48,23 @@ class InstallationTest extends KernelTestBase {
   }
 
   /**
-   * Test that configuration is properly setup during module installation.
+   * Test proper configuration setup during module installation.
    */
   public function testInstallation(): void {
     $config = $this->config('locale.settings');
+
+    // Ensure that remote translations downloading is disabled by default.
     $this->assertEquals(FALSE, $config->get('translation.import_enabled'));
+
+    // Ensure that the English language is translatable.
     $this->assertEquals(TRUE, $config->get('translate_english'));
 
     $config = $this->config('administration_language_negotiation.negotiation');
+
+    // Ensure that English is set as default administration language.
     $this->assertEquals('en', $config->get('default_language'));
+
+    // Ensure administration language on specific administrative paths.
     $this->assertEquals([
       '/admin',
       '/admin/*',
@@ -76,10 +84,14 @@ class InstallationTest extends KernelTestBase {
     ];
 
     $config = $this->config('language.types');
+
+    // Ensure that both interface and content negotiations are enabled.
     $this->assertEquals([
       LanguageInterface::TYPE_INTERFACE,
       LanguageInterface::TYPE_CONTENT,
     ], $config->get('configurable'));
+
+    // Ensure that language negotiations are properly configured.
     $this->assertEquals($interface_settings, $config->get('negotiation.' . LanguageInterface::TYPE_INTERFACE . '.enabled'));
     $this->assertEquals($interface_settings, $config->get('negotiation.' . LanguageInterface::TYPE_INTERFACE . '.method_weights'));
     $this->assertEquals($content_settings, $config->get('negotiation.' . LanguageInterface::TYPE_CONTENT . '.enabled'));
