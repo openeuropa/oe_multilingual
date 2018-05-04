@@ -36,10 +36,10 @@ pipeline:
       - composer require webflo/drupal-core-require-dev:${DRUPAL_VERSION=8.6.x}
 
   npm-build:
-    image: node
+    image: node:9.5.0
     commands:
       - cd build/themes/contrib/oe_theme
-      - npm install
+      - npm install --unsafe-perm
       - npm run build
 
   site-install:
