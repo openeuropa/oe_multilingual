@@ -6,7 +6,7 @@ The OpenEuropa Multilingual module offers default multilingual features for the 
 
 - Enable all 24 official EU languages
 - Provide an optional language switcher block on the [OpenEuropa Theme][1] site header region
-- Make sure that administrative interface is always set to English
+- Make sure that the administrative interface is always set to English
 - Allow English to be translated so that default English copy can be fixed/improved
 
 **Table of contents:**
@@ -69,7 +69,7 @@ the module's functionality.
 During development the module requires a fully functional OpenEuropa Theme to be present and enabled on the test site.
 
 In order to achieve that we need to manually install and build all frontend-related theme dependencies as described in
-its ["Project setup"][5] section.
+the ["Project setup"][5] section of the OpenEuropa Theme documentation.
 
 In short:
 
@@ -82,7 +82,7 @@ $ npm run build
 In order to fetch the required code you'll need to have [Node.js (>= 8)][6] installed locally.
 
 Before setting up and installing the site make sure to customize default configuration values by copying [runner.yml.dist](runner.yml.dist)
-to `./runner.yml` and override relevant properties.
+to `./runner.yml` and overriding relevant properties.
 
 To set up the project run:
 
@@ -92,7 +92,7 @@ $ ./vendor/bin/run drupal:site-setup
 
 This will:
 
-- Symlink the theme in  `./build/modules/custom/oe_multilingual` so that it's available to the test site
+- Symlink the theme in  `./build/modules/custom/oe_multilingual` so that it's available for the test site
 - Setup Drush and Drupal's settings using values from `./runner.yml.dist`
 - Setup PHPUnit and Behat configuration files using values from `./runner.yml.dist`
 
@@ -105,8 +105,8 @@ $ ./vendor/bin/run drupal:site-install
 This will:
 
 - Install the test site
-- Enable OpenEuropa Multilingual module
-- Enable OpenEuropa Multilingual Demo module and [Configuration development][7] modules
+- Enable the OpenEuropa Multilingual module
+- Enable the OpenEuropa Multilingual Demo module and [Configuration development][7] modules
 - Enable and set the OpenEuropa Theme as default
 
 ### Using Docker Compose
@@ -147,7 +147,7 @@ $ docker-compose exec -u web web ./vendor/bin/behat
 
 Manually disabling Drupal 8 caching is a laborious process that is well described [here][10].
 
-Alternatively you can use the following Drupal Console command to disable/enable Drupal 8 caching:
+Alternatively you can use the following Drupal Console commands to disable/enable Drupal 8 caching:
 
 ```
 $ ./vendor/bin/drupal site:mode dev  # Disable all caches.
@@ -169,12 +169,12 @@ This is due to the following [Drupal Console issue][11].
 
 ## Demo module
 
-The OpenEuropa Multilingual module ships with a demo module which provides all necessary configuration and code needed
+The OpenEuropa Multilingual module ships with a demo module which provides all the necessary configuration and code needed
 to showcase the modules's most important features.
 
 The demo module includes a translatable content type with automatic URL path generation.
 
-In order to install the OpenEuropa Multilingual demo module follow the instruction [here][12] or enable it via [Drush][13]
+In order to install the OpenEuropa Multilingual demo module follow the instructions [here][12] or enable it via [Drush][13]
 by running:
 
 ```
