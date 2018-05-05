@@ -11,9 +11,7 @@
         "drupal/pathauto": "1.2",
         "php": "^7.1"
     },
-    "_todo": "Remove dev dependency on Composer once https://github.com/composer/composer/issues/7268 is fixed.",
     "require-dev": {
-        "composer/composer": "1.6.3",
         "cweagans/composer-patches": "~1.0",
         "composer/installers": "^1.2",
         "drupal-composer/drupal-scaffold": "^2.2",
@@ -53,8 +51,7 @@
             "drupal/core": {
                 "https://www.drupal.org/project/drupal/issues/474684": "https://www.drupal.org/files/issues/2018-05-02/474684-165.patch",
                 "https://www.drupal.org/project/drupal/issues/2943172": "https://www.drupal.org/files/issues/2018-04-15/2943172-kernel-test-base-2.patch",
-                "https://www.drupal.org/project/drupal/issues/2599228": "https://www.drupal.org/files/issues/2599228-31-tests-only.patch",
-                "https://www.drupal.org/project/drupal/issues/2969652": "https://www.drupal.org/files/issues/2018-05-04/2969652-fix-twig-cache-invalidation.patch"
+                "https://www.drupal.org/project/drupal/issues/2599228": "https://www.drupal.org/files/issues/2599228-31-tests-only.patch"
             }
         },
         "patches-ignore": {
