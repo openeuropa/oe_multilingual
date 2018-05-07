@@ -7,7 +7,7 @@ The OpenEuropa Multilingual module offers default multilingual features for the 
 - Enable all 24 official EU languages
 - Provide an optional language switcher block on the [OpenEuropa Theme][1] site header region
 - Make sure that the administrative interface is always set to English
-- Allow English to be translated so that default English copy can be fixed/improved
+- Allow English to be translated so that the default English copy may be fixed or improved, if necessary
 
 **Table of contents:**
 
