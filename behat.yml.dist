@@ -18,6 +18,6 @@ default:
       drupal:
         drupal_root: "build"
       region_map:
-        language switcher: "#block-oe-multilingual-language-switcher"
+        language switcher: ".ecl-language-list"
   formatters:
     progress: ~
