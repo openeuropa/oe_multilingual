@@ -15,12 +15,12 @@ use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Language\LanguageInterface;
 
 /**
- * Provides a 'Content Language switcher' block.
+ * Provides a 'Content Language Switcher' block.
  *
  * @Block(
  *   id = "content_language_block",
- *   admin_label = @Translation("Content Language switcher"),
- *   category = @Translation("System")
+ *   admin_label = @Translation("OpenEuropa Content Language Switcher"),
+ *   category = @Translation("OpenEuropa")
  * )
  */
 class ContentLanguageBlock extends BlockBase implements ContainerFactoryPluginInterface {
@@ -99,14 +99,14 @@ class ContentLanguageBlock extends BlockBase implements ContainerFactoryPluginIn
     // Get the potential rendered entity.
     if ($entity = $this->getEntityFromRoute()) {
       // Get current potentially unavailable language.
-      $current_language = $this->languageManager->getCurrentLanguage()->getId();
+      $current_language = $this->languageManager->getCurrentLanguage();
       // Get the actual translation that is going to be rendered.
       /** @var \Drupal\Core\Entity\ContentEntityInterface $translation */
-      $translation = \Drupal::service('entity.repository')->getTranslationFromContext($entity, $current_language);
-      $rendered_language = $translation->language()->getId();
+      $translation = \Drupal::service('entity.repository')->getTranslationFromContext($entity, $current_language->getId());
+      $rendered_language = $translation->language();
       // If current language and rendered language don't match, render the
       // content language select block.
-      if ($translation->language()->getId() != $current_language) {
+      if ($translation->language()->getId() != $current_language->getId()) {
         // Get available translation languages.
         $node_languages = $entity->getTranslationLanguages();
         // Generate language switcher links.
@@ -115,13 +115,13 @@ class ContentLanguageBlock extends BlockBase implements ContainerFactoryPluginIn
         // Only use the available translation languages and remove the one
         // we are currently using.
         $available_languages = array_intersect_key($links->links, $node_languages);
-        unset($available_languages[$rendered_language]);
+        unset($available_languages[$rendered_language->getId()]);
         if (isset($links->links)) {
           $build = [
-            '#theme' => 'links__content_language_block',
+            '#theme' => 'content_language_block',
             '#links' => $available_languages,
-            '#unavailable' => $current_language,
-            '#current' => $rendered_language,
+            '#unavailable' => $current_language->getName(),
+            '#current' => $rendered_language->getName(),
             '#attributes' => [
               'class' => [
                 "language-switcher-{$links->method_id}",
