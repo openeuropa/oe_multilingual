@@ -15,19 +15,11 @@ Feature: Splash
       | Title | Página de prueba |
       | Body  | Hola Mundo       |
 
-  Scenario: Visitor can navigate translated content
-
-    Given I visit the "Test page" content
-    When I click "French"
-    Then I should see the heading "Page de test"
-    And I should see "Bonjour le monde"
-
   Scenario: Automatically generated URLs are generated for translated content
 
     Given I visit the "Test page" content
+    Then the url should match "/language_selection"
+    Then I should be redirected to the language selection page
 
-    When I click "French" in the "language switcher"
+    When I click "French"
     Then the url should match "/fr/page-de-test"
-
-    When I click "Spanish" in the "language switcher"
-    Then the url should match "/es/pagina-de-prueba"

@@ -36,6 +36,12 @@ function oe_multilingual_install() {
       '/node/*/translations',
     ])->save();
 
+  // Make sure that English language prefix is set to "en".
+  \Drupal::configFactory()
+    ->getEditable('language.negotiation')
+    ->set('url.prefixes.en', 'en')
+    ->save();
+
   /** @var \Drupal\oe_multilingual\LanguageNegotiationSetter $setter */
   $setter = \Drupal::service('oe_multilingual.language_negotiation_setter');
 

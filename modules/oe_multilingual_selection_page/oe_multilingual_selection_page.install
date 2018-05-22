@@ -20,7 +20,7 @@ function oe_multilingual_selection_page_install() {
   \Drupal::configFactory()
     ->getEditable('language_selection_page.negotiation')
     ->set('path', '/language_selection')
-    ->set('type', 'embedded')
+    ->set('type', 'standalone')
     ->set('ignore_neutral', FALSE)
     ->set('blacklisted_paths', [
       '/admin',
@@ -37,9 +37,9 @@ function oe_multilingual_selection_page_install() {
 
   // For interface negotiation make sure administrative pages are in English.
   $setter->setInterfaceSettings([
-    LanguageNegotiationLanguageSelectionPage::METHOD_ID => -20,
-    LanguageNegotiationAdministrationLanguage::METHOD_ID => -19,
-    LanguageNegotiationUrl::METHOD_ID => -18,
+    LanguageNegotiationAdministrationLanguage::METHOD_ID => -20,
+    LanguageNegotiationUrl::METHOD_ID => -19,
+    LanguageNegotiationLanguageSelectionPage::METHOD_ID => -18,
     LanguageNegotiationSelected::METHOD_ID => 20,
   ]);
 }

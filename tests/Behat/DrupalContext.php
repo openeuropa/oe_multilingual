@@ -38,7 +38,10 @@ class DrupalContext extends RawDrupalContext {
    * @AfterScenario @selection-page
    */
   public function revertSelectionPage(AfterScenarioScope $scope): void {
-    \Drupal::service('module_installer')->uninstall(['oe_multilingual_selection_page']);
+    \Drupal::service('module_installer')->uninstall([
+      'oe_multilingual_selection_page',
+      'language_selection_page',
+    ]);
   }
 
   /**
