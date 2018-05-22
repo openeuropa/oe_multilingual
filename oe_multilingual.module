@@ -12,8 +12,13 @@ use Drupal\Core\TypedData\TranslatableInterface;
 
 /**
  * Implements hook_language_fallback_candidates_alter().
+ *
+ * - Disable default language fallback logic: the default Drupal behavior
+ * will return all available languages and then choose the first one
+ * ordered alphabetically.
+ * - Return the entity's original language as the default fallback language.
  */
-function oe_multilingual_language_fallback_candidates_alter(array &$candidates, array $context) {
+function oe_multilingual_language_fallback_candidates_alter(array &$candidates, array $context): void {
   $operation = $context['operation'];
 
   // The default fallback language for any entity is the language it was
@@ -32,7 +37,7 @@ function oe_multilingual_language_fallback_candidates_alter(array &$candidates, 
 /**
  * Implements hook_theme().
  */
-function oe_multilingual_theme() {
+function oe_multilingual_theme(): array {
   return [
     'content_language_block' => [
       'variables' => [
@@ -58,7 +63,7 @@ function oe_multilingual_theme() {
  *
  * @see template_preprocess_links()
  */
-function template_preprocess_content_language_block(&$variables) {
+function template_preprocess_content_language_block(&$variables): void {
   $links = $variables['links'];
 
   if (!empty($links)) {
