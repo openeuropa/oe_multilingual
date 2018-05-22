@@ -6,6 +6,7 @@ package: 'OpenEuropa'
 
 dependencies:
   - drupal:language_selection_page
+  - oe_multilingual:oe_multilingual
 
 config_devel:
   install:

@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\oe_multilingual\Behat;
 
+use Behat\Behat\Hook\Scope\AfterScenarioScope;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\TableNode;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
@@ -14,6 +16,30 @@ use Drupal\node\Entity\NodeType;
  * Class DrupalContext.
  */
 class DrupalContext extends RawDrupalContext {
+
+  /**
+   * Enable OpenEuropa Multilingual Selection Page module.
+   *
+   * @param \Behat\Behat\Hook\Scope\BeforeScenarioScope $scope
+   *   The Hook scope.
+   *
+   * @BeforeScenario @selection-page
+   */
+  public function setupSelectionPage(BeforeScenarioScope $scope): void {
+    \Drupal::service('module_installer')->install(['oe_multilingual_selection_page']);
+  }
+
+  /**
+   * Disable OpenEuropa Multilingual Selection Page module.
+   *
+   * @param \Behat\Behat\Hook\Scope\AfterScenarioScope $scope
+   *   The Hook scope.
+   *
+   * @AfterScenario @selection-page
+   */
+  public function revertSelectionPage(AfterScenarioScope $scope): void {
+    \Drupal::service('module_installer')->uninstall(['oe_multilingual_selection_page']);
+  }
 
   /**
    * Create content given its type and fields.

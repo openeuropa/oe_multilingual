@@ -1,4 +1,4 @@
-@api
+@api @selection-page
 Feature: Splash
   In order to be able to show the language selector page
   As an administrator
@@ -6,18 +6,18 @@ Feature: Splash
 
   Background:
     Given the following "Demo translatable page" content item:
-      | Title | Test page |
-      | Body  | Hello world  |
+      | Title | Test page   |
+      | Body  | Hello world |
     And the following "French" translation for the "Demo translatable page" with title "Test page":
-      | Title | Page de test |
-      | Body  | Bonjour le monde  |
+      | Title | Page de test     |
+      | Body  | Bonjour le monde |
     And the following "Spanish" translation for the "Demo translatable page" with title "Test page":
-      | Title | Página de prueba  |
-      | Body  | Hola Mundo |
+      | Title | Página de prueba |
+      | Body  | Hola Mundo       |
 
   Scenario: Visitor can navigate translated content
 
-    Given I visit the "Page title" content
+    Given I visit the "Test page" content
     When I click "French"
     Then I should see the heading "Page de test"
     And I should see "Bonjour le monde"
@@ -30,4 +30,4 @@ Feature: Splash
     Then the url should match "/fr/page-de-test"
 
     When I click "Spanish" in the "language switcher"
-    Then the url should match "/es/pagina-de-mundo"
+    Then the url should match "/es/pagina-de-prueba"
