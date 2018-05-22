@@ -6,10 +6,12 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
+        "php": "^7.1",
         "drupal/administration_language_negotiation": "1.4",
         "drupal/core": "~8.6",
-        "drupal/pathauto": "1.2",
-        "php": "^7.1"
+        "drupal/devel": "^1.2",
+        "drupal/language_selection_page": "2.1",
+        "drupal/pathauto": "1.2"
     },
     "require-dev": {
         "cweagans/composer-patches": "~1.0",
@@ -18,6 +20,7 @@
         "drupal/console": "^1.6",
         "drupal/config_devel": "~1.2",
         "drush/drush": "^9",
+        "drupal/devel": "^1.2",
         "drupal/drupal-extension": "^4.0.0@alpha",
         "openeuropa/code-review": "^0.2",
         "openeuropa/task-runner": "^0.5",

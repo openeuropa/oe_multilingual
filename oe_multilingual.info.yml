@@ -9,6 +9,7 @@ dependencies:
   - drupal:content_translation
   - drupal:language
   - pathauto:pathauto
+  - drupal:language_selection_page
 
 config_devel:
   install:
