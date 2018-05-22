@@ -1,0 +1,4 @@
+services:
+  oe_multilingual.language_negotiation_setter:
+    class: Drupal\oe_multilingual\LanguageNegotiationSetter
+    arguments: ['@config.factory']
