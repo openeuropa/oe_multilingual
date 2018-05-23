@@ -15,7 +15,7 @@ class MinkContext extends RawMinkContext {
    * @Then I should be redirected to the language selection page
    */
   public function assertLanguageSelectionPageRedirect() {
-    $this->assertSession()->addressMatches("/.*\/language_selection$/");
+    $this->assertSession()->addressMatches("/.*\/select-language/");
   }
 
 }

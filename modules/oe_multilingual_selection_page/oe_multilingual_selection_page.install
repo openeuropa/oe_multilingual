@@ -19,7 +19,7 @@ function oe_multilingual_selection_page_install() {
   // Configure selection page language negotiation method.
   \Drupal::configFactory()
     ->getEditable('language_selection_page.negotiation')
-    ->set('path', '/language_selection')
+    ->set('path', '/select-language')
     ->set('type', 'standalone')
     ->set('ignore_neutral', FALSE)
     ->set('blacklisted_paths', [
@@ -29,7 +29,6 @@ function oe_multilingual_selection_page_install() {
       '/admin*',
       '/node/add/*',
       '/node/*/edit',
-      '/node',
     ])->save();
 
   /** @var \Drupal\oe_multilingual\LanguageNegotiationSetter $setter */

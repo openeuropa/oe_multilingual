@@ -130,7 +130,6 @@ Then:
 $ docker-compose exec -u web web composer install
 $ docker-compose exec -u node node npm install
 $ docker-compose exec -u node node npm run build
-$ docker-compose exec -u web web ./vendor/bin/run drupal:site-setup
 $ docker-compose exec -u web web ./vendor/bin/run drupal:site-install
 ```
 

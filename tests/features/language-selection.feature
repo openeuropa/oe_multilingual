@@ -1,8 +1,8 @@
 @api @selection-page
-Feature: Splash
-  In order to be able to show the language selector page
-  As an administrator
-  I want to make sure that I can translate content and select an option to view it in a different language
+Feature: Language selection
+  In order to be able choose the initial language of the site
+  As a visitor
+  I want to be presented with a language selection page
 
   Background:
     Given the following "Demo translatable page" content item:
@@ -15,10 +15,18 @@ Feature: Splash
       | Title | Página de prueba |
       | Body  | Hola Mundo       |
 
-  Scenario: Automatically generated URLs are generated for translated content
+  Scenario: When I visit the homepage I'm presented with a language selection page
+
+    Given I am on the homepage
+    Then I should be redirected to the language selection page
+
+    When I click "French"
+    Then the url should match "/fr"
+
+  Scenario: Users visiting a page should be presented with the language selection page,
+            if no language is detected in the URL.
 
     Given I visit the "Test page" content
-    Then the url should match "/language_selection"
     Then I should be redirected to the language selection page
 
     When I click "French"
