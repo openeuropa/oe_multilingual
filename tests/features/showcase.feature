@@ -36,8 +36,7 @@ Feature: Showcase
     Then the url should match "/el/titlos-selidas"
 
 
-  @mbk
-    Scenario: Site visitor can see and change language using the language switcher
+  Scenario: Site visitor can see and change language using the language switcher with original languages.
     Given I visit the "Page title" content
 
     When I click "English" in the "language switcher"
