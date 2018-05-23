@@ -6,7 +6,6 @@ namespace Drupal\Tests\oe_multilingual\Behat;
 
 use Drupal\DrupalExtension\Context\MinkContext as DrupalExtensionMinkContext;
 
-
 /**
  * Class MinkContext.
  */
@@ -34,4 +33,5 @@ class MinkContext extends DrupalExtensionMinkContext {
       }
     }
   }
+
 }

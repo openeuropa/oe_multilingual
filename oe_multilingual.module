@@ -1,12 +1,20 @@
 <?php
 
+/**
+ * @file
+ * Multilingual module.
+ */
+
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
 
+/**
+ * Implements hook_language_switch_links_alter().
+ */
 function oe_multilingual_language_switch_links_alter(array &$links, $type, Url $url) {
 
   $original_languages = \Drupal::languageManager()->getStandardLanguageList();
-  foreach ($links as $code => &$link){
+  foreach ($links as $code => &$link) {
     if (isset($original_languages[$code])) {
       $link['title'] = $original_languages[$code][1];
     }
@@ -19,7 +27,7 @@ function oe_multilingual_language_switch_links_alter(array &$links, $type, Url $
   $language_interface = \Drupal::languageManager()
     ->getCurrentLanguage();
   if ($type == LanguageInterface::TYPE_CONTENT && isset($links[$language_interface
-        ->getId()])) {
+    ->getId()])) {
     foreach ($links[$language_interface
       ->getId()] as $link) {
       $link['attributes']['class'][] = 'active-language';
