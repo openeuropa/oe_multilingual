@@ -7,7 +7,6 @@
 
 declare(strict_types = 1);
 
-use Drupal\Core\Template\Attribute;
 use Drupal\Core\TypedData\TranslatableInterface;
 
 /**
@@ -23,86 +22,13 @@ function oe_multilingual_language_fallback_candidates_alter(array &$candidates, 
 
   // The default fallback language for any entity is the language it was
   // originally written on.
-  if ($operation == 'entity_upcast' || $operation == 'entity_view') {
+  if ($operation === 'entity_upcast' || $operation === 'entity_view') {
     $attempted_langcode = $context['langcode'];
     if ($context['data'] instanceof TranslatableInterface) {
       $candidates = [$attempted_langcode => $attempted_langcode];
       $entity = $context['data'];
       $default_language = $entity->getUntranslated()->language()->getId();
       $candidates[$default_language] = $default_language;
-    }
-  }
-}
-
-/**
- * Implements hook_theme().
- */
-function oe_multilingual_theme(): array {
-  return [
-    'content_language_block' => [
-      'variables' => [
-        'links' => [],
-        'unavailable' => '',
-        'current' => '',
-        'attributes' => ['class' => ['links']],
-      ],
-    ],
-  ];
-
-}
-
-/**
- * Prepares variables for the content language block.
- *
- * Default template: content-language-block.html.twig.
- *
- * Since this is a very simplified version of the ECL Page Language Selector
- * component (see https://ec-europa.github.io/europa-component-library/ec/components/detail/ec-component-lang-select-page--default)
- * we simply use a simplified version of the links preprocessing function
- * to provide a simple list of links.
- *
- * @see template_preprocess_links()
- */
-function template_preprocess_content_language_block(&$variables): void {
-  $links = $variables['links'];
-
-  if (!empty($links)) {
-
-    $variables['links'] = [];
-    foreach ($links as $key => $link) {
-      $item = [];
-      $link += [
-        'ajax' => NULL,
-        'url' => NULL,
-      ];
-
-      $li_attributes = [];
-      $keys = ['title', 'url'];
-      $link_element = [
-        '#type' => 'link',
-        '#title' => $link['title'],
-        '#options' => array_diff_key($link, array_combine($keys, $keys)),
-        '#url' => $link['url'],
-        '#ajax' => $link['ajax'],
-      ];
-
-      // Handle links and ensure that the active class is added on the LIs, but
-      // only if the 'set_active_class' option is not empty.
-      if (isset($link['url'])) {
-        $item['link'] = $link_element;
-      }
-
-      // Handle title-only text items.
-      $item['text'] = $link['title'];
-      if (isset($link['attributes'])) {
-        $item['text_attributes'] = new Attribute($link['attributes']);
-      }
-
-      // Handle list item attributes.
-      $item['attributes'] = new Attribute($li_attributes);
-
-      // Add the item to the list of links.
-      $variables['links'][$key] = $item;
     }
   }
 }
