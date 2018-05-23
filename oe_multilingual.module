@@ -1,0 +1,28 @@
+<?php
+
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Url;
+
+function oe_multilingual_language_switch_links_alter(array &$links, $type, Url $url) {
+
+  $original_languages = \Drupal::languageManager()->getStandardLanguageList();
+  foreach ($links as $code => &$link){
+    if (isset($original_languages[$code])) {
+      $link['title'] = $original_languages[$code][1];
+    }
+  }
+
+  // Manage 2 special cases.
+  $links['pt']['title'] = 'Português';
+  $links['mt']['title'] = 'Malti';
+
+  $language_interface = \Drupal::languageManager()
+    ->getCurrentLanguage();
+  if ($type == LanguageInterface::TYPE_CONTENT && isset($links[$language_interface
+        ->getId()])) {
+    foreach ($links[$language_interface
+      ->getId()] as $link) {
+      $link['attributes']['class'][] = 'active-language';
+    }
+  }
+}
