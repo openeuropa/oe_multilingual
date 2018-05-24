@@ -5,14 +5,16 @@
  * Multilingual module.
  */
 
-use Drupal\Core\Language\LanguageInterface;
+declare(strict_types = 1);
+
 use Drupal\Core\Url;
 
 /**
  * Implements hook_language_switch_links_alter().
+ *
+ * Replaces the language links labels with the native language version.
  */
-function oe_multilingual_language_switch_links_alter(array &$links, $type, Url $url) {
-
+function oe_multilingual_language_switch_links_alter(array &$links, string $type, Url $url): void {
   $original_languages = \Drupal::languageManager()->getStandardLanguageList();
   foreach ($links as $code => &$link) {
     if (isset($original_languages[$code])) {
