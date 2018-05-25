@@ -2,12 +2,31 @@
 
 /**
  * @file
- * Contains Drupal hooks.
+ * Multilingual module.
  */
 
 declare(strict_types = 1);
 
 use Drupal\Core\TypedData\TranslatableInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_language_switch_links_alter().
+ *
+ * Replaces the language links labels with the native language version.
+ */
+function oe_multilingual_language_switch_links_alter(array &$links, string $type, Url $url): void {
+  $original_languages = \Drupal::languageManager()->getStandardLanguageList();
+  foreach ($links as $code => &$link) {
+    if (isset($original_languages[$code])) {
+      $link['title'] = $original_languages[$code][1];
+    }
+  }
+
+  // Manage 2 special cases.
+  $links['pt']['title'] = 'Português';
+  $links['mt']['title'] = 'Malti';
+}
 
 /**
  * Implements hook_language_fallback_candidates_alter().
