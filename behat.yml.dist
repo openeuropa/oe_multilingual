@@ -19,6 +19,6 @@ default:
         drupal_root: "build"
       region_map:
         language switcher: ".ecl-language-list"
-        content: ".main-content"
+        page header: ".ecl-page-header"
   formatters:
     progress: ~

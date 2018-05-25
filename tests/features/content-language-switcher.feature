@@ -23,7 +23,7 @@ Feature: Content language selector
     Given I visit the "Page title" content
     Then I should see the heading "Page title"
     And I should see "Page body"
-    And I should not see the link "Spanish" in the "content" region
+    And I should not see the link "Spanish" in the "page header" region
 
   Scenario: Visitor navigating to an unavailable translation should see the language selector
     Given I visit the "Page title" content
@@ -32,4 +32,4 @@ Feature: Content language selector
     When I click "Bulgarian"
     Then I should see the heading "Page title"
     And I should see "Page body"
-    And I should see the link "Spanish" in the "content" region
+    And I should see the link "Spanish" in the "page header" region
