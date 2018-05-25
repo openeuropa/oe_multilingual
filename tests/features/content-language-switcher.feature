@@ -29,7 +29,7 @@ Feature: Content language selector
     Given I visit the "Page title" content
     Then I should see the heading "Page title"
     And I should see "Page body"
-    When I click "Bulgarian"
+    When I click "Български"
     Then I should see the heading "Page title"
     And I should see "Page body"
-    And I should see the link "Spanish" in the "page header" region
+    And I should see the link "Español" in the "page header" region
