@@ -1,19 +1,9 @@
 name: 'OpenEuropa Multilingual Selection Page'
 type: module
-description: 'Module for OpenEuropa Multilingual Language Selection Page.'
+description: 'Generates a Language Selection Page used on first access to a multilingual site.'
 core: 8.x
 package: 'OpenEuropa'
 
 dependencies:
   - drupal:language_selection_page
   - oe_multilingual:oe_multilingual
-
-config_devel:
-  install:
-    - core.entity_form_display.node.oe_demo_translatable_page.default
-    - core.entity_view_display.node.oe_demo_translatable_page.default
-    - field.storage.node.field_oe_demo_translatable_body
-    - field.field.node.oe_demo_translatable_page.field_oe_demo_translatable_body
-    - language.content_settings.node.oe_demo_translatable_page
-    - node.type.oe_demo_translatable_page
-    - pathauto.pattern.oe_demo_translatable_page

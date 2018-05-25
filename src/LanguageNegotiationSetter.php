@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\oe_multilingual;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -8,11 +10,11 @@ use Drupal\Core\Language\LanguageInterface;
 /**
  * Helper service for language negotiation method configuration.
  */
-class LanguageNegotiationSetter {
+class LanguageNegotiationSetter implements LanguageNegotiationSetterInterface {
 
   /**
-   * Configuration name.
-   */
+     * Configuration name.
+     */
   const CONFIG_NAME = 'language.types';
 
   /**
@@ -35,7 +37,7 @@ class LanguageNegotiationSetter {
    * @param array $methods
    *   Array of language negotiation method names.
    */
-  public function enableNegotiationMethods(array $methods) {
+  public function enableNegotiationMethods(array $methods):void {
     $this->configFactory
       ->getEditable(self::CONFIG_NAME)
       ->set('configurable', $methods)
@@ -48,7 +50,7 @@ class LanguageNegotiationSetter {
    * @param array $settings
    *   Array of language negotiation method names with their weights.
    */
-  public function setInterfaceSettings(array $settings): void {
+  public function setInterfaceSettings(array $settings):void {
     $this->configFactory
       ->getEditable(self::CONFIG_NAME)
       ->set('negotiation.' . LanguageInterface::TYPE_INTERFACE . '.enabled', $settings)
@@ -62,7 +64,7 @@ class LanguageNegotiationSetter {
    * @param array $settings
    *   Array of language negotiation method names with their weights.
    */
-  public function setContentSettings(array $settings): void {
+  public function setContentSettings(array $settings):void {
     $this->configFactory
       ->getEditable(self::CONFIG_NAME)
       ->set('negotiation.' . LanguageInterface::TYPE_CONTENT . '.enabled', $settings)

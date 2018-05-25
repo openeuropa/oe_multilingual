@@ -31,7 +31,7 @@ function oe_multilingual_selection_page_install() {
       '/node/*/edit',
     ])->save();
 
-  /** @var \Drupal\oe_multilingual\LanguageNegotiationSetter $setter */
+  /** @var \Drupal\oe_multilingual\LanguageNegotiationSetterInterface $setter */
   $setter = \Drupal::service('oe_multilingual.language_negotiation_setter');
 
   // For interface negotiation make sure administrative pages are in English.

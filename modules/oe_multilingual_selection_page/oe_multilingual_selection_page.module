@@ -14,6 +14,7 @@ function oe_multilingual_selection_page_preprocess_language_selection_page_conte
     ->getCurrentLanguage()
     ->getId();
 
+  // Generate an array suitable for use in the ecl-language-list component.
   foreach ($variables['language_links']['#items'] as $key => $value) {
     $language_code = $key;
     $url = $value['#url']->toString();

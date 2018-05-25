@@ -42,7 +42,7 @@ function oe_multilingual_install() {
     ->set('url.prefixes.en', 'en')
     ->save();
 
-  /** @var \Drupal\oe_multilingual\LanguageNegotiationSetter $setter */
+  /** @var \Drupal\oe_multilingual\LanguageNegotiationSetterInterface $setter */
   $setter = \Drupal::service('oe_multilingual.language_negotiation_setter');
 
   // Set default language negotiation methods.
