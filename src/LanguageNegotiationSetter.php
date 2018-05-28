@@ -32,12 +32,9 @@ class LanguageNegotiationSetter implements LanguageNegotiationSetterInterface {
   }
 
   /**
-   * Enable given language negotiation methods.
-   *
-   * @param array $methods
-   *   Array of language negotiation method names.
+   * {@inheritdoc}
    */
-  public function enableNegotiationMethods(array $methods):void {
+  public function enableNegotiationMethods(array $methods): void {
     $this->configFactory
       ->getEditable(self::CONFIG_NAME)
       ->set('configurable', $methods)
@@ -45,12 +42,9 @@ class LanguageNegotiationSetter implements LanguageNegotiationSetterInterface {
   }
 
   /**
-   * Set interface language negotiation settings.
-   *
-   * @param array $settings
-   *   Array of language negotiation method names with their weights.
+   * {@inheritdoc}
    */
-  public function setInterfaceSettings(array $settings):void {
+  public function setInterfaceSettings(array $settings): void {
     $this->configFactory
       ->getEditable(self::CONFIG_NAME)
       ->set('negotiation.' . LanguageInterface::TYPE_INTERFACE . '.enabled', $settings)
@@ -59,17 +53,42 @@ class LanguageNegotiationSetter implements LanguageNegotiationSetterInterface {
   }
 
   /**
-   * Set content language negotiation settings.
-   *
-   * @param array $settings
-   *   Array of language negotiation method names with their weights.
+   * {@inheritdoc}
    */
-  public function setContentSettings(array $settings):void {
+  public function addInterfaceSettings(array $settings): void {
+    $current = $this->configFactory
+      ->get(self::CONFIG_NAME)
+      ->get('negotiation.' . LanguageInterface::TYPE_INTERFACE . '.enabled');
+
+    $settings = array_merge($current, $settings);
+    asort($settings);
+
+    $this->setInterfaceSettings($settings);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setContentSettings(array $settings): void {
     $this->configFactory
       ->getEditable(self::CONFIG_NAME)
       ->set('negotiation.' . LanguageInterface::TYPE_CONTENT . '.enabled', $settings)
       ->set('negotiation.' . LanguageInterface::TYPE_CONTENT . '.method_weights', $settings)
       ->save();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function addContentSettings(array $settings): void {
+    $current = $this->configFactory
+      ->get(self::CONFIG_NAME)
+      ->get('negotiation.' . LanguageInterface::TYPE_CONTENT . '.enabled');
+
+    $settings = array_merge($current, $settings);
+    asort($settings);
+
+    $this->setContentSettings($settings);
   }
 
 }

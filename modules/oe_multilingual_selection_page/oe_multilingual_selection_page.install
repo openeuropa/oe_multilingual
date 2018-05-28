@@ -7,9 +7,6 @@
 
 declare(strict_types = 1);
 
-use Drupal\administration_language_negotiation\Plugin\LanguageNegotiation\LanguageNegotiationAdministrationLanguage;
-use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
-use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationSelected;
 use Drupal\language_selection_page\Plugin\LanguageNegotiation\LanguageNegotiationLanguageSelectionPage;
 
 /**
@@ -34,11 +31,8 @@ function oe_multilingual_selection_page_install() {
   /** @var \Drupal\oe_multilingual\LanguageNegotiationSetterInterface $setter */
   $setter = \Drupal::service('oe_multilingual.language_negotiation_setter');
 
-  // For interface negotiation make sure administrative pages are in English.
-  $setter->setInterfaceSettings([
-    LanguageNegotiationAdministrationLanguage::METHOD_ID => -20,
-    LanguageNegotiationUrl::METHOD_ID => -19,
+  // Add language selection page negotiation method.
+  $setter->addInterfaceSettings([
     LanguageNegotiationLanguageSelectionPage::METHOD_ID => -18,
-    LanguageNegotiationSelected::METHOD_ID => 20,
   ]);
 }
