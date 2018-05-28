@@ -169,7 +169,7 @@ This is due to the following [Drupal Console issue][11].
 ## Demo module
 
 The OpenEuropa Multilingual module ships with a demo module which provides all the necessary configuration and code needed
-to showcase the modules's most important features.
+to showcase the modules' most important features.
 
 The demo module includes a translatable content type with automatic URL path generation.
 
