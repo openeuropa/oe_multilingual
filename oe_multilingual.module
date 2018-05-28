@@ -16,16 +16,12 @@ use Drupal\Core\Url;
  * Replaces the language links labels with the native language version.
  */
 function oe_multilingual_language_switch_links_alter(array &$links, string $type, Url $url): void {
-  $original_languages = \Drupal::languageManager()->getStandardLanguageList();
+  $original_languages = \Drupal::service('oe_multilingual.helper')->getLanguageNameList();
   foreach ($links as $code => &$link) {
     if (isset($original_languages[$code])) {
-      $link['title'] = $original_languages[$code][1];
+      $link['title'] = $original_languages[$code];
     }
   }
-
-  // Manage 2 special cases.
-  $links['pt']['title'] = 'Português';
-  $links['mt']['title'] = 'Malti';
 }
 
 /**

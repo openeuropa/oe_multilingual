@@ -1,4 +1,4 @@
 services:
   oe_multilingual.helper:
     class: Drupal\oe_multilingual\MultilingualHelper
-    arguments: ['@entity.repository', '@current_route_match']
+    arguments: ['@entity.repository', '@current_route_match', '@language_manager']

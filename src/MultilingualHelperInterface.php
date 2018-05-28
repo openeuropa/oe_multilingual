@@ -30,4 +30,12 @@ interface MultilingualHelperInterface {
    */
   public function getCurrentLanguageEntityTranslation(EntityInterface $entity): EntityInterface;
 
+  /**
+   * Returns the list of language names in their native translations.
+   *
+   * @return array
+   *   An array of language codes and language names.
+   */
+  public function getLanguageNameList(): array;
+
 }
