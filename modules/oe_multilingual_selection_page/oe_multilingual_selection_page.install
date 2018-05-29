@@ -32,6 +32,10 @@ function oe_multilingual_selection_page_install() {
   $setter = \Drupal::service('oe_multilingual.language_negotiation_setter');
 
   // Add language selection page negotiation method.
+  // Since this is an optional module setting configuration in its
+  // hook_install() might cause unexpected behaviors.
+  // We are discussing implications in the following ticket:
+  // https://webgate.ec.europa.eu/CITnet/jira/browse/OPENEUROPA-600
   $setter->addInterfaceSettings([
     LanguageNegotiationLanguageSelectionPage::METHOD_ID => -18,
   ]);
