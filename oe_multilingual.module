@@ -7,6 +7,7 @@
 
 declare(strict_types = 1);
 
+use Drupal\Core\TypedData\TranslatableInterface;
 use Drupal\Core\Url;
 
 /**
@@ -15,14 +16,34 @@ use Drupal\Core\Url;
  * Replaces the language links labels with the native language version.
  */
 function oe_multilingual_language_switch_links_alter(array &$links, string $type, Url $url): void {
-  $original_languages = \Drupal::languageManager()->getStandardLanguageList();
+  $original_languages = \Drupal::service('oe_multilingual.helper')->getLanguageNameList();
   foreach ($links as $code => &$link) {
     if (isset($original_languages[$code])) {
-      $link['title'] = $original_languages[$code][1];
+      $link['title'] = $original_languages[$code];
     }
   }
+}
 
-  // Manage 2 special cases.
-  $links['pt']['title'] = 'Português';
-  $links['mt']['title'] = 'Malti';
+/**
+ * Implements hook_language_fallback_candidates_alter().
+ *
+ * - Disable default language fallback logic: the default Drupal behavior
+ * will return all available languages and then choose the first one
+ * ordered alphabetically.
+ * - Return the entity's original language as the default fallback language.
+ */
+function oe_multilingual_language_fallback_candidates_alter(array &$candidates, array $context): void {
+  $operation = $context['operation'];
+
+  // The default fallback language for any entity is the language it was
+  // originally written on.
+  if ($operation === 'entity_upcast' || $operation === 'entity_view') {
+    $attempted_langcode = $context['langcode'];
+    if ($context['data'] instanceof TranslatableInterface) {
+      $candidates = [$attempted_langcode => $attempted_langcode];
+      $entity = $context['data'];
+      $default_language = $entity->getUntranslated()->language()->getId();
+      $candidates[$default_language] = $default_language;
+    }
+  }
 }

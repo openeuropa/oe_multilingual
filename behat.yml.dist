@@ -21,5 +21,6 @@ default:
       region_map:
         "language switcher": ".ecl-language-list"
         "language dialog": ".ecl-dialog"
+        page header: ".ecl-page-header"
   formatters:
     progress: ~

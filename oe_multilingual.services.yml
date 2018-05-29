@@ -2,3 +2,6 @@ services:
   oe_multilingual.language_negotiation_setter:
     class: Drupal\oe_multilingual\LanguageNegotiationSetter
     arguments: ['@config.factory']
+  oe_multilingual.helper:
+    class: Drupal\oe_multilingual\MultilingualHelper
+    arguments: ['@entity.repository', '@current_route_match', '@language_manager']
