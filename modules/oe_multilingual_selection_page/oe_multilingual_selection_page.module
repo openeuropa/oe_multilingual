@@ -5,14 +5,12 @@
  * Contains hooks to manipulate language links for selection page.
  */
 
+declare(strict_types = 1);
+
 /**
  * Implements hook_page_preprocess().
  */
-function oe_multilingual_selection_page_preprocess_language_selection_page_content(array &$variables) {
-
-  $current_language = \Drupal::languageManager()
-    ->getCurrentLanguage()
-    ->getId();
+function oe_multilingual_selection_page_preprocess_language_selection_page_content(array &$variables): void {
 
   // Generate an array suitable for use in the ecl-language-list component.
   foreach ($variables['language_links']['#items'] as $key => $value) {
@@ -20,11 +18,10 @@ function oe_multilingual_selection_page_preprocess_language_selection_page_conte
     $url = $value['#url']->toString();
 
     $variables['languages'][] = [
-      "href" => $url,
-      "hreflang" => $language_code,
-      "label" => $value["#title"],
-      "lang" => $language_code,
-      "isActive" => $language_code === $current_language,
+      'href' => $url,
+      'hreflang' => $language_code,
+      'label' => $value['#title'],
+      'lang' => $language_code,
     ];
   }
 }

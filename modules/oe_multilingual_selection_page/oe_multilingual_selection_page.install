@@ -12,7 +12,7 @@ use Drupal\language_selection_page\Plugin\LanguageNegotiation\LanguageNegotiatio
 /**
  * Implements hook_install().
  */
-function oe_multilingual_selection_page_install() {
+function oe_multilingual_selection_page_install(): void {
   // Configure selection page language negotiation method.
   \Drupal::configFactory()
     ->getEditable('language_selection_page.negotiation')
