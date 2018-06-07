@@ -47,3 +47,17 @@ function oe_multilingual_language_fallback_candidates_alter(array &$candidates, 
     }
   }
 }
+
+/**
+ * Implements hook_preprocess_language_selection_page_content().
+ *
+ * Replaces the language links labels with the native language version.
+ */
+function oe_multilingual_preprocess_language_selection_page_content(&$variables): void {
+  $original_languages = \Drupal::service('oe_multilingual.helper')->getLanguageNameList();
+  foreach ($variables['language_links']['#items'] as $langcode => &$item) {
+    if (isset($original_languages[$langcode])) {
+      $item['#title'] = $original_languages[$langcode];
+    }
+  }
+}
