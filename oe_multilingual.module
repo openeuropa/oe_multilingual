@@ -61,3 +61,12 @@ function oe_multilingual_preprocess_language_selection_page_content(&$variables)
     }
   }
 }
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function oe_multilingual_theme_suggestions_page_alter(array &$suggestions, array $variables): void {
+  if ('language_selection_page' == \Drupal::request()->attributes->get('_route')) {
+    array_splice($suggestions, 1, 0, 'page__language_selection_splash');
+  }
+}
