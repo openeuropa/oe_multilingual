@@ -50,7 +50,7 @@ class InstallationTest extends KernelTestBase {
   /**
    * Test proper configuration setup during module installation.
    */
-  public function testInstallation():void {
+  public function testInstallation(): void {
     $config = $this->config('locale.settings');
 
     // Ensure that remote translations downloading is disabled by default.
@@ -72,11 +72,11 @@ class InstallationTest extends KernelTestBase {
 
     $interface_settings = [
       LanguageNegotiationAdministrationLanguage::METHOD_ID => -20,
-      LanguageNegotiationUrl::METHOD_ID                    => -19,
-      LanguageNegotiationSelected::METHOD_ID               => 20,
+      LanguageNegotiationUrl::METHOD_ID => -19,
+      LanguageNegotiationSelected::METHOD_ID => 20,
     ];
     $content_settings = [
-      LanguageNegotiationUrl::METHOD_ID      => -19,
+      LanguageNegotiationUrl::METHOD_ID => -19,
       LanguageNegotiationSelected::METHOD_ID => 20,
     ];
 
