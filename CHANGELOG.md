@@ -1,10 +1,19 @@
 # Change Log
 
+## [0.1.2](https://github.com/openeuropa/oe_multilingual/tree/0.1.2) (2018-06-15)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.1...0.1.2)
+
+**Merged pull requests:**
+
+- OPENEUROPA-636: Reduce patches on OpenEuropa Multilingual [\#11](https://github.com/openeuropa/oe_multilingual/pull/11) ([ademarco](https://github.com/ademarco))
+- OPENEUROPA-630: Fix administration\_language\_negotiation version. [\#9](https://github.com/openeuropa/oe_multilingual/pull/9) ([ademarco](https://github.com/ademarco))
+
 ## [0.1.1](https://github.com/openeuropa/oe_multilingual/tree/0.1.1) (2018-06-12)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.0...0.1.1)
 
 **Merged pull requests:**
 
+- Update CHANGELOG.md before release 0.1.1. [\#10](https://github.com/openeuropa/oe_multilingual/pull/10) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-615 : Make sure that splash page uses the original language [\#8](https://github.com/openeuropa/oe_multilingual/pull/8) ([Medi4tor](https://github.com/Medi4tor))
 
 ## [0.1.0](https://github.com/openeuropa/oe_multilingual/tree/0.1.0) (2018-05-29)
