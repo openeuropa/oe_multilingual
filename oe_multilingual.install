@@ -27,7 +27,6 @@ function oe_multilingual_install() {
   // Configure administrative language negotiation method.
   \Drupal::configFactory()
     ->getEditable('administration_language_negotiation.negotiation')
-    ->set('default_language', 'en')
     ->set('paths', [
       '/admin',
       '/admin/*',
