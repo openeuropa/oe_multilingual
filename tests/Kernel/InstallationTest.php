@@ -7,8 +7,8 @@ namespace Drupal\Tests\oe_multilingual\Kernel;
 use Drupal\administration_language_negotiation\Plugin\LanguageNegotiation\LanguageNegotiationAdministrationLanguage;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationSelected;
+use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 
 /**
  * Class InstallationTest.
@@ -60,9 +60,6 @@ class InstallationTest extends KernelTestBase {
     $this->assertEquals(TRUE, $config->get('translate_english'));
 
     $config = $this->config('administration_language_negotiation.negotiation');
-
-    // Ensure that English is set as default administration language.
-    $this->assertEquals('en', $config->get('default_language'));
 
     // Ensure administration language on specific administrative paths.
     $this->assertEquals([
