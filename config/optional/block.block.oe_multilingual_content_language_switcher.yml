@@ -4,10 +4,10 @@ dependencies:
   module:
     - oe_multilingual
   theme:
-    - oe_theme
+    - bartik
 id: oe_multilingual_content_language_switcher
-theme: oe_theme
-region: breadcrumb
+theme: bartik
+region: content
 weight: 1
 provider: null
 plugin: oe_multilingual_content_language_switcher

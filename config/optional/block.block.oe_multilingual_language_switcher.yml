@@ -4,10 +4,10 @@ dependencies:
   module:
     - language
   theme:
-    - oe_theme
+    - bartik
 id: oe_multilingual_language_switcher
-theme: oe_theme
-region: site_header
+theme: bartik
+region: sidebar_first
 weight: 1
 provider: null
 plugin: 'language_block:language_interface'
