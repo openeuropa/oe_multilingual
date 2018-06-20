@@ -4,5 +4,5 @@ dependencies: {  }
 id: da
 label: Danish
 direction: ltr
-weight: -8
+weight: -4
 locked: false

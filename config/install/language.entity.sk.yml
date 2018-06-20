@@ -4,5 +4,5 @@ dependencies: {  }
 id: sk
 label: Slovak
 direction: ltr
-weight: 10
+weight: 13
 locked: false

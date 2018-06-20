@@ -4,5 +4,5 @@ dependencies: {  }
 id: mt
 label: Maltese
 direction: ltr
-weight: 5
+weight: 8
 locked: false

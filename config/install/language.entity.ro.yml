@@ -4,5 +4,5 @@ dependencies: {  }
 id: ro
 label: Romanian
 direction: ltr
-weight: 9
+weight: 12
 locked: false
