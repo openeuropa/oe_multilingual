@@ -93,13 +93,13 @@ class MultilingualHelper implements MultilingualHelperInterface {
   public static function getEuropeanUnionLanguageList(): array {
     return [
       'bg' => ['Bulgarian', 'български'],
-      'es' => ['Spanish', 'español'],
       'cs' => ['Czech', 'čeština'],
       'da' => ['Danish', 'dansk'],
       'de' => ['German', 'Deutsch'],
       'et' => ['Estonian', 'eesti'],
       'el' => ['Greek', 'ελληνικά'],
       'en' => ['English', 'English'],
+      'es' => ['Spanish', 'español'],
       'fr' => ['French', 'français'],
       'ga' => ['Irish', 'Gaeilge'],
       'hr' => ['Croatian', 'hrvatski'],

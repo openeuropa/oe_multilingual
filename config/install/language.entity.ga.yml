@@ -4,5 +4,5 @@ dependencies: {  }
 id: ga
 label: Irish
 direction: ltr
-weight: 2
+weight: 3
 locked: false
