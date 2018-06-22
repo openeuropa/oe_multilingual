@@ -1,10 +1,18 @@
 # Change Log
 
+## [0.1.3](https://github.com/openeuropa/oe_multilingual/tree/0.1.3) (2018-06-22)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.2...0.1.3)
+
+**Merged pull requests:**
+
+- OPENEUROPA-652: Add European Union language list and change language weight. [\#14](https://github.com/openeuropa/oe_multilingual/pull/14) ([voidtek](https://github.com/voidtek))
+
 ## [0.1.2](https://github.com/openeuropa/oe_multilingual/tree/0.1.2) (2018-06-15)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.1...0.1.2)
 
 **Merged pull requests:**
 
+- Update CHANGELOG.md for 0.1.2. [\#12](https://github.com/openeuropa/oe_multilingual/pull/12) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-636: Reduce patches on OpenEuropa Multilingual [\#11](https://github.com/openeuropa/oe_multilingual/pull/11) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-630: Fix administration\_language\_negotiation version. [\#9](https://github.com/openeuropa/oe_multilingual/pull/9) ([ademarco](https://github.com/ademarco))
 
