@@ -20,7 +20,7 @@ Feature: Language selection
     Given I am on the homepage
     Then I should be redirected to the language selection page
 
-    When I click "Français"
+    When I click "français"
     Then the url should match "/fr"
 
   Scenario: Users visiting a page should be presented with the language selection page,
@@ -29,5 +29,5 @@ Feature: Language selection
     Given I visit the "Test page" content
     Then I should be redirected to the language selection page
 
-    When I click "Français"
+    When I click "français"
     Then the url should match "/fr/page-de-test"

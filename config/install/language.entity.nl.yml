@@ -4,5 +4,5 @@ dependencies: {  }
 id: nl
 label: Dutch
 direction: ltr
-weight: 6
+weight: 10
 locked: false

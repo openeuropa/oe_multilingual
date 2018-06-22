@@ -82,12 +82,41 @@ class MultilingualHelper implements MultilingualHelperInterface {
    * {@inheritdoc}
    */
   public function getLanguageNameList(): array {
-    $language_list = $this->languageManager->getStandardLanguageList();
-    $language_names = array_combine(array_keys($language_list), array_column($language_list, 1));
-    // Manage 2 special cases.
-    $language_names['pt'] = 'Português';
-    $language_names['mt'] = 'Malti';
-    return $language_names;
+    $language_list = self::getEuropeanUnionLanguageList();
+
+    return array_combine(array_keys($language_list), array_column($language_list, 1));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getEuropeanUnionLanguageList(): array {
+    return [
+      'bg' => ['Bulgarian', 'български'],
+      'cs' => ['Czech', 'čeština'],
+      'da' => ['Danish', 'dansk'],
+      'de' => ['German', 'Deutsch'],
+      'et' => ['Estonian', 'eesti'],
+      'el' => ['Greek', 'ελληνικά'],
+      'en' => ['English', 'English'],
+      'es' => ['Spanish', 'español'],
+      'fr' => ['French', 'français'],
+      'ga' => ['Irish', 'Gaeilge'],
+      'hr' => ['Croatian', 'hrvatski'],
+      'it' => ['Italian', 'italiano'],
+      'lt' => ['Lithuanian', 'lietuvių'],
+      'lv' => ['Latvian', 'latviešu'],
+      'hu' => ['Hungarian', 'magyar'],
+      'mt' => ['Maltese', 'Malti'],
+      'nl' => ['Dutch', 'Nederlands'],
+      'pl' => ['Polish', 'polski'],
+      'pt' => ['Portuguese', 'português'],
+      'ro' => ['Romanian', 'română'],
+      'sk' => ['Slovak', 'slovenčina'],
+      'sl' => ['Slovenian', 'slovenščina'],
+      'fi' => ['Finnish', 'suomi'],
+      'sv' => ['Swedish', 'svenska'],
+    ];
   }
 
 }

@@ -4,5 +4,5 @@ dependencies: {  }
 id: hr
 label: Croatian
 direction: ltr
-weight: 0
+weight: 4
 locked: false
