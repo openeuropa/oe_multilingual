@@ -112,8 +112,8 @@ $ docker-compose up -d
 Then:
 
 ```
-$ docker-compose exec -u web web composer install
-$ docker-compose exec -u web web ./vendor/bin/run drupal:site-install
+$ docker-compose exec web composer install
+$ docker-compose exec web ./vendor/bin/run drupal:site-install
 ```
 
 Your test site will be available at [http://localhost:8080/build](http://localhost:8080/build).
@@ -121,8 +121,8 @@ Your test site will be available at [http://localhost:8080/build](http://localho
 Run tests as follows:
 
 ```
-$ docker-compose exec -u web web ./vendor/bin/phpunit
-$ docker-compose exec -u web web ./vendor/bin/behat
+$ docker-compose exec web ./vendor/bin/phpunit
+$ docker-compose exec web ./vendor/bin/behat
 ```
 
 ### Disable Drupal 8 caching
