@@ -11,19 +11,10 @@ services:
     image: percona/percona-server:5.6
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-  frpc-tunnel:
-    image: fpfis/drone-frpc-plugin:latest
-    when:
-      event: [ push, tag ]
-    secrets: [ frpc_token, frpc_server ]
-    environment:
-      - PLUGIN_ENDPOINT=web:8080
-      - PLUGIN_GEN_AUTH=yes
-      - PLUGIN_DOMAIN=oe_multilingual-${DRONE_BUILD_NUMBER}-${DRONE_JOB_NUMBER}.ci.fpfis.tech.ec.europa.eu
-      - PLUGIN_URL_OUTPUT_FILE=/test/oe_multilingual/.frpc
 
 pipeline:
   composer-install:
+    group: prepare
     image: fpfis/httpd-php-dev:7.1
     volumes:
       - /cache:/cache
