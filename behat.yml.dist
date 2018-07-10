@@ -19,8 +19,8 @@ default:
       drupal:
         drupal_root: "build"
       region_map:
-        "language switcher": ".ecl-language-list"
-        "language dialog": ".ecl-dialog"
-        page header: ".ecl-page-header"
+        "language switcher": "#block-oe-multilingual-language-switcher"
+        "language dialog": "#block-oe-multilingual-language-switcher"
+        page header: ".region-content"
   formatters:
     progress: ~

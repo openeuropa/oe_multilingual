@@ -13,19 +13,17 @@
         "drupal/pathauto": "^1.2"
     },
     "require-dev": {
-        "cweagans/composer-patches": "~1.0",
         "composer/installers": "^1.2",
+        "cweagans/composer-patches": "~1.0",
         "drupal-composer/drupal-scaffold": "^2.2",
-        "drupal/console": "^1.6",
         "drupal/config_devel": "~1.2",
-        "drush/drush": "^9",
+        "drupal/console": "^1.6",
         "drupal/devel": "^1.2",
         "drupal/drupal-extension": "^4.0.0@alpha",
+        "drush/drush": "^9",
         "openeuropa/code-review": "^0.2",
-        "openeuropa/composer-artifacts": "^0.1",
         "openeuropa/task-runner": "^0.5",
-        "openeuropa/oe_theme": "^0.3",
-        "webflo/drupal-core-require-dev": "8.6.x"
+        "webflo/drupal-core-require-dev": "~8.6"
     },
     "scripts": {
         "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
@@ -49,14 +47,6 @@
         }
     },
     "extra": {
-        "artifacts": {
-            "openeuropa/oe_theme": {
-                "dist": {
-                    "url": "https://github.com/{name}/releases/download/{pretty-version}/{project-name}-{pretty-version}.tar.gz",
-                    "type": "tar"
-                }
-            }
-        },
         "composer-exit-on-patch-failure": true,
         "patches": {
             "drupal/core": {
