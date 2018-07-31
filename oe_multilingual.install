@@ -41,6 +41,12 @@ function oe_multilingual_install() {
     ->set('url.prefixes.en', 'en')
     ->save();
 
+  // Make sure that Portuguese language prefix is set to "pt".
+  \Drupal::configFactory()
+    ->getEditable('language.negotiation')
+    ->set('url.prefixes.pt-pt', 'pt')
+    ->save();
+
   /** @var \Drupal\oe_multilingual\LanguageNegotiationSetterInterface $setter */
   $setter = \Drupal::service('oe_multilingual.language_negotiation_setter');
 

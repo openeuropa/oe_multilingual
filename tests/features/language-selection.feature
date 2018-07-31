@@ -27,7 +27,7 @@ Feature: Language selection
     Then the url should match "/fr"
 
     When I click "português"
-    Then the url should match "/pt-pt"
+    Then the url should match "/pt"
 
   Scenario: Users visiting a page should be presented with the language selection page,
             if no language is detected in the URL.
@@ -39,4 +39,4 @@ Feature: Language selection
     Then the url should match "/fr/page-de-test"
 
     When I click "português"
-    Then the url should match "/pt-pt/pagina-de-teste"
+    Then the url should match "/pt/pagina-de-teste"
