@@ -1,7 +1,7 @@
 langcode: en
 status: true
 dependencies: {  }
-id: pt
+id: pt-pt
 label: Portuguese
 direction: ltr
 weight: 12

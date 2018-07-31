@@ -110,7 +110,7 @@ class MultilingualHelper implements MultilingualHelperInterface {
       'mt' => ['Maltese', 'Malti'],
       'nl' => ['Dutch', 'Nederlands'],
       'pl' => ['Polish', 'polski'],
-      'pt' => ['Portuguese', 'português'],
+      'pt-pt' => ['Portuguese', 'português'],
       'ro' => ['Romanian', 'română'],
       'sk' => ['Slovak', 'slovenčina'],
       'sl' => ['Slovenian', 'slovenščina'],
