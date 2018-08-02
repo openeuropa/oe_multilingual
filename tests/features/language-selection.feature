@@ -14,6 +14,9 @@ Feature: Language selection
     And the following "Spanish" translation for the "Demo translatable page" with title "Test page":
       | Title | Página de prueba |
       | Body  | Hola Mundo       |
+    And the following "Portuguese" translation for the "Demo translatable page" with title "Test page":
+      | Title | Página de teste |
+      | Body  | Olá Mundo       |
 
   Scenario: When I visit the homepage I'm presented with a language selection page
 
@@ -23,6 +26,9 @@ Feature: Language selection
     When I click "français"
     Then the url should match "/fr"
 
+    When I click "português"
+    Then the url should match "/pt"
+
   Scenario: Users visiting a page should be presented with the language selection page,
             if no language is detected in the URL.
 
@@ -31,3 +37,6 @@ Feature: Language selection
 
     When I click "français"
     Then the url should match "/fr/page-de-test"
+
+    When I click "português"
+    Then the url should match "/pt/pagina-de-teste"
