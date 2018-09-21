@@ -19,7 +19,21 @@ pipeline:
     volumes:
       - /cache:/cache
     commands:
-      - composer install
+      - composer update --prefer-lowest --ansi --no-suggest --no-progress
+    when:
+      matrix:
+        COMPOSER_BOUNDARY: lowest
+
+  composer-install-highest:
+    group: prepare
+    image: fpfis/httpd-php-dev:7.1
+    volumes:
+      - /cache:/cache
+    commands:
+      - composer install --ansi --no-suggest --no-progress
+    when:
+      matrix:
+        COMPOSER_BOUNDARY: highest
 
   site-install:
     image: fpfis/httpd-php-dev:7.1
