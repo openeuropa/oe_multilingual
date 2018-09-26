@@ -15,7 +15,7 @@
     "require-dev": {
         "composer/installers": "~1.5",
         "cweagans/composer-patches": "^1.6.5",
-        "drupal-composer/drupal-scaffold": "~2.5.2",
+        "drupal-composer/drupal-scaffold": "^2.5.2",
         "drupal/config_devel": "~1.2",
         "drupal/devel": "~1.2",
         "drupal/drupal-extension": "^4.0.0@beta",
