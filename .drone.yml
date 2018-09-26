@@ -19,7 +19,8 @@ pipeline:
     volumes:
       - /cache:/cache
     commands:
-      - composer update --prefer-lowest --ansi --no-suggest --no-progress
+    - composer install --ansi --no-suggest --no-progress
+    - composer update --prefer-lowest --prefer-stable --ansi --no-suggest --no-progress
     when:
       matrix:
         COMPOSER_BOUNDARY: lowest
