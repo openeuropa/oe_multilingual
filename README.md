@@ -22,20 +22,10 @@ The OpenEuropa Multilingual module offers default multilingual features for the 
 
 The recommended way of installing the OpenEuropa Multilingual module is via a [Composer-based workflow][2].
 
-In your Drupal project's main `composer.json` add the following dependency:
-
-```json
-{
-    "require": {
-        "openeuropa/oe_multilingual": "dev-master"
-    }
-}
-```
-
-And run:
+In the root of your Drupal project, run the following command:
 
 ```
-$ composer update
+$ composer require openeuropa/oe_multilingual
 ```
 
 ### Enable the module
