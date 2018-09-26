@@ -6,6 +6,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
+        "consolidation/robo": "^1.2.2",
         "drupal/administration_language_negotiation": "^1.5",
         "drupal/core": "^8.6",
         "drupal/language_selection_page": "^2.2",
@@ -14,7 +15,6 @@
     },
     "require-dev": {
         "composer/installers": "~1.5",
-        "consolidation/robo": ">=1.2.2",
         "cweagans/composer-patches": "~1.0",
         "drupal-composer/drupal-scaffold": "~2.2",
         "drupal/config_devel": "~1.2",
