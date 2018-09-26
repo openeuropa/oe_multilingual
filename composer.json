@@ -21,9 +21,9 @@
         "drupal/console": "~1.0",
         "drupal/devel": "~1.2",
         "drupal/drupal-extension": "~4.0.0@alpha",
-        "drush/drush": "~9.4",
+        "drush/drush": "^9.4",
         "openeuropa/code-review": "~1.0.0-alpha4",
-        "openeuropa/drupal-core-require-dev": "~8.6",
+        "openeuropa/drupal-core-require-dev": "^8.6",
         "openeuropa/task-runner": "~1.0"
     },
     "scripts": {
