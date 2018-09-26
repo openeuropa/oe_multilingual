@@ -23,7 +23,7 @@
         "drush/drush": "~9.4",
         "openeuropa/code-review": "~1.0.0-alpha4",
         "openeuropa/drupal-core-require-dev": "~8.6",
-        "openeuropa/task-runner": "~0.5"
+        "openeuropa/task-runner": "~1.0"
     },
     "scripts": {
         "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
