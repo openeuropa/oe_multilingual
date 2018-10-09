@@ -7,6 +7,7 @@ namespace Drupal\Tests\oe_multilingual\Behat;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Element\NodeElement;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Drupal\field\Entity\FieldConfig;
@@ -199,6 +200,66 @@ class DrupalContext extends RawDrupalContext {
     }
 
     throw new \InvalidArgumentException("Language '{$name}' not found.");
+  }
+
+  /**
+   * Redirect user on Node creation page.
+   *
+   * @param string $content_type_name
+   *   Content type name.
+   *
+   * @Given I am visiting the :content_type_name create node page
+   */
+  public function iAmVisitingTheCreateNodePage(string $content_type_name): void {
+    $node_bundle = $this->getEntityTypeByLabel($content_type_name);
+    $this->visitPath('node/add/' . $node_bundle);
+  }
+
+  /**
+   * Check that selectbox with node language selector is hidden.
+   *
+   * @param string $label
+   *   Label of selectbox.
+   *
+   * @Then I should not see selectbox with label :label
+   */
+  public function iShouldNotSeeSelectboxWithLabel(string $label): void {
+    $element = $this->getSession()
+      ->getPage()
+      ->findField($label);
+    if ($element) {
+      throw new \RuntimeException("Selectbox for selecting initial language still visible.");
+    }
+  }
+
+  /**
+   * Check that we have correct language for initial translation.
+   *
+   * @param string $title
+   *   Title of node.
+   *
+   * @Then I have to be sure that :title node translation only in site default language.
+   */
+  public function assertOnlyDefaultLanguageTranslationExist(string $title) {
+    $title_element = $this->getSession()
+      ->getPage()
+      ->findAll('named', ['link', $title]);
+
+    if (count($title_element) !== 1) {
+      throw new \RuntimeException("We have not correct number of translations.");
+    }
+    if ($title_element[0] instanceof NodeElement) {
+      $translation_language = $title_element[0]
+        ->getParent()
+        ->getParent()
+        ->findAll('named', ['content', \Drupal::languageManager()->getDefaultLanguage()->getName()]);
+      if (!count($translation_language)) {
+        throw new \RuntimeException("Original translation of node not equal to default site language.");
+      }
+    }
+    else {
+      throw new \RuntimeException("Not found translation of node.");
+    }
   }
 
 }
