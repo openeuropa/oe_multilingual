@@ -7,7 +7,6 @@ namespace Drupal\Tests\oe_multilingual\Behat;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Element\NodeElement;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Drupal\field\Entity\FieldConfig;
@@ -203,32 +202,32 @@ class DrupalContext extends RawDrupalContext {
   }
 
   /**
-   * Redirect user on Node creation page.
+   * Redirect user to the node creation page.
    *
    * @param string $content_type_name
    *   Content type name.
    *
-   * @Given I am visiting the :content_type_name create node page
+   * @Given I am visiting the :content_type_name creation page
    */
-  public function iAmVisitingTheCreateNodePage(string $content_type_name): void {
+  public function iAmVisitingTheCreationPage(string $content_type_name): void {
     $node_bundle = $this->getEntityTypeByLabel($content_type_name);
     $this->visitPath('node/add/' . $node_bundle);
   }
 
   /**
-   * Check that selectbox with node language selector is hidden.
+   * Check that the field is not present.
    *
-   * @param string $label
-   *   Label of selectbox.
+   * @param string $field
+   *   Input id, name or label.
    *
-   * @Then I should not see selectbox with label :label
+   * @Then I should not see the field :field
    */
-  public function iShouldNotSeeSelectboxWithLabel(string $label): void {
+  public function iShouldNotSeeTheField(string $field): void {
     $element = $this->getSession()
       ->getPage()
-      ->findField($label);
+      ->findField($field);
     if ($element) {
-      throw new \RuntimeException("Selectbox for selecting initial language still visible.");
+      throw new \RuntimeException("Field '{$field}' is present.");
     }
   }
 
@@ -238,27 +237,22 @@ class DrupalContext extends RawDrupalContext {
    * @param string $title
    *   Title of node.
    *
-   * @Then I have to be sure that :title node translation only in site default language.
+   * @Then The only available translation for :title is in the site's default language
    */
-  public function assertOnlyDefaultLanguageTranslationExist(string $title) {
-    $title_element = $this->getSession()
-      ->getPage()
-      ->findAll('named', ['link', $title]);
+  public function assertOnlyDefaultLanguageTranslationExist(string $title): void {
+    $node = $this->getEntityByLabel('node', $title);
+    if (!$node) {
+      throw new \RuntimeException("Node '{$title}' is not exist.");
+    }
 
-    if (count($title_element) !== 1) {
+    $node_translation_languages = $node->getTranslationLanguages();
+    if (!is_array($node_translation_languages) || count($node_translation_languages) !== 1) {
       throw new \RuntimeException("We have not correct number of translations.");
     }
-    if ($title_element[0] instanceof NodeElement) {
-      $translation_language = $title_element[0]
-        ->getParent()
-        ->getParent()
-        ->findAll('named', ['content', \Drupal::languageManager()->getDefaultLanguage()->getName()]);
-      if (!count($translation_language)) {
-        throw new \RuntimeException("Original translation of node not equal to default site language.");
-      }
-    }
-    else {
-      throw new \RuntimeException("Not found translation of node.");
+
+    $node_language = key($node_translation_languages);
+    if ($node_language != \Drupal::languageManager()->getDefaultLanguage()->getId()) {
+      throw new \RuntimeException("Original translation language of the '{$title}' node is not equal to site's default language.");
     }
   }
 
