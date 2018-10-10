@@ -7,7 +7,7 @@ use Drupal\Core\Config\ConfigFactoryOverrideInterface;
 use Drupal\Core\Config\StorageInterface;
 
 /**
- * Override some config values for customizing default behavior.
+ * Override configuration values related to multilingual elements.
  */
 class MultilingualConfigOverride implements ConfigFactoryOverrideInterface {
 
@@ -17,6 +17,8 @@ class MultilingualConfigOverride implements ConfigFactoryOverrideInterface {
   public function loadOverrides($names) {
     $overrides = [];
     foreach ($names as $config_name) {
+      // Force the default site's language as the default language and prevent
+      // the users from changing it when creating a node.
       if (preg_match('/^language\.content_settings\.node\.(.*)$/', $config_name)) {
         $overrides[$config_name] = [
           'default_langcode' => 'site_default',

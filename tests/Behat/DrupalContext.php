@@ -232,7 +232,7 @@ class DrupalContext extends RawDrupalContext {
   }
 
   /**
-   * Check that we have correct language for initial translation.
+   * Check that we have the correct language for initial translation.
    *
    * @param string $title
    *   Title of node.
@@ -242,17 +242,17 @@ class DrupalContext extends RawDrupalContext {
   public function assertOnlyDefaultLanguageTranslationExist(string $title): void {
     $node = $this->getEntityByLabel('node', $title);
     if (!$node) {
-      throw new \RuntimeException("Node '{$title}' is not exist.");
+      throw new \RuntimeException("Node '{$title}' doesn't exist.");
     }
 
     $node_translation_languages = $node->getTranslationLanguages();
     if (!is_array($node_translation_languages) || count($node_translation_languages) !== 1) {
-      throw new \RuntimeException("We have not correct number of translations.");
+      throw new \RuntimeException("We don't have the correct number of translations.");
     }
 
     $node_language = key($node_translation_languages);
     if ($node_language != \Drupal::languageManager()->getDefaultLanguage()->getId()) {
-      throw new \RuntimeException("Original translation language of the '{$title}' node is not equal to site's default language.");
+      throw new \RuntimeException("Original translation language of the '{$title}' node is not the site's default language.");
     }
   }
 
