@@ -5,3 +5,7 @@ services:
   oe_multilingual.helper:
     class: Drupal\oe_multilingual\MultilingualHelper
     arguments: ['@entity.repository', '@current_route_match', '@language_manager']
+  oe_multilingual.content_language_settings:
+    class: Drupal\oe_multilingual\MultilingualConfigOverride
+    tags:
+      - {name: config.factory.override, priority: 5}
