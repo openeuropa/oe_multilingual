@@ -1,13 +1,13 @@
 @api
 Feature: Content initial language.
-  In order to be create content
+  In order to create content
   As a editor
-  I want to make sure that it impossible for a content editor to create an initial version of a content in any language other
-  than the site default language
+  I want to make sure that it is not possible for a content editor to create a node's initial version in any language
+  other than the site's default language
 
-  Scenario: Content editor try to create node without possibility select initial node language
+  Scenario: As an editor, when I create a node I can not select the initial node language
     Given I am logged in as a user with the "create oe_demo_translatable_page content" permission
-    And I am visiting the "Demo translatable page" creation page
+    And I visit the "Demo translatable page" creation page
     Then I should not see the field "Language"
 
     When I fill in "Title" with "Title Default value"

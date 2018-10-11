@@ -207,7 +207,7 @@ class DrupalContext extends RawDrupalContext {
    * @param string $content_type_name
    *   Content type name.
    *
-   * @Given I am visiting the :content_type_name creation page
+   * @Given I visit the :content_type_name creation page
    */
   public function iAmVisitingTheCreationPage(string $content_type_name): void {
     $node_bundle = $this->getEntityTypeByLabel($content_type_name);
@@ -246,8 +246,8 @@ class DrupalContext extends RawDrupalContext {
     }
 
     $node_translation_languages = $node->getTranslationLanguages();
-    if (!is_array($node_translation_languages) || count($node_translation_languages) !== 1) {
-      throw new \RuntimeException("We don't have the correct number of translations.");
+    if (count($node_translation_languages) !== 1) {
+      throw new \RuntimeException("The node should have only one translation.");
     }
 
     $node_language = key($node_translation_languages);

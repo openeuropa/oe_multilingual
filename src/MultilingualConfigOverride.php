@@ -19,7 +19,7 @@ class MultilingualConfigOverride implements ConfigFactoryOverrideInterface {
     foreach ($names as $config_name) {
       // Force the default site's language as the default language and prevent
       // the users from changing it when creating a node.
-      if (preg_match('/^language\.content_settings\.node\.(.*)$/', $config_name)) {
+      if (strpos($config_name, 'language.content_settings.node.') !== FALSE) {
         $overrides[$config_name] = [
           'default_langcode' => 'site_default',
           'language_alterable' => FALSE,
