@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\oe_multilingual\Kernel;
 
-use Drupal\administration_language_negotiation\Plugin\LanguageNegotiation\LanguageNegotiationAdministrationLanguage;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationSelected;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
+use Drupal\oe_multilingual\Plugin\LanguageNegotiation\LanguageNegotiationAdmin;
 
 /**
  * Class InstallationTest.
@@ -21,7 +21,6 @@ class InstallationTest extends KernelTestBase {
    * @var array
    */
   public static $modules = [
-    'administration_language_negotiation',
     'content_translation',
     'locale',
     'language',
@@ -40,7 +39,6 @@ class InstallationTest extends KernelTestBase {
       'locale',
       'language',
       'content_translation',
-      'administration_language_negotiation',
       'oe_multilingual',
     ]);
     $this->container->get('module_handler')->loadInclude('oe_multilingual', 'install');
@@ -59,19 +57,8 @@ class InstallationTest extends KernelTestBase {
     // Ensure that the English language is translatable.
     $this->assertEquals(TRUE, $config->get('translate_english'));
 
-    $config = $this->config('administration_language_negotiation.negotiation');
-
-    // Ensure administration language on specific administrative paths.
-    $this->assertEquals([
-      '/admin',
-      '/admin/*',
-      '/node/add/*',
-      '/node/*/edit',
-      '/node/*/translations',
-    ], $config->get('paths'));
-
     $interface_settings = [
-      LanguageNegotiationAdministrationLanguage::METHOD_ID => -20,
+      LanguageNegotiationAdmin::METHOD_ID => -20,
       LanguageNegotiationUrl::METHOD_ID => -19,
       LanguageNegotiationSelected::METHOD_ID => 20,
     ];

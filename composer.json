@@ -6,7 +6,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "drupal/administration_language_negotiation": "^1.5",
         "drupal/core": "^8.6",
         "drupal/language_selection_page": "^2.2",
         "drupal/pathauto": "^1.2",
