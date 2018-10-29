@@ -71,6 +71,6 @@ function oe_multilingual_install() {
       LanguageNegotiationSelected::METHOD_ID => 20,
     ]);
 
-    \Drupal::messenger()->addMessage('Please be aware that oe_multilingual makes changes to the following configurations: Locale, Administration language negotiation.');
+    \Drupal::messenger()->addMessage('Please be aware that oe_multilingual makes changes to the following configurations: Language, Locale, Administration language negotiation.');
   }
 }
