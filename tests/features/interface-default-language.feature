@@ -6,8 +6,10 @@ Feature: Interface default language.
 
   Scenario: As an admin, I should see admin pages in the default site language
     Given I am logged in as a user with the "access administration pages" permission
+    # We need to ensure locale stores the string for the first time.
+    And I am on "/en/admin"
     And I translate "Structure" in "French" to "French STR"
-    And I go to "/en/admin"
+    And I reload the page
     Then I should see the link "Structure"
     And I go to "/fr/admin"
     Then I should see the link "Structure"
