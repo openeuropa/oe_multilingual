@@ -18,6 +18,26 @@ use Drupal\node\Entity\NodeType;
 class DrupalContext extends RawDrupalContext {
 
   /**
+   * The config context.
+   *
+   * @var \Drupal\DrupalExtension\Context\ConfigContext
+   */
+  protected $configContext;
+
+  /**
+   * Gathers some other contexts.
+   *
+   * @param \Behat\Behat\Hook\Scope\BeforeScenarioScope $scope
+   *   The before scenario scope.
+   *
+   * @BeforeScenario
+   */
+  public function gatherContexts(BeforeScenarioScope $scope) {
+    $environment = $scope->getEnvironment();
+    $this->configContext = $environment->getContext('Drupal\DrupalExtension\Context\ConfigContext');
+  }
+
+  /**
    * Enable OpenEuropa Multilingual Selection Page module.
    *
    * @param \Behat\Behat\Hook\Scope\BeforeScenarioScope $scope
@@ -91,6 +111,74 @@ class DrupalContext extends RawDrupalContext {
   }
 
   /**
+   * Redirect user to the node creation page.
+   *
+   * @param string $content_type_name
+   *   Content type name.
+   *
+   * @Given I visit the :content_type_name creation page
+   */
+  public function iAmVisitingTheCreationPage(string $content_type_name): void {
+    $node_bundle = $this->getEntityTypeByLabel($content_type_name);
+    $this->visitPath('node/add/' . $node_bundle);
+  }
+
+  /**
+   * Check that the field is not present.
+   *
+   * @param string $field
+   *   Input id, name or label.
+   *
+   * @Then I should not see the field :field
+   */
+  public function iShouldNotSeeTheField(string $field): void {
+    $element = $this->getSession()
+      ->getPage()
+      ->findField($field);
+    if ($element) {
+      throw new \RuntimeException("Field '{$field}' is present.");
+    }
+  }
+
+  /**
+   * Check that we have the correct language for initial translation.
+   *
+   * @param string $title
+   *   Title of node.
+   *
+   * @Then The only available translation for :title is in the site's default language
+   */
+  public function assertOnlyDefaultLanguageTranslationExist(string $title): void {
+    $node = $this->getEntityByLabel('node', $title);
+    if (!$node) {
+      throw new \RuntimeException("Node '{$title}' doesn't exist.");
+    }
+
+    $node_translation_languages = $node->getTranslationLanguages();
+    if (count($node_translation_languages) !== 1) {
+      throw new \RuntimeException("The node should have only one translation.");
+    }
+
+    $node_language = key($node_translation_languages);
+    if ($node_language != \Drupal::languageManager()->getDefaultLanguage()->getId()) {
+      throw new \RuntimeException("Original translation language of the '{$title}' node is not the site's default language.");
+    }
+  }
+
+  /**
+   * Sets the default site language.
+   *
+   * @param string $name
+   *   The language name.
+   *
+   * @Given (I set) the default site language (is) (to) :name
+   */
+  public function theDefaultSiteLanguageIs(string $name): void {
+    $language = $this->getLanguageIdByName($name);
+    $this->configContext->setConfig('system.site', 'default_langcode', $language);
+  }
+
+  /**
    * Return content fields array suitable for Drupal API.
    *
    * @param string $entity_type_label
@@ -101,7 +189,7 @@ class DrupalContext extends RawDrupalContext {
    * @return array
    *   Content fields array.
    */
-  private function getContentValues(string $entity_type_label, TableNode $table): array {
+  protected function getContentValues(string $entity_type_label, TableNode $table): array {
     $entity_type = $this->getEntityTypeByLabel($entity_type_label);
 
     $values = ['type' => $entity_type];
@@ -199,61 +287,6 @@ class DrupalContext extends RawDrupalContext {
     }
 
     throw new \InvalidArgumentException("Language '{$name}' not found.");
-  }
-
-  /**
-   * Redirect user to the node creation page.
-   *
-   * @param string $content_type_name
-   *   Content type name.
-   *
-   * @Given I visit the :content_type_name creation page
-   */
-  public function iAmVisitingTheCreationPage(string $content_type_name): void {
-    $node_bundle = $this->getEntityTypeByLabel($content_type_name);
-    $this->visitPath('node/add/' . $node_bundle);
-  }
-
-  /**
-   * Check that the field is not present.
-   *
-   * @param string $field
-   *   Input id, name or label.
-   *
-   * @Then I should not see the field :field
-   */
-  public function iShouldNotSeeTheField(string $field): void {
-    $element = $this->getSession()
-      ->getPage()
-      ->findField($field);
-    if ($element) {
-      throw new \RuntimeException("Field '{$field}' is present.");
-    }
-  }
-
-  /**
-   * Check that we have the correct language for initial translation.
-   *
-   * @param string $title
-   *   Title of node.
-   *
-   * @Then The only available translation for :title is in the site's default language
-   */
-  public function assertOnlyDefaultLanguageTranslationExist(string $title): void {
-    $node = $this->getEntityByLabel('node', $title);
-    if (!$node) {
-      throw new \RuntimeException("Node '{$title}' doesn't exist.");
-    }
-
-    $node_translation_languages = $node->getTranslationLanguages();
-    if (count($node_translation_languages) !== 1) {
-      throw new \RuntimeException("The node should have only one translation.");
-    }
-
-    $node_language = key($node_translation_languages);
-    if ($node_language != \Drupal::languageManager()->getDefaultLanguage()->getId()) {
-      throw new \RuntimeException("Original translation language of the '{$title}' node is not the site's default language.");
-    }
   }
 
 }
