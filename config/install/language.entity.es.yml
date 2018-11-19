@@ -1,6 +1,10 @@
 langcode: en
 status: true
 dependencies: {  }
+third_party_settings:
+  oe_multilingual:
+    native_language: español
+    weight: 7
 id: es
 label: Spanish
 direction: ltr

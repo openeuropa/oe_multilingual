@@ -1,6 +1,10 @@
 langcode: en
 status: true
 dependencies: {  }
+third_party_settings:
+  oe_multilingual:
+    native_language: čeština
+    weight: 1
 id: cs
 label: Czech
 direction: ltr

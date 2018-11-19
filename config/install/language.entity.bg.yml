@@ -1,6 +1,10 @@
 langcode: en
 status: true
 dependencies: {  }
+third_party_settings:
+  oe_multilingual:
+    native_language: български
+    weight: 0
 id: bg
 label: Bulgarian
 direction: ltr

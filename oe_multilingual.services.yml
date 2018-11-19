@@ -4,7 +4,7 @@ services:
     arguments: ['@config.factory']
   oe_multilingual.helper:
     class: Drupal\oe_multilingual\MultilingualHelper
-    arguments: ['@entity.repository', '@current_route_match', '@language_manager']
+    arguments: ['@entity.repository', '@current_route_match', '@entity_type.manager']
   oe_multilingual.content_language_settings:
     class: Drupal\oe_multilingual\MultilingualConfigOverride
     tags:

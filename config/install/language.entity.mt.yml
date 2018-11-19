@@ -1,6 +1,10 @@
 langcode: en
 status: true
 dependencies: {  }
+third_party_settings:
+  oe_multilingual:
+    native_language: Malti
+    weight: 15
 id: mt
 label: Maltese
 direction: ltr

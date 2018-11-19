@@ -1,6 +1,10 @@
 langcode: en
 status: true
 dependencies: {  }
+third_party_settings:
+  oe_multilingual:
+    native_language: ελληνικά
+    weight: 5
 id: el
 label: Greek
 direction: ltr

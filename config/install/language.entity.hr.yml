@@ -1,6 +1,10 @@
 langcode: en
 status: true
 dependencies: {  }
+third_party_settings:
+  oe_multilingual:
+    native_language: hrvatski
+    weight: 10
 id: hr
 label: Croatian
 direction: ltr

@@ -1,6 +1,10 @@
 langcode: en
 status: true
 dependencies: {  }
+third_party_settings:
+  oe_multilingual:
+    native_language: Gaeilge
+    weight: 9
 id: ga
 label: Irish
 direction: ltr

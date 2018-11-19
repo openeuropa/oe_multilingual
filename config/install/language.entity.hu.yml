@@ -1,6 +1,10 @@
 langcode: en
 status: true
 dependencies: {  }
+third_party_settings:
+  oe_multilingual:
+    native_language: magyar
+    weight: 14
 id: hu
 label: Hungarian
 direction: ltr

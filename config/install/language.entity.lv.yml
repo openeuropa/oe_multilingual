@@ -1,6 +1,10 @@
 langcode: en
 status: true
 dependencies: {  }
+third_party_settings:
+  oe_multilingual:
+    native_language: latviešu
+    weight: 13
 id: lv
 label: Latvian
 direction: ltr

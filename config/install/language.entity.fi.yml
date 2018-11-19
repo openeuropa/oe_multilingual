@@ -1,6 +1,10 @@
 langcode: en
 status: true
 dependencies: {  }
+third_party_settings:
+  oe_multilingual:
+    native_language: suomi
+    weight: 22
 id: fi
 label: Finnish
 direction: ltr

@@ -7,8 +7,8 @@ namespace Drupal\oe_multilingual;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Language\LanguageManagerInterface;
 
 /**
  * Helper service around multilingual functionalities.
@@ -30,11 +30,11 @@ class MultilingualHelper implements MultilingualHelperInterface {
   protected $entityRepository;
 
   /**
-   * The language manager service.
+   * The entity type manager service.
    *
-   * @var \Drupal\Core\Language\LanguageManagerInterface
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
-  protected $languageManager;
+  protected $entityTypeManager;
 
   /**
    * Instantiates a new MultilingualHelper service.
@@ -43,13 +43,13 @@ class MultilingualHelper implements MultilingualHelperInterface {
    *   The entity repository service.
    * @param \Drupal\Core\Routing\RouteMatchInterface $current_route_match
    *   The current route match.
-   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The language manager.
    */
-  public function __construct(EntityRepositoryInterface $entity_repository, RouteMatchInterface $current_route_match, LanguageManagerInterface $language_manager) {
+  public function __construct(EntityRepositoryInterface $entity_repository, RouteMatchInterface $current_route_match, EntityTypeManagerInterface $entity_type_manager) {
     $this->entityRepository = $entity_repository;
     $this->currentRouteMatch = $current_route_match;
-    $this->languageManager = $language_manager;
+    $this->entityTypeManager = $entity_type_manager;
   }
 
   /**
@@ -82,41 +82,27 @@ class MultilingualHelper implements MultilingualHelperInterface {
    * {@inheritdoc}
    */
   public function getLanguageNameList(): array {
-    $language_list = self::getEuropeanUnionLanguageList();
-
-    return array_combine(array_keys($language_list), array_column($language_list, 1));
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getEuropeanUnionLanguageList(): array {
-    return [
-      'bg' => ['Bulgarian', 'български'],
-      'cs' => ['Czech', 'čeština'],
-      'da' => ['Danish', 'dansk'],
-      'de' => ['German', 'Deutsch'],
-      'et' => ['Estonian', 'eesti'],
-      'el' => ['Greek', 'ελληνικά'],
-      'en' => ['English', 'English'],
-      'es' => ['Spanish', 'español'],
-      'fr' => ['French', 'français'],
-      'ga' => ['Irish', 'Gaeilge'],
-      'hr' => ['Croatian', 'hrvatski'],
-      'it' => ['Italian', 'italiano'],
-      'lt' => ['Lithuanian', 'lietuvių'],
-      'lv' => ['Latvian', 'latviešu'],
-      'hu' => ['Hungarian', 'magyar'],
-      'mt' => ['Maltese', 'Malti'],
-      'nl' => ['Dutch', 'Nederlands'],
-      'pl' => ['Polish', 'polski'],
-      'pt-pt' => ['Portuguese', 'português'],
-      'ro' => ['Romanian', 'română'],
-      'sk' => ['Slovak', 'slovenčina'],
-      'sl' => ['Slovenian', 'slovenščina'],
-      'fi' => ['Finnish', 'suomi'],
-      'sv' => ['Swedish', 'svenska'],
-    ];
+    $storage = $this->entityTypeManager
+      ->getStorage('configurable_language');
+    $language_list = $rules = $storage->loadMultiple();
+    // Remove undefined and not applicable from the list.
+    unset($language_list['und']);
+    unset($language_list['zxx']);
+    $language_names = [];
+    // Compose an array of languages with their native title and weight
+    // keyed by the language id.
+    foreach ($language_list as $language_key => $language) {
+      $language_names[$language_key]['native_language'] = $language->getThirdPartySetting('oe_multilingual', 'native_language');
+      $language_names[$language_key]['weight'] = $language->getThirdPartySetting('oe_multilingual', 'weight');
+    }
+    // Order the language array by the weight value.
+    uasort($language_names, function ($a, $b) {
+      return $a['weight'] <=> $b['weight'];
+    });
+    // Compose the final array of language keys and native titles.
+    return array_map(function ($a) {
+      return $a['native_language'];
+    }, $language_names);
   }
 
 }

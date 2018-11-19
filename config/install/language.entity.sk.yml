@@ -1,6 +1,10 @@
 langcode: en
 status: true
 dependencies: {  }
+third_party_settings:
+  oe_multilingual:
+    native_language: slovenčina
+    weight: 20
 id: sk
 label: Slovak
 direction: ltr

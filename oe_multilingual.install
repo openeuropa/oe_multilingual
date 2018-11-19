@@ -21,6 +21,15 @@ function oe_multilingual_install() {
     return;
   }
 
+  // Add basic third party settings for English language.
+  /** @var \Drupal\Core\Entity\EntityStorageInterface $storage */
+  $storage = \Drupal::service('entity_type.manager')->getStorage('configurable_language');
+  /** @var \Drupal\language\ConfigurableLanguageInterface $english */
+  $english = $storage->load('en');
+  $english->setThirdPartySetting('oe_multilingual', 'native_language', 'English');
+  $english->setThirdPartySetting('oe_multilingual', 'weight', 6);
+  $english->save();
+
   // Disable remote translations downloading from Drupal localisation service.
   // Also make sure that English language is translatable.
   \Drupal::configFactory()
