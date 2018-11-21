@@ -78,31 +78,4 @@ class MultilingualHelper implements MultilingualHelperInterface {
     return $this->entityRepository->getTranslationFromContext($entity);
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getLanguageNameList(): array {
-    $storage = $this->entityTypeManager
-      ->getStorage('configurable_language');
-    $language_list = $rules = $storage->loadMultiple();
-    // Remove undefined and not applicable from the list.
-    unset($language_list['und']);
-    unset($language_list['zxx']);
-    $language_names = [];
-    // Compose an array of languages with their native title and weight
-    // keyed by the language id.
-    foreach ($language_list as $language_key => $language) {
-      $language_names[$language_key]['native_language'] = $language->getThirdPartySetting('oe_multilingual', 'native_language');
-      $language_names[$language_key]['weight'] = $language->getThirdPartySetting('oe_multilingual', 'weight');
-    }
-    // Order the language array by the weight value.
-    uasort($language_names, function ($a, $b) {
-      return $a['weight'] <=> $b['weight'];
-    });
-    // Compose the final array of language keys and native titles.
-    return array_map(function ($a) {
-      return $a['native_language'];
-    }, $language_names);
-  }
-
 }

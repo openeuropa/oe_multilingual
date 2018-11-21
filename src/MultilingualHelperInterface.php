@@ -30,15 +30,4 @@ interface MultilingualHelperInterface {
    */
   public function getCurrentLanguageEntityTranslation(EntityInterface $entity): EntityInterface;
 
-  /**
-   * Returns the list of language names in their native translations.
-   *
-   * @return array
-   *   An array of language codes and language names.
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   */
-  public function getLanguageNameList(): array;
-
 }
