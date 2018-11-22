@@ -16,6 +16,22 @@ class ConfigurableLanguageManagerOverride extends ConfigurableLanguageManager {
   /**
    * {@inheritdoc}
    */
+  public function getLanguages($flags = LanguageInterface::STATE_CONFIGURABLE) {
+    $languages = parent::getLanguages($flags);
+    $configurable_languages = [];
+    foreach ($languages as $langcode => $language) {
+      $configurable_languages[$langcode] = ConfigurableLanguage::load($langcode);
+    }
+    uasort($configurable_languages, function ($a, $b) {
+      return $a->getThirdPartySetting("oe_multilingual", "weight") <=> $b->getThirdPartySetting("oe_multilingual", "weight");
+    });
+    return array_replace($configurable_languages, $languages);
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getNativeLanguages() {
     $languages = $this->getLanguages(LanguageInterface::STATE_CONFIGURABLE);
     $natives = [];
@@ -29,11 +45,6 @@ class ConfigurableLanguageManagerOverride extends ConfigurableLanguageManager {
       $natives[$langcode] = $native_language;
     }
     $this->setConfigOverrideLanguage($original_language);
-
-    // Order the language array by the weight value.
-    uasort($natives, function ($a, $b) {
-      return $a->getThirdPartySetting("oe_multilingual", "weight") <=> $b->getThirdPartySetting("oe_multilingual", "weight");
-    });
 
     return $natives;
   }
