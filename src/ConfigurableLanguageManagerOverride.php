@@ -23,8 +23,13 @@ class ConfigurableLanguageManagerOverride extends ConfigurableLanguageManager {
       $configurable_languages[$langcode] = ConfigurableLanguage::load($langcode);
     }
     uasort($configurable_languages, function ($a, $b) {
-      return $a->getThirdPartySetting("oe_multilingual", "weight") <=> $b->getThirdPartySetting("oe_multilingual", "weight");
+      // Make sure that both languages have been properly instantiated.
+      if ($a instanceof ConfigurableLanguage && $b instanceof ConfigurableLanguage) {
+        return $a->getThirdPartySetting("oe_multilingual", "weight") <=> $b->getThirdPartySetting("oe_multilingual", "weight");
+      }
+      return 0;
     });
+
     return array_replace($configurable_languages, $languages);
 
   }
