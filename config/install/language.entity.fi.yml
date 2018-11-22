@@ -4,9 +4,8 @@ dependencies: {  }
 third_party_settings:
   oe_multilingual:
     native_language: suomi
-    weight: 22
 id: fi
 label: Finnish
 direction: ltr
-weight: 16
+weight: 22
 locked: false

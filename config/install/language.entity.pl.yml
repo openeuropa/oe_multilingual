@@ -4,9 +4,8 @@ dependencies: {  }
 third_party_settings:
   oe_multilingual:
     native_language: polski
-    weight: 18
 id: pl
 label: Polish
 direction: ltr
-weight: 11
+weight: 17
 locked: false

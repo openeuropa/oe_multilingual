@@ -5,6 +5,3 @@ language.entity.*.third_party.oe_multilingual:
     native_language:
       type: text
       label: 'Native language title'
-    weight:
-      type: integer
-      label: 'Weight'

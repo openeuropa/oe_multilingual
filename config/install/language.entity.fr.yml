@@ -4,9 +4,8 @@ dependencies: {  }
 third_party_settings:
   oe_multilingual:
     native_language: français
-    weight: 8
 id: fr
 label: French
 direction: ltr
-weight: 2
+weight: 8
 locked: false

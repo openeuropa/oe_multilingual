@@ -4,9 +4,8 @@ dependencies: {  }
 third_party_settings:
   oe_multilingual:
     native_language: italiano
-    weight: 11
 id: it
 label: Italian
 direction: ltr
-weight: 5
+weight: 11
 locked: false

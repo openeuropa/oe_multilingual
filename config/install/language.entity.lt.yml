@@ -4,9 +4,8 @@ dependencies: {  }
 third_party_settings:
   oe_multilingual:
     native_language: lietuvių
-    weight: 12
 id: lt
 label: Lithuanian
 direction: ltr
-weight: 6
+weight: 12
 locked: false

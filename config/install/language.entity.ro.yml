@@ -4,9 +4,8 @@ dependencies: {  }
 third_party_settings:
   oe_multilingual:
     native_language: română
-    weight: 19
 id: ro
 label: Romanian
 direction: ltr
-weight: 13
+weight: 19
 locked: false

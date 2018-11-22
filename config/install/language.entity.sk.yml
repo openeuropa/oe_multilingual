@@ -4,9 +4,8 @@ dependencies: {  }
 third_party_settings:
   oe_multilingual:
     native_language: slovenčina
-    weight: 20
 id: sk
 label: Slovak
 direction: ltr
-weight: 14
+weight: 20
 locked: false
