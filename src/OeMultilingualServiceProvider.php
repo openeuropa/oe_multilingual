@@ -16,9 +16,8 @@ class OeMultilingualServiceProvider extends ServiceProviderBase {
    * {@inheritdoc}
    */
   public function alter(ContainerBuilder $container) {
-
-    $definition = $container->getDefinition('language_manager');
-    $definition->setClass('Drupal\oe_multilingual\ConfigurableLanguageManagerOverride');
+    $container->getDefinition('language_manager')
+      ->setClass('Drupal\oe_multilingual\ConfigurableLanguageManagerOverride');
   }
 
 }

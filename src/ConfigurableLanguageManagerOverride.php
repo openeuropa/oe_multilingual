@@ -29,10 +29,12 @@ class ConfigurableLanguageManagerOverride extends ConfigurableLanguageManager {
       $natives[$langcode] = $native_language;
     }
     $this->setConfigOverrideLanguage($original_language);
+
     // Order the language array by the weight value.
     uasort($natives, function ($a, $b) {
       return $a->getThirdPartySetting("oe_multilingual", "weight") <=> $b->getThirdPartySetting("oe_multilingual", "weight");
     });
+
     return $natives;
   }
 
