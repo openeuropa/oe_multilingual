@@ -37,6 +37,12 @@ class LanguageNegotiationSetterTest extends KernelTestBase {
   protected function setUp() {
     parent::setUp();
 
+    $this->installSchema('locale', [
+      'locales_location',
+      'locales_target',
+      'locales_source',
+    ]);
+
     $this->installConfig([
       'locale',
       'language',
