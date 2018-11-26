@@ -16,7 +16,7 @@ use Drupal\Core\Url;
  * Replaces the language links labels with the native language version.
  */
 function oe_multilingual_language_switch_links_alter(array &$links, string $type, Url $url): void {
-  /** @var \Drupal\language\Entity\ConfigurableLanguage[] $original_languages */
+  /** @var \Drupal\Core\Language\LanguageInterface[] $original_languages */
   $original_languages = \Drupal::service('language_manager')->getNativeLanguages();
   foreach ($links as $code => &$link) {
     if (isset($original_languages[$code])) {
@@ -55,7 +55,7 @@ function oe_multilingual_language_fallback_candidates_alter(array &$candidates, 
  * Replaces the language links labels with the native language version.
  */
 function oe_multilingual_preprocess_language_selection_page_content(&$variables): void {
-  /** @var \Drupal\language\Entity\ConfigurableLanguage[] $original_languages */
+  /** @var \Drupal\Core\Language\LanguageInterface[] $original_languages */
   $original_languages = \Drupal::service('language_manager')->getNativeLanguages();
   foreach ($variables['language_links']['#items'] as $langcode => &$item) {
     if (isset($original_languages[$langcode])) {
