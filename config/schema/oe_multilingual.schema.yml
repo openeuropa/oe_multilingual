@@ -1,7 +1,0 @@
-language.entity.*.third_party.oe_multilingual:
-  type: mapping
-  label: 'OpenEuropa Multilingual extra settings on languages'
-  mapping:
-    native_language:
-      type: text
-      label: 'Native language title'
