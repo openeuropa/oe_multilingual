@@ -4,5 +4,5 @@ dependencies: {  }
 id: it
 label: Italian
 direction: ltr
-weight: 5
+weight: 11
 locked: false

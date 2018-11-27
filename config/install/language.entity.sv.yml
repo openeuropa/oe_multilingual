@@ -4,5 +4,5 @@ dependencies: {  }
 id: sv
 label: Swedish
 direction: ltr
-weight: 17
+weight: 23
 locked: false

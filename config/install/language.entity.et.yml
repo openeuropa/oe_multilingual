@@ -4,5 +4,5 @@ dependencies: {  }
 id: et
 label: Estonian
 direction: ltr
-weight: -2
+weight: 4
 locked: false

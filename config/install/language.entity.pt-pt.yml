@@ -4,5 +4,5 @@ dependencies: {  }
 id: pt-pt
 label: Portuguese
 direction: ltr
-weight: 12
+weight: 18
 locked: false

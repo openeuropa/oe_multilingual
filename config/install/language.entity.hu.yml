@@ -4,5 +4,5 @@ dependencies: {  }
 id: hu
 label: Hungarian
 direction: ltr
-weight: 7
+weight: 14
 locked: false

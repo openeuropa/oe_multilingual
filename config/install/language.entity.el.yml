@@ -4,5 +4,5 @@ dependencies: {  }
 id: el
 label: Greek
 direction: ltr
-weight: -1
+weight: 5
 locked: false

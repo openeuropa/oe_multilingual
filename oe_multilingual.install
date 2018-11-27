@@ -21,6 +21,12 @@ function oe_multilingual_install() {
     return;
   }
 
+  // Set up the weight of the English language.
+  \Drupal::configFactory()
+    ->getEditable('language.entity.en')
+    ->set('weight', 6)
+    ->save();
+
   // Disable remote translations downloading from Drupal localisation service.
   // Also make sure that English language is translatable.
   \Drupal::configFactory()
