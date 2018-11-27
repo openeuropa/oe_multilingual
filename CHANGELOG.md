@@ -1,10 +1,23 @@
 # Change Log
 
+## [0.2.0](https://github.com/openeuropa/oe_multilingual/tree/0.2.0) (2018-11-27)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.6...0.2.0)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1322: Use the proper Docker way of overriding docker-composer.yml file. [\#35](https://github.com/openeuropa/oe_multilingual/pull/35) ([drupol](https://github.com/drupol))
+- OPENEUROPA-1345: Remove hardcoded language list. [\#34](https://github.com/openeuropa/oe_multilingual/pull/34) ([imanoleguskiza](https://github.com/imanoleguskiza))
+- OPENEUROPA-1326: Use patched core from drupal-core-require. [\#33](https://github.com/openeuropa/oe_multilingual/pull/33) ([dxvargas](https://github.com/dxvargas))
+- OPENEUROPA-1276: Use the core functionality for admin language negotiation [\#32](https://github.com/openeuropa/oe_multilingual/pull/32) ([upchuk](https://github.com/upchuk))
+- OPENEUROPA-1301: Ensure config changes in hook\_install don't happen if the config is being synced and show disclaimer [\#31](https://github.com/openeuropa/oe_multilingual/pull/31) ([nagyad](https://github.com/nagyad))
+- OPENEUROPA-660: Make it impossible for a content editor to create an initial version of a content in any language other than the default language [\#29](https://github.com/openeuropa/oe_multilingual/pull/29) ([sergepavle](https://github.com/sergepavle))
+
 ## [0.1.6](https://github.com/openeuropa/oe_multilingual/tree/0.1.6) (2018-09-27)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.5...0.1.6)
 
 **Merged pull requests:**
 
+- OPENEUROPA-1241: Update CHANGELOG.md. [\#28](https://github.com/openeuropa/oe_multilingual/pull/28) ([voidtek](https://github.com/voidtek))
 - OPENEUROPA-782: Make sure component dependencies are as relaxed as possible. [\#27](https://github.com/openeuropa/oe_multilingual/pull/27) ([aritomelo](https://github.com/aritomelo))
 - OPENEUROPA-1119: Create a docker-compose.yml.dist file [\#26](https://github.com/openeuropa/oe_multilingual/pull/26) ([netlooker](https://github.com/netlooker))
 - Update README to suggest installation of stable release [\#23](https://github.com/openeuropa/oe_multilingual/pull/23) ([pfrenssen](https://github.com/pfrenssen))
