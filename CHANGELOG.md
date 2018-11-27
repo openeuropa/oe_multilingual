@@ -1,10 +1,18 @@
 # Change Log
 
+## [0.2.1](https://github.com/openeuropa/oe_multilingual/tree/0.2.1) (2018-11-27)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.2.0...0.2.1)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1345: Add tests for language translations. [\#37](https://github.com/openeuropa/oe_multilingual/pull/37) ([imanoleguskiza](https://github.com/imanoleguskiza))
+
 ## [0.2.0](https://github.com/openeuropa/oe_multilingual/tree/0.2.0) (2018-11-27)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.6...0.2.0)
 
 **Merged pull requests:**
 
+- Update CHANGELOG.md for 0.2.0 release. [\#36](https://github.com/openeuropa/oe_multilingual/pull/36) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-1322: Use the proper Docker way of overriding docker-composer.yml file. [\#35](https://github.com/openeuropa/oe_multilingual/pull/35) ([drupol](https://github.com/drupol))
 - OPENEUROPA-1345: Remove hardcoded language list. [\#34](https://github.com/openeuropa/oe_multilingual/pull/34) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - OPENEUROPA-1326: Use patched core from drupal-core-require. [\#33](https://github.com/openeuropa/oe_multilingual/pull/33) ([dxvargas](https://github.com/dxvargas))
