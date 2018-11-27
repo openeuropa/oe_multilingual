@@ -25,8 +25,6 @@ class MinkContext extends RawMinkContext {
    * @param \Behat\Gherkin\Node\TableNode $links
    *   List of links.
    *
-   * @throws \Exception
-   *
    * @Then I should see the following links in the language switcher:
    */
   public function assertLinksInRegion(TableNode $links): void {

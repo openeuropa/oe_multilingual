@@ -1,6 +1,6 @@
 @api
 Feature: Language selection
-  In order to comply to European standards
+  In order to comply with European standards
   The site languages have to be translated
 
   Scenario: The language switcher contains all language translations
