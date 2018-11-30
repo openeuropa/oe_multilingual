@@ -71,3 +71,22 @@ function oe_multilingual_install() {
 
   \Drupal::messenger()->addMessage('Please be aware that oe_multilingual makes changes to the following configurations: Language, Locale, Administration language negotiation.');
 }
+
+/**
+ * Implements hook_update_N().
+ *
+ * Remove administration_language_negotiation.
+ */
+function oe_multilingual_update_8001(&$sandbox) {
+
+  $config = \Drupal::configFactory()->getEditable('language.types');
+  $language_types = \Drupal::languageManager()->getLanguageTypes();
+  foreach ($language_types as $type) {
+    $config->clear('negotiation.' . $type . '.enabled.administration-language-negotiation');
+  }
+  $config->save();
+
+  $module_data = \Drupal::config('core.extension')->get('module');
+  unset($module_data['administration_language_negotiation']);
+  \Drupal::configFactory()->getEditable('core.extension')->set('module', $module_data)->save();
+}
