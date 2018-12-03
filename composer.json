@@ -53,6 +53,11 @@
             "build/profiles/contrib/{$name}": ["type:drupal-profile"],
             "build/modules/contrib/{$name}": ["type:drupal-module"],
             "build/themes/contrib/{$name}": ["type:drupal-theme"]
+        },
+        "patches": {
+            "drupal/core": {
+                "https://www.drupal.org/project/drupal/issues/2189267": "https://www.drupal.org/files/issues/2018-09-14/2189267-88.patch"
+            }
         }
     },
     "config": {
