@@ -1,10 +1,18 @@
 # Change Log
 
+## [0.2.2](https://github.com/openeuropa/oe_multilingual/tree/0.2.2) (2018-12-03)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.2.1...0.2.2)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1386: Adding back the multilingual patch. [\#40](https://github.com/openeuropa/oe_multilingual/pull/40) ([imanoleguskiza](https://github.com/imanoleguskiza))
+
 ## [0.2.1](https://github.com/openeuropa/oe_multilingual/tree/0.2.1) (2018-11-27)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.2.0...0.2.1)
 
 **Merged pull requests:**
 
+- Update CHANGELOG.md for 0.2.1 release. [\#38](https://github.com/openeuropa/oe_multilingual/pull/38) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-1345: Add tests for language translations. [\#37](https://github.com/openeuropa/oe_multilingual/pull/37) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [0.2.0](https://github.com/openeuropa/oe_multilingual/tree/0.2.0) (2018-11-27)
