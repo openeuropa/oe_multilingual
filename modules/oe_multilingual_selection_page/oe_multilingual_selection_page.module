@@ -15,13 +15,20 @@ function oe_multilingual_selection_page_preprocess_language_selection_page_conte
   // Generate an array suitable for use in the ecl-language-list component.
   foreach ($variables['language_links']['#items'] as $key => $value) {
     $language_code = $key;
-    $url = $value['#url']->toString();
+    /** @var \Drupal\Core\Url $url */
+    $url = $value['#url'];
 
     $variables['languages'][] = [
       'href' => $url,
       'hreflang' => $language_code,
       'label' => $value['#title'],
       'lang' => $language_code,
+    ];
+
+    // We need to set vary by URL because the links need to redirect to the
+    // initial requested language.
+    $variables['#cache'] = [
+      'contexts' => ['url'],
     ];
   }
 }
