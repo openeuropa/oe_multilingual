@@ -4,6 +4,7 @@ namespace Drupal\Tests\oe_multilingual\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\RawMinkContext;
+use PHPUnit\Framework\Assert;
 
 /**
  * Class MinkContext.
@@ -29,13 +30,18 @@ class MinkContext extends RawMinkContext {
    */
   public function assertLinksInRegion(TableNode $links): void {
     $switcher = $this->getSession()->getPage()->find('css', '#block-oe-multilingual-language-switcher');
-
-    foreach ($links->getRows() as $row) {
-      $result = $switcher->findLink($row[0]);
-      if (empty($result)) {
-        throw new \Exception(sprintf('No link to "%s" in the "%s" region on the page %s', $row[0], $region, $this->getSession()->getCurrentUrl()));
-      }
+    $switcher_links = $switcher->findAll('css', 'a');
+    $actual_links = [];
+    /** @var \Behat\Mink\Element\NodeElement $switcher_link */
+    foreach ($switcher_links as $switcher_link) {
+      $actual_links[] = $switcher_link->getText();
     }
+    $expected_links = [];
+    foreach ($links->getRows() as $row) {
+      $expected_links[] = $row[0];
+
+    }
+    Assert::assertEquals($expected_links, $actual_links);
   }
 
 }

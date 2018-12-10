@@ -18,8 +18,8 @@ Feature: Language selection
       | Gaeilge     |
       | hrvatski    |
       | italiano    |
-      | latviešu    |
       | lietuvių    |
+      | latviešu    |
       | magyar      |
       | Malti       |
       | Nederlands  |
