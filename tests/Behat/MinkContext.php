@@ -29,18 +29,13 @@ class MinkContext extends RawMinkContext {
    * @Then I should see the following links in the language switcher:
    */
   public function assertLinksInRegion(TableNode $links): void {
-    $switcher = $this->getSession()->getPage()->find('css', '#block-oe-multilingual-language-switcher');
-    $switcher_links = $switcher->findAll('css', 'a');
+    $switcher_links = $this->getSession()->getPage()->findAll('css', '#block-oe-multilingual-language-switcher a');
     $actual_links = [];
     /** @var \Behat\Mink\Element\NodeElement $switcher_link */
     foreach ($switcher_links as $switcher_link) {
       $actual_links[] = $switcher_link->getText();
     }
-    $expected_links = [];
-    foreach ($links->getRows() as $row) {
-      $expected_links[] = $row[0];
-
-    }
+    $expected_links = array_keys($links->getRowsHash());
     Assert::assertEquals($expected_links, $actual_links);
   }
 
