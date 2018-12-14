@@ -4,5 +4,5 @@ dependencies: {  }
 id: lv
 label: Latvian
 direction: ltr
-weight: 13
+weight: 12
 locked: false
