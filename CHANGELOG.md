@@ -1,10 +1,19 @@
 # Change Log
 
+## [0.2.3](https://github.com/openeuropa/oe_multilingual/tree/0.2.3) (2018-12-18)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.2.2...0.2.3)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1350: Remove multilingual patch. [\#44](https://github.com/openeuropa/oe_multilingual/pull/44) ([imanoleguskiza](https://github.com/imanoleguskiza))
+- OPENEUROPA-1382: Assert that the language switcher has appropriate li… [\#43](https://github.com/openeuropa/oe_multilingual/pull/43) ([imanoleguskiza](https://github.com/imanoleguskiza))
+
 ## [0.2.2](https://github.com/openeuropa/oe_multilingual/tree/0.2.2) (2018-12-03)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.2.1...0.2.2)
 
 **Merged pull requests:**
 
+- Update CHANGELOG.md for 0.2.2 release. [\#41](https://github.com/openeuropa/oe_multilingual/pull/41) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-1386: Adding back the multilingual patch. [\#40](https://github.com/openeuropa/oe_multilingual/pull/40) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [0.2.1](https://github.com/openeuropa/oe_multilingual/tree/0.2.1) (2018-11-27)
