@@ -8,7 +8,7 @@ Feature: Translate content
     Given I am logged in as a user with the "create content translations, translate oe_demo_translatable_page node, create oe_demo_translatable_page content" permission
 
     # Create a Translatable page content.
-    When I am on "the Add demo translatable page"
+    When I am on "the demo content creation page"
     And I fill in "Title" with "Test page"
     And I fill in "Body" with "This is a test"
     And I press "Save"
