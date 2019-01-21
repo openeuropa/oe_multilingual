@@ -13,8 +13,7 @@ Feature: Translate content
     And I fill in "Body" with "This is a test"
     And I press "Save"
 
-    Then I should see the following success messages:
-      | Demo translatable page Test page has been created. |
+    Then I should see the success message "Demo translatable page Test page has been created."
     And I should see "Test page" in the "page header"
     And I should see "This is a test" in the "page header"
 
@@ -25,8 +24,7 @@ Feature: Translate content
     And I fill in "Body" with "Esto es una prueba"
     And I press "Save (this translation)"
 
-    Then I should see the following success messages:
-      | Demo translatable page Página de prueba has been updated. |
+    Then I should see the success message "Demo translatable page Página de prueba has been updated."
     And I should see "Página de prueba" in the "page header"
     And I should see "Esto es una prueba" in the "page header"
 
