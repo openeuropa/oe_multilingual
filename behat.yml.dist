@@ -11,6 +11,11 @@ default:
         - Drupal\Tests\oe_multilingual\Behat\DrupalContext
         - Drupal\Tests\oe_multilingual\Behat\MinkContext
         - Drupal\Tests\oe_multilingual\Behat\InterfaceTranslationContext
+        - OpenEuropa\Behat\TransformationContext:
+            pages:
+              English administration home: 'en/admin'
+              French administration home: 'fr/admin'
+              demo content creation: 'node/add/oe_demo_translatable_page'
   extensions:
     Behat\MinkExtension:
       goutte: ~
