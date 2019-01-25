@@ -7,6 +7,7 @@
 
 declare(strict_types = 1);
 
+use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationSelected;
@@ -70,4 +71,45 @@ function oe_multilingual_install() {
   ]);
 
   \Drupal::messenger()->addMessage('Please be aware that oe_multilingual makes changes to the following configurations: Language, Locale, Administration language negotiation.');
+
+  _oe_multilingual_ensure_config_translations();
+}
+
+/**
+ * Ensures that local entries exist for the configuration translations.
+ *
+ * Because we are shipping with pre-existing config translations for the
+ * languages, we need to also ensure that upon install, corresponding locale
+ * entries are created for all the translatable values found in them. See
+ * \Drupal\locale\LocaleConfigSubscriber for the logic that does this normally
+ * and onto which we rely by simply saving the config translations.
+ *
+ * In addition, since the aforementioned logic only happens if the site is NOT
+ * currently in the process of being installed, we need to "trick" it into
+ * believing otherwise for the cases in which the module is being installed
+ * as part of a site install (such as profile dependency).
+ */
+function _oe_multilingual_ensure_config_translations(): void {
+  $backup = isset($GLOBALS['install_state']) ? $GLOBALS['install_state'] : NULL;
+  if ($backup) {
+    unset($GLOBALS['install_state']);
+  }
+
+  $language_manager = \Drupal::languageManager();
+  $storage = new FileStorage(drupal_get_path('module', 'oe_multilingual') . '/config/install');
+  foreach ($language_manager->getLanguages() as $language) {
+    if ($language->getId() === 'en') {
+      continue;
+    }
+
+    $collection = $storage->createCollection('language.' . $language->getId());
+    foreach ($collection->listAll() as $name) {
+      $config = $language_manager->getLanguageConfigOverride($language->getId(), $name);
+      $config->save();
+    }
+  }
+
+  if ($backup) {
+    $GLOBALS['install_state'] = $backup;
+  }
 }
