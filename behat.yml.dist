@@ -17,7 +17,7 @@ default:
               French administration home: 'fr/admin'
               demo content creation: 'node/add/oe_demo_translatable_page'
   extensions:
-    Behat\MinkExtension:
+    Drupal\MinkExtension:
       goutte: ~
       selenium2: ~
       javascript_session: selenium2
