@@ -8,9 +8,8 @@ default:
         - Drupal\DrupalExtension\Context\DrupalContext
         - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\DrupalExtension\Context\ConfigContext
-        - Drupal\Tests\oe_multilingual\Behat\DrupalContext
-        - Drupal\Tests\oe_multilingual\Behat\MinkContext
-        - Drupal\Tests\oe_multilingual\Behat\InterfaceTranslationContext
+        - Drupal\oe_multilingual\Tests\Behat\DrupalContext
+        - Drupal\oe_multilingual\Tests\Behat\MultilingualContext
         - OpenEuropa\Behat\TransformationContext:
             pages:
               English administration home: 'en/admin'
