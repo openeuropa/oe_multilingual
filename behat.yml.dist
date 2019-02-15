@@ -10,6 +10,8 @@ default:
         - Drupal\DrupalExtension\Context\ConfigContext
         - Drupal\Tests\oe_multilingual\Behat\DrupalContext
         - OpenEuropa\Behat\TransformationContext:
+            elements:
+              language switcher: '#block-oe-multilingual-language-switcher'
             pages:
               English administration home: 'en/admin'
               French administration home: 'fr/admin'

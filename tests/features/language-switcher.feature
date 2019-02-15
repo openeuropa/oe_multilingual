@@ -5,7 +5,7 @@ Feature: Language selection
 
   Scenario: The language switcher contains all language translations
     When I am on the homepage
-    And I should see the following links in the language switcher:
+    And the "language switcher" element should have the following links:
       | български   |
       | čeština     |
       | dansk       |

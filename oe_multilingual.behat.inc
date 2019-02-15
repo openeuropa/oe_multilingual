@@ -258,15 +258,18 @@ class OeMultilingualContext extends DrupalSubContextBase implements DrupalSubCon
   }
 
   /**
-   * Assert links in region.
+   * Assert links in element.
    *
+   * @param string $element
+   *   Selector for the element to check.
    * @param \Behat\Gherkin\Node\TableNode $links
    *   List of links.
    *
-   * @Then I should see the following links in the language switcher:
+   * @Then the :element element should have the following links:
    */
-  public function assertLinksInRegion(TableNode $links): void {
-    $switcher_links = $this->getSession()->getPage()->findAll('css', '#block-oe-multilingual-language-switcher a');
+  public function assertLinksInElement(string $element, TableNode $links): void {
+    $switcher = $this->getSession()->getPage()->find('css', $element);
+    $switcher_links = $switcher->findAll('css', 'a');
     $actual_links = [];
     /** @var \Behat\Mink\Element\NodeElement $switcher_link */
     foreach ($switcher_links as $switcher_link) {
