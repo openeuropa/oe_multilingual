@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\oe_multilingual\Tests\Behat\Traits;
+namespace Drupal\oe_multilingual\Tests\Traits;
 
 use Behat\Gherkin\Node\TableNode;
 use Drupal\Core\Entity\ContentEntityInterface;

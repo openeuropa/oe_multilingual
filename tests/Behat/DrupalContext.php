@@ -2,11 +2,11 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\oe_multilingual\Tests\Behat;
+namespace Drupal\Tests\oe_multilingual\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
-use Drupal\oe_multilingual\Tests\Behat\Traits\ContentManagerTrait;
+use Drupal\oe_multilingual\Tests\Traits\ContentManagerTrait;
 
 /**
  * Class DrupalContext.
