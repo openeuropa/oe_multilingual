@@ -6,6 +6,7 @@ namespace Drupal\Tests\oe_multilingual\Kernel;
 
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\KernelTests\KernelTestBase;
+use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationSelected;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Drupal\oe_multilingual\Plugin\LanguageNegotiation\LanguageNegotiationAdmin;
@@ -39,6 +40,7 @@ class InstallationTest extends KernelTestBase {
       'locales_location',
       'locales_target',
       'locales_source',
+      'locale_file',
     ]);
 
     $this->installConfig([
@@ -49,6 +51,33 @@ class InstallationTest extends KernelTestBase {
     ]);
     $this->container->get('module_handler')->loadInclude('oe_multilingual', 'install');
     oe_multilingual_install();
+  }
+
+  /**
+   * Test languages keep the configuration after being deleted.
+   */
+  public function testLanguageConfiguration(): void {
+    // Delete a language.
+    /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $language_manager */
+    $entity_manager = $this->container->get('entity_type.manager');
+    $storage = $entity_manager->getStorage('configurable_language');
+    /** @var \Drupal\language\Entity\ConfigurableLanguage $old_language */
+    $old_language = $storage->load('fr');
+    $old_language->delete();
+
+    // Assert language is deleted.
+    $language = $storage->load('fr');
+    $this->assertNull($language);
+
+    // Create the same language.
+    /** @var \Drupal\language\Entity\ConfigurableLanguage $new_language */
+    $new_language = new ConfigurableLanguage(['id' => 'fr'], 'configurable_language');
+    $new_language->save();
+    $new_language = $storage->load('fr');
+
+    $this->assertEquals($old_language->id(), $new_language->id());
+    $this->assertEquals($old_language->getWeight(), $new_language->getWeight());
+    $this->assertEquals($old_language->getName(), $new_language->getName());
   }
 
   /**
