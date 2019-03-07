@@ -6,7 +6,6 @@ namespace Drupal\Tests\oe_multilingual\Kernel;
 
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationSelected;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Drupal\oe_multilingual\Plugin\LanguageNegotiation\LanguageNegotiationAdmin;
@@ -54,30 +53,33 @@ class InstallationTest extends KernelTestBase {
   }
 
   /**
-   * Test languages keep the configuration after being deleted.
+   * Test languages keep the configuration after being deleted and recreated.
    */
   public function testLanguageConfiguration(): void {
     // Delete a language.
-    /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $language_manager */
-    $entity_manager = $this->container->get('entity_type.manager');
-    $storage = $entity_manager->getStorage('configurable_language');
+    $storage = $this->container->get('entity_type.manager')->getStorage('configurable_language');
     /** @var \Drupal\language\Entity\ConfigurableLanguage $old_language */
     $old_language = $storage->load('fr');
     $old_language->delete();
 
-    // Assert language is deleted.
+    // Assert the language is deleted.
     $language = $storage->load('fr');
     $this->assertNull($language);
 
     // Create the same language.
-    /** @var \Drupal\language\Entity\ConfigurableLanguage $new_language */
-    $new_language = new ConfigurableLanguage(['id' => 'fr'], 'configurable_language');
+    /** @var \Drupal\language\ConfigurableLanguageInterface $new_language */
+    $new_language = $storage->create(['id' => 'fr']);
     $new_language->save();
     $new_language = $storage->load('fr');
 
+    // Assert the same values apply.
     $this->assertEquals($old_language->id(), $new_language->id());
     $this->assertEquals($old_language->getWeight(), $new_language->getWeight());
     $this->assertEquals($old_language->getName(), $new_language->getName());
+
+    // Ensure the correct translation is also present.
+    $translation = $this->container->get('language_manager')->getLanguageConfigOverride('fr', 'language.entity.fr');
+    $this->assertEquals('français', $translation->get('label'));
   }
 
   /**
