@@ -39,6 +39,7 @@ class InstallationTest extends KernelTestBase {
       'locales_location',
       'locales_target',
       'locales_source',
+      'locale_file',
     ]);
 
     $this->installConfig([
@@ -49,6 +50,36 @@ class InstallationTest extends KernelTestBase {
     ]);
     $this->container->get('module_handler')->loadInclude('oe_multilingual', 'install');
     oe_multilingual_install();
+  }
+
+  /**
+   * Test languages keep the configuration after being deleted and recreated.
+   */
+  public function testLanguageConfiguration(): void {
+    // Delete a language.
+    $storage = $this->container->get('entity_type.manager')->getStorage('configurable_language');
+    /** @var \Drupal\language\Entity\ConfigurableLanguage $old_language */
+    $old_language = $storage->load('fr');
+    $old_language->delete();
+
+    // Assert the language is deleted.
+    $language = $storage->load('fr');
+    $this->assertNull($language);
+
+    // Create the same language.
+    /** @var \Drupal\language\ConfigurableLanguageInterface $new_language */
+    $new_language = $storage->create(['id' => 'fr']);
+    $new_language->save();
+    $new_language = $storage->load('fr');
+
+    // Assert the same values apply.
+    $this->assertEquals($old_language->id(), $new_language->id());
+    $this->assertEquals($old_language->getWeight(), $new_language->getWeight());
+    $this->assertEquals($old_language->getName(), $new_language->getName());
+
+    // Ensure the correct translation is also present.
+    $translation = $this->container->get('language_manager')->getLanguageConfigOverride('fr', 'language.entity.fr');
+    $this->assertEquals('français', $translation->get('label'));
   }
 
   /**
