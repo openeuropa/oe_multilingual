@@ -1,10 +1,24 @@
 # Change Log
 
+## [0.3.0](https://github.com/openeuropa/oe_multilingual/tree/0.3.0) (2019-03-26)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.2.3...0.3.0)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1674: Make sure reenabling any language preserves configuration. [\#53](https://github.com/openeuropa/oe_multilingual/pull/53) ([imanoleguskiza](https://github.com/imanoleguskiza))
+- OPENEUROPA-1609: Add ajax\_timeout setting for behat. [\#51](https://github.com/openeuropa/oe_multilingual/pull/51) ([nagyad](https://github.com/nagyad))
+- OPENEUROPA-1609 Fix behat.yml.dist to use drupal-extension properly. [\#50](https://github.com/openeuropa/oe_multilingual/pull/50) ([nagyad](https://github.com/nagyad))
+- OPENEUROPA-1549: Ensuring config translations get added to locale. [\#49](https://github.com/openeuropa/oe_multilingual/pull/49) ([upchuk](https://github.com/upchuk))
+- OPENEUROPA-1549: Using drupal/core. [\#48](https://github.com/openeuropa/oe_multilingual/pull/48) ([upchuk](https://github.com/upchuk))
+- OPENEUROPA-1533: Add --strict flag for Behat tests executions. [\#47](https://github.com/openeuropa/oe_multilingual/pull/47) ([sergepavle](https://github.com/sergepavle))
+- OPENEUROPA-1522: Make sure we don't use Drupal paths in Behat scenarios. [\#46](https://github.com/openeuropa/oe_multilingual/pull/46) ([sergepavle](https://github.com/sergepavle))
+
 ## [0.2.3](https://github.com/openeuropa/oe_multilingual/tree/0.2.3) (2018-12-18)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.2.2...0.2.3)
 
 **Merged pull requests:**
 
+- OPENEUROPA-1387: Update ChangeLog.md. [\#45](https://github.com/openeuropa/oe_multilingual/pull/45) ([voidtek](https://github.com/voidtek))
 - OPENEUROPA-1350: Remove multilingual patch. [\#44](https://github.com/openeuropa/oe_multilingual/pull/44) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - OPENEUROPA-1382: Assert that the language switcher has appropriate li… [\#43](https://github.com/openeuropa/oe_multilingual/pull/43) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
