@@ -98,18 +98,16 @@ class ContentLanguageBlock extends LanguageBlock implements ContainerFactoryPlug
 
     $available_languages = $this->languageProvider->getEntityAvailableLanguages($entity);
 
-    if ($available_languages) {
-      $build = [
-        '#theme' => 'links__oe_multilingual_content_language_block',
-        '#links' => $available_languages,
-        '#attributes' => [
-          'class' => [
-            "language-switcher",
-          ],
+    $build = [
+      '#theme' => 'links__oe_multilingual_content_language_block',
+      '#links' => $available_languages,
+      '#attributes' => [
+        'class' => [
+          "language-switcher",
         ],
-        '#set_active_class' => TRUE,
-      ];
-    }
+      ],
+      '#set_active_class' => TRUE,
+    ];
 
     return $build;
   }
