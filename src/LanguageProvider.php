@@ -62,16 +62,15 @@ class LanguageProvider {
    *   Array of available translation links.
    */
   public function getEntityAvailableLanguages(EntityInterface $entity) {
-    $available_languages = [];
-
-    $translation = $this->multilingualHelper->getCurrentLanguageEntityTranslation($entity);
     $route_name = $this->pathMatcher->isFrontPage() ? '<front>' : '<current>';
     $links = $this->languageManager->getLanguageSwitchLinks(LanguageInterface::TYPE_CONTENT, Url::fromRoute($route_name));
 
+    $available_languages = [];
     if (isset($links->links)) {
       // Only show links to the available translation languages except the
       // current one.
       $available_languages = array_intersect_key($links->links, $entity->getTranslationLanguages());
+      $translation = $this->multilingualHelper->getCurrentLanguageEntityTranslation($entity);
       unset($available_languages[$translation->language()->getId()]);
     }
 
