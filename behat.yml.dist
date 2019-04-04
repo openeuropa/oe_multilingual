@@ -32,6 +32,6 @@ default:
       region_map:
         "language switcher": "#block-oe-multilingual-language-switcher"
         "language dialog": "#block-oe-multilingual-language-switcher"
-        page header: ".region-content"
+        "page content": ".region-content"
   formatters:
     progress: ~
