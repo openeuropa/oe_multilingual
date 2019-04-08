@@ -24,9 +24,9 @@ Feature: Content language selector
     Then I should see the heading "Page title"
     And I should see "Page body"
 
-    And I should not see the link "ελληνικά" in the "page content" region
-    And I should not see the link "español" in the "page content" region
-    And I should not see the link "italiano" in the "page content" region
+    And I should not see the link "ελληνικά" in the "page content"
+    And I should not see the link "español" in the "page content"
+    And I should not see the link "italiano" in the "page content"
 
   Scenario: Visitor navigating to an available translation shouldn't see the language selector
     When I visit the "Page title" content
@@ -34,9 +34,9 @@ Feature: Content language selector
     Then I should see the heading "Titolo pagina"
     And I should see "Testo pagina"
 
-    And I should not see the link "ελληνικά" in the "page content" region
-    And I should not see the link "English" in the "page content" region
-    And I should not see the link "español" in the "page content" region
+    And I should not see the link "ελληνικά" in the "page content"
+    And I should not see the link "English" in the "page content"
+    And I should not see the link "español" in the "page content"
 
   Scenario: Visitor navigating to an unavailable translation should see the language selector
     When I visit the "Page title" content
@@ -44,6 +44,6 @@ Feature: Content language selector
     Then I should see the heading "Page title"
     And I should see "Page body"
 
-    And I should see the link "ελληνικά" in the "page content" region
-    And I should see the link "español" in the "page content" region
-    And I should see the link "italiano" in the "page content" region
+    And I should see the link "ελληνικά" in the "page content"
+    And I should see the link "español" in the "page content"
+    And I should see the link "italiano" in the "page content"
