@@ -98,6 +98,8 @@ class ContentLanguageBlock extends LanguageBlock implements ContainerFactoryPlug
 
     $available_languages = $this->contentLanguageSwitcherProvider->getAvailableEntityLanguages($entity);
 
+    // Currently the language switcher block cannot be cached:
+    // https://www.drupal.org/node/2232375
     $build = [
       '#theme' => 'links__oe_multilingual_content_language_block',
       '#links' => $available_languages,
@@ -108,7 +110,6 @@ class ContentLanguageBlock extends LanguageBlock implements ContainerFactoryPlug
       ],
       '#set_active_class' => TRUE,
     ];
-
     return $build;
   }
 
