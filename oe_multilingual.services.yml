@@ -5,6 +5,9 @@ services:
   oe_multilingual.helper:
     class: Drupal\oe_multilingual\MultilingualHelper
     arguments: ['@entity.repository', '@current_route_match']
+  oe_multilingual.content_language_switcher_provider:
+    class: Drupal\oe_multilingual\ContentLanguageSwitcherProvider
+    arguments: ['@language_manager', '@path.matcher', '@oe_multilingual.helper']
   oe_multilingual.content_language_settings:
     class: Drupal\oe_multilingual\MultilingualConfigOverride
     tags:

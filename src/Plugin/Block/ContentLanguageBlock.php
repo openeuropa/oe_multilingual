@@ -6,12 +6,11 @@ namespace Drupal\oe_multilingual\Plugin\Block;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Path\PathMatcherInterface;
-use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Url;
 use Drupal\language\Plugin\Block\LanguageBlock;
 use Drupal\oe_multilingual\MultilingualHelperInterface;
+use Drupal\oe_multilingual\ContentLanguageSwitcherProvider;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -33,6 +32,13 @@ class ContentLanguageBlock extends LanguageBlock implements ContainerFactoryPlug
   protected $multilingualHelper;
 
   /**
+   * The content language switcher provider.
+   *
+   * @var \Drupal\oe_multilingual\ContentLanguageSwitcherProvider
+   */
+  protected $contentLanguageSwitcherProvider;
+
+  /**
    * Constructs an ContentLanguageBlock object.
    *
    * @param array $configuration
@@ -47,10 +53,13 @@ class ContentLanguageBlock extends LanguageBlock implements ContainerFactoryPlug
    *   The path matcher.
    * @param \Drupal\oe_multilingual\MultilingualHelperInterface $multilingual_helper
    *   The multilingual helper service.
+   * @param \Drupal\oe_multilingual\ContentLanguageSwitcherProvider $content_language_switcher_provider
+   *   The content language switcher provider.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, PathMatcherInterface $path_matcher, MultilingualHelperInterface $multilingual_helper) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, PathMatcherInterface $path_matcher, MultilingualHelperInterface $multilingual_helper, ContentLanguageSwitcherProvider $content_language_switcher_provider) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $language_manager, $path_matcher);
     $this->multilingualHelper = $multilingual_helper;
+    $this->contentLanguageSwitcherProvider = $content_language_switcher_provider;
   }
 
   /**
@@ -63,7 +72,8 @@ class ContentLanguageBlock extends LanguageBlock implements ContainerFactoryPlug
       $plugin_definition,
       $container->get('language_manager'),
       $container->get('path.matcher'),
-      $container->get('oe_multilingual.helper')
+      $container->get('oe_multilingual.helper'),
+      $container->get('oe_multilingual.content_language_switcher_provider')
     );
   }
 
@@ -86,27 +96,20 @@ class ContentLanguageBlock extends LanguageBlock implements ContainerFactoryPlug
       return $build;
     }
 
-    $route_name = $this->pathMatcher->isFrontPage() ? '<front>' : '<current>';
-    $links = $this->languageManager->getLanguageSwitchLinks(LanguageInterface::TYPE_CONTENT, Url::fromRoute($route_name));
+    $available_languages = $this->contentLanguageSwitcherProvider->getAvailableEntityLanguages($entity);
 
-    if (isset($links->links)) {
-      // Only show links to the available translation languages except the
-      // current one.
-      $available_languages = array_intersect_key($links->links, $entity->getTranslationLanguages());
-      unset($available_languages[$translation->language()->getId()]);
-
-      $build = [
-        '#theme' => 'links__oe_multilingual_content_language_block',
-        '#links' => $available_languages,
-        '#attributes' => [
-          'class' => [
-            "language-switcher-{$links->method_id}",
-          ],
+    // Currently the language switcher block cannot be cached:
+    // https://www.drupal.org/node/2232375
+    $build = [
+      '#theme' => 'links__oe_multilingual_content_language_block',
+      '#links' => $available_languages,
+      '#attributes' => [
+        'class' => [
+          "language-switcher",
         ],
-        '#set_active_class' => TRUE,
-      ];
-    }
-
+      ],
+      '#set_active_class' => TRUE,
+    ];
     return $build;
   }
 
