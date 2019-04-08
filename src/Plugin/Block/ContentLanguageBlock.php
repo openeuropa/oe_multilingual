@@ -32,11 +32,11 @@ class ContentLanguageBlock extends LanguageBlock implements ContainerFactoryPlug
   protected $multilingualHelper;
 
   /**
-   * The language provider.
+   * The content language switcher provider.
    *
    * @var \Drupal\oe_multilingual\ContentLanguageSwitcherProvider
    */
-  protected $languageProvider;
+  protected $contentLanguageSwitcherProvider;
 
   /**
    * Constructs an ContentLanguageBlock object.
@@ -53,13 +53,13 @@ class ContentLanguageBlock extends LanguageBlock implements ContainerFactoryPlug
    *   The path matcher.
    * @param \Drupal\oe_multilingual\MultilingualHelperInterface $multilingual_helper
    *   The multilingual helper service.
-   * @param \Drupal\oe_multilingual\ContentLanguageSwitcherProvider $language_provider
-   *   The language provider.
+   * @param \Drupal\oe_multilingual\ContentLanguageSwitcherProvider $content_language_switcher_provider
+   *   The content language switcher provider.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, PathMatcherInterface $path_matcher, MultilingualHelperInterface $multilingual_helper, ContentLanguageSwitcherProvider $language_provider) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager, PathMatcherInterface $path_matcher, MultilingualHelperInterface $multilingual_helper, ContentLanguageSwitcherProvider $content_language_switcher_provider) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $language_manager, $path_matcher);
     $this->multilingualHelper = $multilingual_helper;
-    $this->languageProvider = $language_provider;
+    $this->contentLanguageSwitcherProvider = $content_language_switcher_provider;
   }
 
   /**
@@ -73,7 +73,7 @@ class ContentLanguageBlock extends LanguageBlock implements ContainerFactoryPlug
       $container->get('language_manager'),
       $container->get('path.matcher'),
       $container->get('oe_multilingual.helper'),
-      $container->get('oe_multilingual.language_provider')
+      $container->get('oe_multilingual.content_language_switcher_provider')
     );
   }
 
@@ -96,7 +96,7 @@ class ContentLanguageBlock extends LanguageBlock implements ContainerFactoryPlug
       return $build;
     }
 
-    $available_languages = $this->languageProvider->getAvailableEntityLanguages($entity);
+    $available_languages = $this->contentLanguageSwitcherProvider->getAvailableEntityLanguages($entity);
 
     $build = [
       '#theme' => 'links__oe_multilingual_content_language_block',

@@ -11,7 +11,7 @@ use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Url;
 
 /**
- * Helper service around multilingual functionalities.
+ * Service that provides the content language switcher links for a given entity.
  */
 class ContentLanguageSwitcherProvider {
 
