@@ -1,10 +1,18 @@
 # Change Log
 
-## [0.3.0](https://github.com/openeuropa/oe_multilingual/tree/0.3.0) (2019-03-26)
+## [0.3.1](https://github.com/openeuropa/oe_multilingual/tree/0.3.1) (2019-04-08)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.3.0...0.3.1)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1754: Move content language switcher to header. [\#55](https://github.com/openeuropa/oe_multilingual/pull/55) ([imanoleguskiza](https://github.com/imanoleguskiza))
+
+## [0.3.0](https://github.com/openeuropa/oe_multilingual/tree/0.3.0) (2019-03-27)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.2.3...0.3.0)
 
 **Merged pull requests:**
 
+- Create the release 0.3.0 [\#54](https://github.com/openeuropa/oe_multilingual/pull/54) ([voidtek](https://github.com/voidtek))
 - OPENEUROPA-1674: Make sure reenabling any language preserves configuration. [\#53](https://github.com/openeuropa/oe_multilingual/pull/53) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - OPENEUROPA-1609: Add ajax\_timeout setting for behat. [\#51](https://github.com/openeuropa/oe_multilingual/pull/51) ([nagyad](https://github.com/nagyad))
 - OPENEUROPA-1609 Fix behat.yml.dist to use drupal-extension properly. [\#50](https://github.com/openeuropa/oe_multilingual/pull/50) ([nagyad](https://github.com/nagyad))
