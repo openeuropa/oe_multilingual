@@ -19,7 +19,7 @@ Feature: Content language selector
       | Title | Titolo pagina |
       | Body  | Testo pagina  |
 
-  Scenario: Visitor navigating to an available translation shouldn't see the language selector
+  Scenario: Visitor navigating to the original content shouldn't see the language selector
     When I visit the "Page title" content
     Then I should see the heading "Page title"
     And I should see "Page body"

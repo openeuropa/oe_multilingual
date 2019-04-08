@@ -8,6 +8,7 @@
 declare(strict_types = 1);
 
 use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -110,12 +111,18 @@ function oe_multilingual_page_header_pre_render(array $build): array {
   $multilingual_helper = \Drupal::service('oe_multilingual.helper');
   $content_language_switcher_provider = \Drupal::service('oe_multilingual.content_language_switcher_provider');
   $language_manager = \Drupal::languageManager();
+  $cache = new CacheableMetadata();
+  $cache->addCacheContexts(['languages:language_content']);
 
   $entity = $multilingual_helper->getEntityFromCurrentRoute();
   // Bail out if there is no entity or if it's not a content entity.
   if (!$entity || !$entity instanceof ContentEntityInterface) {
+    $cache->applyTo($build);
     return $build;
   }
+
+  $cache->addCacheableDependency($entity);
+  $cache->applyTo($build);
 
   // Render the links only if the current entity translation language is not
   // the same as the current site language.
