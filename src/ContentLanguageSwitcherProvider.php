@@ -13,7 +13,7 @@ use Drupal\Core\Url;
 /**
  * Helper service around multilingual functionalities.
  */
-class LanguageProvider {
+class ContentLanguageSwitcherProvider {
 
   /**
    * The multilingual helper service.
@@ -61,7 +61,7 @@ class LanguageProvider {
    * @return array
    *   Array of available translation links.
    */
-  public function getEntityAvailableLanguages(EntityInterface $entity) {
+  public function getAvailableEntityLanguages(EntityInterface $entity) {
     $route_name = $this->pathMatcher->isFrontPage() ? '<front>' : '<current>';
     $links = $this->languageManager->getLanguageSwitchLinks(LanguageInterface::TYPE_CONTENT, Url::fromRoute($route_name));
 

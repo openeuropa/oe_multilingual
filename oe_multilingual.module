@@ -137,7 +137,7 @@ function oe_multilingual_page_header_pre_render(array $build): array {
   // Normalize the links to an array of options suitable for the ECL
   // "ecl-lang-select-pages" template.
   $content['#language_switcher']['options'] = [];
-  foreach ($language_provider->getEntityAvailableLanguages($entity) as $language_code => $link) {
+  foreach ($language_provider->getAvailableEntityLanguages($entity) as $language_code => $link) {
     /** @var \Drupal\Core\Url $url */
     $url = $link['url'];
     $href = $url
