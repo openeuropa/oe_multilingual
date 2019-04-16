@@ -124,23 +124,6 @@ class DrupalContext extends RawDrupalContext {
   }
 
   /**
-   * Check that the field is not present.
-   *
-   * @param string $field
-   *   Input id, name or label.
-   *
-   * @Then I should not see the field :field
-   */
-  public function iShouldNotSeeTheField(string $field): void {
-    $element = $this->getSession()
-      ->getPage()
-      ->findField($field);
-    if ($element) {
-      throw new \RuntimeException("Field '{$field}' is present.");
-    }
-  }
-
-  /**
    * Check that we have the correct language for initial translation.
    *
    * @param string $title
