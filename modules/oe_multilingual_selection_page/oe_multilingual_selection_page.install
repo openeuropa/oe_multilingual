@@ -26,6 +26,7 @@ function oe_multilingual_selection_page_install(): void {
       '/admin*',
       '/node/add/*',
       '/node/*/edit',
+      '/sites/*/files/*',
     ])->save();
 
   /** @var \Drupal\oe_multilingual\LanguageNegotiationSetterInterface $setter */
@@ -39,4 +40,16 @@ function oe_multilingual_selection_page_install(): void {
   $setter->addInterfaceSettings([
     LanguageNegotiationLanguageSelectionPage::METHOD_ID => -18,
   ]);
+}
+
+/**
+ * Add files directory to blacklisted paths.
+ */
+function oe_multilingual_selection_page_update_8001() {
+  $config = \Drupal::configFactory()
+    ->getEditable('language_selection_page.negotiation');
+  $blacklist = $config->get('blacklisted_paths');
+  $blacklist[] = '/sites/*/files/*';
+  $config->set('blacklisted_paths', $blacklist);
+  $config->save();
 }
