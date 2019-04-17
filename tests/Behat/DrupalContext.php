@@ -124,27 +124,19 @@ class DrupalContext extends RawDrupalContext {
   }
 
   /**
-   * Check that we have the correct language for initial translation.
+   * Check that the field is present.
    *
-   * @param string $title
-   *   Title of node.
+   * @param string $field
+   *   Input id, name or label.
    *
-   * @Then The only available translation for :title is in the site's default language
+   * @Then I should see the field :field
    */
-  public function assertOnlyDefaultLanguageTranslationExist(string $title): void {
-    $node = $this->getEntityByLabel('node', $title);
-    if (!$node) {
-      throw new \RuntimeException("Node '{$title}' doesn't exist.");
-    }
-
-    $node_translation_languages = $node->getTranslationLanguages();
-    if (count($node_translation_languages) !== 1) {
-      throw new \RuntimeException("The node should have only one translation.");
-    }
-
-    $node_language = key($node_translation_languages);
-    if ($node_language != \Drupal::languageManager()->getDefaultLanguage()->getId()) {
-      throw new \RuntimeException("Original translation language of the '{$title}' node is not the site's default language.");
+  public function iShouldSeeTheField(string $field): void {
+    $element = $this->getSession()
+      ->getPage()
+      ->findField($field);
+    if (empty($element)) {
+      throw new \RuntimeException("Field '{$field}' is not present.");
     }
   }
 
