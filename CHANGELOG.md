@@ -1,10 +1,19 @@
 # Change Log
 
+## [0.4.0](https://github.com/openeuropa/oe_multilingual/tree/0.4.0) (2019-04-23)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.3.1...0.4.0)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1781: Do not lock source language value to default language. [\#58](https://github.com/openeuropa/oe_multilingual/pull/58) ([dxvargas](https://github.com/dxvargas))
+- OPENEUROPA-1811: Fix issue with image styles generating related to language selection page. [\#57](https://github.com/openeuropa/oe_multilingual/pull/57) ([sergepavle](https://github.com/sergepavle))
+
 ## [0.3.1](https://github.com/openeuropa/oe_multilingual/tree/0.3.1) (2019-04-08)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.3.0...0.3.1)
 
 **Merged pull requests:**
 
+- Release 0.3.1 changelog. [\#56](https://github.com/openeuropa/oe_multilingual/pull/56) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - OPENEUROPA-1754: Move content language switcher to header. [\#55](https://github.com/openeuropa/oe_multilingual/pull/55) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [0.3.0](https://github.com/openeuropa/oe_multilingual/tree/0.3.0) (2019-03-27)
