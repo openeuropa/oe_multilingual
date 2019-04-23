@@ -8,7 +8,3 @@ services:
   oe_multilingual.content_language_switcher_provider:
     class: Drupal\oe_multilingual\ContentLanguageSwitcherProvider
     arguments: ['@language_manager', '@path.matcher', '@oe_multilingual.helper']
-  oe_multilingual.content_language_settings:
-    class: Drupal\oe_multilingual\MultilingualConfigOverride
-    tags:
-      - {name: config.factory.override, priority: 5}
