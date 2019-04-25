@@ -76,6 +76,22 @@ function oe_multilingual_install() {
 }
 
 /**
+ * Implements hook_uninstall().
+ */
+function oe_multilingual_uninstall() {
+  /** @var \Drupal\oe_multilingual\LanguageNegotiationSetterInterface $setter */
+  $setter = \Drupal::service('oe_multilingual.language_negotiation_setter');
+
+  // Unset the LanguageNegotiationAdmin plugin from the interface negotiation.
+  // This is needed because the plugin is defined by this module.
+  $setter->setInterfaceSettings([
+    // By default, the URL based negotiation is the highest priority one.
+    LanguageNegotiationUrl::METHOD_ID => -19,
+    LanguageNegotiationSelected::METHOD_ID => 20,
+  ]);
+}
+
+/**
  * Ensures that local entries exist for the configuration translations.
  *
  * Because we are shipping with pre-existing config translations for the
