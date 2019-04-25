@@ -76,6 +76,29 @@ function oe_multilingual_install() {
 }
 
 /**
+ * Implements hook_uninstall().
+ */
+function oe_multilingual_uninstall() {
+  // Unset the LanguageNegotiationAdmin plugin from the interface negotiation.
+  // This is needed because the plugin is defined by this module.
+  $names = [
+    'negotiation.' . LanguageInterface::TYPE_INTERFACE . '.enabled',
+    'negotiation.' . LanguageInterface::TYPE_INTERFACE . '.method_weights',
+  ];
+
+  $config = \Drupal::configFactory()->getEditable('language.types');
+  foreach ($names as $name) {
+    $settings = $config->get($name);
+    if (isset($settings[LanguageNegotiationAdmin::METHOD_ID])) {
+      unset($settings[LanguageNegotiationAdmin::METHOD_ID]);
+    }
+    $config->set($name, $settings);
+  }
+
+  $config->save();
+}
+
+/**
  * Ensures that local entries exist for the configuration translations.
  *
  * Because we are shipping with pre-existing config translations for the
