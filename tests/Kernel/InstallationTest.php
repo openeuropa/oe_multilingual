@@ -42,6 +42,8 @@ class InstallationTest extends KernelTestBase {
       'locale_file',
     ]);
 
+    $this->installSchema('user', ['users_data']);
+
     $this->installConfig([
       'locale',
       'language',
@@ -117,6 +119,24 @@ class InstallationTest extends KernelTestBase {
     $this->assertEquals($interface_settings, $config->get('negotiation.' . LanguageInterface::TYPE_INTERFACE . '.method_weights'));
     $this->assertEquals($content_settings, $config->get('negotiation.' . LanguageInterface::TYPE_CONTENT . '.enabled'));
     $this->assertEquals($content_settings, $config->get('negotiation.' . LanguageInterface::TYPE_CONTENT . '.method_weights'));
+  }
+
+  /**
+   * Tests that uninstalling the module leaves the site in working condition.
+   *
+   * There can be plugins defined by the module which could no longer be found
+   * otherwise.
+   */
+  public function testUninstall() {
+    $this->container->get('module_installer')->uninstall(['oe_multilingual']);
+
+    $config = $this->config('language.types');
+    $interface_settings = [
+      LanguageNegotiationUrl::METHOD_ID => -19,
+      LanguageNegotiationSelected::METHOD_ID => 20,
+    ];
+    $this->assertEquals($interface_settings, $config->get('negotiation.' . LanguageInterface::TYPE_INTERFACE . '.enabled'));
+    $this->assertEquals($interface_settings, $config->get('negotiation.' . LanguageInterface::TYPE_INTERFACE . '.method_weights'));
   }
 
 }
