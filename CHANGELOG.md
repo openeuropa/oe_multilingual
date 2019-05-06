@@ -1,10 +1,18 @@
 # Change Log
 
+## [0.4.2](https://github.com/openeuropa/oe_multilingual/tree/0.4.2) (2019-05-06)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.4.1...0.4.2)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1766: Update container on drone. [\#62](https://github.com/openeuropa/oe_multilingual/pull/62) ([voidtek](https://github.com/voidtek))
+
 ## [0.4.1](https://github.com/openeuropa/oe_multilingual/tree/0.4.1) (2019-04-25)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.4.0...0.4.1)
 
 **Merged pull requests:**
 
+- Update CHANGELOG.md for release 0.4.1. [\#61](https://github.com/openeuropa/oe_multilingual/pull/61) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-1794: Bug in the OE Multilingual uninstallation. [\#60](https://github.com/openeuropa/oe_multilingual/pull/60) ([upchuk](https://github.com/upchuk))
 
 ## [0.4.0](https://github.com/openeuropa/oe_multilingual/tree/0.4.0) (2019-04-23)
@@ -36,7 +44,6 @@
 - OPENEUROPA-1549: Ensuring config translations get added to locale. [\#49](https://github.com/openeuropa/oe_multilingual/pull/49) ([upchuk](https://github.com/upchuk))
 - OPENEUROPA-1549: Using drupal/core. [\#48](https://github.com/openeuropa/oe_multilingual/pull/48) ([upchuk](https://github.com/upchuk))
 - OPENEUROPA-1533: Add --strict flag for Behat tests executions. [\#47](https://github.com/openeuropa/oe_multilingual/pull/47) ([sergepavle](https://github.com/sergepavle))
-- OPENEUROPA-1522: Make sure we don't use Drupal paths in Behat scenarios. [\#46](https://github.com/openeuropa/oe_multilingual/pull/46) ([sergepavle](https://github.com/sergepavle))
 
 ## [0.2.3](https://github.com/openeuropa/oe_multilingual/tree/0.2.3) (2018-12-18)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.2.2...0.2.3)
@@ -68,6 +75,7 @@
 
 **Merged pull requests:**
 
+- OPENEUROPA-1522: Make sure we don't use Drupal paths in Behat scenarios. [\#46](https://github.com/openeuropa/oe_multilingual/pull/46) ([sergepavle](https://github.com/sergepavle))
 - Update CHANGELOG.md for 0.2.0 release. [\#36](https://github.com/openeuropa/oe_multilingual/pull/36) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-1322: Use the proper Docker way of overriding docker-composer.yml file. [\#35](https://github.com/openeuropa/oe_multilingual/pull/35) ([drupol](https://github.com/drupol))
 - OPENEUROPA-1345: Remove hardcoded language list. [\#34](https://github.com/openeuropa/oe_multilingual/pull/34) ([imanoleguskiza](https://github.com/imanoleguskiza))
