@@ -1,10 +1,18 @@
 # Change Log
 
+## [1.0.0](https://github.com/openeuropa/oe_multilingual/tree/1.0.0) (2019-05-15)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.5.0...1.0.0)
+
+**Closed issues:**
+
+- Release current version to 1.0.0 [\#66](https://github.com/openeuropa/oe_multilingual/issues/66)
+
 ## [0.5.0](https://github.com/openeuropa/oe_multilingual/tree/0.5.0) (2019-05-07)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.4.2...0.5.0)
 
 **Merged pull requests:**
 
+- OPENEUROPA-1813: Create release 0.5.0. [\#65](https://github.com/openeuropa/oe_multilingual/pull/65) ([voidtek](https://github.com/voidtek))
 - OPENEUROPA-1813: Upgrade to 8.7 [\#63](https://github.com/openeuropa/oe_multilingual/pull/63) ([upchuk](https://github.com/upchuk))
 
 ## [0.4.2](https://github.com/openeuropa/oe_multilingual/tree/0.4.2) (2019-05-07)
