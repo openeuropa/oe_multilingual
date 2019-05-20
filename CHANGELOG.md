@@ -1,11 +1,22 @@
 # Change Log
 
+## [1.0.1](https://github.com/openeuropa/oe_multilingual/tree/1.0.1) (2019-05-20)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.0.0...1.0.1)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1922: Do not modify configuration in hook\_install\(\) if configuration is in syncing mode. [\#68](https://github.com/openeuropa/oe_multilingual/pull/68) ([ademarco](https://github.com/ademarco))
+
 ## [1.0.0](https://github.com/openeuropa/oe_multilingual/tree/1.0.0) (2019-05-15)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.5.0...1.0.0)
 
 **Closed issues:**
 
 - Release current version to 1.0.0 [\#66](https://github.com/openeuropa/oe_multilingual/issues/66)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1864: Create release 1.0.0. [\#67](https://github.com/openeuropa/oe_multilingual/pull/67) ([dxvargas](https://github.com/dxvargas))
 
 ## [0.5.0](https://github.com/openeuropa/oe_multilingual/tree/0.5.0) (2019-05-07)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.4.2...0.5.0)
