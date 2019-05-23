@@ -17,6 +17,12 @@ use Drupal\oe_multilingual\Plugin\LanguageNegotiation\LanguageNegotiationAdmin;
  * Implements hook_install().
  */
 function oe_multilingual_install() {
+  if (\Drupal::isConfigSyncing() === FALSE || !empty($GLOBALS['install_state']['config_install_path'])) {
+    // If the config is not syncing or the site is being installed from
+    // configuration, ensure the config localization.
+    _oe_multilingual_ensure_config_translations();
+  }
+
   if (\Drupal::isConfigSyncing() === TRUE) {
     // If config is syncing, we do nothing here.
     return;
@@ -71,8 +77,6 @@ function oe_multilingual_install() {
   ]);
 
   \Drupal::messenger()->addMessage('Please be aware that oe_multilingual makes changes to the following configurations: Language, Locale, Administration language negotiation.');
-
-  _oe_multilingual_ensure_config_translations();
 }
 
 /**
