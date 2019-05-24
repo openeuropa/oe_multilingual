@@ -1,18 +1,21 @@
 <?php
 
-declare(strict_types = 1);
+/**
+ * @file
+ * Contains \OEMultilingualSubContext.
+ */
 
-namespace Drupal\Tests\oe_multilingual\Behat;
+declare(strict_types = 1);
 
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Drupal\Core\Language\LanguageInterface;
-use Drupal\DrupalExtension\Context\RawDrupalContext;
+use Drupal\DrupalExtension\Context\DrupalSubContextBase;
 use Drupal\locale\SourceString;
 
 /**
- * Methods for translating the interface inside a Behat feature.
+ * Behat step definitions for testing the oe_multilingual module.
  */
-class InterfaceTranslationContext extends RawDrupalContext {
+class OEMultilingualSubContext extends DrupalSubContextBase {
 
   /**
    * The backed up translations.

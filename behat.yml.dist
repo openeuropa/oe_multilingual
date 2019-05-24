@@ -10,7 +10,6 @@ default:
         - Drupal\DrupalExtension\Context\ConfigContext
         - Drupal\Tests\oe_multilingual\Behat\DrupalContext
         - Drupal\Tests\oe_multilingual\Behat\MinkContext
-        - Drupal\Tests\oe_multilingual\Behat\InterfaceTranslationContext
         - OpenEuropa\Behat\TransformationContext:
             pages:
               English administration home: 'en/admin'
