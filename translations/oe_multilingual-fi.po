@@ -1,6 +1,0 @@
-
-msgid ""
-msgstr ""
-
-msgid "Finnish"
-msgstr "suomi"

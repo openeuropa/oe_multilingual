@@ -41,6 +41,3 @@ config_devel:
     # Language switcher block
     - block.block.oe_multilingual_language_switcher
     - block.block.oe_multilingual_content_language_switcher
-
-'interface translation project': oe_multilingual
-'interface translation server pattern': modules/custom/oe_multilingual/translations/%project-%language.po

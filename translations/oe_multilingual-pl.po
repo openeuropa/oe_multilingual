@@ -1,6 +1,0 @@
-
-msgid ""
-msgstr ""
-
-msgid "Polish"
-msgstr "polski"

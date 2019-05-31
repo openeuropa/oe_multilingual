@@ -1,8 +1,0 @@
-
-msgid ""
-msgstr ""
-
-msgid "Slovak"
-msgstr "slovenčina"
-
-
