@@ -78,6 +78,10 @@ class InstallationTest extends KernelTestBase {
     $this->assertEquals($old_language->id(), $new_language->id());
     $this->assertEquals($old_language->getWeight(), $new_language->getWeight());
     $this->assertEquals($old_language->getName(), $new_language->getName());
+
+    // Ensure the correct translation is also present.
+    $translation = $this->container->get('language_manager')->getLanguageConfigOverride('fr', 'language.entity.fr');
+    $this->assertEquals('français', $translation->get('label'));
   }
 
   /**

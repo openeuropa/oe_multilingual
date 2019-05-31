@@ -88,13 +88,20 @@ function oe_multilingual_configurable_language_presave(EntityInterface $entity) 
 /**
  * Implements hook_ENTITY_TYPE_insert() for the configurable language entities.
  *
- * In the rare cases in which a language entity is deleted and re-added, we need
- * to re-trigger the import of the module string translations so that the
- * language names get imported in the native languages.
+ * Whenever a language entity is created, we need to ensure we create its
+ * translation so that we have the correct native name for it.
  */
 function oe_multilingual_configurable_language_insert(EntityInterface $entity) {
-  module_load_include('install', 'oe_multilingual');
-  _oe_multilingual_import_string_translations($entity->id());
+  $storage = new FileStorage(drupal_get_path('module', 'oe_multilingual'));
+  $native_names = $storage->read('oe_multilingual.language_native_names');
+  if (!isset($native_names[$entity->id()])) {
+    return;
+  }
+
+  /** @var \Drupal\language\ConfigurableLanguageInterface $config */
+  $config = \Drupal::languageManager()->getLanguageConfigOverride($entity->getId(), 'language.entity.' . $entity->id());
+  $config->set('label', $native_names[$entity->id()]);
+  $config->save();
 }
 
 /**

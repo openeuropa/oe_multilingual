@@ -54,6 +54,11 @@
             "build/profiles/contrib/{$name}": ["type:drupal-profile"],
             "build/modules/contrib/{$name}": ["type:drupal-module"],
             "build/themes/contrib/{$name}": ["type:drupal-theme"]
+        },
+        "drush": {
+            "services": {
+                "drush.services.yml": "^9"
+            }
         }
     },
     "config": {

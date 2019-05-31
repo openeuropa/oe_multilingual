@@ -1,0 +1,6 @@
+services:
+  oe_multilingual.commands:
+    class: \Drupal\oe_multilingual\Commands\MultilingualCommands
+    arguments: ['@module_handler', '@language_manager', '@extension.list.module']
+    tags:
+      - { name: drush.command }
