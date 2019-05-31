@@ -1,0 +1,8 @@
+
+msgid ""
+msgstr ""
+
+msgid "Bulgarian"
+msgstr "български"
+
+

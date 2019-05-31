@@ -7,7 +7,6 @@
 
 declare(strict_types = 1);
 
-use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationSelected;
@@ -17,12 +16,6 @@ use Drupal\oe_multilingual\Plugin\LanguageNegotiation\LanguageNegotiationAdmin;
  * Implements hook_install().
  */
 function oe_multilingual_install() {
-  if (\Drupal::isConfigSyncing() === FALSE || !empty($GLOBALS['install_state']['config_install_path'])) {
-    // If the config is not syncing or the site is being installed from
-    // configuration, ensure the config localization.
-    _oe_multilingual_ensure_config_translations();
-  }
-
   if (\Drupal::isConfigSyncing() === TRUE) {
     // If config is syncing, we do nothing here.
     return;
@@ -103,40 +96,40 @@ function oe_multilingual_uninstall() {
 }
 
 /**
- * Ensures that local entries exist for the configuration translations.
+ * Importing the string translations that ship with this module.
  *
- * Because we are shipping with pre-existing config translations for the
- * languages, we need to also ensure that upon install, corresponding locale
- * entries are created for all the translatable values found in them. See
- * \Drupal\locale\LocaleConfigSubscriber for the logic that does this normally
- * and onto which we rely by simply saving the config translations.
- *
- * In addition, since the aforementioned logic only happens if the site is NOT
- * currently in the process of being installed, we need to "trick" it into
- * believing otherwise for the cases in which the module is being installed
- * as part of a site install (such as profile dependency).
+ * This is needed when a site is installed before this module is, the site is
+ * not yet multilingual so the installation process does not run the import
+ * of translations. So we make sure that after the module is installed, our
+ * string translations get imported.
  */
-function _oe_multilingual_ensure_config_translations(): void {
-  $backup = isset($GLOBALS['install_state']) ? $GLOBALS['install_state'] : NULL;
-  if ($backup) {
-    unset($GLOBALS['install_state']);
+function _oe_multilingual_import_string_translations(string $langcode = NULL) {
+  $module_handler = \Drupal::moduleHandler();
+  $module_handler->loadInclude('locale', 'fetch.inc');
+  $module_handler->loadInclude('locale', 'bulk.inc');
+  $module_handler->loadInclude('locale', 'translation.inc');
+  $module_handler->loadInclude('locale', 'inc', 'locale.compare');
+
+  if (!$langcode) {
+    $languages = \Drupal::languageManager()->getLanguages();
+    $langcodes = [];
+    foreach ($languages as $language) {
+      if ($language->getId() === 'en') {
+        continue;
+      }
+
+      $languages[] = $language->getId();
+    }
+  }
+  else {
+    $langcodes = [$langcode];
   }
 
-  $language_manager = \Drupal::languageManager();
-  $storage = new FileStorage(drupal_get_path('module', 'oe_multilingual') . '/config/install');
-  foreach ($language_manager->getLanguages() as $language) {
-    if ($language->getId() === 'en') {
-      continue;
-    }
-
-    $collection = $storage->createCollection('language.' . $language->getId());
-    foreach ($collection->listAll() as $name) {
-      $config = $language_manager->getLanguageConfigOverride($language->getId(), $name);
-      $config->save();
-    }
-  }
-
-  if ($backup) {
-    $GLOBALS['install_state'] = $backup;
+  locale_translation_check_projects_local(['oe_multilingual'], $langcodes);
+  $options = _locale_translation_default_update_options();
+  $batch = locale_translation_batch_fetch_build(['oe_multilingual'], $langcodes, $options);
+  batch_set($batch);
+  if ($batch = locale_config_batch_update_components($options, $langcodes)) {
+    batch_set($batch);
   }
 }

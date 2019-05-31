@@ -41,6 +41,7 @@ class LanguageNegotiationSetterTest extends KernelTestBase {
       'locales_location',
       'locales_target',
       'locales_source',
+      'locale_file',
     ]);
 
     $this->installConfig([

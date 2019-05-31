@@ -70,7 +70,7 @@ function oe_multilingual_preprocess_language_selection_page_content(&$variables)
 }
 
 /**
- * Implements hook_entity_presave().
+ * Implements hook_ENTITY_TYPE_presave() for the configurable language entities.
  *
  * Make sure whenever we add or re-add a language it follows the configuration
  * set by the module's configuration files.
@@ -83,6 +83,18 @@ function oe_multilingual_configurable_language_presave(EntityInterface $entity) 
       $entity->set($key, $value);
     }
   }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for the configurable language entities.
+ *
+ * In the rare cases in which a language entity is deleted and re-added, we need
+ * to re-trigger the import of the module string translations so that the
+ * language names get imported in the native languages.
+ */
+function oe_multilingual_configurable_language_insert(EntityInterface $entity) {
+  module_load_include('install', 'oe_multilingual');
+  _oe_multilingual_import_string_translations($entity->id());
 }
 
 /**
