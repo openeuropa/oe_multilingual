@@ -101,7 +101,20 @@ function oe_multilingual_configurable_language_insert(EntityInterface $entity) {
   /** @var \Drupal\language\ConfigurableLanguageInterface $config */
   $config = \Drupal::languageManager()->getLanguageConfigOverride($entity->getId(), 'language.entity.' . $entity->id());
   $config->set('label', $native_names[$entity->id()]);
+
+  // If the language is created as part of a site install, we need to "trick"
+  // the locale subscriber into thinking otherwise so that it creates the
+  // locale translation of the language strings.
+  // @see \Drupal\locale\LocaleConfigSubscriber::onConfigSave().
+  $backup = isset($GLOBALS['install_state']) ? $GLOBALS['install_state'] : NULL;
+  if ($backup) {
+    unset($GLOBALS['install_state']);
+  }
   $config->save();
+
+  if ($backup) {
+    $GLOBALS['install_state'] = $backup;
+  }
 }
 
 /**
