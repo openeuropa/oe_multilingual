@@ -1,6 +1,6 @@
 services:
   oe_multilingual.commands:
     class: \Drupal\oe_multilingual\Commands\MultilingualCommands
-    arguments: ['@module_handler', '@theme_handler', '@language_manager', '@extension.list.module', '@extension.list.theme', '@extension.list.profile']
+    arguments: ['@oe_multilingual.local_translations_batcher']
     tags:
       - { name: drush.command }

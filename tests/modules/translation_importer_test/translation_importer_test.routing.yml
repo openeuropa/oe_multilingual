@@ -1,0 +1,15 @@
+translation_importer_test.batch_page:
+  path: '/import-translations'
+  defaults:
+    _controller: '\Drupal\translation_importer_test\Controller\TranslationImporterController::importBatchPage'
+    _title: 'Import translations'
+  requirements:
+    _access: 'TRUE'
+
+translation_importer_test.batch_redirect:
+  path: '/import-translations/done'
+  defaults:
+    _controller: '\Drupal\translation_importer_test\Controller\TranslationImporterController::redirectPage'
+    _title: 'Import translations done'
+  requirements:
+    _access: 'TRUE'
