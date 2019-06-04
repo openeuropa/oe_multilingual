@@ -111,6 +111,7 @@ function oe_multilingual_configurable_language_insert(EntityInterface $entity) {
     $reader->open();
   }
   catch (\Exception $exception) {
+    // If something goes wrong with the the reader, we return and do nothing.
     return;
   }
 
