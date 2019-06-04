@@ -1,0 +1,8 @@
+
+msgid ""
+msgstr ""
+
+msgid "Estonian"
+msgstr "eesti"
+
+

@@ -7,6 +7,7 @@
 
 declare(strict_types = 1);
 
+use Drupal\Component\Gettext\PoStreamReader;
 use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Config\FileStorage;
@@ -92,28 +93,35 @@ function oe_multilingual_configurable_language_presave(EntityInterface $entity) 
  * translation so that we have the correct native name for it.
  */
 function oe_multilingual_configurable_language_insert(EntityInterface $entity) {
-  $storage = new FileStorage(drupal_get_path('module', 'oe_multilingual'));
-  $native_names = $storage->read('oe_multilingual.language_native_names');
-  if (!isset($native_names[$entity->id()])) {
+  if (\Drupal::isConfigSyncing() || isset($GLOBALS['install_state'])) {
+    // We only want to trigger this if the language is not created as part of
+    // a site install or config sync. In those cases, we import the string
+    // translations which will create the language overrides.
     return;
   }
 
-  /** @var \Drupal\language\ConfigurableLanguageInterface $config */
-  $config = \Drupal::languageManager()->getLanguageConfigOverride($entity->getId(), 'language.entity.' . $entity->id());
-  $config->set('label', $native_names[$entity->id()]);
-
-  // If the language is created as part of a site install, we need to "trick"
-  // the locale subscriber into thinking otherwise so that it creates the
-  // locale translation of the language strings.
-  // @see \Drupal\locale\LocaleConfigSubscriber::onConfigSave().
-  $backup = isset($GLOBALS['install_state']) ? $GLOBALS['install_state'] : NULL;
-  if ($backup) {
-    unset($GLOBALS['install_state']);
+  $reader = new PoStreamReader();
+  $reader->setLangcode($entity->getId());
+  $file = drupal_get_path('module', 'oe_multilingual') . "/translations/oe_multilingual-{$entity->getId()}.po";
+  if (!file_exists($file)) {
+    return;
   }
-  $config->save();
+  $reader->setURI($file);
+  try {
+    $reader->open();
+  }
+  catch (\Exception $exception) {
+    return;
+  }
 
-  if ($backup) {
-    $GLOBALS['install_state'] = $backup;
+  while ($item = $reader->readItem()) {
+    if ($item->getSource() === $entity->getName()) {
+      /** @var \Drupal\language\ConfigurableLanguageInterface $config */
+      $config = \Drupal::languageManager()->getLanguageConfigOverride($entity->getId(), 'language.entity.' . $entity->id());
+      $config->set('label', $item->getTranslation());
+      $config->save();
+      break;
+    }
   }
 }
 

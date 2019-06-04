@@ -1,0 +1,6 @@
+
+msgid ""
+msgstr ""
+
+msgid "Slovenian"
+msgstr "slovenščina"
