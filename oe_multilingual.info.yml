@@ -43,4 +43,5 @@ config_devel:
     - block.block.oe_multilingual_content_language_switcher
 
 'interface translation project': oe_multilingual
-'interface translation server pattern': modules/custom/oe_multilingual/translations/%project-%language.po
+# The path to the actual translations is defined in
+# oe_multilingual_locale_translation_projects_alter().

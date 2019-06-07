@@ -205,3 +205,10 @@ function oe_multilingual_page_header_pre_render(array $build): array {
 
   return $build;
 }
+
+/**
+ * Implements hook_locale_translation_projects_alter().
+ */
+function oe_multilingual_locale_translation_projects_alter(&$projects) {
+  $projects['oe_multilingual']['info']['interface translation server pattern'] = drupal_get_path('module', 'oe_multilingual') . '/translations/%project-%language.po';
+}
