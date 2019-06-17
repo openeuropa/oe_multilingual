@@ -22,7 +22,7 @@ services:
 #      - 3306:3306
 
   selenium:
-    image: selenium/standalone-chrome-debug:3
+    image: selenium/standalone-chrome-debug:3.141.59-oxygen
     expose:
     - '4444'
     environment:
