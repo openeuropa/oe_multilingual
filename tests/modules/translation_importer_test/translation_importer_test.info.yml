@@ -1,0 +1,8 @@
+name: Translation Importer
+description: Test module for importing translations
+core: 8.x
+type: module
+package: Testing
+
+'interface translation project': translation_importer_test
+'interface translation server pattern': modules/custom/oe_multilingual/tests/modules/translation_importer_test/translations/%project-%language.po

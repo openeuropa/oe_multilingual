@@ -23,11 +23,17 @@ drupal:
     # Activate the module later, so the default Bartik blocks are placed.
     - "./vendor/bin/drush en oe_multilingual -y"
     - "./vendor/bin/drush en oe_multilingual_demo -y"
+    - "./vendor/bin/drush oe-multilingual:import-local-translations"
   settings:
     settings:
       file_scan_ignore_directories:
         - "vendor"
         - "${drupal.root}"
+
+selenium:
+  host: "http://selenium"
+  port: "4444"
+  browser: "chrome"
 
 commands:
   drupal:site-setup:
@@ -40,5 +46,7 @@ commands:
     - { task: "run", command: "setup:behat" }
   setup:phpunit:
     - { task: "process", source: "phpunit.xml.dist", destination: "phpunit.xml" }
+    # Generate settings.testing.php, it will be used when running functional tests.
+    - { task: "process-php", type: "write", config: "drupal.settings", source: "${drupal.root}/sites/default/default.settings.php", destination: "${drupal.root}/sites/default/settings.testing.php", override: true }
   setup:behat:
     - { task: "process", source: "behat.yml.dist", destination: "behat.yml" }

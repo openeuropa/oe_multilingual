@@ -1,0 +1,6 @@
+services:
+  oe_multilingual.commands:
+    class: \Drupal\oe_multilingual\Commands\MultilingualCommands
+    arguments: ['@oe_multilingual.local_translations_batcher']
+    tags:
+      - { name: drush.command }

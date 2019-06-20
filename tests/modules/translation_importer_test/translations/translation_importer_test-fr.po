@@ -1,0 +1,8 @@
+
+msgid ""
+msgstr ""
+
+msgid "Structure"
+msgstr "French STR"
+
+

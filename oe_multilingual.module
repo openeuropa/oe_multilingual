@@ -7,6 +7,7 @@
 
 declare(strict_types = 1);
 
+use Drupal\Component\Gettext\PoStreamReader;
 use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Config\FileStorage;
@@ -70,7 +71,7 @@ function oe_multilingual_preprocess_language_selection_page_content(&$variables)
 }
 
 /**
- * Implements hook_entity_presave().
+ * Implements hook_ENTITY_TYPE_presave() for the configurable language entities.
  *
  * Make sure whenever we add or re-add a language it follows the configuration
  * set by the module's configuration files.
@@ -81,6 +82,46 @@ function oe_multilingual_configurable_language_presave(EntityInterface $entity) 
   if ($values) {
     foreach ($values as $key => $value) {
       $entity->set($key, $value);
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert() for the configurable language entities.
+ *
+ * Whenever a language entity is created, we need to ensure we create its
+ * translation so that we have the correct native name for it.
+ */
+function oe_multilingual_configurable_language_insert(EntityInterface $entity) {
+  if (\Drupal::isConfigSyncing() || isset($GLOBALS['install_state'])) {
+    // We only want to trigger this if the language is not created as part of
+    // a site install or config sync. In those cases, we import the string
+    // translations which will create the language overrides.
+    return;
+  }
+
+  $reader = new PoStreamReader();
+  $reader->setLangcode($entity->getId());
+  $file = drupal_get_path('module', 'oe_multilingual') . "/translations/oe_multilingual-{$entity->getId()}.po";
+  if (!file_exists($file)) {
+    return;
+  }
+  $reader->setURI($file);
+  try {
+    $reader->open();
+  }
+  catch (\Exception $exception) {
+    // If something goes wrong with the the reader, we return and do nothing.
+    return;
+  }
+
+  while ($item = $reader->readItem()) {
+    if ($item->getSource() === $entity->getName()) {
+      /** @var \Drupal\language\ConfigurableLanguageInterface $config */
+      $config = \Drupal::languageManager()->getLanguageConfigOverride($entity->getId(), 'language.entity.' . $entity->id());
+      $config->set('label', $item->getTranslation());
+      $config->save();
+      break;
     }
   }
 }
@@ -163,4 +204,11 @@ function oe_multilingual_page_header_pre_render(array $build): array {
   $content['#language_switcher']['is_primary'] = TRUE;
 
   return $build;
+}
+
+/**
+ * Implements hook_locale_translation_projects_alter().
+ */
+function oe_multilingual_locale_translation_projects_alter(&$projects) {
+  $projects['oe_multilingual']['info']['interface translation server pattern'] = drupal_get_path('module', 'oe_multilingual') . '/translations/%project-%language.po';
 }
