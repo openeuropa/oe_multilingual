@@ -62,7 +62,7 @@ class LocalTranslationsBatcher {
   protected $profileExtensionList;
 
   /**
-   * MultilingualCommands constructor.
+   * LocalTranslationsBatcher constructor.
    *
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    *   The module handler.
@@ -91,6 +91,8 @@ class LocalTranslationsBatcher {
    *
    * @param array $langcodes
    *   The optional langcodes to import in.
+   *
+   * @see \Drupal\locale\Form\TranslationStatusForm::submitForm()
    */
   public function createBatch(array $langcodes = []): void {
     $this->moduleHandler->loadInclude('locale', 'fetch.inc');
@@ -141,7 +143,7 @@ class LocalTranslationsBatcher {
         continue;
       }
 
-      // This will include also profiles.
+      // The module handler checks also profiles.
       if (!$this->moduleHandler->moduleExists($name) && !$this->themeHandler->themeExists($name)) {
         continue;
       }
