@@ -9,5 +9,5 @@ services:
     class: Drupal\oe_multilingual\ContentLanguageSwitcherProvider
     arguments: ['@language_manager', '@path.matcher', '@oe_multilingual.helper']
   oe_multilingual.local_translations_batcher:
-    class: \Drupal\oe_multilingual\LocalTranslationsBatcher
+    class: Drupal\oe_multilingual\LocalTranslationsBatcher
     arguments: ['@module_handler', '@theme_handler', '@language_manager', '@extension.list.module', '@extension.list.theme', '@extension.list.profile']
