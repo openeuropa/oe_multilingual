@@ -1,10 +1,19 @@
 # Change Log
 
+## [1.1.0](https://github.com/openeuropa/oe_multilingual/tree/1.1.0) (2019-06-25)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.0.1...1.1.0)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1922: Minor corrections. [\#73](https://github.com/openeuropa/oe_multilingual/pull/73) ([brummbar](https://github.com/brummbar))
+- OPENEUROPA-1922: Ensure config localization when site is installed from config. [\#71](https://github.com/openeuropa/oe_multilingual/pull/71) ([upchuk](https://github.com/upchuk))
+
 ## [1.0.1](https://github.com/openeuropa/oe_multilingual/tree/1.0.1) (2019-05-20)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.0.0...1.0.1)
 
 **Merged pull requests:**
 
+- Update CHANGELOG.md for release 1.0.1. [\#70](https://github.com/openeuropa/oe_multilingual/pull/70) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-1922: Do not modify configuration in hook\_install\(\) if configuration is in syncing mode. [\#68](https://github.com/openeuropa/oe_multilingual/pull/68) ([ademarco](https://github.com/ademarco))
 
 ## [1.0.0](https://github.com/openeuropa/oe_multilingual/tree/1.0.0) (2019-05-15)
