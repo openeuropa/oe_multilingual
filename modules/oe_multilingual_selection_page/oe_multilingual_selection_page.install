@@ -32,6 +32,8 @@ function oe_multilingual_selection_page_install(): void {
       '/node/add/*',
       '/node/*/edit',
       '/sites/*/files/*',
+      '/system/files',
+      '/system/files/*',
     ])->save();
 
   /** @var \Drupal\oe_multilingual\LanguageNegotiationSetterInterface $setter */
