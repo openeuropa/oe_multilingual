@@ -1,10 +1,18 @@
 # Change Log
 
+## [1.1.1](https://github.com/openeuropa/oe_multilingual/tree/1.1.1) (2019-07-02)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.1.0...1.1.1)
+
+**Merged pull requests:**
+
+- OPENEUROPA-2031: Blacklist language selection on private files. [\#75](https://github.com/openeuropa/oe_multilingual/pull/75) ([upchuk](https://github.com/upchuk))
+
 ## [1.1.0](https://github.com/openeuropa/oe_multilingual/tree/1.1.0) (2019-06-25)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.0.1...1.1.0)
 
 **Merged pull requests:**
 
+- Update CHANGELOG.md for release 1.1.0. [\#74](https://github.com/openeuropa/oe_multilingual/pull/74) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-1922: Minor corrections. [\#73](https://github.com/openeuropa/oe_multilingual/pull/73) ([brummbar](https://github.com/brummbar))
 - OPENEUROPA-1922: Ensure config localization when site is installed from config. [\#71](https://github.com/openeuropa/oe_multilingual/pull/71) ([upchuk](https://github.com/upchuk))
 
