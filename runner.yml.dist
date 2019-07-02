@@ -29,6 +29,7 @@ drupal:
       file_scan_ignore_directories:
         - "vendor"
         - "${drupal.root}"
+      file_private_path: "sites/default/files/private"
 
 selenium:
   host: "http://selenium"

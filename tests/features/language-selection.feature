@@ -19,24 +19,24 @@ Feature: Language selection
       | Body  | Olá Mundo       |
 
   Scenario: When I visit the homepage I'm presented with a language selection page
-
     Given I am on the homepage
     Then I should be redirected to the language selection page
-
     When I click "français"
     Then the url should match "/fr"
-
     When I click "português"
     Then the url should match "/pt"
 
   Scenario: Users visiting a page should be presented with the language selection page,
             if no language is detected in the URL.
-
     Given I visit the "Test page" content
     Then I should be redirected to the language selection page
-
     When I click "français"
     Then the url should match "/fr/page-de-test"
-
     When I click "português"
     Then the url should match "/pt/pagina-de-teste"
+
+  Scenario: File paths are excluded from the language selection page.
+    Given I visit a test "private" file called "sample.pdf"
+    Then the current page should be of the "sample.pdf" "private" file
+    When I visit a test "public" file called "example_1.jpeg"
+    Then the current page should be of the "example_1.jpeg" "public" file

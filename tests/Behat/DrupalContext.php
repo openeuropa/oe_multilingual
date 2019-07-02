@@ -154,6 +154,48 @@ class DrupalContext extends RawDrupalContext {
   }
 
   /**
+   * Creates and visits a test file with a given scheme.
+   *
+   * @param string $scheme
+   *   The scheme.
+   * @param string $name
+   *   The file name.
+   *
+   * @Given I visit a test :scheme file called :name
+   */
+  public function createTestFile(string $scheme, string $name) {
+    $file = file_save_data(file_get_contents(drupal_get_path('module', 'oe_multilingual') . '/tests/fixtures/' . $name), "$scheme://$name");
+    $file->setPermanent();
+    $file->save();
+
+    $this->visitPath(file_create_url($file->getFileUri()));
+    $file->delete();
+  }
+
+  /**
+   * Asserts the current page is of the file with the given name.
+   *
+   * @param string $name
+   *   The file name.
+   * @param string $scheme
+   *   The scheme.
+   *
+   * @Then the current page should be of the :name :scheme file
+   */
+  public function theCurrentPageShouldBeOfTheFile(string $name, string $scheme) {
+    $map = [
+      'public' => '\/sites\/default\/files\/' . $name,
+      'private' => '\/system\/files\/' . $name,
+    ];
+
+    if (!isset($map[$scheme])) {
+      throw new \Exception('Unsupported scheme');
+    }
+
+    $this->assertSession()->addressMatches("/$map[$scheme]/");
+  }
+
+  /**
    * Return content fields array suitable for Drupal API.
    *
    * @param string $entity_type_label
