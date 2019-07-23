@@ -7,6 +7,8 @@ The OpenEuropa Multilingual module offers default multilingual features for the 
 - Enable all 24 official EU languages
 - Provide an optional language switcher block on the [OpenEuropa Theme][1] site header region
 - Make sure that the administrative interface is always set to English
+- Allow English to be translated so that the default English copy may be fixed or improved, if necessary
+- Configure site to follow [IPG rules for Language Negotiation](http://ec.europa.eu/ipg/print/print_all_content/index_en.htm#3.0), using the path suffix. _(optional)_
 
 **Table of contents:**
 
@@ -189,6 +191,14 @@ In order to install the OpenEuropa Multilingual demo module follow [the instruct
 Enabling English string translation can have unintended consequences when making changes to translatable configuration entities.
 If these strings are available in locale, the change would get saved as EN translations.
  
+=======
+## Enabling URL suffix
+
+This is optional and should be done only if your website should follow the [IPG rules](http://ec.europa.eu/ipg/print/print_all_content/index_en.htm#3.0) for language negotiation.
+
+1. Go to `admin/config/regional/language/detection` as admin;
+2. Enable `URL suffix` and disable `URL`;
+3. Click on `Configure` for `URL suffix` and configure the language suffixes.
 
 ## Contributing
 
