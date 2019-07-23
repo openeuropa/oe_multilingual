@@ -312,6 +312,8 @@ class DrupalContext extends RawDrupalContext {
   }
 
   /**
+   * Configure language negotiation to use URL suffixes.
+   *
    * @BeforeScenario @language-negotiation-suffix
    */
   public function setUpLanguageNegotiationSuffix(): void {
@@ -341,6 +343,8 @@ class DrupalContext extends RawDrupalContext {
   }
 
   /**
+   * Revert configuration to be the same used in oe_multilingual_install().
+   *
    * @AfterScenario @language-negotiation-suffix
    */
   public function revertLanguageNegotiationSuffix(): void {
