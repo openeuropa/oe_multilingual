@@ -8,9 +8,14 @@ use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\TableNode;
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Language\LanguageInterface;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationSelected;
+use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Drupal\node\Entity\NodeType;
+use Drupal\oe_multilingual\Plugin\LanguageNegotiation\LanguageNegotiationAdmin;
+use Drupal\oe_multilingual\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix;
 
 /**
  * Class DrupalContext.
@@ -304,6 +309,62 @@ class DrupalContext extends RawDrupalContext {
     }
 
     throw new \InvalidArgumentException("Language '{$name}' not found.");
+  }
+
+  /**
+   * @BeforeScenario @language-negotiation-suffix
+   */
+  public function setUpLanguageNegotiationSuffix(): void {
+    /** @var \Drupal\oe_multilingual\LanguageNegotiationSetterInterface $setter */
+    $setter = \Drupal::service('oe_multilingual.language_negotiation_setter');
+
+    // Set only interface negotiation.
+    $setter->enableNegotiationMethods([
+      LanguageInterface::TYPE_INTERFACE,
+    ]);
+
+    // For set Language Negotiation to use URL Suffix.
+    $setter->setInterfaceSettings([
+      LanguageNegotiationUrlSuffix::METHOD_ID => -19,
+    ]);
+
+    // Set URL suffixes.
+    $configFactory = \Drupal::configFactory();
+    $configFactory->getEditable('language.negotiation')
+      ->set('url_suffixes', [
+        'en' => 'en',
+        'fr' => 'fr',
+        'es' => 'es',
+        'pt-pt' => 'pt',
+      ])
+      ->save();
+  }
+
+  /**
+   * @AfterScenario @language-negotiation-suffix
+   */
+  public function revertLanguageNegotiationSuffix(): void {
+    /** @var \Drupal\oe_multilingual\LanguageNegotiationSetterInterface $setter */
+    $setter = \Drupal::service('oe_multilingual.language_negotiation_setter');
+
+    // Set default language negotiation methods.
+    $setter->enableNegotiationMethods([
+      LanguageInterface::TYPE_INTERFACE,
+      LanguageInterface::TYPE_CONTENT,
+    ]);
+
+    // For interface negotiation make sure administrative pages are in English.
+    $setter->setInterfaceSettings([
+      LanguageNegotiationAdmin::METHOD_ID => -20,
+      LanguageNegotiationUrl::METHOD_ID => -19,
+      LanguageNegotiationSelected::METHOD_ID => 20,
+    ]);
+
+    // For content negotiation make sure that content respects URL language.
+    $setter->setContentSettings([
+      LanguageNegotiationUrl::METHOD_ID => -19,
+      LanguageNegotiationSelected::METHOD_ID => 20,
+    ]);
   }
 
 }
