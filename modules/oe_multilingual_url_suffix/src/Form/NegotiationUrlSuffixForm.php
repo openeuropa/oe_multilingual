@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\oe_multilingual\Form;
+namespace Drupal\oe_multilingual_url_suffix\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Class NegotiationUrlSuffixForm.
  *
- * @package Drupal\oe_multilingual\Form
+ * @package Drupal\oe_multilingual_url_suffix\Form
  */
 class NegotiationUrlSuffixForm extends ConfigFormBase {
 
@@ -71,7 +71,7 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
       '#tree' => TRUE,
       '#title' => $this->t('Path suffix configuration'),
       '#open' => TRUE,
-      '#description' => $this->t('Language codes or other custom text to use as a path suffix for URL language detection.'),
+      '#description' => $this->t('Language codes or other custom text to use as a path suffix for URL language detection. For the selected fallback language, this value may be left blank. <strong>Modifying this value may break existing URLs. Use with caution in a production environment.</strong> Example: Specifying "deutsch" as the path suffix code for German results in URLs like "example.com/contact_deutsch".'),
     ];
 
     $languages = $this->languageManager->getLanguages();
@@ -83,7 +83,7 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
         '#title' => $language->isDefault() ? $this->t('%language (%langcode) path suffix (Default language)', $t_args) : $this->t('%language (%langcode) path suffix', $t_args),
         '#maxlength' => 64,
         '#default_value' => isset($suffixes[$langcode]) ? $suffixes[$langcode] : substr($langcode, 0, 2),
-        '#field_prefix' => $base_url . '/some-path_',
+        '#field_prefix' => $base_url . '/index_',
       ];
     }
 
@@ -103,7 +103,7 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
     foreach ($languages as $langcode => $language) {
       $value = $form_state->getValue(['suffix', $langcode]);
       if ($value === '') {
-        // Throw a form error if the suffix is blank for a non-default language,
+        // Throw a form error if the suffix is blank for any language,
         // although it is required for selected negotiation type.
         $form_state->setErrorByName("suffix][$langcode", $this->t('The suffix may only be left blank for the <a href=":url">selected detection fallback language.</a>', [
           ':url' => $this->getUrlGenerator()->generate('language.negotiation_selected'),

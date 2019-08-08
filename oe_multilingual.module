@@ -15,7 +15,6 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\TypedData\TranslatableInterface;
 use Drupal\Core\Url;
-use Drupal\oe_multilingual\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix;
 
 /**
  * Implements hook_language_switch_links_alter().
@@ -212,13 +211,4 @@ function oe_multilingual_page_header_pre_render(array $build): array {
  */
 function oe_multilingual_locale_translation_projects_alter(&$projects) {
   $projects['oe_multilingual']['info']['interface translation server pattern'] = drupal_get_path('module', 'oe_multilingual') . '/translations/%project-%language.po';
-}
-
-/**
- * Implements hook_language_negotiation_info_alter().
- */
-function oe_multilingual_language_negotiation_info_alter(&$negotiation_info) {
-  // Replace the original plugin with our own implementation.
-  $method_id = LanguageNegotiationUrlSuffix::METHOD_ID;
-  $negotiation_info[$method_id]['class'] = 'Drupal\oe_multilingual\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix';
 }
