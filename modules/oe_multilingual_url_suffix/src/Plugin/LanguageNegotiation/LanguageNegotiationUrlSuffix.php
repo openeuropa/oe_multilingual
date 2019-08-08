@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\oe_multilingual\Plugin\LanguageNegotiation;
+namespace Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation;
 
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Render\BubbleableMetadata;
@@ -11,14 +11,14 @@ use Symfony\Component\HttpFoundation\Request;
  * Class LanguageNegotiationUrlSuffix.
  *
  * @LanguageNegotiation(
- *   id = \Drupal\oe_multilingual\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix::METHOD_ID,
+ *   id = \Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix::METHOD_ID,
  *   types = {\Drupal\Core\Language\LanguageInterface::TYPE_INTERFACE,
  *   \Drupal\Core\Language\LanguageInterface::TYPE_CONTENT,
  *   \Drupal\Core\Language\LanguageInterface::TYPE_URL},
  *   weight = -10,
  *   name = @Translation("URL suffix"),
  *   description = @Translation("Language from the URL (Path suffix)."),
- *   config_route_name = "oe_multilingual.negotiation_url_suffix"
+ *   config_route_name = "oe_multilingual_url_suffix.negotiation_url_suffix"
  * )
  */
 class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl {
@@ -79,7 +79,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl {
     $languages = array_flip(array_keys($this->languageManager->getLanguages()));
     // Language can be passed as an option, or we go for current URL language.
     if (!isset($options['language'])) {
-      $language_url = $this->languageManager->getCurrentLanguage();
+      $language_url = $this->languageManager->getCurrentLanguage(LanguageInterface::TYPE_URL);
       $options['language'] = $language_url;
     }
     // We allow only added languages here.
