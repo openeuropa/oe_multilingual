@@ -188,12 +188,15 @@ In order to install the OpenEuropa Multilingual demo module follow [the instruct
 
 This is optional and should be done only if your website should follow the [IPG rules](http://ec.europa.eu/ipg/print/print_all_content/index_en.htm#3.0) for language negotiation.
 
-1. Go to `admin/config/regional/language/detection` as admin;
-2. Enable `URL suffix` and disable `URL`;
-3. Click on `Configure` for `URL suffix` and configure the language suffixes.
+For enabling this feature you need to install the OpenEuropa Multilingual URL Suffix module.
+
+In order to install the OpenEuropa Multilingual URL Suffix module follow [the instructions][10] or enable it via [Drush][11] by running:
+
+```bash
+./vendor/bin/drush en oe_multilingual_url_suffix -y
+```
 
 ## Contributing
-
 Please read [the full documentation](https://github.com/openeuropa/openeuropa) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
