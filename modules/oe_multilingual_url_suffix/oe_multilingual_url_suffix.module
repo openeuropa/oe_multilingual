@@ -8,7 +8,6 @@
 declare(strict_types = 1);
 
 use Drupal\Core\Language\LanguageInterface;
-use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUI;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrlFallback;
 use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix;
 
@@ -18,6 +17,38 @@ use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotia
  * @see \language_language_types_info_alter()
  */
 function oe_multilingual_url_suffix_language_types_info_alter(array &$language_types) {
-  $language_types[LanguageInterface::TYPE_CONTENT]['fixed'] = [LanguageNegotiationUI::METHOD_ID];
   $language_types[LanguageInterface::TYPE_URL]['fixed'] = [LanguageNegotiationUrlSuffix::METHOD_ID, LanguageNegotiationUrlFallback::METHOD_ID];
+}
+
+/**
+ * Update the list of url suffixes from the installed languages.
+ *
+ * @see \language_negotiation_url_prefixes_update()
+ */
+function oe_multilingual_url_suffix_list_update() {
+  $config = \Drupal::configFactory()->getEditable('language.negotiation');
+  $suffixes = $config->get('url_suffixes');
+  foreach (\Drupal::languageManager()->getLanguages() as $language) {
+    // The prefix for this language should be updated if it's not assigned yet
+    // or the prefix is set to the empty string.
+    if (empty($suffixes[$language->getId()])) {
+      // For the default language, set the prefix to the empty string,
+      // otherwise use the langcode.
+      $suffixes[$language->getId()] = $language->getId();
+    }
+    // Otherwise we keep the configured suffix.
+  }
+  $config->set('url_suffixes', $suffixes)->save(TRUE);
+}
+
+/**
+ * Implements hook_config_schema_info_alter().
+ */
+function oe_multilingual_url_suffix_config_schema_info_alter(&$definitions) {
+  if (isset($definitions['language.negotiation']['mapping']['url']['mapping']['prefixes'])) {
+    $suffixes_definition = $definitions['language.negotiation']['mapping']['url']['mapping']['prefixes'];
+    $suffixes_definition['label'] = 'Path suffix configuration';
+    $suffixes_definition['sequence']['label'] = 'Path suffix';
+    $definitions['language.negotiation']['mapping']['url_suffixes'] = $suffixes_definition;
+  }
 }
