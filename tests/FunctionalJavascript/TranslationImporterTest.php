@@ -29,7 +29,7 @@ class TranslationImporterTest extends WebDriverTestBase {
     $this->drupalGet('import-translations');
     // Wait for the AJAX to complete. This can take a while until the batch
     // process finishes hence the increase in timeout.
-    $this->assertSession()->assertWaitOnAjaxRequest(100000);
+    $this->assertSession()->assertWaitOnAjaxRequest(1000000);
     $this->assertSession()->pageTextContains('The batch has completed');
     $translations = $locale_storage->getTranslations(['source' => 'Structure']);
     $this->assertCount(1, $translations);
