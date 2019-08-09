@@ -8,6 +8,7 @@
 declare(strict_types = 1);
 
 use Drupal\Core\Language\LanguageInterface;
+use Drupal\language\ConfigurableLanguageManager;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Drupal\oe_multilingual\LanguageNegotiationSetter;
 use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix;
@@ -71,4 +72,6 @@ function oe_multilingual_url_suffix_uninstall() {
   $enabled_content_methods[LanguageNegotiationUrl::METHOD_ID] = $enabled_content_methods[LanguageNegotiationUrlSuffix::METHOD_ID] ?? -19;
   unset($enabled_content_methods[LanguageNegotiationUrlSuffix::METHOD_ID]);
   $setter->setContentSettings($enabled_content_methods);
+
+  ConfigurableLanguageManager::rebuildServices();
 }
