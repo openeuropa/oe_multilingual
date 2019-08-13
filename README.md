@@ -198,8 +198,7 @@ This is optional and should be done only if your website should follow the [IPG 
 
 For enabling this feature you need to install the OpenEuropa Multilingual URL Suffix module.
 
-In order to install the OpenEuropa Multilingual URL Suffix module follow [the instructions][10] or enable it via [Drush][11] by running:
-
+In order to enable this feature you need to install the OpenEuropa Multilingual URL Suffix module by following [this instructions][10] or via [Drush][11] by running:
 ```bash
 ./vendor/bin/drush en oe_multilingual_url_suffix -y
 ```

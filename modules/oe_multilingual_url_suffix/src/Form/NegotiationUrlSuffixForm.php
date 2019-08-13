@@ -6,6 +6,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -83,7 +84,7 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
         '#title' => $language->isDefault() ? $this->t('%language (%langcode) path suffix (Default language)', $t_args) : $this->t('%language (%langcode) path suffix', $t_args),
         '#maxlength' => 64,
         '#default_value' => isset($suffixes[$langcode]) ? $suffixes[$langcode] : substr($langcode, 0, 2),
-        '#field_prefix' => $base_url . '/index_',
+        '#field_prefix' => $base_url . '/index' . LanguageNegotiationUrlSuffix::SUFFIX_DELIMITER,
       ];
     }
 
@@ -109,10 +110,10 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
           ':url' => $this->getUrlGenerator()->generate('language.negotiation_selected'),
         ]));
       }
-      elseif (strpos($value, '/') !== FALSE) {
-        // Throw a form error if the string contains a slash,
+      elseif (strpos($value, LanguageNegotiationUrlSuffix::SUFFIX_DELIMITER) !== FALSE) {
+        // Throw a form error if the string contains an underscore,
         // which would not work.
-        $form_state->setErrorByName("suffix][$langcode", $this->t('The suffix may not contain a slash.'));
+        $form_state->setErrorByName("suffix][$langcode", $this->t('The suffix may not contain a underscore.'));
       }
       elseif (isset($count[$value]) && $count[$value] > 1) {
         // Throw a form error if there are two languages with the same suffix.

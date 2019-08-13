@@ -14,6 +14,9 @@ use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotia
 /**
  * Implements hook_language_types_info_alter().
  *
+ * For more info:
+ * https://www.drupal.org/docs/8/multilingual/enable-language-negotiation.
+ *
  * @see \language_language_types_info_alter()
  */
 function oe_multilingual_url_suffix_language_types_info_alter(array &$language_types) {
@@ -29,12 +32,10 @@ function oe_multilingual_url_suffix_list_update() {
   $config = \Drupal::configFactory()->getEditable('language.negotiation');
   $suffixes = $config->get('url_suffixes');
   foreach (\Drupal::languageManager()->getLanguages() as $language) {
-    // The prefix for this language should be updated if it's not assigned yet
-    // or the prefix is set to the empty string.
+    // The suffix for this language should be updated if it's not assigned yet.
     if (empty($suffixes[$language->getId()])) {
-      // For the default language, set the prefix to the empty string,
-      // otherwise use the langcode.
-      $suffixes[$language->getId()] = $language->getId();
+      // Also make sure that Portuguese language prefix is set to "pt".
+      $suffixes[$language->getId()] = $language->getId() === 'pt-pt' ? 'pt' : $language->getId();
     }
     // Otherwise we keep the configured suffix.
   }

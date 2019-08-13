@@ -12,7 +12,7 @@ use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotia
 use Drupal\Tests\oe_multilingual\Kernel\InstallationTest;
 
 /**
- * Class InstallationTest.
+ * Class UrlSuffixInstallationTest.
  */
 class UrlSuffixInstallationTest extends InstallationTest {
 
@@ -21,7 +21,7 @@ class UrlSuffixInstallationTest extends InstallationTest {
    *
    * @var array
    */
-  public static $modules = ['oe_multilingual_url_suffix'];
+  protected static $modules = ['oe_multilingual_url_suffix'];
 
   /**
    * {@inheritdoc}

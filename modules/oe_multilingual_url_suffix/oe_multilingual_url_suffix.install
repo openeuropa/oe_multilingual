@@ -27,13 +27,15 @@ function oe_multilingual_url_suffix_install() {
 
   $config = Drupal::configFactory()->get(LanguageNegotiationSetter::CONFIG_NAME);
 
-  // For interface negotiation make sure url suffix replace URL method.
+  // Replace the default prefix URL negotiator with our suffix Url negotiator
+  // on the interface negotiation methods.
   $enabled_interface_methods = $config->get('negotiation.' . LanguageInterface::TYPE_INTERFACE . '.enabled');
   $enabled_interface_methods[LanguageNegotiationUrlSuffix::METHOD_ID] = $enabled_interface_methods[LanguageNegotiationUrl::METHOD_ID] ?? -19;
   unset($enabled_interface_methods[LanguageNegotiationUrl::METHOD_ID]);
   $setter->setInterfaceSettings($enabled_interface_methods);
 
-  // For content negotiation make sure url suffix replace URL method.
+  // Replace the default prefix URL negotiator with our suffix Url negotiator
+  // on the content negotiation methods.
   $enabled_content_methods = $config->get('negotiation.' . LanguageInterface::TYPE_CONTENT . '.enabled');
   $enabled_content_methods[LanguageNegotiationUrlSuffix::METHOD_ID] = $enabled_content_methods[LanguageNegotiationUrl::METHOD_ID] ?? -19;
   unset($enabled_content_methods[LanguageNegotiationUrl::METHOD_ID]);
@@ -41,12 +43,6 @@ function oe_multilingual_url_suffix_install() {
 
   // Update language negotiation config for suffixes list.
   oe_multilingual_url_suffix_list_update();
-
-  // Make sure that Portuguese language prefix is set to "pt".
-  \Drupal::configFactory()
-    ->getEditable('language.negotiation')
-    ->set('url_suffixes.pt-pt', 'pt')
-    ->save();
 
   \Drupal::messenger()->addMessage('Please be aware that oe_multilingual makes changes to the following configurations: Language, Locale, Administration language negotiation.');
 }
