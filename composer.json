@@ -13,9 +13,10 @@
     },
     "require-dev": {
         "composer/installers": "~1.5",
+        "consolidation/robo": "~1.4",
+        "consolidation/annotated-command": "~2.12",
         "drupal-composer/drupal-scaffold": "^2.5.2",
         "drupal/config_devel": "~1.2",
-        "drupal/console": "~1.0",
         "drupal/devel": "~1.2",
         "drupal/drupal-extension": "~4.0",
         "drush/drush": "~9.0@stable",
@@ -54,6 +55,11 @@
             "build/profiles/contrib/{$name}": ["type:drupal-profile"],
             "build/modules/contrib/{$name}": ["type:drupal-module"],
             "build/themes/contrib/{$name}": ["type:drupal-theme"]
+        },
+        "patches": {
+            "drupal/core": {
+                "https://www.drupal.org/project/drupal/issues/3074765": "https://www.drupal.org/files/issues/2019-08-14/locale_translation_import_performance-3074765-3.patch"
+            }
         },
         "drush": {
             "services": {
