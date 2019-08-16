@@ -17,7 +17,6 @@
         "consolidation/annotated-command": "~2.12",
         "drupal-composer/drupal-scaffold": "^2.5.2",
         "drupal/config_devel": "~1.2",
-        "drupal/console": "~1.0",
         "drupal/devel": "~1.2",
         "drupal/drupal-extension": "~4.0",
         "drush/drush": "~9.0@stable",

@@ -167,7 +167,6 @@ class LocalTranslationsBatcher {
    */
   protected function localeTranslationCheckProjectsLocal(array $projects, array $langcodes): void {
     $projects = locale_translation_get_projects($projects);
-
     // For each project and each language we check if a local po file is
     // available. When found the source object is updated with the appropriate
     // type and timestamp of the po file.
