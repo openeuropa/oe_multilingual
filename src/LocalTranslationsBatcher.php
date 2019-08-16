@@ -118,7 +118,7 @@ class LocalTranslationsBatcher {
     }
 
     locale_translation_flush_projects();
-    locale_translation_check_projects_local($extensions, $langcodes);
+    $this->localeTranslationCheckProjectsLocal($extensions, $langcodes);
     $options = _locale_translation_default_update_options();
     $batch = locale_translation_batch_fetch_build($extensions, $langcodes, $options);
     batch_set($batch);
@@ -152,6 +152,76 @@ class LocalTranslationsBatcher {
     }
 
     return $extensions;
+  }
+
+  /**
+   * Check and store the status and timestamp of local po files.
+   *
+   * @param array $projects
+   *   Array of project names for which to check the state of translation files.
+   *   Defaults to all translatable projects.
+   * @param array $langcodes
+   *   Array of language codes. Defaults to all translatable languages.
+   *
+   * @see locale_translation_check_projects_local()
+   */
+  protected function localeTranslationCheckProjectsLocal(array $projects, array $langcodes): void {
+    $projects = locale_translation_get_projects($projects);
+
+    // For each project and each language we check if a local po file is
+    // available. When found the source object is updated with the appropriate
+    // type and timestamp of the po file.
+    foreach ($projects as $name => $project) {
+      foreach ($langcodes as $langcode) {
+        $source = locale_translation_source_build($project, $langcode);
+        $file = locale_translation_source_check_file($source);
+        $this->localeTranslationStatusSave($name, $langcode, $file);
+      }
+    }
+  }
+
+  /**
+   * Saves the status of translation sources in static cache.
+   *
+   * @param string $project
+   *   Machine readable project name.
+   * @param string $langcode
+   *   Language code.
+   * @param object $data
+   *   File object containing timestamp when the translation is last updated.
+   *
+   * @see locale_translation_status_save()
+   */
+  protected function localeTranslationStatusSave(string $project, string $langcode, $data): void {
+    // Load the translation status or build it if not already available.
+    module_load_include('translation.inc', 'locale');
+    $status = locale_translation_get_status([$project]);
+    if (empty($status)) {
+      $projects = locale_translation_get_projects([$project]);
+      if (isset($projects[$project])) {
+        $status[$project][$langcode] = locale_translation_source_build($projects[$project], $langcode);
+      }
+    }
+
+    // Merge the new status data with the existing status.
+    if (isset($status[$project][$langcode])) {
+      // Add the source data to the status array.
+      $status[$project][$langcode]->files[LOCALE_TRANSLATION_LOCAL] = $data;
+
+      // Check if this translation is the most recent one. Set timestamp and
+      // data type of the most recent translation source.
+      if (isset($data->timestamp) && $data->timestamp) {
+        if ($data->timestamp > $status[$project][$langcode]->timestamp) {
+          $status[$project][$langcode]->timestamp = $data->timestamp;
+          $status[$project][$langcode]->last_checked = REQUEST_TIME;
+          $status[$project][$langcode]->type = LOCALE_TRANSLATION_LOCAL;
+        }
+      }
+
+      \Drupal::keyValue('locale.translation_status')
+        ->set($project, $status[$project]);
+      \Drupal::state()->set('locale.translation_last_checked', REQUEST_TIME);
+    }
   }
 
 }
