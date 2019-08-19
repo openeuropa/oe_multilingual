@@ -120,7 +120,7 @@ class LocalTranslationsBatcher {
     locale_translation_flush_projects();
     $this->localeTranslationCheckProjectsLocal($extensions, $langcodes);
     $options = _locale_translation_default_update_options();
-    $batch = locale_translation_batch_fetch_build($extensions, $langcodes, $options);
+    $batch = $this->localeTranslationBatchFetchBuild($extensions, $langcodes, $options);
     batch_set($batch);
     if ($batch = locale_config_batch_update_components($options, $langcodes)) {
       batch_set($batch);
@@ -174,7 +174,7 @@ class LocalTranslationsBatcher {
       foreach ($langcodes as $langcode) {
         $source = locale_translation_source_build($project, $langcode);
         $file = locale_translation_source_check_file($source);
-        $this->localeTranslationStatusSave($name, $langcode, $file);
+        self::localeTranslationStatusSave($name, $langcode, LOCALE_TRANSLATION_LOCAL, $file);
       }
     }
   }
@@ -186,12 +186,16 @@ class LocalTranslationsBatcher {
    *   Machine readable project name.
    * @param string $langcode
    *   Language code.
+   * @param string $type
+   *   Type of data to be stored.
    * @param object $data
    *   File object containing timestamp when the translation is last updated.
    *
    * @see locale_translation_status_save()
+   *
+   * @SuppressWarnings(PHPMD.CyclomaticComplexity)
    */
-  protected function localeTranslationStatusSave(string $project, string $langcode, $data): void {
+  public static function localeTranslationStatusSave(string $project, string $langcode, string $type, $data): void {
     // Load the translation status or build it if not already available.
     module_load_include('translation.inc', 'locale');
     $status = locale_translation_get_status([$project]);
@@ -204,22 +208,145 @@ class LocalTranslationsBatcher {
 
     // Merge the new status data with the existing status.
     if (isset($status[$project][$langcode])) {
-      // Add the source data to the status array.
-      $status[$project][$langcode]->files[LOCALE_TRANSLATION_LOCAL] = $data;
+      switch ($type) {
+        case LOCALE_TRANSLATION_REMOTE:
+        case LOCALE_TRANSLATION_LOCAL:
+          // Add the source data to the status array.
+          $status[$project][$langcode]->files[$type] = $data;
 
-      // Check if this translation is the most recent one. Set timestamp and
-      // data type of the most recent translation source.
-      if (isset($data->timestamp) && $data->timestamp) {
-        if ($data->timestamp > $status[$project][$langcode]->timestamp) {
+          // Check if this translation is the most recent one. Set timestamp and
+          // data type of the most recent translation source.
+          if (isset($data->timestamp) && $data->timestamp) {
+            if ($data->timestamp > $status[$project][$langcode]->timestamp) {
+              $status[$project][$langcode]->timestamp = $data->timestamp;
+              $status[$project][$langcode]->last_checked = REQUEST_TIME;
+              $status[$project][$langcode]->type = $type;
+            }
+          }
+          break;
+
+        case LOCALE_TRANSLATION_CURRENT:
+          $data->last_checked = REQUEST_TIME;
           $status[$project][$langcode]->timestamp = $data->timestamp;
-          $status[$project][$langcode]->last_checked = REQUEST_TIME;
-          $status[$project][$langcode]->type = LOCALE_TRANSLATION_LOCAL;
-        }
+          $status[$project][$langcode]->last_checked = $data->last_checked;
+          $status[$project][$langcode]->type = $type;
+          locale_translation_update_file_history($data);
+          break;
       }
 
-      \Drupal::keyValue('locale.translation_status')
-        ->set($project, $status[$project]);
+      \Drupal::keyValue('locale.translation_status')->set($project, $status[$project]);
       \Drupal::state()->set('locale.translation_last_checked', REQUEST_TIME);
+    }
+  }
+
+  /**
+   * Builds a batch to download and import project translations.
+   *
+   * @param array $projects
+   *   Array of project names for which to check the state of translation files.
+   *   Defaults to all translatable projects.
+   * @param array $langcodes
+   *   Array of language codes. Defaults to all translatable languages.
+   * @param array $options
+   *   Array of import options. See locale_translate_batch_import_files().
+   *
+   * @return array
+   *   Batch definition array.
+   *
+   * @see locale_translation_batch_fetch_build()
+   */
+  protected function localeTranslationBatchFetchBuild(array $projects, array $langcodes, array $options): array {
+    $batch = [
+      'operations' => $this->localeTranslationFetchOperations($projects, $langcodes, $options),
+      'title' => t('Updating translations.'),
+      'progress_message' => '',
+      'error_message' => t('Error importing translation files'),
+      'finished' => 'locale_translation_batch_fetch_finished',
+      'file' => drupal_get_path('module', 'locale') . '/locale.batch.inc',
+    ];
+    return $batch;
+  }
+
+  /**
+   * Helper function to construct the batch operations to fetch translations.
+   *
+   * @param array $projects
+   *   Array of project names for which to check the state of translation files.
+   *   Defaults to all translatable projects.
+   * @param array $langcodes
+   *   Array of language codes. Defaults to all translatable languages.
+   * @param array $options
+   *   Array of import options.
+   *
+   * @return array
+   *   Array of batch operations.
+   *
+   * @see _locale_translation_fetch_operations()
+   */
+  protected function localeTranslationFetchOperations(array $projects, array $langcodes, array $options): array {
+    $operations = [];
+
+    foreach ($projects as $project) {
+      foreach ($langcodes as $langcode) {
+        $operations[] = [
+          [get_class($this), 'localeTranslationBatchFetchImport'],
+          [$project, $langcode, $options],
+        ];
+      }
+    }
+
+    return $operations;
+  }
+
+  /**
+   * Implements callback_batch_operation().
+   *
+   * Imports a gettext file from the translation directory.
+   * When successfully the translation status is updated.
+   *
+   * @param string $project
+   *   Source object of the translatable project.
+   * @param string $langcode
+   *   Language code.
+   * @param array $options
+   *   Array of import options.
+   * @param array|object $context
+   *   The batch context.
+   *
+   * @see locale_translation_batch_fetch_import()
+   * @see locale_translate_batch_import_files()
+   * @see locale_translation_batch_fetch_download()
+   */
+  public static function localeTranslationBatchFetchImport(string $project, string $langcode, array $options, &$context): void {
+    $sources = locale_translation_get_status([$project], [$langcode]);
+    if (isset($sources[$project][$langcode])) {
+      $source = $sources[$project][$langcode];
+      if (isset($source->type)) {
+        if ($source->type == LOCALE_TRANSLATION_REMOTE || $source->type == LOCALE_TRANSLATION_LOCAL) {
+          $file = $source->files[LOCALE_TRANSLATION_LOCAL];
+          module_load_include('bulk.inc', 'locale');
+          $options += [
+            'message' => t('Importing translation for %project.', ['%project' => $source->project]),
+          ];
+          // Import the translation file.
+          // For large files the batch operations is
+          // progressive and will be called repeatedly until finished.
+          locale_translate_batch_import($file, $options, $context);
+
+          // The import is finished.
+          if (isset($context['finished']) && $context['finished'] == 1) {
+            // The import is successful.
+            if (isset($context['results']['files'][$file->uri])) {
+              $context['message'] = t('Imported translation for %project.', ['%project' => $source->project]);
+
+              // Save the data of imported source
+              // into the {locale_file} table and
+              // update the current translation status.
+              self::localeTranslationStatusSave($project, $langcode, LOCALE_TRANSLATION_CURRENT, $source->files[LOCALE_TRANSLATION_LOCAL]);
+            }
+          }
+        }
+      }
     }
   }
 
