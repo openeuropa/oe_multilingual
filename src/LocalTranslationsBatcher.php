@@ -97,6 +97,7 @@ class LocalTranslationsBatcher {
    */
   public function createBatch(array $langcodes = []): void {
     $this->moduleHandler->loadInclude('locale', 'inc', 'locale.compare');
+    $this->moduleHandler->loadInclude('locale', 'inc', 'locale.bulk');
 
     if (!$langcodes) {
       $languages = $this->languageManager->getLanguages();
@@ -132,6 +133,11 @@ class LocalTranslationsBatcher {
     ];
 
     batch_set($batch);
+    // Update config translations.
+    if ($batch = locale_config_batch_update_components([], $langcodes)) {
+      batch_set($batch);
+    }
+
   }
 
   /**
