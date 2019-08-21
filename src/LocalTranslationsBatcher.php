@@ -10,6 +10,7 @@ use Drupal\Core\Extension\ProfileExtensionList;
 use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\Extension\ThemeHandlerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\locale\Gettext;
 
 /**
  * Creates the batches for importing the local translations.
@@ -95,9 +96,6 @@ class LocalTranslationsBatcher {
    * @see \Drupal\locale\Form\TranslationStatusForm::submitForm()
    */
   public function createBatch(array $langcodes = []): void {
-    $this->moduleHandler->loadInclude('locale', 'fetch.inc');
-    $this->moduleHandler->loadInclude('locale', 'bulk.inc');
-    $this->moduleHandler->loadInclude('locale', 'translation.inc');
     $this->moduleHandler->loadInclude('locale', 'inc', 'locale.compare');
 
     if (!$langcodes) {
@@ -113,18 +111,27 @@ class LocalTranslationsBatcher {
     }
 
     $extensions = $this->getExtensionsToTranslate();
-    if (!$extensions) {
+    if (!$extensions || !$langcodes) {
       return;
     }
 
-    locale_translation_flush_projects();
-    locale_translation_check_projects_local($extensions, $langcodes);
-    $options = _locale_translation_default_update_options();
-    $batch = locale_translation_batch_fetch_build($extensions, $langcodes, $options);
-    batch_set($batch);
-    if ($batch = locale_config_batch_update_components($options, $langcodes)) {
-      batch_set($batch);
+    // Build operations for local translation batch import.
+    $operations = [];
+    foreach ($extensions as $extension) {
+      $operations[] = [
+        [get_class($this), 'importProjectPoFiles'],
+        [$extension, $langcodes],
+      ];
     }
+
+    $batch = [
+      'operations' => $operations,
+      'title' => t('Updating translations.'),
+      'progress_message' => '',
+      'error_message' => t('Error importing translation files'),
+    ];
+
+    batch_set($batch);
   }
 
   /**
@@ -151,7 +158,30 @@ class LocalTranslationsBatcher {
       $extensions[] = $name;
     }
 
-    return $extensions;
+    return array_intersect_key(locale_translation_project_list(), array_combine($extensions, $extensions));
+  }
+
+  /**
+   * Implements callback_batch_operation().
+   *
+   * Import po files of the project for allowed languages.
+   */
+  public static function importProjectPoFiles($extension, $langcodes, &$context): void {
+    $files = file_scan_directory(
+      \Drupal::service('file_system')->dirname($extension['info']['interface translation server pattern']),
+      '/.*-(' . implode('|', $langcodes) . ')\.po/'
+    );
+    foreach ($files as $file) {
+      preg_match('/(' . implode('|', $langcodes) . ')$/', $file->name, $matches);
+      $file->langcode = $matches[0];
+      Gettext::fileToDatabase($file, [
+        'overwrite_options' => [
+          'not_customized' => TRUE,
+        ],
+      ]);
+
+      $context['message'] = t('Imported translation for %project (%langcode).', ['%project' => $extension['name'], '%langcode' => $file->langcode]);
+    }
   }
 
 }
