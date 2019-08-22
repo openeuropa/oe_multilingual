@@ -4,12 +4,15 @@ declare(strict_types = 1);
 
 namespace Drupal\oe_multilingual;
 
+use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ProfileExtensionList;
 use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\Extension\ThemeHandlerInterface;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\locale\Gettext;
 
 /**
@@ -19,6 +22,9 @@ use Drupal\locale\Gettext;
  * extension by specifying the location of the strings inside its info file.
  */
 class LocalTranslationsBatcher {
+
+  use StringTranslationTrait;
+  use DependencySerializationTrait;
 
   /**
    * The module handler.
@@ -63,6 +69,13 @@ class LocalTranslationsBatcher {
   protected $profileExtensionList;
 
   /**
+   * The file system service.
+   *
+   * @var \Drupal\Core\File\FileSystemInterface
+   */
+  protected $fileSystem;
+
+  /**
    * LocalTranslationsBatcher constructor.
    *
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
@@ -77,14 +90,17 @@ class LocalTranslationsBatcher {
    *   The theme extensions list.
    * @param \Drupal\Core\Extension\ProfileExtensionList $profileExtensionList
    *   The profile extensions list.
+   * @param \Drupal\Core\File\FileSystemInterface $fileSystem
+   *   The file system service.
    */
-  public function __construct(ModuleHandlerInterface $moduleHandler, ThemeHandlerInterface $themeHandler, LanguageManagerInterface $languageManager, ModuleExtensionList $moduleExtensionList, ThemeExtensionList $themeExtensionList, ProfileExtensionList $profileExtensionList) {
+  public function __construct(ModuleHandlerInterface $moduleHandler, ThemeHandlerInterface $themeHandler, LanguageManagerInterface $languageManager, ModuleExtensionList $moduleExtensionList, ThemeExtensionList $themeExtensionList, ProfileExtensionList $profileExtensionList, FileSystemInterface $fileSystem) {
     $this->moduleHandler = $moduleHandler;
     $this->themeHandler = $themeHandler;
     $this->languageManager = $languageManager;
     $this->moduleExtensionList = $moduleExtensionList;
     $this->themeExtensionList = $themeExtensionList;
     $this->profileExtensionList = $profileExtensionList;
+    $this->fileSystem = $fileSystem;
   }
 
   /**
@@ -120,23 +136,20 @@ class LocalTranslationsBatcher {
     $operations = [];
     foreach ($extensions as $extension) {
       $operations[] = [
-        [get_class($this), 'importProjectPoFiles'],
+        [$this, 'importProjectPoFiles'],
         [$extension, $langcodes],
       ];
     }
 
     $batch = [
       'operations' => $operations,
-      'title' => t('Updating translations.'),
+      'title' => $this->t('Importing translations.'),
       'progress_message' => '',
-      'error_message' => t('Error importing translation files'),
+      'error_message' => $this->t('Error importing translation files'),
+      'file' => drupal_get_path('module', 'locale') . '/locale.batch.inc',
     ];
 
     batch_set($batch);
-    // Update config translations.
-    if ($batch = locale_config_batch_update_components([], $langcodes)) {
-      batch_set($batch);
-    }
 
   }
 
@@ -172,9 +185,9 @@ class LocalTranslationsBatcher {
    *
    * Import po files of the project for allowed languages.
    */
-  public static function importProjectPoFiles($extension, $langcodes, &$context): void {
+  public function importProjectPoFiles($extension, $langcodes, &$context): void {
     $files = file_scan_directory(
-      \Drupal::service('file_system')->dirname($extension['info']['interface translation server pattern']),
+      $this->fileSystem->dirname($extension['info']['interface translation server pattern']),
       '/.*-(' . implode('|', $langcodes) . ')\.po/'
     );
     foreach ($files as $file) {
@@ -186,7 +199,7 @@ class LocalTranslationsBatcher {
         ],
       ]);
 
-      $context['message'] = t('Imported translation for %project (%langcode).', ['%project' => $extension['name'], '%langcode' => $file->langcode]);
+      $context['message'] = $this->t('Imported translation for %project (%langcode).', ['%project' => $extension['name'], '%langcode' => $file->langcode]);
     }
   }
 

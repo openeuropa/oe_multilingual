@@ -44,6 +44,7 @@ class MultilingualCommands extends DrushCommands {
    */
   public function importLocalTranslations(array $options = ['langcodes' => self::OPT]): void {
     $langcodes = $options['langcodes'] ? $options['langcodes'] : [];
+
     $this->localTranslationsBatcher->createBatch($langcodes);
     $batch =& batch_get();
     if (!$batch) {
@@ -51,6 +52,14 @@ class MultilingualCommands extends DrushCommands {
     }
 
     drush_backend_batch_process();
+    // Update config translations.
+    if ($batch = locale_config_batch_update_components([])) {
+      $this->logger()->notice('Importing configuration translations...');
+      batch_set($batch);
+      drush_backend_batch_process();
+      $this->logger()->notice('Done.');
+    }
+
   }
 
 }
