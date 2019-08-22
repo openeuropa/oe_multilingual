@@ -57,7 +57,7 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
-    return ['language.negotiation'];
+    return ['oe_multilingual_url_suffix.settings'];
   }
 
   /**
@@ -65,7 +65,7 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     global $base_url;
-    $config = $this->config('language.negotiation');
+    $config = $this->config('oe_multilingual_url_suffix.settings');
 
     $form['suffix'] = [
       '#type' => 'details',
@@ -129,7 +129,7 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Save configured suffixes.
-    $this->config('language.negotiation')
+    $this->config('oe_multilingual_url_suffix.settings')
       ->set('url_suffixes', $form_state->getValue('suffix'))
       ->save();
 

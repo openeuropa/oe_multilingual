@@ -14,6 +14,10 @@ use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotia
 /**
  * Implements hook_language_types_info_alter().
  *
+ * This implemented hook will make Drupal aware of a new method
+ * of determining the Url language and will make the Url Suffix negotiator
+ * behave the same way as the core Url negotiator.
+ *
  * For more info:
  * https://www.drupal.org/docs/8/multilingual/enable-language-negotiation.
  *
@@ -29,7 +33,7 @@ function oe_multilingual_url_suffix_language_types_info_alter(array &$language_t
  * @see \language_negotiation_url_prefixes_update()
  */
 function oe_multilingual_url_suffix_list_update() {
-  $config = \Drupal::configFactory()->getEditable('language.negotiation');
+  $config = \Drupal::configFactory()->getEditable('oe_multilingual_url_suffix.settings');
   $suffixes = $config->get('url_suffixes');
   foreach (\Drupal::languageManager()->getLanguages() as $language) {
     // The suffix for this language should be updated if it's not assigned yet.
@@ -40,16 +44,4 @@ function oe_multilingual_url_suffix_list_update() {
     // Otherwise we keep the configured suffix.
   }
   $config->set('url_suffixes', $suffixes)->save(TRUE);
-}
-
-/**
- * Implements hook_config_schema_info_alter().
- */
-function oe_multilingual_url_suffix_config_schema_info_alter(&$definitions) {
-  if (isset($definitions['language.negotiation']['mapping']['url']['mapping']['prefixes'])) {
-    $suffixes_definition = $definitions['language.negotiation']['mapping']['url']['mapping']['prefixes'];
-    $suffixes_definition['label'] = 'Path suffix configuration';
-    $suffixes_definition['sequence']['label'] = 'Path suffix';
-    $definitions['language.negotiation']['mapping']['url_suffixes'] = $suffixes_definition;
-  }
 }

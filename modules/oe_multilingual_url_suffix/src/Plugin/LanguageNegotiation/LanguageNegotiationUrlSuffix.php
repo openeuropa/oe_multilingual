@@ -8,7 +8,7 @@ use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class LanguageNegotiationUrlSuffix.
+ * Class LanguageNegotiationUrlSuffix for identifying language via URL suffix.
  *
  * @LanguageNegotiation(
  *   id = \Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix::METHOD_ID,
@@ -39,7 +39,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl {
   public function getLangcode(Request $request = NULL) {
     $langcode = NULL;
 
-    $config = $this->config->get('language.negotiation')->get('url_suffixes');
+    $config = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes');
     if ($request && $config) {
       $request_path = urldecode(trim($request->getPathInfo(), '/'));
       $parts = explode(static::SUFFIX_DELIMITER, $request_path);
@@ -59,7 +59,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl {
    * {@inheritdoc}
    */
   public function processInbound($path, Request $request) {
-    $config = $this->config->get('language.negotiation')->get('url_suffixes');
+    $config = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes');
     if ($config) {
       $parts = explode(static::SUFFIX_DELIMITER, trim($path, '/'));
       $suffix = array_pop($parts);
@@ -88,7 +88,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl {
     }
 
     // Append suffix to path.
-    $config = $this->config->get('language.negotiation')->get('url_suffixes');
+    $config = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes');
     if (isset($config[$options['language']->getId()])) {
       $path .= static::SUFFIX_DELIMITER . $config[$options['language']->getId()];
     }
