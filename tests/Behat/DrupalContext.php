@@ -8,9 +8,13 @@ use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\TableNode;
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Language\LanguageInterface;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Drupal\node\Entity\NodeType;
+use Drupal\oe_multilingual\LanguageNegotiationSetter;
+use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix;
 
 /**
  * Class DrupalContext.
@@ -313,6 +317,30 @@ class DrupalContext extends RawDrupalContext {
    */
   public function setUpLanguageNegotiationSuffix(): void {
     \Drupal::service('module_installer')->install(['oe_multilingual_url_suffix']);
+
+    /** @var \Drupal\oe_multilingual\LanguageNegotiationSetterInterface $setter */
+    $setter = \Drupal::service('oe_multilingual.language_negotiation_setter');
+
+    $config = \Drupal::configFactory()->get(LanguageNegotiationSetter::CONFIG_NAME);
+
+    // Replace the default prefix URL negotiator with our suffix Url negotiator
+    // on the interface negotiation methods.
+    $enabled_interface_methods = $config->get('negotiation.' . LanguageInterface::TYPE_INTERFACE . '.enabled');
+    $enabled_interface_methods[LanguageNegotiationUrlSuffix::METHOD_ID] = $enabled_interface_methods[LanguageNegotiationUrl::METHOD_ID] ?? -19;
+    unset($enabled_interface_methods[LanguageNegotiationUrl::METHOD_ID]);
+    $this->configContext->setConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_INTERFACE . '.enabled', $enabled_interface_methods);
+    $this->configContext->setConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_INTERFACE . '.method_weights', $enabled_interface_methods);
+
+    // Replace the default prefix URL negotiator with our suffix Url negotiator
+    // on the content negotiation methods.
+    $enabled_content_methods = $config->get('negotiation.' . LanguageInterface::TYPE_CONTENT . '.enabled');
+    $enabled_content_methods[LanguageNegotiationUrlSuffix::METHOD_ID] = $enabled_content_methods[LanguageNegotiationUrl::METHOD_ID] ?? -19;
+    unset($enabled_content_methods[LanguageNegotiationUrl::METHOD_ID]);
+    $this->configContext->setConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_CONTENT . '.enabled', $enabled_content_methods);
+    $this->configContext->setConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_CONTENT . '.method_weights', $enabled_content_methods);
+
+    $setter->setContentSettings($enabled_content_methods);
+
   }
 
   /**
