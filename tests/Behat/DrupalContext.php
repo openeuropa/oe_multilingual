@@ -318,9 +318,6 @@ class DrupalContext extends RawDrupalContext {
   public function setUpLanguageNegotiationSuffix(): void {
     \Drupal::service('module_installer')->install(['oe_multilingual_url_suffix']);
 
-    /** @var \Drupal\oe_multilingual\LanguageNegotiationSetterInterface $setter */
-    $setter = \Drupal::service('oe_multilingual.language_negotiation_setter');
-
     $config = \Drupal::configFactory()->get(LanguageNegotiationSetter::CONFIG_NAME);
 
     // Replace the default prefix URL negotiator with our suffix Url negotiator
@@ -338,9 +335,6 @@ class DrupalContext extends RawDrupalContext {
     unset($enabled_content_methods[LanguageNegotiationUrl::METHOD_ID]);
     $this->configContext->setConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_CONTENT . '.enabled', $enabled_content_methods);
     $this->configContext->setConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_CONTENT . '.method_weights', $enabled_content_methods);
-
-    $setter->setContentSettings($enabled_content_methods);
-
   }
 
   /**

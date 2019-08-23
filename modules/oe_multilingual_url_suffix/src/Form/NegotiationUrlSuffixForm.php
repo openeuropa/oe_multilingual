@@ -10,7 +10,7 @@ use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotia
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class NegotiationUrlSuffixForm.
+ * Configure the URL suffixes language negotiation method for this site.
  *
  * @package Drupal\oe_multilingual_url_suffix\Form
  */
