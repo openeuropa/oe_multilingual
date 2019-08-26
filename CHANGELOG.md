@@ -1,10 +1,18 @@
 # Change Log
 
+## [1.1.2](https://github.com/openeuropa/oe_multilingual/tree/1.1.2) (2019-08-26)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.1.1...1.1.2)
+
+**Merged pull requests:**
+
+- OPENEUROPA-2147: Implementation of third approach with local import translations. [\#82](https://github.com/openeuropa/oe_multilingual/pull/82) ([sergepavle](https://github.com/sergepavle))
+
 ## [1.1.1](https://github.com/openeuropa/oe_multilingual/tree/1.1.1) (2019-07-02)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.1.0...1.1.1)
 
 **Merged pull requests:**
 
+- Release 1.1.1 [\#76](https://github.com/openeuropa/oe_multilingual/pull/76) ([nagyad](https://github.com/nagyad))
 - OPENEUROPA-2031: Blacklist language selection on private files. [\#75](https://github.com/openeuropa/oe_multilingual/pull/75) ([upchuk](https://github.com/upchuk))
 
 ## [1.1.0](https://github.com/openeuropa/oe_multilingual/tree/1.1.0) (2019-06-25)
