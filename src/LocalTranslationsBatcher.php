@@ -4,12 +4,16 @@ declare(strict_types = 1);
 
 namespace Drupal\oe_multilingual;
 
+use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\Extension\ModuleExtensionList;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ProfileExtensionList;
 use Drupal\Core\Extension\ThemeExtensionList;
 use Drupal\Core\Extension\ThemeHandlerInterface;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\locale\Gettext;
 
 /**
  * Creates the batches for importing the local translations.
@@ -18,6 +22,9 @@ use Drupal\Core\Language\LanguageManagerInterface;
  * extension by specifying the location of the strings inside its info file.
  */
 class LocalTranslationsBatcher {
+
+  use StringTranslationTrait;
+  use DependencySerializationTrait;
 
   /**
    * The module handler.
@@ -62,6 +69,13 @@ class LocalTranslationsBatcher {
   protected $profileExtensionList;
 
   /**
+   * The file system service.
+   *
+   * @var \Drupal\Core\File\FileSystemInterface
+   */
+  protected $fileSystem;
+
+  /**
    * LocalTranslationsBatcher constructor.
    *
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
@@ -76,14 +90,17 @@ class LocalTranslationsBatcher {
    *   The theme extensions list.
    * @param \Drupal\Core\Extension\ProfileExtensionList $profileExtensionList
    *   The profile extensions list.
+   * @param \Drupal\Core\File\FileSystemInterface $fileSystem
+   *   The file system service.
    */
-  public function __construct(ModuleHandlerInterface $moduleHandler, ThemeHandlerInterface $themeHandler, LanguageManagerInterface $languageManager, ModuleExtensionList $moduleExtensionList, ThemeExtensionList $themeExtensionList, ProfileExtensionList $profileExtensionList) {
+  public function __construct(ModuleHandlerInterface $moduleHandler, ThemeHandlerInterface $themeHandler, LanguageManagerInterface $languageManager, ModuleExtensionList $moduleExtensionList, ThemeExtensionList $themeExtensionList, ProfileExtensionList $profileExtensionList, FileSystemInterface $fileSystem) {
     $this->moduleHandler = $moduleHandler;
     $this->themeHandler = $themeHandler;
     $this->languageManager = $languageManager;
     $this->moduleExtensionList = $moduleExtensionList;
     $this->themeExtensionList = $themeExtensionList;
     $this->profileExtensionList = $profileExtensionList;
+    $this->fileSystem = $fileSystem;
   }
 
   /**
@@ -95,10 +112,8 @@ class LocalTranslationsBatcher {
    * @see \Drupal\locale\Form\TranslationStatusForm::submitForm()
    */
   public function createBatch(array $langcodes = []): void {
-    $this->moduleHandler->loadInclude('locale', 'fetch.inc');
-    $this->moduleHandler->loadInclude('locale', 'bulk.inc');
-    $this->moduleHandler->loadInclude('locale', 'translation.inc');
     $this->moduleHandler->loadInclude('locale', 'inc', 'locale.compare');
+    $this->moduleHandler->loadInclude('locale', 'inc', 'locale.bulk');
 
     if (!$langcodes) {
       $languages = $this->languageManager->getLanguages();
@@ -113,18 +128,29 @@ class LocalTranslationsBatcher {
     }
 
     $extensions = $this->getExtensionsToTranslate();
-    if (!$extensions) {
+    if (!$extensions || !$langcodes) {
       return;
     }
 
-    locale_translation_flush_projects();
-    locale_translation_check_projects_local($extensions, $langcodes);
-    $options = _locale_translation_default_update_options();
-    $batch = locale_translation_batch_fetch_build($extensions, $langcodes, $options);
-    batch_set($batch);
-    if ($batch = locale_config_batch_update_components($options, $langcodes)) {
-      batch_set($batch);
+    // Build operations for local translation batch import.
+    $operations = [];
+    foreach ($extensions as $extension) {
+      $operations[] = [
+        [$this, 'importProjectPoFiles'],
+        [$extension, $langcodes],
+      ];
     }
+
+    $batch = [
+      'operations' => $operations,
+      'title' => $this->t('Importing translations.'),
+      'progress_message' => '',
+      'error_message' => $this->t('Error importing translation files'),
+      'file' => drupal_get_path('module', 'locale') . '/locale.batch.inc',
+    ];
+
+    batch_set($batch);
+
   }
 
   /**
@@ -151,7 +177,30 @@ class LocalTranslationsBatcher {
       $extensions[] = $name;
     }
 
-    return $extensions;
+    return array_intersect_key(locale_translation_project_list(), array_combine($extensions, $extensions));
+  }
+
+  /**
+   * Implements callback_batch_operation().
+   *
+   * Import po files of the project for allowed languages.
+   */
+  public function importProjectPoFiles($extension, $langcodes, &$context): void {
+    $files = file_scan_directory(
+      $this->fileSystem->dirname($extension['info']['interface translation server pattern']),
+      '/.*-(' . implode('|', $langcodes) . ')\.po/'
+    );
+    foreach ($files as $file) {
+      preg_match('/(' . implode('|', $langcodes) . ')$/', $file->name, $matches);
+      $file->langcode = $matches[0];
+      Gettext::fileToDatabase($file, [
+        'overwrite_options' => [
+          'not_customized' => TRUE,
+        ],
+      ]);
+
+      $context['message'] = $this->t('Imported translation for %project (%langcode).', ['%project' => $extension['name'], '%langcode' => $file->langcode]);
+    }
   }
 
 }
