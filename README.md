@@ -8,7 +8,7 @@ The OpenEuropa Multilingual module offers default multilingual features for the 
 - Provide an optional language switcher block on the [OpenEuropa Theme][1] site header region
 - Make sure that the administrative interface is always set to English
 - Allow English to be translated so that the default English copy may be fixed or improved, if necessary
-- Configure site to follow [IPG rules for Language Negotiation](http://ec.europa.eu/ipg/print/print_all_content/index_en.htm#3.0), using the path suffix. _(optional)_
+- Configure the site to follow [IPG rules for Language Negotiation](http://ec.europa.eu/ipg/print/print_all_content/index_en.htm#3.0), using the path suffix. _(optional)_
 
 **Table of contents:**
 
@@ -210,6 +210,10 @@ After enabling the module:
 5. Save new order
 6. If necessary configure the `URL suffix` method by clicking on `Configure`
 7. Rebuild cache
+
+### Caveats against URL suffix
+
+It is strongly recommended to avoid an usage of the language suffix separator (`_`) in their pathauto patterns/aliases as it might lead to unexpected behaviors.
 
 ## Contributing
 Please read [the full documentation](https://github.com/openeuropa/openeuropa) for details on our code of conduct, and the process for submitting pull requests to us.
