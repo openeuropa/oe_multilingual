@@ -12,9 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @LanguageNegotiation(
  *   id = \Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix::METHOD_ID,
- *   types = {\Drupal\Core\Language\LanguageInterface::TYPE_INTERFACE,
- *   \Drupal\Core\Language\LanguageInterface::TYPE_CONTENT,
- *   \Drupal\Core\Language\LanguageInterface::TYPE_URL},
+ *   types = {
+ *     \Drupal\Core\Language\LanguageInterface::TYPE_INTERFACE,
+ *     \Drupal\Core\Language\LanguageInterface::TYPE_CONTENT,
+ *     \Drupal\Core\Language\LanguageInterface::TYPE_URL
+ *   },
  *   weight = -10,
  *   name = @Translation("URL suffix"),
  *   description = @Translation("Language from the URL (Path suffix)."),
@@ -26,7 +28,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl {
   /**
    * The language negotiation method id.
    */
-  const METHOD_ID = 'language-url-suffix';
+  const METHOD_ID = 'oe-multilingual-url-suffix-negotiation-method';
 
   /**
    * The suffix delimiter.
@@ -40,15 +42,22 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl {
     $langcode = NULL;
 
     $config = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes');
-    if ($request && $config) {
+    if ($request && $this->languageManager && $config) {
       $request_path = urldecode(trim($request->getPathInfo(), '/'));
       $parts = explode(static::SUFFIX_DELIMITER, $request_path);
       $suffix = array_pop($parts);
 
-      // Search suffix within configs.
-      $negotiated_language = array_search($suffix, $config);
+      // Search suffix within added languages.
+      $negotiated_language = FALSE;
+      foreach ($this->languageManager->getLanguages() as $language) {
+        if (isset($config[$language->getId()]) && $config[$language->getId()] == $suffix) {
+          $negotiated_language = $language;
+          break;
+        }
+      }
+
       if ($negotiated_language) {
-        $langcode = $negotiated_language;
+        $langcode = $negotiated_language->getId();
       }
     }
 
@@ -59,12 +68,12 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl {
    * {@inheritdoc}
    */
   public function processInbound($path, Request $request) {
-    $config = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes');
-    if ($config) {
+    $url_suffixes = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes');
+    if (!empty($url_suffixes) && is_array($url_suffixes)) {
       $parts = explode(static::SUFFIX_DELIMITER, trim($path, '/'));
       $suffix = array_pop($parts);
 
-      if (array_search($suffix, $config)) {
+      if (array_search($suffix, $url_suffixes)) {
         $path = '/' . implode(static::SUFFIX_DELIMITER, $parts);
       }
     }

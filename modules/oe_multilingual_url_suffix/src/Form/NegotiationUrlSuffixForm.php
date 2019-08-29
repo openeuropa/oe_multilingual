@@ -11,8 +11,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Configure the URL suffixes language negotiation method for this site.
- *
- * @package Drupal\oe_multilingual_url_suffix\Form
  */
 class NegotiationUrlSuffixForm extends ConfigFormBase {
 
@@ -50,7 +48,7 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'language_negotiation_configure_url_suffix_form';
+    return 'oe_multilingual_url_suffix_language_negotiation_configure';
   }
 
   /**
@@ -78,10 +76,17 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
     $languages = $this->languageManager->getLanguages();
     $suffixes = $config->get('url_suffixes');
     foreach ($languages as $langcode => $language) {
-      $t_args = ['%language' => $language->getName(), '%langcode' => $language->getId()];
+      $t_args = [
+        '%language' => $language->getName(),
+        '%langcode' => $language->getId(),
+        '%default_language' => '',
+      ];
+      if ($language->isDefault()) {
+        $t_args['%default_language'] = ' (Default language)';
+      }
       $form['suffix'][$langcode] = [
         '#type' => 'textfield',
-        '#title' => $language->isDefault() ? $this->t('%language (%langcode) path suffix (Default language)', $t_args) : $this->t('%language (%langcode) path suffix', $t_args),
+        '#title' => $this->t('%language (%langcode) path suffix %default_language', $t_args),
         '#maxlength' => 64,
         '#default_value' => isset($suffixes[$langcode]) ? $suffixes[$langcode] : substr($langcode, 0, 2),
         '#field_prefix' => $base_url . '/index' . LanguageNegotiationUrlSuffix::SUFFIX_DELIMITER,
@@ -113,7 +118,7 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
       elseif (strpos($value, LanguageNegotiationUrlSuffix::SUFFIX_DELIMITER) !== FALSE) {
         // Throw a form error if the string contains an underscore,
         // which would not work.
-        $form_state->setErrorByName("suffix][$langcode", $this->t('The suffix may not contain a underscore.'));
+        $form_state->setErrorByName("suffix][$langcode", $this->t('The suffix may not contain the delimiter character: "@delimiter".', ['@delimiter' => LanguageNegotiationUrlSuffix::SUFFIX_DELIMITER]));
       }
       elseif (isset($count[$value]) && $count[$value] > 1) {
         // Throw a form error if there are two languages with the same suffix.
