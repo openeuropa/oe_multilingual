@@ -26,22 +26,3 @@ use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotia
 function oe_multilingual_url_suffix_language_types_info_alter(array &$language_types) {
   $language_types[LanguageInterface::TYPE_URL]['fixed'] = [LanguageNegotiationUrlSuffix::METHOD_ID, LanguageNegotiationUrlFallback::METHOD_ID];
 }
-
-/**
- * Update the list of url suffixes from the installed languages.
- *
- * @see \language_negotiation_url_prefixes_update()
- */
-function oe_multilingual_url_suffix_list_update() {
-  $config = \Drupal::configFactory()->getEditable('oe_multilingual_url_suffix.settings');
-  $suffixes = $config->get('url_suffixes');
-  foreach (\Drupal::languageManager()->getLanguages() as $language) {
-    // The suffix for this language should be updated if it's not assigned yet.
-    if (empty($suffixes[$language->getId()])) {
-      // Also make sure that Portuguese language prefix is set to "pt".
-      $suffixes[$language->getId()] = $language->getId() === 'pt-pt' ? 'pt' : $language->getId();
-    }
-    // Otherwise we keep the configured suffix.
-  }
-  $config->set('url_suffixes', $suffixes)->save(TRUE);
-}
