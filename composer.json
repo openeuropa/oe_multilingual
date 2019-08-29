@@ -21,7 +21,7 @@
         "openeuropa/behat-transformation-context" : "~0.1",
         "openeuropa/code-review": "~1.0@beta",
         "openeuropa/drupal-core-require-dev": "^8.7",
-        "openeuropa/task-runner": "^1.0.0-beta6",
+        "openeuropa/task-runner": "~1.0.0-beta6",
         "phpunit/phpunit": "~6.0",
         "symfony/browser-kit": "~3.0 || ~4.0"
     },
