@@ -7,7 +7,6 @@ The OpenEuropa Multilingual module offers default multilingual features for the 
 - Enable all 24 official EU languages
 - Provide an optional language switcher block on the [OpenEuropa Theme][1] site header region
 - Make sure that the administrative interface is always set to English
-- (TEMPORARILY REMOVED) Allow English to be translated so that the default English copy may be fixed or improved, if necessary.
 
 **Table of contents:**
 
@@ -185,12 +184,10 @@ In order to install the OpenEuropa Multilingual demo module follow [the instruct
 
 ## Known Issues
 
-##### Enabling English translations allows configuration changes to override locale translations
+##### Enabling string English string translation
 
-Having English translations available had an unintended consequence: when making changes to translatable config entities, 
-if the strings of this config entities were also available on locale they would get saved as translations. The functionality
-was removed on OPENEUROPA-2111 and a solution is currently being investigated on OPENEUROPA-2244
-
+Enabling English string translation can have unintended consequences when making changes to translatable configuration entities.
+If these strings are available in locale, the change would get saved as EN translations.
  
 
 ## Contributing
