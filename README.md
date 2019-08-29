@@ -201,13 +201,15 @@ In order to use this feature you need to enable the OpenEuropa Multilingual URL 
 ./vendor/bin/drush en oe_multilingual_url_suffix -y
 ```
 
-After module enabling:
+After enabling the module:
 
-1. Go to `admin/config/regional/language/detection` as admin;
-2. Inside "Interface text language detection" and "Content language detection" disable `URL` method.
-3. Enable `URL suffix` for "Interface text language detection" and "Content language detection";
-4. Make sure that `URL suffix` located on top of list or after `Administration pages` negotiation method
-5. Click on `Configure` for `URL suffix` and configure the language suffixes.
+1. Go to `admin/config/regional/language/detection`
+2. Disable the `URL` method in `Interface text language detection` and `Content language detection`;
+3. Enable the `URL suffix` method in `Interface text language detection` and `Content language detection`;
+4. Make sure that the `URL suffix` method is located on top of list but after the `Administration pages` negotiation method, if you use it
+5. Save new order
+6. If necessary configure the `URL suffix` method by clicking on `Configure`
+7. Rebuild cache
 
 ## Contributing
 Please read [the full documentation](https://github.com/openeuropa/openeuropa) for details on our code of conduct, and the process for submitting pull requests to us.
