@@ -40,7 +40,9 @@ class InterfaceTranslationContext extends RawDrupalContext {
 
     $source = $locale_storage->findString(['source' => $string]);
     if (!$source instanceof SourceString) {
-      throw new \Exception(sprintf('Missing string to translate: %s', $source));
+      // We need to make sure the string is available to be translated.
+      $source = new SourceString();
+      $source->setString($string)->setStorage($locale_storage)->save();
     }
 
     // Backup existing translation.
