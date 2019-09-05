@@ -7,7 +7,6 @@ The OpenEuropa Multilingual module offers default multilingual features for the 
 - Enable all 24 official EU languages
 - Provide an optional language switcher block on the [OpenEuropa Theme][1] site header region
 - Make sure that the administrative interface is always set to English
-- Allow English to be translated so that the default English copy may be fixed or improved, if necessary
 
 **Table of contents:**
 
@@ -182,6 +181,14 @@ In order to install the OpenEuropa Multilingual demo module follow [the instruct
 ```bash
 ./vendor/bin/drush en oe_multilingual_demo -y
 ```
+
+## Known Issues
+
+##### Enabling string English string translation
+
+Enabling English string translation can have unintended consequences when making changes to translatable configuration entities.
+If these strings are available in locale, the change would get saved as EN translations.
+ 
 
 ## Contributing
 

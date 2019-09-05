@@ -32,7 +32,6 @@ function oe_multilingual_install() {
   \Drupal::configFactory()
     ->getEditable('locale.settings')
     ->set('translation.import_enabled', FALSE)
-    ->set('translate_english', TRUE)
     ->save();
 
   // Make sure that English language prefix is set to "en".

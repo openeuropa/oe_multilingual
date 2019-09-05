@@ -93,8 +93,8 @@ class InstallationTest extends KernelTestBase {
     // Ensure that remote translations downloading is disabled by default.
     $this->assertEquals(FALSE, $config->get('translation.import_enabled'));
 
-    // Ensure that the English language is translatable.
-    $this->assertEquals(TRUE, $config->get('translate_english'));
+    // Ensure that the English language is not translatable.
+    $this->assertEquals(FALSE, $config->get('translate_english'));
 
     $interface_settings = [
       LanguageNegotiationAdmin::METHOD_ID => -20,
