@@ -1,10 +1,18 @@
 # Change Log
 
+## [1.1.4](https://github.com/openeuropa/oe_multilingual/tree/1.1.4) (2019-09-23)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.1.3...1.1.4)
+
+**Merged pull requests:**
+
+- OPENEUROPA-2111: Remove English translations. [\#86](https://github.com/openeuropa/oe_multilingual/pull/86) ([imanoleguskiza](https://github.com/imanoleguskiza))
+
 ## [1.1.3](https://github.com/openeuropa/oe_multilingual/tree/1.1.3) (2019-08-26)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.1.2...1.1.3)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for release 1.1.3. [\#85](https://github.com/openeuropa/oe_multilingual/pull/85) ([sergepavle](https://github.com/sergepavle))
 - OPENEUROPA-2147: Hotfix regarding changes in service. [\#84](https://github.com/openeuropa/oe_multilingual/pull/84) ([sergepavle](https://github.com/sergepavle))
 
 ## [1.1.2](https://github.com/openeuropa/oe_multilingual/tree/1.1.2) (2019-08-26)
