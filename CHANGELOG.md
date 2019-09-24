@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- OPENEUROPA-1766: Create release 1.1.4. [\#89](https://github.com/openeuropa/oe_multilingual/pull/89) ([voidtek](https://github.com/voidtek))
 - OPENEUROPA-2111: Remove English translations. [\#86](https://github.com/openeuropa/oe_multilingual/pull/86) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [1.1.3](https://github.com/openeuropa/oe_multilingual/tree/1.1.3) (2019-08-26)
