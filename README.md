@@ -211,7 +211,7 @@ After enabling the module:
 6. If necessary configure the `URL suffix` method by clicking on `Configure`
 7. Rebuild cache
 
-### Caveats against URL suffix
+### URL suffix usage
 
 It is strongly recommended to avoid an usage of the language suffix separator (`_`) in their pathauto patterns/aliases as it might lead to unexpected behaviors.
 
