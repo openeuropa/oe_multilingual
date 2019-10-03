@@ -70,9 +70,15 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl {
   public function processInbound($path, Request $request) {
     $url_suffixes = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes');
     if (!empty($url_suffixes) && is_array($url_suffixes)) {
+
+      // Split the path by the defined delimiter.
       $parts = explode(static::SUFFIX_DELIMITER, trim($path, '/'));
+
+      // Suffix should be the last part on the path.
       $suffix = array_pop($parts);
 
+      // If the suffix is one of the configured language suffix, rebuild the
+      // path to remove it.
       if (array_search($suffix, $url_suffixes)) {
         $path = '/' . implode(static::SUFFIX_DELIMITER, $parts);
       }
