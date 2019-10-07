@@ -110,14 +110,14 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
       $value = $form_state->getValue(['suffix', $langcode]);
       if ($value === '') {
         // Throw a form error if the suffix is blank for any language,
-        // although it is required for selected negotiation type.
+        // as it is required for selected negotiation type.
         $form_state->setErrorByName("suffix][$langcode", $this->t('The suffix may only be left blank for the <a href=":url">selected detection fallback language.</a>', [
           ':url' => $this->getUrlGenerator()->generate('language.negotiation_selected'),
         ]));
       }
       elseif (strpos($value, LanguageNegotiationUrlSuffix::SUFFIX_DELIMITER) !== FALSE) {
-        // Throw a form error if the string contains an underscore,
-        // which would not work.
+        // Throw a form error if the string contains de configured delimiter,
+        // as this would not work.
         $form_state->setErrorByName("suffix][$langcode", $this->t('The suffix may not contain the delimiter character: "@delimiter".', ['@delimiter' => LanguageNegotiationUrlSuffix::SUFFIX_DELIMITER]));
       }
       elseif (isset($count[$value]) && $count[$value] > 1) {

@@ -8,7 +8,7 @@ use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class LanguageNegotiationUrlSuffix for identifying language via URL suffix.
+ * Identifies the language via a URL suffix.
  *
  * @LanguageNegotiation(
  *   id = \Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix::METHOD_ID,
@@ -50,7 +50,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl {
       // Search suffix within added languages.
       $negotiated_language = FALSE;
       foreach ($this->languageManager->getLanguages() as $language) {
-        if (isset($config[$language->getId()]) && $config[$language->getId()] == $suffix) {
+        if (isset($config[$language->getId()]) && $config[$language->getId()] === $suffix) {
           $negotiated_language = $language;
           break;
         }

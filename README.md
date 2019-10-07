@@ -196,7 +196,7 @@ If these strings are available in locale, the change would get saved as EN trans
 
 This is optional and should be done only if your website should follow the [IPG rules](http://ec.europa.eu/ipg/print/print_all_content/index_en.htm#3.0) for language negotiation.
 
-In order to use this feature you need to enable the OpenEuropa Multilingual URL Suffix module by following [this instructions][10] or via [Drush][11] by running:
+In order to use this feature you need to enable the OpenEuropa Multilingual URL Suffix module by following [these instructions][10] or via [Drush][11] by running:
 ```bash
 ./vendor/bin/drush en oe_multilingual_url_suffix -y
 ```
@@ -213,7 +213,9 @@ After enabling the module:
 
 ### URL suffix usage
 
-It is strongly recommended to avoid an usage of the language suffix separator (`_`) in their pathauto patterns/aliases as it might lead to unexpected behaviors.
+- It is strongly recommended to avoid an usage of the language suffix separator (`_`) in their pathauto patterns/aliases as it might lead to unexpected behaviors.
+
+- Drush user:login(uli) implementation does not currently work with oe_multilingual_url_suffix module. The following [patch](https://patch-diff.githubusercontent.com/raw/drush-ops/drush/pull/4209.diff) is required to correctly generate the url.
 
 ## Contributing
 Please read [the full documentation](https://github.com/openeuropa/openeuropa) for details on our code of conduct, and the process for submitting pull requests to us.

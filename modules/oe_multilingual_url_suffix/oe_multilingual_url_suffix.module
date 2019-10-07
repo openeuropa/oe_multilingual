@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains hooks to manipulate language links for selection page.
+ * The OpenEuropa Multilingual URL suffix module.
  */
 
 declare(strict_types = 1);
@@ -14,12 +14,9 @@ use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotia
 /**
  * Implements hook_language_types_info_alter().
  *
- * This implemented hook will make Drupal aware of a new method
- * of determining the Url language and will make the Url Suffix negotiator
- * behave the same way as the core Url negotiator.
- *
- * For more info:
- * https://www.drupal.org/docs/8/multilingual/enable-language-negotiation.
+ * Fixes the suffix-based language negotiation plugin for the URL type of
+ * language. This basically changes the default URL-based language negotiation
+ * plugin set by core (LanguageNegotiationUrl).
  *
  * @see \language_language_types_info_alter()
  */
