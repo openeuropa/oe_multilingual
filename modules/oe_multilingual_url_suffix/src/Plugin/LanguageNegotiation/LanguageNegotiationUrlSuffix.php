@@ -106,10 +106,9 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl {
     $config = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes');
     if (isset($config[$options['language']->getId()])) {
       $path .= static::SUFFIX_DELIMITER . $config[$options['language']->getId()];
-    }
-
-    if ($bubbleable_metadata) {
-      $bubbleable_metadata->addCacheContexts(['languages:' . LanguageInterface::TYPE_URL]);
+      if ($bubbleable_metadata) {
+        $bubbleable_metadata->addCacheContexts(['languages:' . LanguageInterface::TYPE_URL]);
+      }
     }
 
     return $path;
