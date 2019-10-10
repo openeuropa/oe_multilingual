@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\oe_multilingual_url_suffix\Kernel;
 
 use Drupal\Core\Language\LanguageInterface;
@@ -8,7 +10,7 @@ use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotia
 use Drupal\Tests\language\Kernel\LanguageTestBase;
 
 /**
- * Tests the language of entity URLs.
+ * Tests the suffix-based language negotiation in entity URLs.
  *
  * @group language
  */
@@ -62,9 +64,9 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
   }
 
   /**
-   * Ensures that entity URLs in a language have the right language suffix.
+   * Ensures that entity URLs have the right language suffix.
    */
-  public function testEntityUrlLanguage() {
+  public function testEntityUrlLanguage(): void {
     $this->assertTrue(strpos($this->entity->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_en') !== FALSE);
     $this->assertTrue(strpos($this->entity->getTranslation('es')->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_es') !== FALSE);
     $this->assertTrue(strpos($this->entity->getTranslation('fr')->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_fr') !== FALSE);
@@ -73,7 +75,7 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
   /**
    * Creates a translated entity.
    */
-  protected function createTranslatableEntity() {
+  protected function createTranslatableEntity(): void {
     $this->entity = EntityTest::create();
     $this->entity->addTranslation('es', ['name' => 'name spanish']);
     $this->entity->addTranslation('fr', ['name' => 'name french']);

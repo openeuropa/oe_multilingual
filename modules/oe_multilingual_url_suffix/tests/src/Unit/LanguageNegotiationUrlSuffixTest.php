@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\oe_multilingual_url_suffix\Unit;
 
 use Drupal\Core\Language\LanguageInterface;
@@ -30,6 +32,13 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
   protected $user;
 
   /**
+   * Test languages.
+   *
+   * @var array
+   */
+  protected $languages = [];
+
+  /**
    * {@inheritdoc}
    */
   protected function setUp() {
@@ -43,18 +52,17 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
     $language_en->expects($this->any())
       ->method('getId')
       ->will($this->returnValue('en'));
-    $languages = [
+    $this->languages = [
       'de' => $language_de,
       'en' => $language_en,
     ];
-    $this->languages = $languages;
 
     // Create a language manager stub.
     $language_manager = $this->getMockBuilder('Drupal\language\ConfigurableLanguageManagerInterface')
       ->getMock();
     $language_manager->expects($this->any())
       ->method('getLanguages')
-      ->will($this->returnValue($languages));
+      ->will($this->returnValue($this->languages));
     $this->languageManager = $language_manager;
 
     // Create a user stub.
@@ -73,9 +81,16 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
   /**
    * Test url suffix language negotiation and outbound path processing.
    *
+   * @param string $suffix
+   *   The test suffix.
+   * @param array $suffixes
+   *   The configured suffixes.
+   * @param string $expected_langcode
+   *   The expected langcode.
+   *
    * @dataProvider providerTestPathSuffix
    */
-  public function testPathSuffix($suffix, $suffixes, $expected_langcode) {
+  public function testPathSuffix(string $suffix, array $suffixes, string $expected_langcode = NULL): void {
     $this->languageManager->expects($this->any())
       ->method('getCurrentLanguage')
       ->will($this->returnValue($this->languages[(in_array($expected_langcode, ['en', 'de'])) ? $expected_langcode : 'en']));
@@ -111,9 +126,9 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
    * Provides data for the url suffix test.
    *
    * @return array
-   *   An array of data for checking path suffix negotiation.
+   *   An array of data for checking the path suffix negotiation.
    */
-  public function providerTestPathSuffix() {
+  public function providerTestPathSuffix(): array {
     $url_suffix_configuration[] = [
       'suffix' => 'de',
       'suffixes' => [

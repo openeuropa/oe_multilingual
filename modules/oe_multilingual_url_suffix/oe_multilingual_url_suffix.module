@@ -16,7 +16,10 @@ use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotia
  *
  * Fixes the suffix-based language negotiation plugin for the URL type of
  * language. This basically changes the default URL-based language negotiation
- * plugin set by core (LanguageNegotiationUrl).
+ * plugin set by core (LanguageNegotiationUrl). This is needed because we cannot
+ * configure the language negotiation for the URL type via the UI (only content
+ * and interface). And there are subsystems in core (such as the language
+ * manager) that rely exclusively on the URL type.
  *
  * @see \language_language_types_info_alter()
  */

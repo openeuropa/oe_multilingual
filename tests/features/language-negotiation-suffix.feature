@@ -28,7 +28,7 @@ Feature: Language negotiation by suffix.
     When I am on "/pagina-de-teste_pt"
     Then I should see "Olá Mundo"
 
-  Scenario: As a privileged user I able to change the url suffix settings
+  Scenario: As a privileged user I am able to change the url suffix settings
     Given I am logged in as a user with the "administer languages, access administration pages, view the administration theme" permission
 
     When I am on "the url suffix settings page"

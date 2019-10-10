@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Drupal\Tests\oe_multilingual_url_suffix\Functional;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Tests\BrowserTestBase;
 
 /**
+ * Tests the suffix based language negotiation method.
+ *
  * @coversDefaultClass \Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix
  * @group language
  */
@@ -16,7 +20,7 @@ class LanguageNegotiationUrlSuffixTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'language',
     'node',
     'path',
@@ -24,7 +28,7 @@ class LanguageNegotiationUrlSuffixTest extends BrowserTestBase {
   ];
 
   /**
-   * The user.
+   * The logged-in user.
    *
    * @var \Drupal\user\Entity\User
    */
@@ -57,9 +61,11 @@ class LanguageNegotiationUrlSuffixTest extends BrowserTestBase {
   }
 
   /**
+   * Tests that inbound requests are able to be correctly negotiated.
+   *
    * @covers ::processInbound
    */
-  public function testDomain() {
+  public function testInbound(): void {
     // Check if paths that contain language suffix can be reached when
     // language is taken from the url suffix.
     $edit = [
