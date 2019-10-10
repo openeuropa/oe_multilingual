@@ -1,0 +1,7 @@
+oe_multilingual_url_suffix.negotiation_url_suffix:
+  path: '/admin/config/regional/language/detection/url-suffix'
+  defaults:
+    _form: 'Drupal\oe_multilingual_url_suffix\Form\NegotiationUrlSuffixForm'
+    _title: 'URL language detection configuration'
+  requirements:
+    _permission: 'administer languages'

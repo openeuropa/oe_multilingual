@@ -7,6 +7,8 @@ The OpenEuropa Multilingual module offers default multilingual features for the 
 - Enable all 24 official EU languages
 - Provide an optional language switcher block on the [OpenEuropa Theme][1] site header region
 - Make sure that the administrative interface is always set to English
+- Allow English to be translated so that the default English copy may be fixed or improved, if necessary
+- Configure the site to follow [IPG rules for Language Negotiation](http://ec.europa.eu/ipg/print/print_all_content/index_en.htm#3.0), using the path suffix. _(optional)_
 
 **Table of contents:**
 
@@ -189,9 +191,33 @@ In order to install the OpenEuropa Multilingual demo module follow [the instruct
 Enabling English string translation can have unintended consequences when making changes to translatable configuration entities.
 If these strings are available in locale, the change would get saved as EN translations.
  
+=======
+## Enabling URL suffix
+
+This is optional and should be done only if your website should follow the [IPG rules](http://ec.europa.eu/ipg/print/print_all_content/index_en.htm#3.0) for language negotiation.
+
+In order to use this feature you need to enable the OpenEuropa Multilingual URL Suffix module by following [these instructions][10] or via [Drush][11] by running:
+```bash
+./vendor/bin/drush en oe_multilingual_url_suffix -y
+```
+
+After enabling the module:
+
+1. Go to `admin/config/regional/language/detection`
+2. Disable the `URL` method in `Interface text language detection` and `Content language detection`;
+3. Enable the `URL suffix` method in `Interface text language detection` and `Content language detection`;
+4. Make sure that the `URL suffix` method is located on top of list but after the `Administration pages` negotiation method, if you use it
+5. Save new order
+6. If necessary configure the `URL suffix` method by clicking on `Configure`
+7. Rebuild cache
+
+### URL suffix usage
+
+- It is strongly recommended to avoid an usage of the language suffix separator (`_`) in their pathauto patterns/aliases as it might lead to unexpected behaviors.
+
+- Drush user:login(uli) implementation does not currently work with oe_multilingual_url_suffix module. The following [patch](https://patch-diff.githubusercontent.com/raw/drush-ops/drush/pull/4209.diff) is required to correctly generate the url.
 
 ## Contributing
-
 Please read [the full documentation](https://github.com/openeuropa/openeuropa) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning

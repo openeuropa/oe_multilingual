@@ -1,0 +1,10 @@
+oe_multilingual_url_suffix.settings:
+  type: config_object
+  label: 'Language detection method based on URL suffix'
+  mapping:
+    url_suffixes:
+      type: sequence
+      label: 'Path suffix configuration'
+      sequence:
+        type: string
+        label: 'Path suffix'

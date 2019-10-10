@@ -20,7 +20,7 @@ class InstallationTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'content_translation',
     'locale',
     'language',
