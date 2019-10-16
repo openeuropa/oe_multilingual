@@ -1,10 +1,19 @@
 # Change Log
 
+## [1.2.0](https://github.com/openeuropa/oe_multilingual/tree/1.2.0) (2019-10-16)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.1.4...1.2.0)
+
+**Merged pull requests:**
+
+- OPENEUROPA-1766: Revert mink fix. [\#91](https://github.com/openeuropa/oe_multilingual/pull/91) ([voidtek](https://github.com/voidtek))
+- OPENEUROPA-2097: Language negotiation using URL suffix. [\#79](https://github.com/openeuropa/oe_multilingual/pull/79) ([sergepavle](https://github.com/sergepavle))
+
 ## [1.1.4](https://github.com/openeuropa/oe_multilingual/tree/1.1.4) (2019-09-23)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.1.3...1.1.4)
 
 **Merged pull requests:**
 
+- OPENEUROPA-1766: Create release 1.1.4. [\#89](https://github.com/openeuropa/oe_multilingual/pull/89) ([voidtek](https://github.com/voidtek))
 - OPENEUROPA-2111: Remove English translations. [\#86](https://github.com/openeuropa/oe_multilingual/pull/86) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [1.1.3](https://github.com/openeuropa/oe_multilingual/tree/1.1.3) (2019-08-26)
