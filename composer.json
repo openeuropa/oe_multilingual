@@ -18,6 +18,7 @@
         "drupal/devel": "~1.2",
         "drupal/drupal-extension": "~4.0",
         "drush/drush": "~9.0@stable",
+        "guzzlehttp/guzzle": "~6.3",
         "openeuropa/behat-transformation-context" : "~0.1",
         "openeuropa/code-review": "~1.0@beta",
         "openeuropa/drupal-core-require-dev": "^8.7",
@@ -25,6 +26,9 @@
         "phpunit/phpunit": "~6.0",
         "symfony/browser-kit": "~3.0 || ~4.0"
     },
+    "_readme": [
+        "We explicitly require guzzlehttp/guzzle to allow tests after 'composer update --prefer-lowest' to complete successfully."
+    ],
     "scripts": {
         "post-install-cmd": "./vendor/bin/run drupal:site-setup",
         "post-update-cmd": "./vendor/bin/run drupal:site-setup"
@@ -61,9 +65,6 @@
         }
     },
     "config": {
-        "sort-packages": true,
-        "platform": {
-            "php": "7.1.9"
-        }
+        "sort-packages": true
     }
 }
