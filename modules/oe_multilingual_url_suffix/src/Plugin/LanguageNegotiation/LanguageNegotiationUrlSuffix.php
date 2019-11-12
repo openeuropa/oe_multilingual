@@ -136,10 +136,11 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
     $config = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes');
     if (isset($config[$options['language']->getId()])) {
 
-      // Ensure front-page path has the configured alias of the front-page.
-      $front_uri = $this->config->get('system.site')->get('page.front');
-      $front_alias = $this->aliasManager->getAliasByPath($front_uri);
+      // Ensure front-page path has the configured alias of the front-page
+      // in order to avoid links pointing to "/_[language_suffix]".
       if ($path === '/') {
+        $front_uri = $this->config->get('system.site')->get('page.front');
+        $front_alias = $this->aliasManager->getAliasByPath($front_uri);
         $path = $front_alias;
       }
 
