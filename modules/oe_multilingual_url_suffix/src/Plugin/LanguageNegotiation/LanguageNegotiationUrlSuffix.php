@@ -64,7 +64,6 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
     return new static($container->get('path.alias_manager'));
   }
 
-
   /**
    * {@inheritdoc}
    */

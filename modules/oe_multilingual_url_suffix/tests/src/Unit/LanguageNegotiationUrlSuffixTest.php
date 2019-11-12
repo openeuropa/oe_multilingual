@@ -25,6 +25,13 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
   protected $languageManager;
 
   /**
+   * The path alias manager.
+   *
+   * @var \Drupal\Core\Path\AliasManagerInterface
+   */
+  protected $aliasManager;
+
+  /**
    * The User.
    *
    * @var \Drupal\Core\Session\AccountInterface
@@ -42,7 +49,6 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
    * {@inheritdoc}
    */
   protected function setUp() {
-
     // Set up some languages to be used by the language-based path processor.
     $language_de = $this->getMock('\Drupal\Core\Language\LanguageInterface');
     $language_de->expects($this->any())
@@ -64,6 +70,10 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
       ->method('getLanguages')
       ->will($this->returnValue($this->languages));
     $this->languageManager = $language_manager;
+
+    $alias_manager = $this->getMockBuilder('\Drupal\Core\Path\AliasManagerInterface')
+      ->getMock();
+    $this->aliasManager = $alias_manager;
 
     // Create a user stub.
     $this->user = $this->getMockBuilder('Drupal\Core\Session\AccountInterface')
@@ -102,7 +112,7 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
     ]);
 
     $request = Request::create('/foo_' . $suffix, 'GET');
-    $method = new LanguageNegotiationUrlSuffix();
+    $method = new LanguageNegotiationUrlSuffix($this->aliasManager);
     $method->setLanguageManager($this->languageManager);
     $method->setConfig($config);
     $method->setCurrentUser($this->user);
