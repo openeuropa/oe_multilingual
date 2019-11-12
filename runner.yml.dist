@@ -24,6 +24,7 @@ drupal:
     - "./vendor/bin/drush en oe_multilingual -y"
     - "./vendor/bin/drush en oe_multilingual_demo -y"
     - "./vendor/bin/drush oe-multilingual:import-local-translations"
+    - "./vendor/bin/drush cr"
   settings:
     settings:
       file_scan_ignore_directories:
