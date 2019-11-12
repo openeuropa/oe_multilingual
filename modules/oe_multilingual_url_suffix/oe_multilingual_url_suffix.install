@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the module.
+ */
+
+declare(strict_types = 1);
+
+use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
+
+/**
+ * Implements hook_uninstall().
+ */
+function oe_multilingual_url_suffix_uninstall() {
+  /** @var \Drupal\oe_multilingual\LanguageNegotiationSetterInterface $setter */
+  $setter = \Drupal::service('oe_multilingual.language_negotiation_setter');
+
+  // Set language negotiation to URL prefix that is provided by core.
+  $setter->setInterfaceSettings([
+    LanguageNegotiationUrl::METHOD_ID => -19,
+  ]);
+
+  // Set language negotiation to URL prefix that is provided by core.
+  $setter->setContentSettings([
+    LanguageNegotiationUrl::METHOD_ID => -19,
+  ]);
+}
