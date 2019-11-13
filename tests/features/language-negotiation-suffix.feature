@@ -53,6 +53,7 @@ Feature: Language negotiation by suffix.
     Then I should see the error message 'The suffix for Spanish, es, is not unique.'
     Then I should see the error message 'The suffix for French, es, is not unique.'
 
+  @front-page
   Scenario: Language switcher should maintain front page alias in the links.
     Given I am logged in as a user with the "administer languages, access administration pages, view the administration theme, administer site configuration" permission
     And I am on "/admin/config/system/site-information"

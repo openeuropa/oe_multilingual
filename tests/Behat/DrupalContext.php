@@ -346,4 +346,13 @@ class DrupalContext extends RawDrupalContext {
     \Drupal::service('module_installer')->uninstall(['oe_multilingual_url_suffix']);
   }
 
+  /**
+   * Reset the front-page configuration.
+   *
+   * @AfterScenario @front-page
+   */
+  public function resetFrontPage(): void {
+    $this->configContext->setConfig('system.site', 'page.front', '/user/login');
+  }
+
 }
