@@ -5,11 +5,8 @@ declare(strict_types = 1);
 namespace Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation;
 
 use Drupal\Core\Language\LanguageInterface;
-use Drupal\Core\Path\AliasManagerInterface;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -28,7 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
  *   config_route_name = "oe_multilingual_url_suffix.negotiation_url_suffix"
  * )
  */
-class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements ContainerFactoryPluginInterface {
+class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl {
 
   /**
    * The language negotiation method id.
@@ -39,30 +36,6 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
    * The suffix delimiter.
    */
   const SUFFIX_DELIMITER = '_';
-
-  /**
-   * The path alias manager.
-   *
-   * @var \Drupal\Core\Path\AliasManagerInterface
-   */
-  protected $aliasManager;
-
-  /**
-   * Constructs an ContentLanguageBlock object.
-   *
-   * @param \Drupal\Core\Path\AliasManagerInterface $alias_manager
-   *   The path matcher.
-   */
-  public function __construct(AliasManagerInterface $alias_manager) {
-    $this->aliasManager = $alias_manager;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static($container->get('path.alias_manager'));
-  }
 
   /**
    * {@inheritdoc}
@@ -134,15 +107,6 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
     // Append suffix to path.
     $config = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes');
     if (isset($config[$options['language']->getId()])) {
-
-      // Ensure front-page path has the configured alias of the front-page
-      // in order to avoid links pointing to "/_[language_suffix]".
-      if ($path === '/') {
-        $front_uri = $this->config->get('system.site')->get('page.front');
-        $front_alias = $this->aliasManager->getAliasByPath($front_uri);
-        $path = $front_alias;
-      }
-
       $path .= static::SUFFIX_DELIMITER . $config[$options['language']->getId()];
       if ($bubbleable_metadata) {
         $bubbleable_metadata->addCacheContexts(['languages:' . LanguageInterface::TYPE_URL]);
