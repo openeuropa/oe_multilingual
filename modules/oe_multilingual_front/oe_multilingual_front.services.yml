@@ -1,0 +1,6 @@
+services:
+  oe_multilingual_path_processor_front:
+    class: Drupal\oe_multilingual_front\PathProcessorFront
+    tags:
+      - { name: path_processor_outbound, priority: 199 }
+    arguments: ['@config.factory', '@path.alias_manager']
