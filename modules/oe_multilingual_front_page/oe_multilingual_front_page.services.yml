@@ -1,5 +1,5 @@
 services:
-  oe_multilingual_path_processor_front:
+  oe_multilingual_path_processor_front_page:
     class: Drupal\oe_multilingual_front\PathProcessorFront
     tags:
       - { name: path_processor_outbound, priority: 199 }
