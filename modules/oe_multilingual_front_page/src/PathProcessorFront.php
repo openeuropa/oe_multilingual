@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\oe_multilingual_front;
+namespace Drupal\oe_multilingual_front_page;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Path\AliasManager;
@@ -46,14 +46,12 @@ class PathProcessorFront implements OutboundPathProcessorInterface {
       $path = $front_alias;
     }
 
-    if (isset($config[$options['language']->getId()])) {
-      // Ensure front-page path has the configured alias of the front-page
-      // in order to avoid links pointing to "/_[language_suffix]".
-      if ($path === '/') {
-        $front_uri = $this->config->get('system.site')->get('page.front');
-        $front_alias = $this->aliasManager->getAliasByPath($front_uri);
-        $path = $front_alias;
-      }
+    // Ensure front-page path has the configured alias of the front-page
+    // in order to avoid links pointing to "/_[language_suffix]".
+    if ($path === '/') {
+      $front_uri = $this->config->get('system.site')->get('page.front');
+      $front_alias = $this->aliasManager->getAliasByPath($front_uri);
+      $path = $front_alias;
     }
 
     return $path;
