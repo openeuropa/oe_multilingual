@@ -39,21 +39,13 @@ class PathProcessorFront implements OutboundPathProcessorInterface {
    * {@inheritdoc}
    */
   public function processOutbound($path, &$options = [], Request $request = NULL, BubbleableMetadata $bubbleable_metadata = NULL) {
-    // The special path '<front>' links to the default front page.
+    // Ensure front-page path has the configured alias of the front-page
+    // in order to avoid links pointing to "/_[language_suffix]".
     if (in_array($path, ['/<front>', '/'])) {
       $front_uri = $this->config->get('system.site')->get('page.front');
       $front_alias = $this->aliasManager->getAliasByPath($front_uri);
       $path = $front_alias;
     }
-
-    // Ensure front-page path has the configured alias of the front-page
-    // in order to avoid links pointing to "/_[language_suffix]".
-    if ($path === '/') {
-      $front_uri = $this->config->get('system.site')->get('page.front');
-      $front_alias = $this->aliasManager->getAliasByPath($front_uri);
-      $path = $front_alias;
-    }
-
     return $path;
   }
 
