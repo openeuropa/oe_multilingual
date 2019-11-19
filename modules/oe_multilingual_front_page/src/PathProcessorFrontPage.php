@@ -9,11 +9,9 @@ use Drupal\Core\Render\BubbleableMetadata;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Processes the inbound path by resolving it to the front page if empty.
- *
- * @todo - remove ::processOutbound() when we remove UrlGenerator::fromPath().
+ * Set the front page path.
  */
-class PathProcessorFront implements OutboundPathProcessorInterface {
+class PathProcessorFrontPage implements OutboundPathProcessorInterface {
 
   /**
    * A config factory for retrieving required config settings.
