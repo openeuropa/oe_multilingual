@@ -62,3 +62,5 @@ Feature: Language negotiation by suffix.
     When I am on "/"
     And I click "français"
     Then the url should match "/test-page_fr"
+    When I am on "/_fr"
+    Then the url should match "/page-de-test_fr"
