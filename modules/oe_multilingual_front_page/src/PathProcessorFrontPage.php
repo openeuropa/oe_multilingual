@@ -21,6 +21,13 @@ class PathProcessorFrontPage implements OutboundPathProcessorInterface {
   protected $config;
 
   /**
+   * Alias manager used to get front page alias.
+   *
+   * @var \Drupal\Core\Path\AliasManager
+   */
+  protected $aliasManager;
+
+  /**
    * Constructs a PathProcessorFront object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config
