@@ -71,10 +71,6 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
       ->will($this->returnValue($this->languages));
     $this->languageManager = $language_manager;
 
-    $alias_manager = $this->getMockBuilder('\Drupal\Core\Path\AliasManagerInterface')
-      ->getMock();
-    $this->aliasManager = $alias_manager;
-
     // Create a user stub.
     $this->user = $this->getMockBuilder('Drupal\Core\Session\AccountInterface')
       ->getMock();
@@ -112,7 +108,7 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
     ]);
 
     $request = Request::create('/foo_' . $suffix, 'GET');
-    $method = new LanguageNegotiationUrlSuffix($this->aliasManager);
+    $method = new LanguageNegotiationUrlSuffix();
     $method->setLanguageManager($this->languageManager);
     $method->setConfig($config);
     $method->setCurrentUser($this->user);

@@ -52,15 +52,3 @@ Feature: Language negotiation by suffix.
     And I press "Save configuration"
     Then I should see the error message 'The suffix for Spanish, es, is not unique.'
     Then I should see the error message 'The suffix for French, es, is not unique.'
-
-  @front-page
-  Scenario: Language switcher should maintain front page alias in the links.
-    Given I am logged in as a user with the "administer languages, access administration pages, view the administration theme, administer site configuration" permission
-    And I am on "/admin/config/system/site-information"
-    And I fill in "Default front page" with "/test-page"
-    And I press "Save configuration"
-    When I am on "/"
-    And I click "français"
-    Then the url should match "/test-page_fr"
-    When I am on "/_fr"
-    Then the url should match "/page-de-test_fr"
