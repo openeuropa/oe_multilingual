@@ -25,13 +25,6 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
   protected $languageManager;
 
   /**
-   * The path alias manager.
-   *
-   * @var \Drupal\Core\Path\AliasManagerInterface
-   */
-  protected $aliasManager;
-
-  /**
    * The User.
    *
    * @var \Drupal\Core\Session\AccountInterface
