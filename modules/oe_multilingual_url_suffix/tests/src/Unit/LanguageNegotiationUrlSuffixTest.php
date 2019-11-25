@@ -42,6 +42,7 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
    * {@inheritdoc}
    */
   protected function setUp() {
+
     // Set up some languages to be used by the language-based path processor.
     $language_de = $this->getMock('\Drupal\Core\Language\LanguageInterface');
     $language_de->expects($this->any())

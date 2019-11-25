@@ -52,3 +52,4 @@ Feature: Language negotiation by suffix.
     And I press "Save configuration"
     Then I should see the error message 'The suffix for Spanish, es, is not unique.'
     Then I should see the error message 'The suffix for French, es, is not unique.'
+
