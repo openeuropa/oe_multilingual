@@ -75,14 +75,14 @@ class PathProcessorFrontPageTest extends KernelTestBase {
     // Set node alias.
     $alias_storage->save($node->toUrl()->toString(), '/test-page', LanguageInterface::LANGCODE_NOT_SPECIFIED);
     $url = Url::fromRoute('<front>')->toString();
-    $this->assertEquals($url, '/test-page');
+    $this->assertEquals('/test-page', $url);
 
     // Update node alias.
     $node_alias = $alias_storage->load(['alias' => '/test-page']);
     $alias_storage->save('/node/' . $node->id(), '/new-alias', LanguageInterface::LANGCODE_NOT_SPECIFIED, $node_alias['pid']);
     // Check that the front page alias updates.
     $url = Url::fromRoute('<front>')->toString();
-    $this->assertEquals($url, '/new-alias');
+    $this->assertEquals('/new-alias', $url);
 
     // Remove node alias.
     $alias_storage->delete(['alias' => '/new-alias']);
@@ -96,11 +96,11 @@ class PathProcessorFrontPageTest extends KernelTestBase {
     $alias_storage->save($node->toUrl()->toString(), '/translatable-page', LanguageInterface::LANGCODE_NOT_SPECIFIED);
     $system_site_config->set('page.front', '/node/' . $node->id())->save();
     $url = Url::fromRoute('<front>')->toString();
-    $this->assertEquals($url, '/translatable-page');
+    $this->assertEquals('/translatable-page', $url);
     // Set the default language to French.
     $system_site_config->set('default_langcode', 'fr')->save();
     // Check that the alias is the same, as alias are language independent.
-    $this->assertEquals($url, '/translatable-page');
+    $this->assertEquals('/translatable-page', $url);
   }
 
 }
