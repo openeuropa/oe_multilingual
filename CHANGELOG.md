@@ -1,10 +1,21 @@
 # Change Log
 
+## [1.3.0](https://github.com/openeuropa/oe_multilingual/tree/1.3.0) (2019-11-25)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.2.0...1.3.0)
+
+**Merged pull requests:**
+
+-  OPENEUROPA-2420: Maintain front page alias with language suffix links. [\#95](https://github.com/openeuropa/oe_multilingual/pull/95) ([nagyad](https://github.com/nagyad))
+- OPENEUROPA-2258: Undo use of PHP 7.2. [\#94](https://github.com/openeuropa/oe_multilingual/pull/94) ([dxvargas](https://github.com/dxvargas))
+- OPENEUROPA-2464: Use PHP 7.1 in docker-compose. [\#93](https://github.com/openeuropa/oe_multilingual/pull/93) ([dxvargas](https://github.com/dxvargas))
+- OPENEUROPA-2258: Use PHP 7.2 in drone and docker image. [\#88](https://github.com/openeuropa/oe_multilingual/pull/88) ([dxvargas](https://github.com/dxvargas))
+
 ## [1.2.0](https://github.com/openeuropa/oe_multilingual/tree/1.2.0) (2019-10-16)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.1.4...1.2.0)
 
 **Merged pull requests:**
 
+- OPENEUROPA-1766: Release 1.2.0. [\#92](https://github.com/openeuropa/oe_multilingual/pull/92) ([dxvargas](https://github.com/dxvargas))
 - OPENEUROPA-1766: Revert mink fix. [\#91](https://github.com/openeuropa/oe_multilingual/pull/91) ([voidtek](https://github.com/voidtek))
 - OPENEUROPA-2097: Language negotiation using URL suffix. [\#79](https://github.com/openeuropa/oe_multilingual/pull/79) ([sergepavle](https://github.com/sergepavle))
 
