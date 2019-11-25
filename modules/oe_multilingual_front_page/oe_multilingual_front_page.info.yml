@@ -1,0 +1,8 @@
+name: 'OpenEuropa Multilingual Front page'
+type: module
+description: 'Provides handling for front page.'
+core: 8.x
+package: 'OpenEuropa'
+
+dependencies:
+  - drupal:redirect
