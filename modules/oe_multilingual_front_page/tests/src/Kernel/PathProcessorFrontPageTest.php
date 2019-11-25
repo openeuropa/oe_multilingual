@@ -45,27 +45,6 @@ class PathProcessorFrontPageTest extends KernelTestBase {
   ];
 
   /**
-   * A config for retrieving required config settings.
-   *
-   * @var \Drupal\Core\Config\Config
-   */
-  protected $config;
-
-  /**
-   * The alias storage service.
-   *
-   * @var \Drupal\Core\Path\AliasStorageInterface
-   */
-  protected $aliasStorage;
-
-  /**
-   * The alias manager.
-   *
-   * @var \Drupal\Core\Path\AliasManager
-   */
-  protected $aliasManager;
-
-  /**
    * {@inheritdoc}
    */
   protected function setUp() {
@@ -87,56 +66,41 @@ class PathProcessorFrontPageTest extends KernelTestBase {
    */
   public function testFrontPagePath() {
     $alias_storage = $this->container->get('path.alias_storage');
-    $alias_manager = $this->container->get('path.alias_manager');
+    $system_site = \Drupal::configFactory()->getEditable('system.site');
 
     $this->drupalCreateContentType(['type' => 'article', 'name' => 'Article']);
     $node = $this->drupalCreateNode(['type' => 'article', 'title' => 'Test page']);
     // Set the node as front page.
-    $this->config('system.site')->set('page.front', '/node/' . $node->id())->save();
+    $system_site->set('page.front', '/node/' . $node->id())->save();
     // Set node alias.
     $alias_storage->save($node->toUrl()->toString(), '/test-page', LanguageInterface::LANGCODE_NOT_SPECIFIED);
-    $node_alias = $alias_manager->getAliasByPath('/node/' . $node->id());
-    $front_uri = \Drupal::config('system.site')->get('page.front');
-    $front_alias = $alias_manager->getAliasByPath($front_uri);
     $url = Url::fromRoute('<front>')->toString();
-    $this->assertEquals($front_alias, '/test-page');
-    $this->assertEquals($front_alias, $url);
+    $this->assertEquals($url, '/test-page');
 
     // Update node alias.
-    $node_alias = \Drupal::service('path.alias_storage')->load(['alias' => $node_alias]);
-    $alias_storage->save($front_uri, '/new-alias', LanguageInterface::LANGCODE_NOT_SPECIFIED, $node_alias['pid']);
-    $front_uri = \Drupal::config('system.site')->get('page.front');
-    $front_alias = $alias_manager->getAliasByPath($front_uri);
+    $node_alias = $alias_storage->load(['alias' => '/test-page']);
+    $alias_storage->save('/node/' . $node->id(), '/new-alias', LanguageInterface::LANGCODE_NOT_SPECIFIED, $node_alias['pid']);
     // Check that the front page alias updates.
-    $this->assertEquals($front_alias, '/new-alias');
     $url = Url::fromRoute('<front>')->toString();
-    $this->assertEquals($front_alias, $url);
+    $this->assertEquals($url, '/new-alias');
 
     // Remove node alias.
-    $alias_storage->delete($node_alias);
-    $node_alias = $alias_manager->getAliasByPath('/node/' . $node->id());
-    $front_uri = \Drupal::config('system.site')->get('page.front');
-    $front_alias = $alias_manager->getAliasByPath($front_uri);
+    $alias_storage->delete(['alias' => '/new-alias']);
     // Check that the front page alias updates.
-    $this->assertEquals($front_alias, $node_alias);
     $url = Url::fromRoute('<front>')->toString();
-    $this->assertEquals($front_alias, $url);
+    $this->assertNotEqual('/new-alias', $url);
 
     // New node translatable node.
     $node = $this->drupalCreateNode(['type' => 'oe_demo_translatable_page', 'title' => 'Translatable page']);
     $node->addTranslation('fr', ['title' => 'Translatable page fr'])->save();
     $alias_storage->save($node->toUrl()->toString(), '/translatable-page', LanguageInterface::LANGCODE_NOT_SPECIFIED);
-    $this->config('system.site')->set('page.front', '/node/' . $node->id())->save();
-    $front_uri = \Drupal::config('system.site')->get('page.front');
-    $front_alias = $alias_manager->getAliasByPath($front_uri);
-    $this->assertEquals('/translatable-page', $front_alias);
+    $system_site->set('page.front', '/node/' . $node->id())->save();
     $url = Url::fromRoute('<front>')->toString();
-    $this->assertEquals($front_alias, $url);
+    $this->assertEquals($url, '/translatable-page');
     // Set the default language to French.
-    \Drupal::configFactory()->getEditable('system.site')->set('default_langcode', 'fr')->save();
+    $system_site->set('default_langcode', 'fr')->save();
     // Check that the alias is the same.
-    $this->assertEquals('/translatable-page', $front_alias);
-    $this->assertEquals($front_alias, $url);
+    $this->assertEquals($url, '/translatable-page');
   }
 
 }
