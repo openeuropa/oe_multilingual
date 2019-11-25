@@ -66,12 +66,12 @@ class PathProcessorFrontPageTest extends KernelTestBase {
    */
   public function testFrontPagePath() {
     $alias_storage = $this->container->get('path.alias_storage');
-    $system_site = \Drupal::configFactory()->getEditable('system.site');
+    $system_site_config = \Drupal::configFactory()->getEditable('system.site');
 
     $this->drupalCreateContentType(['type' => 'article', 'name' => 'Article']);
     $node = $this->drupalCreateNode(['type' => 'article', 'title' => 'Test page']);
     // Set the node as front page.
-    $system_site->set('page.front', '/node/' . $node->id())->save();
+    $system_site_config->set('page.front', '/node/' . $node->id())->save();
     // Set node alias.
     $alias_storage->save($node->toUrl()->toString(), '/test-page', LanguageInterface::LANGCODE_NOT_SPECIFIED);
     $url = Url::fromRoute('<front>')->toString();
@@ -88,18 +88,18 @@ class PathProcessorFrontPageTest extends KernelTestBase {
     $alias_storage->delete(['alias' => '/new-alias']);
     // Check that the front page alias updates.
     $url = Url::fromRoute('<front>')->toString();
-    $this->assertNotEqual('/new-alias', $url);
+    $this->assertEquals('/node/1', $url);
 
     // New node translatable node.
     $node = $this->drupalCreateNode(['type' => 'oe_demo_translatable_page', 'title' => 'Translatable page']);
     $node->addTranslation('fr', ['title' => 'Translatable page fr'])->save();
     $alias_storage->save($node->toUrl()->toString(), '/translatable-page', LanguageInterface::LANGCODE_NOT_SPECIFIED);
-    $system_site->set('page.front', '/node/' . $node->id())->save();
+    $system_site_config->set('page.front', '/node/' . $node->id())->save();
     $url = Url::fromRoute('<front>')->toString();
     $this->assertEquals($url, '/translatable-page');
     // Set the default language to French.
-    $system_site->set('default_langcode', 'fr')->save();
-    // Check that the alias is the same.
+    $system_site_config->set('default_langcode', 'fr')->save();
+    // Check that the alias is the same, as alias are language independent.
     $this->assertEquals($url, '/translatable-page');
   }
 
