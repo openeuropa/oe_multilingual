@@ -8,7 +8,7 @@
     "require": {
         "php": "^7.1",
         "drupal/core": "^8.7",
-        "drupal/language_selection_page": "^2.2",
+        "drupal/language_selection_page": "2.3",
         "drupal/pathauto": "^1.2"
     },
     "require-dev": {
@@ -60,6 +60,11 @@
             "build/profiles/contrib/{$name}": ["type:drupal-profile"],
             "build/modules/contrib/{$name}": ["type:drupal-module"],
             "build/themes/contrib/{$name}": ["type:drupal-theme"]
+        },
+        "patches": {
+            "drupal/language_selection_page": {
+                "https://www.drupal.org/project/language_selection_page/issues/3105633": "https://www.drupal.org/files/issues/2020-01-27/3105633-6-stable.patch"
+            }
         },
         "drush": {
             "services": {
