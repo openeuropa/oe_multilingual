@@ -71,22 +71,6 @@ function oe_multilingual_preprocess_language_selection_page_content(&$variables)
 }
 
 /**
- * Implements hook_ENTITY_TYPE_presave() for the configurable language entities.
- *
- * Make sure whenever we add or re-add a language it follows the configuration
- * set by the module's configuration files.
- */
-function oe_multilingual_configurable_language_presave(EntityInterface $entity) {
-  $storage = new FileStorage(drupal_get_path('module', 'oe_multilingual') . '/config/install');
-  $values = $storage->read('language.entity.' . $entity->id());
-  if ($values) {
-    foreach ($values as $key => $value) {
-      $entity->set($key, $value);
-    }
-  }
-}
-
-/**
  * Implements hook_ENTITY_TYPE_insert() for the configurable language entities.
  *
  * Whenever a language entity is created, we need to ensure we create its
