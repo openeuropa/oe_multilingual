@@ -10,7 +10,6 @@ declare(strict_types = 1);
 use Drupal\Component\Gettext\PoStreamReader;
 use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Cache\CacheableMetadata;
-use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\TypedData\TranslatableInterface;
@@ -66,22 +65,6 @@ function oe_multilingual_preprocess_language_selection_page_content(&$variables)
   foreach ($variables['language_links']['#items'] as $langcode => &$item) {
     if (isset($original_languages[$langcode])) {
       $item['#title'] = $original_languages[$langcode]->getName();
-    }
-  }
-}
-
-/**
- * Implements hook_ENTITY_TYPE_presave() for the configurable language entities.
- *
- * Make sure whenever we add or re-add a language it follows the configuration
- * set by the module's configuration files.
- */
-function oe_multilingual_configurable_language_presave(EntityInterface $entity) {
-  $storage = new FileStorage(drupal_get_path('module', 'oe_multilingual') . '/config/install');
-  $values = $storage->read('language.entity.' . $entity->id());
-  if ($values) {
-    foreach ($values as $key => $value) {
-      $entity->set($key, $value);
     }
   }
 }
