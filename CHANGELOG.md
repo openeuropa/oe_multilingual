@@ -1,11 +1,19 @@
 # Change Log
 
+## [1.3.1](https://github.com/openeuropa/oe_multilingual/tree/1.3.1) (2020-02-05)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.3.0...1.3.1)
+
+**Merged pull requests:**
+
+- OPENEUROPA-2652: Use patch to add language cache tags to selection page. [\#98](https://github.com/openeuropa/oe_multilingual/pull/98) ([imanoleguskiza](https://github.com/imanoleguskiza))
+- OPENEUROPA-0000: Prepare for 1.3.0 release. [\#96](https://github.com/openeuropa/oe_multilingual/pull/96) ([hernani](https://github.com/hernani))
+
 ## [1.3.0](https://github.com/openeuropa/oe_multilingual/tree/1.3.0) (2019-11-25)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.2.0...1.3.0)
 
 **Merged pull requests:**
 
--  OPENEUROPA-2420: Maintain front page alias with language suffix links. [\#95](https://github.com/openeuropa/oe_multilingual/pull/95) ([nagyad](https://github.com/nagyad))
+- OPENEUROPA-2420: Maintain front page alias with language suffix links. [\#95](https://github.com/openeuropa/oe_multilingual/pull/95) ([nagyad](https://github.com/nagyad))
 - OPENEUROPA-2258: Undo use of PHP 7.2. [\#94](https://github.com/openeuropa/oe_multilingual/pull/94) ([dxvargas](https://github.com/dxvargas))
 - OPENEUROPA-2464: Use PHP 7.1 in docker-compose. [\#93](https://github.com/openeuropa/oe_multilingual/pull/93) ([dxvargas](https://github.com/dxvargas))
 - OPENEUROPA-2258: Use PHP 7.2 in drone and docker image. [\#88](https://github.com/openeuropa/oe_multilingual/pull/88) ([dxvargas](https://github.com/dxvargas))
