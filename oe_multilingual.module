@@ -152,7 +152,7 @@ function oe_multilingual_page_header_pre_render(array $build): array {
   $multilingual_helper = \Drupal::service('oe_multilingual.helper');
   $content_language_switcher_provider = \Drupal::service('oe_multilingual.content_language_switcher_provider');
   $language_manager = \Drupal::languageManager();
-  $cache = new CacheableMetadata();
+  $cache = CacheableMetadata::createFromRenderArray($build);
   $cache->addCacheContexts(['languages:language_content']);
 
   $entity = $multilingual_helper->getEntityFromCurrentRoute();
