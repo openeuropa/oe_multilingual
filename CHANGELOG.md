@@ -1,10 +1,19 @@
 # Change Log
 
+## [1.3.2](https://github.com/openeuropa/oe_multilingual/tree/1.3.2) (2020-02-19)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.3.1...1.3.2)
+
+**Merged pull requests:**
+
+- OPENEUROPA-2854: Fix new cache instead of generating from existing. [\#101](https://github.com/openeuropa/oe_multilingual/pull/101) ([nagyad](https://github.com/nagyad))
+- OPENEUROPA-2768: Remove presave that forces language configuration. [\#99](https://github.com/openeuropa/oe_multilingual/pull/99) ([nagyad](https://github.com/nagyad))
+
 ## [1.3.1](https://github.com/openeuropa/oe_multilingual/tree/1.3.1) (2020-02-05)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.3.0...1.3.1)
 
 **Merged pull requests:**
 
+- OPENEUROPA-1766: Release 1.3.1. [\#100](https://github.com/openeuropa/oe_multilingual/pull/100) ([dxvargas](https://github.com/dxvargas))
 - OPENEUROPA-2652: Use patch to add language cache tags to selection page. [\#98](https://github.com/openeuropa/oe_multilingual/pull/98) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - OPENEUROPA-0000: Prepare for 1.3.0 release. [\#96](https://github.com/openeuropa/oe_multilingual/pull/96) ([hernani](https://github.com/hernani))
 
