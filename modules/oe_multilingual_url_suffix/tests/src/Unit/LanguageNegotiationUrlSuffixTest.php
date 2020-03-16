@@ -44,11 +44,11 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
   protected function setUp() {
 
     // Set up some languages to be used by the language-based path processor.
-    $language_de = $this->getMock('\Drupal\Core\Language\LanguageInterface');
+    $language_de = $this->getMockBuilder('\Drupal\Core\Language\LanguageInterface')->getMock();
     $language_de->expects($this->any())
       ->method('getId')
       ->will($this->returnValue('de'));
-    $language_en = $this->getMock('\Drupal\Core\Language\LanguageInterface');
+    $language_en = $this->getMockBuilder('\Drupal\Core\Language\LanguageInterface')->getMock();
     $language_en->expects($this->any())
       ->method('getId')
       ->will($this->returnValue('en'));
@@ -66,8 +66,7 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
     $this->languageManager = $language_manager;
 
     // Create a user stub.
-    $this->user = $this->getMockBuilder('Drupal\Core\Session\AccountInterface')
-      ->getMock();
+    $this->user = $this->getMockBuilder('Drupal\Core\Session\AccountInterface')->getMock();
 
     $cache_contexts_manager = $this->getMockBuilder('Drupal\Core\Cache\Context\CacheContextsManager')
       ->disableOriginalConstructor()
