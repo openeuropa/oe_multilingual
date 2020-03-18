@@ -56,6 +56,13 @@ class PathProcessorFrontPageTest extends KernelTestBase {
     $this->installEntitySchema('node');
     $this->installConfig(['system', 'node', 'filter']);
 
+    // In Drupal 8.8, paths have been moved to an entity type.
+    // @todo remove this when the component will depend on 8.8.
+    if ($this->container->get('entity_type.manager')->hasDefinition('path_alias')) {
+      $this->container->get('module_installer')->install(['path_alias']);
+      $this->installEntitySchema('path_alias');
+    }
+
     ConfigurableLanguage::createFromLangcode('fr')->save();
   }
 
