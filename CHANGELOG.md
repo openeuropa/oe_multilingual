@@ -1,10 +1,21 @@
 # Change Log
 
+## [1.4.0](https://github.com/openeuropa/oe_multilingual/tree/1.4.0) (2020-04-08)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.3.2...1.4.0)
+
+**Merged pull requests:**
+
+- OPENEUROPA-0000: Use drupal/core instead of drupal/core-recommended. [\#109](https://github.com/openeuropa/oe_multilingual/pull/109) ([22Alexandra](https://github.com/22Alexandra))
+- OPENEUROPA-2943: Upgrade to PHP 7.3. [\#108](https://github.com/openeuropa/oe_multilingual/pull/108) ([sergepavle](https://github.com/sergepavle))
+- OPENEUROPA-2604: Drupal 8.8 readyness. [\#107](https://github.com/openeuropa/oe_multilingual/pull/107) ([upchuk](https://github.com/upchuk))
+- OPENEUROPA-2604: Update pathauto to prepare for Drupal 8.8. [\#97](https://github.com/openeuropa/oe_multilingual/pull/97) ([imanoleguskiza](https://github.com/imanoleguskiza))
+
 ## [1.3.2](https://github.com/openeuropa/oe_multilingual/tree/1.3.2) (2020-02-19)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.3.1...1.3.2)
 
 **Merged pull requests:**
 
+- Release-1.3.2: Update changelog. [\#104](https://github.com/openeuropa/oe_multilingual/pull/104) ([nagyad](https://github.com/nagyad))
 - OPENEUROPA-2854: Fix new cache instead of generating from existing. [\#101](https://github.com/openeuropa/oe_multilingual/pull/101) ([nagyad](https://github.com/nagyad))
 - OPENEUROPA-2768: Remove presave that forces language configuration. [\#99](https://github.com/openeuropa/oe_multilingual/pull/99) ([nagyad](https://github.com/nagyad))
 
@@ -22,7 +33,7 @@
 
 **Merged pull requests:**
 
-- OPENEUROPA-2420: Maintain front page alias with language suffix links. [\#95](https://github.com/openeuropa/oe_multilingual/pull/95) ([nagyad](https://github.com/nagyad))
+-  OPENEUROPA-2420: Maintain front page alias with language suffix links. [\#95](https://github.com/openeuropa/oe_multilingual/pull/95) ([nagyad](https://github.com/nagyad))
 - OPENEUROPA-2258: Undo use of PHP 7.2. [\#94](https://github.com/openeuropa/oe_multilingual/pull/94) ([dxvargas](https://github.com/dxvargas))
 - OPENEUROPA-2464: Use PHP 7.1 in docker-compose. [\#93](https://github.com/openeuropa/oe_multilingual/pull/93) ([dxvargas](https://github.com/dxvargas))
 - OPENEUROPA-2258: Use PHP 7.2 in drone and docker image. [\#88](https://github.com/openeuropa/oe_multilingual/pull/88) ([dxvargas](https://github.com/dxvargas))
@@ -242,7 +253,7 @@
 **Merged pull requests:**
 
 - Update CHANGELOG.md before release 0.1.1. [\#10](https://github.com/openeuropa/oe_multilingual/pull/10) ([ademarco](https://github.com/ademarco))
-- OPENEUROPA-615 : Make sure that splash page uses the original language [\#8](https://github.com/openeuropa/oe_multilingual/pull/8) ([Medi4tor](https://github.com/Medi4tor))
+- OPENEUROPA-615 : Make sure that splash page uses the original language [\#8](https://github.com/openeuropa/oe_multilingual/pull/8) ([ku-enza](https://github.com/ku-enza))
 
 ## [0.1.0](https://github.com/openeuropa/oe_multilingual/tree/0.1.0) (2018-05-29)
 **Merged pull requests:**
@@ -250,7 +261,7 @@
 - Update CHANGELOG.md before release 0.1.0. [\#7](https://github.com/openeuropa/oe_multilingual/pull/7) ([ademarco](https://github.com/ademarco))
 - "oe\_theme not found" during installation [\#6](https://github.com/openeuropa/oe_multilingual/pull/6) ([brummbar](https://github.com/brummbar))
 - OPENEUROPA-480: Provide a language selection page [\#5](https://github.com/openeuropa/oe_multilingual/pull/5) ([richardcanoe](https://github.com/richardcanoe))
-- OPENEUROPA-580 Make sure language switcher links are displayed in their native language [\#4](https://github.com/openeuropa/oe_multilingual/pull/4) ([Medi4tor](https://github.com/Medi4tor))
+- OPENEUROPA-580 Make sure language switcher links are displayed in their native language [\#4](https://github.com/openeuropa/oe_multilingual/pull/4) ([ku-enza](https://github.com/ku-enza))
 - OPENEUROPA-469: Add first draft of language switcher block. [\#3](https://github.com/openeuropa/oe_multilingual/pull/3) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - OPENEUROPA-558: Fix language switcher selector [\#2](https://github.com/openeuropa/oe_multilingual/pull/2) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-557: Create OpenEuropa Multilingual module [\#1](https://github.com/openeuropa/oe_multilingual/pull/1) ([ademarco](https://github.com/ademarco))
