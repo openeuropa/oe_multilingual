@@ -48,15 +48,16 @@ class TestUrlSuffixesAlterEventSubscriber implements EventSubscriberInterface {
    *   The event.
    */
   public function alterUrlSuffixes(UrlSuffixesAlterEvent $event): void {
-    if ($this->state->get(static::STATE) !== TRUE) {
+    if (!$blacklist = $this->state->get(static::STATE)) {
+      return;
+    }
+
+    if (!is_array($blacklist)) {
       return;
     }
 
     $suffixes = $event->getUrlSuffixes();
-
-    unset($suffixes['en']);
-
-    $event->setUrlSuffixes($suffixes);
+    $event->setUrlSuffixes(array_diff($suffixes, $blacklist));
   }
 
 }

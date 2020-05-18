@@ -74,7 +74,7 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
     $this->assertTrue(strpos($this->entity->getTranslation('fr')->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_fr') !== FALSE);
 
     // Set the state to trigger our test event subscriber.
-    $this->container->get('state')->set(TestUrlSuffixesAlterEventSubscriber::STATE, TRUE);
+    $this->container->get('state')->set(TestUrlSuffixesAlterEventSubscriber::STATE, ['en']);
     // Assert that the '_en' is not found, because of our test event subscriber.
     // @see: TestUrlSuffixesAlterEventSubscriber::alterUrlSuffixes().
     $this->assertTrue(strpos($this->entity->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_en') === FALSE);

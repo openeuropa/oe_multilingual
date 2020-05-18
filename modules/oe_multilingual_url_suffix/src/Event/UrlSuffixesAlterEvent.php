@@ -9,7 +9,8 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * Dispatched by LanguageNegotiationUrlSuffix::getUrlSuffixes().
  *
- * Allows to alter the list of url suffixes retrieved from config.
+ * Allows the alter the list of URL suffixes available to the
+ * LanguageNegotiationUrlSuffix negotiator.
  */
 class UrlSuffixesAlterEvent extends Event {
 
@@ -23,13 +24,23 @@ class UrlSuffixesAlterEvent extends Event {
   protected $urlSuffixes;
 
   /**
+   * The UrlSuffixesAlterEvent constructor.
+   *
+   * @param array $url_suffixes
+   *   Array of url suffixes.
+   */
+  public function __construct(array $url_suffixes) {
+    $this->urlSuffixes = $url_suffixes;
+  }
+
+  /**
    * Sets the url suffixes array.
    *
-   * @param array $config
-   *   The array containing the url suffixes list form config.
+   * @param array $url_suffixes
+   *   The array containing the url suffixes.
    */
-  public function setUrlSuffixes(array $config): void {
-    $this->urlSuffixes = $config;
+  public function setUrlSuffixes(array $url_suffixes): void {
+    $this->urlSuffixes = $url_suffixes;
   }
 
   /**

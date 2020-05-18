@@ -62,7 +62,9 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static($container->get('event_dispatcher'));
+    return new static(
+      $container->get('event_dispatcher')
+    );
   }
 
   /**
@@ -71,8 +73,8 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
   public function getLangcode(Request $request = NULL) {
     $langcode = NULL;
 
-    $config = $this->getUrlSuffixes();
-    if ($request && $this->languageManager && $config) {
+    $url_suffixes = $this->getUrlSuffixes();
+    if ($request && $this->languageManager && $url_suffixes) {
       $request_path = urldecode(trim($request->getPathInfo(), '/'));
       $parts = explode(static::SUFFIX_DELIMITER, $request_path);
       $suffix = array_pop($parts);
@@ -80,7 +82,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
       // Search suffix within added languages.
       $negotiated_language = FALSE;
       foreach ($this->languageManager->getLanguages() as $language) {
-        if (isset($config[$language->getId()]) && $config[$language->getId()] === $suffix) {
+        if (isset($url_suffixes[$language->getId()]) && $url_suffixes[$language->getId()] === $suffix) {
           $negotiated_language = $language;
           break;
         }
@@ -133,9 +135,9 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
     }
 
     // Append suffix to path.
-    $config = $this->getUrlSuffixes();
-    if (isset($config[$options['language']->getId()])) {
-      $path .= static::SUFFIX_DELIMITER . $config[$options['language']->getId()];
+    $url_suffixes = $this->getUrlSuffixes();
+    if (isset($url_suffixes[$options['language']->getId()])) {
+      $path .= static::SUFFIX_DELIMITER . $url_suffixes[$options['language']->getId()];
       if ($bubbleable_metadata) {
         $bubbleable_metadata->addCacheContexts(['languages:' . LanguageInterface::TYPE_URL]);
       }
@@ -151,15 +153,14 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
    *   The array of language suffixes.
    */
   public function getUrlSuffixes(): array {
-    $config = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes') ?? [];
+    $url_suffixes = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes') ?? [];
 
-    // Allow the alteration of url suffix array through an event.
-    $event = new UrlSuffixesAlterEvent();
-    $event->setUrlSuffixes($config);
+    // Allow other modules to alter the list of suffixes available to the
+    // negotiator.
+    $event = new UrlSuffixesAlterEvent($url_suffixes);
     $this->eventDispatcher->dispatch(UrlSuffixesAlterEvent::EVENT, $event);
-    $config = $event->getUrlSuffixes();
 
-    return $config;
+    return $event->getUrlSuffixes();
   }
 
 }
