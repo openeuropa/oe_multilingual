@@ -1,0 +1,6 @@
+services:
+  oe_multilingual_url_suffix_test.event_subscriber.test_alter_url_suffixes:
+    arguments: ['@state']
+    class: Drupal\oe_multilingual_url_suffix_test\EventSubscriber\TestUrlSuffixesAlterEventSubscriber
+    tags:
+      - { name: event_subscriber }

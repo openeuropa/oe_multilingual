@@ -25,6 +25,13 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
   protected $languageManager;
 
   /**
+   * The Event Dispatcher.
+   *
+   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+   */
+  protected $eventDispatcher;
+
+  /**
    * The User.
    *
    * @var \Drupal\Core\Session\AccountInterface
@@ -42,7 +49,6 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
    * {@inheritdoc}
    */
   protected function setUp() {
-
     // Set up some languages to be used by the language-based path processor.
     $language_de = $this->getMockBuilder('\Drupal\Core\Language\LanguageInterface')->getMock();
     $language_de->expects($this->any())
@@ -56,6 +62,11 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
       'de' => $language_de,
       'en' => $language_en,
     ];
+
+    // Create event dispatcher stub.
+    $this->eventDispatcher = $this->getMockBuilder('\Symfony\Component\EventDispatcher\EventDispatcherInterface')
+      ->disableOriginalConstructor()
+      ->getMock();
 
     // Create a language manager stub.
     $language_manager = $this->getMockBuilder('Drupal\language\ConfigurableLanguageManagerInterface')
@@ -101,7 +112,7 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
     ]);
 
     $request = Request::create('/foo_' . $suffix, 'GET');
-    $method = new LanguageNegotiationUrlSuffix();
+    $method = new LanguageNegotiationUrlSuffix($this->eventDispatcher);
     $method->setLanguageManager($this->languageManager);
     $method->setConfig($config);
     $method->setCurrentUser($this->user);
