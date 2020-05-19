@@ -7,6 +7,7 @@ namespace Drupal\Tests\oe_multilingual_url_suffix\Kernel;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\entity_test\Entity\EntityTest;
 use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix;
+use Drupal\oe_multilingual_url_suffix_test\EventSubscriber\TestUrlSuffixesAlterEventSubscriber;
 use Drupal\Tests\language\Kernel\LanguageTestBase;
 
 /**
@@ -27,6 +28,7 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
     'user',
     'oe_multilingual',
     'oe_multilingual_url_suffix',
+    'oe_multilingual_url_suffix_test',
   ];
 
   /**
@@ -70,6 +72,12 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
     $this->assertTrue(strpos($this->entity->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_en') !== FALSE);
     $this->assertTrue(strpos($this->entity->getTranslation('es')->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_es') !== FALSE);
     $this->assertTrue(strpos($this->entity->getTranslation('fr')->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_fr') !== FALSE);
+
+    // Set the state to trigger our test event subscriber.
+    $this->container->get('state')->set(TestUrlSuffixesAlterEventSubscriber::STATE, ['en']);
+    // Assert that the '_en' is not found, because of our test event subscriber.
+    // @see: TestUrlSuffixesAlterEventSubscriber::alterUrlSuffixes().
+    $this->assertTrue(strpos($this->entity->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_en') === FALSE);
   }
 
   /**
