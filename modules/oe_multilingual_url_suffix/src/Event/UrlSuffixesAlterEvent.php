@@ -9,7 +9,7 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * Dispatched by LanguageNegotiationUrlSuffix::getUrlSuffixes().
  *
- * Allows the alter the list of URL suffixes available to the
+ * Allows to alter the list of URL suffixes available to the
  * LanguageNegotiationUrlSuffix negotiator.
  */
 class UrlSuffixesAlterEvent extends Event {
