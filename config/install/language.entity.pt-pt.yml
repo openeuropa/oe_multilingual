@@ -1,6 +1,9 @@
 langcode: en
 status: true
 dependencies: {  }
+third_party_settings:
+  oe_multilingual:
+    category: eu
 id: pt-pt
 label: Portuguese
 direction: ltr
