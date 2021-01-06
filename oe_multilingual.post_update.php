@@ -22,6 +22,7 @@ function oe_multilingual_post_update_00001_invalidate_containers_cache(): void {
  */
 function oe_multilingual_post_update_00002(): void {
   $eu_languages = [
+    'en',
     'sv',
     'lv',
     'pl',

@@ -21,6 +21,13 @@ function oe_multilingual_install() {
     return;
   }
 
+  // Set EU category for the English language.
+  \Drupal::entityTypeManager()
+    ->getStorage('configurable_language')
+    ->load('en')
+    ->setThirdPartySetting('oe_multilingual', 'category', 'eu')
+    ->save();
+
   // Set up the weight of the English language.
   \Drupal::configFactory()
     ->getEditable('language.entity.en')
