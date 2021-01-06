@@ -20,7 +20,7 @@ function oe_multilingual_post_update_00001_invalidate_containers_cache(): void {
 /**
  * Apply EU category to EU languages.
  */
-function oe_multilingual_post_update_00001(): void {
+function oe_multilingual_post_update_00002(): void {
   $eu_languages = [
     'sv',
     'lv',
