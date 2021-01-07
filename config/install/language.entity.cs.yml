@@ -1,6 +1,9 @@
 langcode: en
 status: true
 dependencies: {  }
+third_party_settings:
+  oe_multilingual:
+    category: eu
 id: cs
 label: Czech
 direction: ltr

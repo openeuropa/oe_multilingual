@@ -1,0 +1,7 @@
+language.entity.*.third_party.oe_multilingual:
+  type: mapping
+  label: 'Language category'
+  mapping:
+    category:
+      type: string
+      label: 'The category of the language.'

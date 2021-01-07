@@ -12,8 +12,10 @@ use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\TypedData\TranslatableInterface;
 use Drupal\Core\Url;
+use Drupal\language\Entity\ConfigurableLanguage;
 
 /**
  * Implements hook_language_switch_links_alter().
@@ -194,4 +196,44 @@ function oe_multilingual_page_header_pre_render(array $build): array {
  */
 function oe_multilingual_locale_translation_projects_alter(&$projects) {
   $projects['oe_multilingual']['info']['interface translation server pattern'] = drupal_get_path('module', 'oe_multilingual') . '/translations/%project-%language.po';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Add a category selection to language entity form.
+ */
+function oe_multilingual_form_language_admin_edit_form_alter(&$form, FormStateInterface $form_state): void {
+  /** @var \Drupal\language\Entity\ConfigurableLanguage $language */
+  $language = $form_state->getFormObject()->getEntity();
+  $form['category'] = [
+    '#type' => 'select',
+    '#title' => t('Category'),
+    '#required' => TRUE,
+    '#options' => [
+      'eu' => t('EU'),
+      'non_eu' => t('Non-EU'),
+    ],
+    '#default_value' => $language->getThirdPartySetting('oe_multilingual', 'category'),
+  ];
+
+  $form['#entity_builders'][] = 'oe_multilingual_form_language_edit_form_builder';
+}
+
+/**
+ * Entity form builder for the language edit form.
+ *
+ * Saves the language category into the language settings.
+ *
+ * @param string $entity_type
+ *   The name of the entity type.
+ * @param \Drupal\language\Entity\ConfigurableLanguage $language
+ *   The language entity.
+ * @param array $form
+ *   The form array.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state.
+ */
+function oe_multilingual_form_language_edit_form_builder(string $entity_type, ConfigurableLanguage $language, array &$form, FormStateInterface $form_state): void {
+  $language->setThirdPartySetting('oe_multilingual', 'category', $form_state->getValue('category'));
 }
