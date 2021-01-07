@@ -7,7 +7,7 @@ namespace Drupal\Tests\oe_multilingual\Functional;
 use Drupal\Tests\BrowserTestBase;
 
 /**
- * Tests features implemented for the configurable language.
+ * Tests features implemented for the configurable language config entity.
  */
 class ConfigurableLanguageTest extends BrowserTestBase {
 
@@ -21,16 +21,16 @@ class ConfigurableLanguageTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stark';
-
-  /**
-   * {@inheritdoc}
-   */
   protected function setUp() {
     parent::setUp();
 
+    $permissions = [
+      'administer languages',
+      'access administration pages',
+      'view the administration theme',
+    ];
     /** @var \Drupal\user\UserInterface $user */
-    $user = $this->createUser([], '', TRUE);
+    $user = $this->createUser($permissions, 'test');
     $this->drupalLogin($user);
   }
 
