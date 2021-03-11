@@ -1,11 +1,22 @@
 # Changelog
 
+## [1.6.0](https://github.com/openeuropa/oe_multilingual/tree/1.6.0) (2021-03-11)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.5.0...1.6.0)
+
+**Merged pull requests:**
+
+- EWPP-529: Replace scaffold library. [\#115](https://github.com/openeuropa/oe_multilingual/pull/115) ([sergepavle](https://github.com/sergepavle))
+- EWPP-606: Introduce category setting to language config entity. [\#114](https://github.com/openeuropa/oe_multilingual/pull/114) ([nagyad](https://github.com/nagyad))
+- EWPP-516: Update docker images. [\#113](https://github.com/openeuropa/oe_multilingual/pull/113) ([22Alexandra](https://github.com/22Alexandra))
+
 ## [1.5.0](https://github.com/openeuropa/oe_multilingual/tree/1.5.0) (2020-06-23)
 
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.4.0...1.5.0)
 
 **Merged pull requests:**
 
+- Release-1.5.0: Update changelog. [\#112](https://github.com/openeuropa/oe_multilingual/pull/112) ([nagyad](https://github.com/nagyad))
 - OPENEUROPA-3191: Add event for language url suffix alteration. [\#111](https://github.com/openeuropa/oe_multilingual/pull/111) ([nagyad](https://github.com/nagyad))
 
 ## [1.4.0](https://github.com/openeuropa/oe_multilingual/tree/1.4.0) (2020-04-08)
