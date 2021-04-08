@@ -54,3 +54,24 @@ function oe_multilingual_post_update_00002(): void {
     $language->save();
   }
 }
+
+/**
+ * Change the order of languages.
+ */
+function oe_multilingual_post_update_00003(): void {
+  $language_weight_mapping = [
+    'cs' => 2,
+    'da' => 3,
+    'de' => 4,
+    'el' => 6,
+    'es' => 1,
+    'et' => 5,
+    'en' => 7,
+  ];
+  $languages = \Drupal::entityTypeManager()->getStorage('configurable_language')->loadMultiple(array_keys($language_weight_mapping));
+  foreach ($languages as $language) {
+    /** @var \Drupal\language\Entity\ConfigurableLanguage $language */
+    $language->setWeight($language_weight_mapping[$language->id()]);
+    $language->save();
+  }
+}
