@@ -7,7 +7,7 @@ use Behat\MinkExtension\Context\RawMinkContext;
 use PHPUnit\Framework\Assert;
 
 /**
- * Class MinkContext.
+ * A generic Mink context.
  */
 class MinkContext extends RawMinkContext {
 

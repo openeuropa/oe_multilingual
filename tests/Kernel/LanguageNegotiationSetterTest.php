@@ -7,7 +7,7 @@ namespace Drupal\Tests\oe_multilingual\Kernel;
 use Drupal\KernelTests\KernelTestBase;
 
 /**
- * Class LanguageNegotiationSetterTest.
+ * Tests the language negotiation setter.
  */
 class LanguageNegotiationSetterTest extends KernelTestBase {
 

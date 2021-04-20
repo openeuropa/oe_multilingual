@@ -124,7 +124,10 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
       }
       elseif (isset($count[$value]) && $count[$value] > 1) {
         // Throw a form error if there are two languages with the same suffix.
-        $form_state->setErrorByName("suffix][$langcode", $this->t('The suffix for %language, %value, is not unique.', ['%language' => $language->getName(), '%value' => $value]));
+        $form_state->setErrorByName("suffix][$langcode", $this->t('The suffix for %language, %value, is not unique.', [
+          '%language' => $language->getName(),
+          '%value' => $value,
+        ]));
       }
     }
 

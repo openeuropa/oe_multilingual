@@ -46,7 +46,10 @@ class InterfaceTranslationContext extends RawDrupalContext {
     }
 
     // Backup existing translation.
-    $translation = $locale_storage->findTranslation(['lid' => $source->getId(), 'language' => $language->getId()]);
+    $translation = $locale_storage->findTranslation([
+      'lid' => $source->getId(),
+      'language' => $language->getId(),
+    ]);
     $this->translations[$source->getId()] = [
       'language' => $language,
       'translation' => clone $translation,
@@ -87,7 +90,10 @@ class InterfaceTranslationContext extends RawDrupalContext {
       }
 
       // Otherwise, we need to delete the translation for that source.
-      $locale_storage->deleteTranslations(['lid' => $translation->getId(), 'language' => $language->getId()]);
+      $locale_storage->deleteTranslations([
+        'lid' => $translation->getId(),
+        'language' => $language->getId(),
+      ]);
     }
   }
 

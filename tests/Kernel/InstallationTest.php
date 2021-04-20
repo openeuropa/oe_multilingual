@@ -11,7 +11,7 @@ use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Drupal\oe_multilingual\Plugin\LanguageNegotiation\LanguageNegotiationAdmin;
 
 /**
- * Class InstallationTest.
+ * Tests the multilingual installation.
  */
 class InstallationTest extends KernelTestBase {
 
