@@ -101,9 +101,10 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
    * @dataProvider providerTestPathSuffix
    */
   public function testPathSuffix(string $suffix, array $suffixes, string $expected_langcode = NULL): void {
+    $language_code = (in_array($expected_langcode, ['en', 'de'])) ? $expected_langcode : 'en';
     $this->languageManager->expects($this->any())
       ->method('getCurrentLanguage')
-      ->will($this->returnValue($this->languages[(in_array($expected_langcode, ['en', 'de'])) ? $expected_langcode : 'en']));
+      ->will($this->returnValue($this->languages[$language_code]));
 
     $config = $this->getConfigFactoryStub([
       'oe_multilingual_url_suffix.settings' => [

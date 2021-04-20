@@ -199,7 +199,10 @@ class LocalTranslationsBatcher {
         ],
       ]);
 
-      $context['message'] = $this->t('Imported translation for %project (%langcode).', ['%project' => $extension['name'], '%langcode' => $file->langcode]);
+      $context['message'] = $this->t('Imported translation for %project (%langcode).', [
+        '%project' => $extension['name'],
+        '%langcode' => $file->langcode,
+      ]);
     }
   }
 

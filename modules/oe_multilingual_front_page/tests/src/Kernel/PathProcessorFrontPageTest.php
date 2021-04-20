@@ -75,8 +75,14 @@ class PathProcessorFrontPageTest extends KernelTestBase {
     $alias_storage = $this->container->get('path.alias_storage');
     $system_site_config = \Drupal::configFactory()->getEditable('system.site');
 
-    $this->drupalCreateContentType(['type' => 'article', 'name' => 'Article']);
-    $node = $this->drupalCreateNode(['type' => 'article', 'title' => 'Test page']);
+    $this->drupalCreateContentType([
+      'type' => 'article',
+      'name' => 'Article',
+    ]);
+    $node = $this->drupalCreateNode([
+      'type' => 'article',
+      'title' => 'Test page',
+    ]);
     // Set the node as front page.
     $system_site_config->set('page.front', '/node/' . $node->id())->save();
     // Set node alias.
@@ -98,7 +104,10 @@ class PathProcessorFrontPageTest extends KernelTestBase {
     $this->assertEquals('/node/1', $url);
 
     // New node translatable node.
-    $node = $this->drupalCreateNode(['type' => 'oe_demo_translatable_page', 'title' => 'Translatable page']);
+    $node = $this->drupalCreateNode([
+      'type' => 'oe_demo_translatable_page',
+      'title' => 'Translatable page',
+    ]);
     $node->addTranslation('fr', ['title' => 'Translatable page fr'])->save();
     $alias_storage->save($node->toUrl()->toString(), '/translatable-page', LanguageInterface::LANGCODE_NOT_SPECIFIED);
     $system_site_config->set('page.front', '/node/' . $node->id())->save();

@@ -17,7 +17,7 @@ use Drupal\oe_multilingual\LanguageNegotiationSetter;
 use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix;
 
 /**
- * Class DrupalContext.
+ * A generic Drupal context.
  */
 class DrupalContext extends RawDrupalContext {
 
