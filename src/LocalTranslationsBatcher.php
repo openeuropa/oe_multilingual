@@ -186,7 +186,7 @@ class LocalTranslationsBatcher {
    * Import po files of the project for allowed languages.
    */
   public function importProjectPoFiles($extension, $langcodes, &$context): void {
-    $files = file_scan_directory(
+    $files = $this->fileSystem->scanDirectory(
       $this->fileSystem->dirname($extension['info']['interface translation server pattern']),
       '/.*-(' . implode('|', $langcodes) . ')\.po/'
     );

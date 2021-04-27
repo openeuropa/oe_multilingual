@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\Tests\oe_multilingual\FunctionalJavascript;
+namespace Drupal\Tests\oe_multilingual\src\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 
@@ -10,6 +10,11 @@ use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
  * Tests the translator importer service using a test Controller.
  */
 class TranslationImporterTest extends WebDriverTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * {@inheritdoc}

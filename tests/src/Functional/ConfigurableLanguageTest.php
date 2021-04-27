@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\Tests\oe_multilingual\Functional;
+namespace Drupal\Tests\oe_multilingual\src\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 
@@ -14,6 +14,11 @@ class ConfigurableLanguageTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'classy';
+
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = [
     'oe_multilingual',
   ];
@@ -21,7 +26,7 @@ class ConfigurableLanguageTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $permissions = [

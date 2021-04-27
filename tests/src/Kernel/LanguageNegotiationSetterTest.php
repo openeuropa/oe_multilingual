@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\Tests\oe_multilingual\Kernel;
+namespace Drupal\Tests\oe_multilingual\src\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 

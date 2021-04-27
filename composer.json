@@ -41,6 +41,10 @@
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        "task-runner-drupal-project-symlink": {
+            "type": "vcs",
+            "url": "https://github.com/openeuropa/task-runner-drupal-project-symlink"
         }
     },
     "autoload": {
@@ -50,7 +54,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Drupal\\Tests\\oe_multilingual\\": "./tests/"
+            "Drupal\\Tests\\oe_multilingual\\": "./tests/src"
         }
     },
     "extra": {
