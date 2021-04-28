@@ -1,11 +1,13 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - oe_multilingual
 third_party_settings:
   oe_multilingual:
     category: eu
 id: cs
 label: Czech
 direction: ltr
-weight: 1
+weight: 2
 locked: false
