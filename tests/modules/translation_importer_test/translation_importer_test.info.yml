@@ -1,6 +1,6 @@
 name: Translation Importer
 description: Test module for importing translations
-core: 8.x
+core_version_requirement: ^8 || ^9
 type: module
 package: Testing
 
