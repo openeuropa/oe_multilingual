@@ -14,7 +14,7 @@
     "require-dev": {
         "composer/installers": "~1.5",
         "consolidation/annotated-command": "^2.8.2",
-        "consolidation/robo": "~1.4",
+        "consolidation/robo": "^1.4.13 || ^2",
         "drupal/core-composer-scaffold": "^8.9 || ^9",
         "drupal/config_devel": "~1.2",
         "drupal/devel": "~4.1",
