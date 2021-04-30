@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Drupal\Tests\oe_multilingual\src\Functional;
+namespace Drupal\Tests\oe_multilingual\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 

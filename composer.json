@@ -8,7 +8,7 @@
     "require": {
         "php": ">=7.3",
         "drupal/core": "^8.9 || ^9",
-        "drupal/language_selection_page": "^2.6",
+        "drupal/language_selection_page": "^2.7",
         "drupal/pathauto": "^1.6"
     },
     "require-dev": {
