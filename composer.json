@@ -54,6 +54,11 @@
             "build/modules/contrib/{$name}": ["type:drupal-module"],
             "build/themes/contrib/{$name}": ["type:drupal-theme"]
         },
+        "patches": {
+            "drupal/language_selection_page": {
+                "https://www.drupal.org/project/language_selection_page/issues/3212711": "https://www.drupal.org/files/issues/2021-05-07/3212711-2.patch"
+            }
+        },
         "drush": {
             "services": {
                 "drush.services.yml": "^9"
