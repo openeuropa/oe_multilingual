@@ -8,7 +8,7 @@
     "require": {
         "php": ">=7.3",
         "drupal/core": "^8.9 || ^9",
-        "drupal/language_selection_page": "^2.7",
+        "drupal/language_selection_page": "^2.8",
         "drupal/pathauto": "^1.6"
     },
     "require-dev": {
@@ -54,11 +54,7 @@
             "build/modules/contrib/{$name}": ["type:drupal-module"],
             "build/themes/contrib/{$name}": ["type:drupal-theme"]
         },
-        "patches": {
-            "drupal/language_selection_page": {
-                "https://www.drupal.org/project/language_selection_page/issues/3212711": "https://git.drupalcode.org/project/language_selection_page/-/merge_requests/1.diff"
-            }
-        },
+        "patches": {},
         "drush": {
             "services": {
                 "drush.services.yml": "^9"

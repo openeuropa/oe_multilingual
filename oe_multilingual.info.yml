@@ -1,5 +1,5 @@
-name: OpenEuropa Multilingual
-description: Multilingual features for the OpenEuropa project.
+name: 'OpenEuropa Multilingual'
+description: 'Multilingual features for the OpenEuropa project.'
 package: OpenEuropa
 type: module
 core_version_requirement: ^8.9 || ^9
