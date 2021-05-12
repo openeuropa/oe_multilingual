@@ -51,7 +51,7 @@ class InstallationTest extends KernelTestBase {
       'oe_multilingual',
     ]);
     $this->container->get('module_handler')->loadInclude('oe_multilingual', 'install');
-    oe_multilingual_install();
+    oe_multilingual_install(FALSE);
   }
 
   /**
