@@ -56,7 +56,7 @@
         },
         "patches": {
             "drupal/language_selection_page": {
-                "https://www.drupal.org/project/language_selection_page/issues/3212711": "https://www.drupal.org/files/issues/2021-05-07/3212711-2.patch"
+                "https://www.drupal.org/project/language_selection_page/issues/3212711": "https://git.drupalcode.org/project/language_selection_page/-/merge_requests/1.diff"
             }
         },
         "drush": {
