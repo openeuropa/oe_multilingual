@@ -1,7 +1,7 @@
 name: 'OpenEuropa Multilingual URL Suffix Test'
 description: 'Test module to test the language suffix negotiation functionality.'
 type: module
-core: 8.x
+core_version_requirement: ^8.9 || ^9
 
 dependencies:
   - oe_multilingual:oe_multilingual_url_suffix

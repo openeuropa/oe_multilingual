@@ -15,8 +15,8 @@ use Drupal\oe_multilingual\Plugin\LanguageNegotiation\LanguageNegotiationAdmin;
 /**
  * Implements hook_install().
  */
-function oe_multilingual_install() {
-  if (\Drupal::isConfigSyncing() === TRUE) {
+function oe_multilingual_install($is_syncing) {
+  if ($is_syncing) {
     // If config is syncing, we do nothing here.
     return;
   }

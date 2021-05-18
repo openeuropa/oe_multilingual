@@ -12,8 +12,8 @@ use Drupal\language_selection_page\Plugin\LanguageNegotiation\LanguageNegotiatio
 /**
  * Implements hook_install().
  */
-function oe_multilingual_selection_page_install(): void {
-  if (\Drupal::isConfigSyncing()) {
+function oe_multilingual_selection_page_install($is_syncing): void {
+  if ($is_syncing) {
     // If config is syncing, we do nothing here.
     return;
   }

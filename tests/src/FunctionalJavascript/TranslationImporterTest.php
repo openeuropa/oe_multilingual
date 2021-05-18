@@ -14,6 +14,11 @@ class TranslationImporterTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stark';
+
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = [
     'oe_multilingual',
     'translation_importer_test',

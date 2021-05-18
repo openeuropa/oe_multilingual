@@ -3,7 +3,7 @@
 namespace Drupal\oe_multilingual_front_page;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Path\AliasManager;
+use Drupal\path_alias\AliasManager;
 use Drupal\Core\PathProcessor\OutboundPathProcessorInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +23,7 @@ class PathProcessorFrontPage implements OutboundPathProcessorInterface {
   /**
    * Alias manager used to get front page alias.
    *
-   * @var \Drupal\Core\Path\AliasManager
+   * @var \Drupal\path_alias\AliasManager
    */
   protected $aliasManager;
 
@@ -32,7 +32,7 @@ class PathProcessorFrontPage implements OutboundPathProcessorInterface {
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config
    *   A config factory for retrieving the site front page configuration.
-   * @param \Drupal\Core\Path\AliasManager $aliasManager
+   * @param \Drupal\path_alias\AliasManager $aliasManager
    *   The alias manager.
    */
   public function __construct(ConfigFactoryInterface $config, AliasManager $aliasManager) {

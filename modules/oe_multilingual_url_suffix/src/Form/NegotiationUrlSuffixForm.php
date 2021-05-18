@@ -8,6 +8,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Routing\UrlGeneratorInterface;
 use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -24,16 +25,26 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
   protected $languageManager;
 
   /**
+   * The url generator.
+   *
+   * @var \Drupal\Core\Routing\UrlGeneratorInterface
+   */
+  protected $urlGenerator;
+
+  /**
    * Constructs a new NegotiationUrlSuffixForm object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    *   The language manager.
+   * @param \Drupal\Core\Routing\UrlGeneratorInterface $url_generator
+   *   The url generator.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, LanguageManagerInterface $language_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, LanguageManagerInterface $language_manager, UrlGeneratorInterface $url_generator) {
     parent::__construct($config_factory);
     $this->languageManager = $language_manager;
+    $this->urlGenerator = $url_generator;
   }
 
   /**
@@ -42,7 +53,8 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
-      $container->get('language_manager')
+      $container->get('language_manager'),
+      $container->get('url_generator')
     );
   }
 
@@ -114,7 +126,7 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
         // Throw a form error if the suffix is blank for any language,
         // as it is required for selected negotiation type.
         $form_state->setErrorByName("suffix][$langcode", $this->t('The suffix may only be left blank for the <a href=":url">selected detection fallback language.</a>', [
-          ':url' => $this->getUrlGenerator()->generate('language.negotiation_selected'),
+          ':url' => $this->urlGenerator->generate('language.negotiation_selected'),
         ]));
       }
       elseif (strpos($value, LanguageNegotiationUrlSuffix::SUFFIX_DELIMITER) !== FALSE) {

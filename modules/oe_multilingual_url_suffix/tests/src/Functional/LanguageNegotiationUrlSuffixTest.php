@@ -37,7 +37,12 @@ class LanguageNegotiationUrlSuffixTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected $defaultTheme = 'classy';
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function setUp(): void {
     parent::setUp();
 
     // Create an Article node type.
@@ -57,7 +62,8 @@ class LanguageNegotiationUrlSuffixTest extends BrowserTestBase {
 
     // Enable URL language detection and selection.
     $edit = ['language_interface[enabled][oe-multilingual-url-suffix-negotiation-method]' => 1];
-    $this->drupalPostForm('admin/config/regional/language/detection', $edit, t('Save settings'));
+    $this->drupalGet('admin/config/regional/language/detection');
+    $this->submitForm($edit, t('Save settings'));
   }
 
   /**
@@ -71,13 +77,15 @@ class LanguageNegotiationUrlSuffixTest extends BrowserTestBase {
     $edit = [
       'suffix[en]' => 'eng',
     ];
-    $this->drupalPostForm('admin/config/regional/language/detection/url-suffix_en', $edit, $this->t('Save configuration'));
+    $this->drupalGet('admin/config/regional/language/detection/url-suffix_en');
+    $this->submitForm($edit, $this->t('Save configuration'));
 
     $nodeValues = [
       'title[0][value]' => 'Test',
       'path[0][alias]' => '/test_eng',
     ];
-    $this->drupalPostForm('node/add/article_eng', $nodeValues, $this->t('Save'));
+    $this->drupalGet('node/add/article_eng');
+    $this->submitForm($nodeValues, $this->t('Save'));
     $this->assertSession()->statusCodeEquals(200);
 
     $this->drupalGet('/test_eng_eng');
