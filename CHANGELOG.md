@@ -1,11 +1,20 @@
-# Changelog
+# Change Log
+
+## [1.7.0](https://github.com/openeuropa/oe_multilingual/tree/1.7.0) (2021-06-15)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.6.0...1.7.0)
+
+**Merged pull requests:**
+
+- EWPP-919: Drupal 9 compatibility fixes. [\#121](https://github.com/openeuropa/oe_multilingual/pull/121) ([22Alexandra](https://github.com/22Alexandra))
+- EWPP-942: Order of languages in language switcher. [\#120](https://github.com/openeuropa/oe_multilingual/pull/120) ([yenyasinn](https://github.com/yenyasinn))
+- EWPP-721: Update xdebug configuration. [\#118](https://github.com/openeuropa/oe_multilingual/pull/118) ([22Alexandra](https://github.com/22Alexandra))
 
 ## [1.6.0](https://github.com/openeuropa/oe_multilingual/tree/1.6.0) (2021-03-11)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.5.0...1.6.0)
 
 **Merged pull requests:**
 
+- Release-1.6.0: Update changelog for release 1.6.0. [\#119](https://github.com/openeuropa/oe_multilingual/pull/119) ([sergepavle](https://github.com/sergepavle))
 - EWPP-529: Replace scaffold library. [\#115](https://github.com/openeuropa/oe_multilingual/pull/115) ([sergepavle](https://github.com/sergepavle))
 - EWPP-606: Introduce category setting to language config entity. [\#114](https://github.com/openeuropa/oe_multilingual/pull/114) ([nagyad](https://github.com/nagyad))
 - EWPP-516: Update docker images. [\#113](https://github.com/openeuropa/oe_multilingual/pull/113) ([22Alexandra](https://github.com/22Alexandra))
