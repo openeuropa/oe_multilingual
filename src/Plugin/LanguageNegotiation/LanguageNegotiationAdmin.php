@@ -23,7 +23,7 @@ class LanguageNegotiationAdmin extends LanguageNegotiationUserAdmin {
   /**
    * The language negotiation method id.
    */
-  const METHOD_ID = 'language-admin';
+  const METHOD_ID = 'language-user-admin';
 
   /**
    * {@inheritdoc}
