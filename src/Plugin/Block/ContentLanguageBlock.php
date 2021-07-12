@@ -4,10 +4,13 @@ declare(strict_types = 1);
 
 namespace Drupal\oe_multilingual\Plugin\Block;
 
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Access\AccessResultInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\language\Plugin\Block\LanguageBlock;
 use Drupal\oe_multilingual\MultilingualHelperInterface;
 use Drupal\oe_multilingual\ContentLanguageSwitcherProvider;
@@ -81,23 +84,8 @@ class ContentLanguageBlock extends LanguageBlock implements ContainerFactoryPlug
    * {@inheritdoc}
    */
   public function build() {
-    $build = [];
-
     $entity = $this->multilingualHelper->getEntityFromCurrentRoute();
-    // Bail out if there is no entity or if it's not a content entity.
-    if (!$entity || !$entity instanceof ContentEntityInterface) {
-      return $build;
-    }
-
-    // Render the links only if the current entity translation language is not
-    // the same as the current site language.
-    $translation = $this->multilingualHelper->getCurrentLanguageEntityTranslation($entity);
-    if ($translation->language()->getId() === $this->languageManager->getCurrentLanguage()->getId()) {
-      return $build;
-    }
-
     $available_languages = $this->contentLanguageSwitcherProvider->getAvailableEntityLanguages($entity);
-
     // Currently the language switcher block cannot be cached:
     // https://www.drupal.org/node/2232375
     $build = [
@@ -111,6 +99,25 @@ class ContentLanguageBlock extends LanguageBlock implements ContainerFactoryPlug
       '#set_active_class' => TRUE,
     ];
     return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function blockAccess(AccountInterface $account): AccessResultInterface {
+    $entity = $this->multilingualHelper->getEntityFromCurrentRoute();
+    // Bail out if there is no entity or if it's not a content entity.
+    if (!$entity || !$entity instanceof ContentEntityInterface) {
+      return AccessResult::forbidden();
+    }
+
+    // Render the links only if the current entity translation language is not
+    // the same as the current site language.
+    $translation = $this->multilingualHelper->getCurrentLanguageEntityTranslation($entity);
+    if ($translation->language()->getId() === $this->languageManager->getCurrentLanguage()->getId()) {
+      return AccessResult::forbidden();
+    }
+    return parent::blockAccess($account);
   }
 
 }
