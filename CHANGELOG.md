@@ -1,5 +1,12 @@
 # Change Log
 
+## [1.8.0](https://github.com/openeuropa/oe_multilingual/tree/1.8.0) (2021-07-26)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.7.0...1.8.0)
+
+**Merged pull requests:**
+
+- \[EWPP-1142\] EWPP-1278: Move access check to appropriate method. [\#125](https://github.com/openeuropa/oe_multilingual/pull/125) ([imanoleguskiza](https://github.com/imanoleguskiza))
+
 ## [1.7.0](https://github.com/openeuropa/oe_multilingual/tree/1.7.0) (2021-06-15)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.6.0...1.7.0)
 
