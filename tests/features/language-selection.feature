@@ -18,17 +18,16 @@ Feature: Language selection
       | Title | Página de teste |
       | Body  | Olá Mundo       |
 
-  Scenario: When I visit the homepage I'm presented with a language selection page
+  Scenario: When I visit the site I'm presented with a language selection page
+    # First visit the homepage.
     Given I am on the homepage
     Then I should be redirected to the language selection page
     When I click "français"
     Then the url should match "/fr"
     When I click "português"
     Then the url should match "/pt"
-
-  Scenario: Users visiting a page should be presented with the language selection page,
-            if no language is detected in the URL.
-    Given I visit the "Test page" content
+    # Now visit another page and assert the language links are correct.
+    When I visit the "Test page" content
     Then I should be redirected to the language selection page
     When I click "français"
     Then the url should match "/fr/page-de-test"
