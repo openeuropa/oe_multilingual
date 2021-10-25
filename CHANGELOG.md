@@ -1,22 +1,35 @@
-# Change Log
+# Changelog
+
+## [1.9.0](https://github.com/openeuropa/oe_multilingual/tree/1.9.0) (2021-10-25)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.8.0...1.9.0)
+
+**Merged pull requests:**
+
+- EWPP-1618: Updating language\_selection\_page version. [\#128](https://github.com/openeuropa/oe_multilingual/pull/128) ([upchuk](https://github.com/upchuk))
 
 ## [1.8.0](https://github.com/openeuropa/oe_multilingual/tree/1.8.0) (2021-07-26)
+
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.7.0...1.8.0)
 
 **Merged pull requests:**
 
+- Update CHANGELOG.md for release 1.8.0. [\#127](https://github.com/openeuropa/oe_multilingual/pull/127) ([ademarco](https://github.com/ademarco))
 - \[EWPP-1142\] EWPP-1278: Move access check to appropriate method. [\#125](https://github.com/openeuropa/oe_multilingual/pull/125) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [1.7.0](https://github.com/openeuropa/oe_multilingual/tree/1.7.0) (2021-06-15)
+
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.6.0...1.7.0)
 
 **Merged pull requests:**
 
+- Prepare changelog for release 1.7.0. [\#122](https://github.com/openeuropa/oe_multilingual/pull/122) ([brummbar](https://github.com/brummbar))
 - EWPP-919: Drupal 9 compatibility fixes. [\#121](https://github.com/openeuropa/oe_multilingual/pull/121) ([22Alexandra](https://github.com/22Alexandra))
 - EWPP-942: Order of languages in language switcher. [\#120](https://github.com/openeuropa/oe_multilingual/pull/120) ([yenyasinn](https://github.com/yenyasinn))
 - EWPP-721: Update xdebug configuration. [\#118](https://github.com/openeuropa/oe_multilingual/pull/118) ([22Alexandra](https://github.com/22Alexandra))
 
 ## [1.6.0](https://github.com/openeuropa/oe_multilingual/tree/1.6.0) (2021-03-11)
+
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.5.0...1.6.0)
 
 **Merged pull requests:**
