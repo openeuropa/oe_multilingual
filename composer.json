@@ -6,23 +6,23 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.3",
-        "drupal/core": "^8.9 || ^9",
+        "php": ">=7.4",
+        "drupal/core": "^9.2",
         "drupal/language_selection_page": "^2.10",
         "drupal/pathauto": "^1.6"
     },
     "require-dev": {
         "composer/installers": "~1.5",
-        "drupal/core-composer-scaffold": "^8.9 || ^9",
+        "drupal/core-composer-scaffold": "^9.2",
+        "drupal/core-dev": "^9.2",
         "drupal/config_devel": "~1.2",
         "drupal/devel": "~4.1",
         "drupal/drupal-extension": "~4.0",
         "drupal/redirect": "^1.6",
         "drush/drush": "~10.3",
         "openeuropa/behat-transformation-context": "~0.1",
-        "openeuropa/code-review": "~1.6",
-        "openeuropa/drupal-core-require-dev": "^8.9 || ^9",
-        "openeuropa/task-runner-drupal-project-symlink": "^1.0",
+        "openeuropa/code-review": "^2.0",
+        "openeuropa/task-runner-drupal-project-symlink": "^1.0-beta5",
         "phpunit/phpunit": "^7 || ^8"
     },
     "scripts": {
@@ -67,6 +67,12 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "phpro/grumphp": true
+        }
     }
 }

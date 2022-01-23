@@ -16,6 +16,7 @@ services:
   web:
     image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     environment:
+      - COMPOSERVER=--2
       - DOCUMENT_ROOT=/test/oe_multilingual
   mysql:
     image: registry.fpfis.eu/fpfis/sql:percona-5.7
@@ -34,13 +35,17 @@ services:
       - NODE_MAX_SESSION=5
 
 pipeline:
-  composer-install:
+  composer-install-highest:
     group: prepare
     image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     volumes:
       - /cache:/cache
     commands:
-      - composer install --ansi --no-suggest --no-progress
+      - composer self-update --2
+      - composer install --ansi --no-progress
+    when:
+      matrix:
+        COMPOSER_BOUNDARY: highest
 
   composer-update-lowest:
     group: prepare-update
@@ -48,7 +53,8 @@ pipeline:
     volumes:
       - /cache:/cache
     commands:
-      - composer update --prefer-lowest --prefer-stable --ansi --no-suggest --no-progress
+      - composer self-update --2
+      - composer update --prefer-lowest --prefer-stable --ansi --no-progress
     when:
       matrix:
         COMPOSER_BOUNDARY: lowest
@@ -81,4 +87,5 @@ matrix:
     - lowest
     - highest
   PHP_VERSION:
-    - 7.3
+    - 7.4
+    - 8.0
