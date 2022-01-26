@@ -1,11 +1,20 @@
 # Changelog
 
+## [1.10.0](https://github.com/openeuropa/oe_multilingual/tree/1.10.0) (2022-01-26)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.9.0...1.10.0)
+
+**Merged pull requests:**
+
+- EWPP-1907: Update to PHP8. [\#130](https://github.com/openeuropa/oe_multilingual/pull/130) ([22Alexandra](https://github.com/22Alexandra))
+
 ## [1.9.0](https://github.com/openeuropa/oe_multilingual/tree/1.9.0) (2021-10-25)
 
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.8.0...1.9.0)
 
 **Merged pull requests:**
 
+- Prepare release 1.9.0. [\#129](https://github.com/openeuropa/oe_multilingual/pull/129) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - EWPP-1618: Updating language\_selection\_page version. [\#128](https://github.com/openeuropa/oe_multilingual/pull/128) ([upchuk](https://github.com/upchuk))
 
 ## [1.8.0](https://github.com/openeuropa/oe_multilingual/tree/1.8.0) (2021-07-26)
@@ -212,6 +221,7 @@
 **Merged pull requests:**
 
 - Release 0.3.1 changelog. [\#56](https://github.com/openeuropa/oe_multilingual/pull/56) ([imanoleguskiza](https://github.com/imanoleguskiza))
+- OPENEUROPA-1754: Move content language switcher to header. [\#55](https://github.com/openeuropa/oe_multilingual/pull/55) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [0.3.0](https://github.com/openeuropa/oe_multilingual/tree/0.3.0) (2019-03-27)
 
@@ -219,7 +229,6 @@
 
 **Merged pull requests:**
 
-- OPENEUROPA-1754: Move content language switcher to header. [\#55](https://github.com/openeuropa/oe_multilingual/pull/55) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - Create the release 0.3.0 [\#54](https://github.com/openeuropa/oe_multilingual/pull/54) ([voidtek](https://github.com/voidtek))
 - OPENEUROPA-1674: Make sure reenabling any language preserves configuration. [\#53](https://github.com/openeuropa/oe_multilingual/pull/53) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - OPENEUROPA-1609: Add ajax\_timeout setting for behat. [\#51](https://github.com/openeuropa/oe_multilingual/pull/51) ([nagyad](https://github.com/nagyad))
