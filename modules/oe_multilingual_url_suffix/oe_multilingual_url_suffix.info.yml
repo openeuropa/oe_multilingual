@@ -1,7 +1,7 @@
 name: 'OpenEuropa Multilingual URL Suffix'
 type: module
 description: 'Provides language detection method based on URL suffix.'
-core_version_requirement: ^9.2
+core_version_requirement: ^9.3
 package: 'OpenEuropa'
 
 dependencies:

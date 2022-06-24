@@ -102,7 +102,7 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
         '#type' => 'textfield',
         '#title' => $this->t('%language (%langcode) path suffix %default_language', $t_args),
         '#maxlength' => 64,
-        '#default_value' => isset($suffixes[$langcode]) ? $suffixes[$langcode] : substr($langcode, 0, 2),
+        '#default_value' => $suffixes[$langcode] ?? substr($langcode, 0, 2),
         '#field_prefix' => $base_url . '/index' . LanguageNegotiationUrlSuffix::SUFFIX_DELIMITER,
       ];
     }
