@@ -17,7 +17,7 @@
         "drupal/config_devel": "~1.2",
         "drupal/core-composer-scaffold": "^9.3",
         "drupal/core-dev": "^9.3",
-        "drupal/ctools": "^3.7",
+        "drupal/ctools": "3.9.0",
         "drupal/devel": "~4.1",
         "drupal/drupal-extension": "~4.0",
         "drupal/redirect": "^1.6",
@@ -27,7 +27,7 @@
         "openeuropa/behat-transformation-context": "~0.1",
         "openeuropa/code-review": "^2.0",
         "openeuropa/task-runner-drupal-project-symlink": "^1.0-beta5",
-        "phpspec/prophecy-phpunit": "^1 || ^2",
+        "phpspec/prophecy-phpunit": "^2",
         "symfony/dom-crawler": "^4.4.12"
     },
     "_readme": [
