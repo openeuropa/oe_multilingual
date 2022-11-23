@@ -7,7 +7,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.0",
-        "drupal/core": "^9.3",
+        "drupal/core": "^9.4",
         "drupal/language_selection_page": "^2.10",
         "drupal/pathauto": "^1.8"
     },
@@ -15,8 +15,8 @@
         "behat/behat": "^3.10",
         "composer/installers": "~1.5",
         "drupal/config_devel": "~1.2",
-        "drupal/core-composer-scaffold": "^9.3",
-        "drupal/core-dev": "^9.3",
+        "drupal/core-composer-scaffold": "^9.4",
+        "drupal/core-dev": "^9.4",
         "drupal/ctools": "3.9.0",
         "drupal/devel": "~4.1",
         "drupal/drupal-extension": "~4.0",
