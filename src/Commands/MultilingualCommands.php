@@ -43,10 +43,10 @@ class MultilingualCommands extends DrushCommands {
    * @validate-module-enabled locale
    */
   public function importLocalTranslations(array $options = ['langcodes' => self::OPT]): void {
-    $langcodes = $options['langcodes'] ? $options['langcodes'] : [];
+    $langcodes = $options['langcodes'] ?: [];
 
     $this->localTranslationsBatcher->createBatch($langcodes);
-    $batch =& batch_get();
+    $batch = &batch_get();
     if (!$batch) {
       return;
     }
