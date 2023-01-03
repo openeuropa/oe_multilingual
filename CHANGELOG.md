@@ -1,12 +1,21 @@
 # Changelog
 
-## [1.11.0](https://github.com/openeuropa/oe_multilingual/tree/1.11.0) (2022-08-01)
+## [1.12.0](https://github.com/openeuropa/oe_multilingual/tree/1.12.0) (2023-01-03)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.11.0...1.12.0)
+
+**Merged pull requests:**
+
+- EWPP-2787: Update to PHP 8.1. [\#137](https://github.com/openeuropa/oe_multilingual/pull/137) ([22Alexandra](https://github.com/22Alexandra))
+
+## [1.11.0](https://github.com/openeuropa/oe_multilingual/tree/1.11.0) (2022-08-02)
 
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.10.0...1.11.0)
 
 **Merged pull requests:**
 
 - EWPP: Fix ctools version. [\#135](https://github.com/openeuropa/oe_multilingual/pull/135) ([imanoleguskiza](https://github.com/imanoleguskiza))
+- Prepare release 1.11.0. [\#134](https://github.com/openeuropa/oe_multilingual/pull/134) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - EWPP-2358: Drupal 9.4 support. [\#133](https://github.com/openeuropa/oe_multilingual/pull/133) ([yenyasinn](https://github.com/yenyasinn))
 
 ## [1.10.0](https://github.com/openeuropa/oe_multilingual/tree/1.10.0) (2022-01-26)
