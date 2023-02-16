@@ -4,9 +4,9 @@ dependencies:
   module:
     - oe_multilingual
   theme:
-    - bartik
+    - olivero
 id: oe_multilingual_content_language_switcher
-theme: bartik
+theme: olivero
 region: content
 weight: 1
 provider: null
