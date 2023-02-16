@@ -23,7 +23,7 @@ class LanguageNegotiationSetterTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'locale',
     'language',
     'oe_multilingual',
@@ -34,7 +34,7 @@ class LanguageNegotiationSetterTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->installSchema('locale', [

@@ -84,7 +84,7 @@ function oe_multilingual_configurable_language_insert(EntityInterface $entity) {
 
   $reader = new PoStreamReader();
   $reader->setLangcode($entity->getId());
-  $file = drupal_get_path('module', 'oe_multilingual') . "/translations/oe_multilingual-{$entity->getId()}.po";
+  $file = \Drupal::service('extension.list.module')->getPath('oe_multilingual') . "/translations/oe_multilingual-{$entity->getId()}.po";
   if (!file_exists($file)) {
     return;
   }
@@ -112,7 +112,7 @@ function oe_multilingual_configurable_language_insert(EntityInterface $entity) {
  * Implements hook_locale_translation_projects_alter().
  */
 function oe_multilingual_locale_translation_projects_alter(&$projects) {
-  $projects['oe_multilingual']['info']['interface translation server pattern'] = drupal_get_path('module', 'oe_multilingual') . '/translations/%project-%language.po';
+  $projects['oe_multilingual']['info']['interface translation server pattern'] = \Drupal::service('extension.list.module')->getPath('oe_multilingual') . '/translations/%project-%language.po';
 }
 
 /**

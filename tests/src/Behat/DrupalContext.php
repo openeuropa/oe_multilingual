@@ -168,7 +168,10 @@ class DrupalContext extends RawDrupalContext {
    * @Given I visit a test :scheme file called :name
    */
   public function createTestFile(string $scheme, string $name) {
-    $file = file_save_data(file_get_contents(drupal_get_path('module', 'oe_multilingual') . '/tests/fixtures/' . $name), "$scheme://$name");
+    $file = \Drupal::service('file.repository')->writeData(
+      file_get_contents(\Drupal::service('extension.list.module')->getPath('oe_multilingual') . '/tests/fixtures/' . $name),
+      "$scheme://$name"
+    );
     $file->setPermanent();
     $file->save();
 
