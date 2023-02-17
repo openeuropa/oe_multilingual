@@ -175,7 +175,7 @@ class DrupalContext extends RawDrupalContext {
     $file->setPermanent();
     $file->save();
 
-    $this->visitPath(file_create_url($file->getFileUri()));
+    $this->visitPath(\Drupal::service('file_url_generator')->generateAbsoluteString(($file->getFileUri())));
     $file->delete();
   }
 
