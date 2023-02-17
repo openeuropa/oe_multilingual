@@ -8,14 +8,14 @@ label: 'Demo translatable page'
 type: 'canonical_entities:node'
 pattern: '[node:title]'
 selection_criteria:
-  4c3dfef3-a556-41cf-8639-2d381e6ea498:
-    id: node_type
-    bundles:
-      oe_demo_translatable_page: oe_demo_translatable_page
+  5b3e57dd-e9d8-4eba-8f46-0bd833fde911:
+    id: 'entity_bundle:node'
     negate: false
+    uuid: 5b3e57dd-e9d8-4eba-8f46-0bd833fde911
     context_mapping:
       node: node
-    uuid: 4c3dfef3-a556-41cf-8639-2d381e6ea498
+    bundles:
+      oe_demo_translatable_page: oe_demo_translatable_page
 selection_logic: and
 weight: -5
 relationships: {  }
