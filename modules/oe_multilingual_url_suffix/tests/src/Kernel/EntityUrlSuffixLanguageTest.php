@@ -22,7 +22,7 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'entity_test',
     'language',
     'user',
@@ -41,7 +41,7 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->installEntitySchema('entity_test');

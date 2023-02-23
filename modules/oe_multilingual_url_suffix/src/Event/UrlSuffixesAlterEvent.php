@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\oe_multilingual_url_suffix\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Dispatched by LanguageNegotiationUrlSuffix::getUrlSuffixes().

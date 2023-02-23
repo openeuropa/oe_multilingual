@@ -158,7 +158,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
     // Allow other modules to alter the list of suffixes available to the
     // negotiator.
     $event = new UrlSuffixesAlterEvent($url_suffixes);
-    $this->eventDispatcher->dispatch(UrlSuffixesAlterEvent::EVENT, $event);
+    $this->eventDispatcher->dispatch($event, UrlSuffixesAlterEvent::EVENT);
 
     return $event->getUrlSuffixes();
   }

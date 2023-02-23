@@ -48,13 +48,13 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     // Set up some languages to be used by the language-based path processor.
-    $language_de = $this->getMockBuilder('\Drupal\Core\Language\LanguageInterface')->getMock();
+    $language_de = $this->createMock('\Drupal\Core\Language\LanguageInterface');
     $language_de->expects($this->any())
       ->method('getId')
       ->will($this->returnValue('de'));
-    $language_en = $this->getMockBuilder('\Drupal\Core\Language\LanguageInterface')->getMock();
+    $language_en = $this->createMock('\Drupal\Core\Language\LanguageInterface');
     $language_en->expects($this->any())
       ->method('getId')
       ->will($this->returnValue('en'));
@@ -64,24 +64,19 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
     ];
 
     // Create event dispatcher stub.
-    $this->eventDispatcher = $this->getMockBuilder('\Symfony\Component\EventDispatcher\EventDispatcherInterface')
-      ->disableOriginalConstructor()
-      ->getMock();
+    $this->eventDispatcher = $this->createMock('\Symfony\Component\EventDispatcher\EventDispatcherInterface');
 
     // Create a language manager stub.
-    $language_manager = $this->getMockBuilder('Drupal\language\ConfigurableLanguageManagerInterface')
-      ->getMock();
+    $language_manager = $this->createMock('Drupal\language\ConfigurableLanguageManagerInterface');
     $language_manager->expects($this->any())
       ->method('getLanguages')
       ->will($this->returnValue($this->languages));
     $this->languageManager = $language_manager;
 
     // Create a user stub.
-    $this->user = $this->getMockBuilder('Drupal\Core\Session\AccountInterface')->getMock();
+    $this->user = $this->createMock('Drupal\Core\Session\AccountInterface');
 
-    $cache_contexts_manager = $this->getMockBuilder('Drupal\Core\Cache\Context\CacheContextsManager')
-      ->disableOriginalConstructor()
-      ->getMock();
+    $cache_contexts_manager = $this->createMock('Drupal\Core\Cache\Context\CacheContextsManager');
     $cache_contexts_manager->method('assertValidTokens')->willReturn(TRUE);
     $container = new ContainerBuilder();
     $container->set('cache_contexts_manager', $cache_contexts_manager);

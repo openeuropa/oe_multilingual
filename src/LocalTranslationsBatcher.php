@@ -146,7 +146,7 @@ class LocalTranslationsBatcher {
       'title' => $this->t('Importing translations.'),
       'progress_message' => '',
       'error_message' => $this->t('Error importing translation files'),
-      'file' => drupal_get_path('module', 'locale') . '/locale.batch.inc',
+      'file' => \Drupal::service('extension.list.module')->getPath('locale') . '/locale.batch.inc',
     ];
 
     batch_set($batch);
