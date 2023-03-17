@@ -7,7 +7,7 @@ services:
     arguments: ['@entity.repository', '@current_route_match']
   oe_multilingual.content_language_switcher_provider:
     class: Drupal\oe_multilingual\ContentLanguageSwitcherProvider
-    arguments: ['@language_manager', '@path.matcher', '@oe_multilingual.helper']
+    arguments: ['@language_manager', '@oe_multilingual.helper', '@current_route_match']
   oe_multilingual.local_translations_batcher:
     class: Drupal\oe_multilingual\LocalTranslationsBatcher
     arguments: ['@module_handler', '@theme_handler', '@language_manager', '@extension.list.module', '@extension.list.theme', '@extension.list.profile', '@file_system']

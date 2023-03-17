@@ -7,7 +7,7 @@ namespace Drupal\oe_multilingual;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
-use Drupal\Core\Path\PathMatcherInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 
 /**
@@ -30,26 +30,26 @@ class ContentLanguageSwitcherProvider {
   protected $languageManager;
 
   /**
-   * The path matcher.
+   * The active route match.
    *
-   * @var \Drupal\Core\Path\PathMatcherInterface
+   * @var \Drupal\Core\Routing\RouteMatchInterface
    */
-  protected $pathMatcher;
+  protected $routeMatch;
 
   /**
    * Constructs an ContentLanguageBlock object.
    *
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    *   The language manager.
-   * @param \Drupal\Core\Path\PathMatcherInterface $path_matcher
-   *   The path matcher.
    * @param \Drupal\oe_multilingual\MultilingualHelperInterface $multilingual_helper
    *   The multilingual helper service.
+   * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
+   *   The current route match.
    */
-  public function __construct(LanguageManagerInterface $language_manager, PathMatcherInterface $path_matcher, MultilingualHelperInterface $multilingual_helper) {
+  public function __construct(LanguageManagerInterface $language_manager, MultilingualHelperInterface $multilingual_helper, RouteMatchInterface $route_match) {
     $this->languageManager = $language_manager;
-    $this->pathMatcher = $path_matcher;
     $this->multilingualHelper = $multilingual_helper;
+    $this->routeMatch = $route_match;
   }
 
   /**
@@ -62,8 +62,7 @@ class ContentLanguageSwitcherProvider {
    *   Array of available translation links.
    */
   public function getAvailableEntityLanguages(EntityInterface $entity) {
-    $route_name = $this->pathMatcher->isFrontPage() ? '<front>' : '<current>';
-    $links = $this->languageManager->getLanguageSwitchLinks(LanguageInterface::TYPE_CONTENT, Url::fromRoute($route_name));
+    $links = $this->languageManager->getLanguageSwitchLinks(LanguageInterface::TYPE_CONTENT, Url::fromRouteMatch($this->routeMatch));
 
     $available_languages = [];
     if (isset($links->links)) {
