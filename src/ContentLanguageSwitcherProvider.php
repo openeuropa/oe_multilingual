@@ -7,6 +7,7 @@ namespace Drupal\oe_multilingual;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 
@@ -37,18 +38,34 @@ class ContentLanguageSwitcherProvider {
   protected $routeMatch;
 
   /**
+   * The path matcher.
+   *
+   * @var \Drupal\Core\Path\PathMatcherInterface
+   */
+  protected $pathMatcher;
+
+  /**
    * Constructs an ContentLanguageBlock object.
    *
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    *   The language manager.
+   * @param \Drupal\Core\Path\PathMatcherInterface $path_matcher
+   *   The path matcher (deprecated).
    * @param \Drupal\oe_multilingual\MultilingualHelperInterface $multilingual_helper
    *   The multilingual helper service.
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
    *   The current route match.
    */
-  public function __construct(LanguageManagerInterface $language_manager, MultilingualHelperInterface $multilingual_helper, RouteMatchInterface $route_match) {
+  public function __construct(LanguageManagerInterface $language_manager, PathMatcherInterface $path_matcher, MultilingualHelperInterface $multilingual_helper, RouteMatchInterface $route_match = NULL) {
     $this->languageManager = $language_manager;
+    $this->pathMatcher = $path_matcher;
     $this->multilingualHelper = $multilingual_helper;
+    // @codingStandardsIgnoreStart
+    if (!$route_match) {
+      @trigger_error('Calling ContentLanguageSwitcherProvider::__construct() without the $route_match argument is deprecated in 1.14.0 and will be required from 2.0.0.', E_USER_DEPRECATED);
+      $route_match = \Drupal::service('current_route_match');
+    }
+    // @codingStandardsIgnoreEnd
     $this->routeMatch = $route_match;
   }
 
