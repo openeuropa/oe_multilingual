@@ -1,13 +1,29 @@
 # Changelog
 
-## [1.13.0](https://github.com/openeuropa/oe_multilingual/tree/1.13.0) (2023-03-03)
-[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.12.0...1.13.0)
+## [1.14.0](https://github.com/openeuropa/oe_multilingual/tree/1.14.0) (2023-03-21)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.13.0...1.14.0)
 
 **Merged pull requests:**
 
+- EWPP-3180: Add deprecation notice when route match is not provided. [\#142](https://github.com/openeuropa/oe_multilingual/pull/142) ([nagyad](https://github.com/nagyad))
+- EWPP-3180: Use route match to get the language switch links. [\#141](https://github.com/openeuropa/oe_multilingual/pull/141) ([nagyad](https://github.com/nagyad))
+
+## [1.13.0](https://github.com/openeuropa/oe_multilingual/tree/1.13.0) (2023-03-03)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.12.0...1.13.0)
+
+**Closed issues:**
+
+- Languages can't be sorted on language ui. [\#106](https://github.com/openeuropa/oe_multilingual/issues/106)
+
+**Merged pull requests:**
+
+- Prepare changelog for release 1.13.0 [\#140](https://github.com/openeuropa/oe_multilingual/pull/140) ([brummbar](https://github.com/brummbar))
 - EWPP-2963: Drupal 10 compatibility. [\#139](https://github.com/openeuropa/oe_multilingual/pull/139) ([brummbar](https://github.com/brummbar))
 
 ## [1.12.0](https://github.com/openeuropa/oe_multilingual/tree/1.12.0) (2023-01-03)
+
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.11.0...1.12.0)
 
 **Merged pull requests:**
