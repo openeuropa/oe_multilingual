@@ -73,7 +73,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
   public function getLangcode(Request $request = NULL) {
     $langcode = NULL;
 
-    $url_suffixes = $this->getUrlSuffixes();
+    $url_suffixes = $this->getUrlSuffixes($request->getPathInfo());
     if ($request && $this->languageManager && $url_suffixes) {
       $request_path = urldecode(trim($request->getPathInfo(), '/'));
       $parts = explode(static::SUFFIX_DELIMITER, $request_path);
@@ -100,7 +100,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
    * {@inheritdoc}
    */
   public function processInbound($path, Request $request) {
-    $url_suffixes = $this->getUrlSuffixes();
+    $url_suffixes = $this->getUrlSuffixes($path);
     if (!empty($url_suffixes) && is_array($url_suffixes)) {
 
       // Split the path by the defined delimiter.
@@ -135,7 +135,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
     }
 
     // Append suffix to path.
-    $url_suffixes = $this->getUrlSuffixes();
+    $url_suffixes = $this->getUrlSuffixes($path);
     if (isset($url_suffixes[$options['language']->getId()])) {
       $path .= static::SUFFIX_DELIMITER . $url_suffixes[$options['language']->getId()];
       if ($bubbleable_metadata) {
@@ -149,15 +149,21 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
   /**
    * Get the list of url suffixes from config.
    *
+   * @param string|null $path
+   *   The path.
+   *
    * @return array
    *   The array of language suffixes.
    */
-  public function getUrlSuffixes(): array {
+  public function getUrlSuffixes(string $path = NULL): array {
     $url_suffixes = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes') ?? [];
 
     // Allow other modules to alter the list of suffixes available to the
     // negotiator.
     $event = new UrlSuffixesAlterEvent($url_suffixes);
+    if ($path) {
+      $event->setPath($path);
+    }
     $this->eventDispatcher->dispatch($event, UrlSuffixesAlterEvent::EVENT);
 
     return $event->getUrlSuffixes();

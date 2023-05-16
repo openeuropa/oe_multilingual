@@ -23,6 +23,7 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
    * @var array
    */
   protected static $modules = [
+    'system',
     'entity_test',
     'language',
     'user',
@@ -61,6 +62,7 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
       LanguageNegotiationUrlSuffix::METHOD_ID => 0,
     ]);
     $config->save();
+    $this->config('system.site')->set('page.front', '/')->save();
 
     $this->createTranslatableEntity();
   }
@@ -78,6 +80,12 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
     // Assert that the '_en' is not found, because of our test event subscriber.
     // @see: TestUrlSuffixesAlterEventSubscriber::alterUrlSuffixes().
     $this->assertTrue(strpos($this->entity->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_en') === FALSE);
+    $config = $this->config('oe_multilingual_url_suffix.settings');
+    $values = $config->getRawData();
+    $values['whitelisted_paths'] = ['/entity_test/*'];
+    $config->setData($values);
+    $config->save();
+    $this->assertTrue(strpos($this->entity->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_en') !== FALSE);
   }
 
   /**

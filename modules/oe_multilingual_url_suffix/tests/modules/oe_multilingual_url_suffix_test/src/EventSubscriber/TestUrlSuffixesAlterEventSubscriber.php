@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace Drupal\oe_multilingual_url_suffix_test\EventSubscriber;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\State\State;
 use Drupal\oe_multilingual_url_suffix\Event\UrlSuffixesAlterEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -23,13 +25,33 @@ class TestUrlSuffixesAlterEventSubscriber implements EventSubscriberInterface {
   protected $state;
 
   /**
+   * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
+   * The path matcher.
+   *
+   * @var \Drupal\Core\Path\PathMatcherInterface
+   */
+  protected $pathMatcher;
+
+  /**
    * TestUrlSuffixesAlterEventSubscriber constructor.
    *
    * @param \Drupal\Core\State\State $state
    *   The state.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The config factory.
+   * @param \Drupal\Core\Path\PathMatcherInterface $path_matcher
+   *   The path matcher.
    */
-  public function __construct(State $state) {
+  public function __construct(State $state, ConfigFactoryInterface $config_factory, PathMatcherInterface $path_matcher) {
     $this->state = $state;
+    $this->configFactory = $config_factory;
+    $this->pathMatcher = $path_matcher;
   }
 
   /**
@@ -54,6 +76,16 @@ class TestUrlSuffixesAlterEventSubscriber implements EventSubscriberInterface {
 
     if (!is_array($blacklist)) {
       return;
+    }
+
+    $whitelisted_paths = $this->configFactory->get('oe_multilingual_url_suffix.settings')->get('whitelisted_paths') ?? [];
+    if (!$event->getPath()) {
+      return;
+    }
+    foreach ($whitelisted_paths as $whitelisted_path) {
+      if ($event->getPath() && $this->pathMatcher->matchPath($event->getPath(), $whitelisted_path)) {
+        return;
+      }
     }
 
     $suffixes = $event->getUrlSuffixes();

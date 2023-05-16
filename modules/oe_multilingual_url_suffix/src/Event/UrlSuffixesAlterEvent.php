@@ -24,6 +24,13 @@ class UrlSuffixesAlterEvent extends Event {
   protected $urlSuffixes;
 
   /**
+   * The path.
+   *
+   * @var string
+   */
+  protected string $path;
+
+  /**
    * The UrlSuffixesAlterEvent constructor.
    *
    * @param array $url_suffixes
@@ -51,6 +58,26 @@ class UrlSuffixesAlterEvent extends Event {
    */
   public function getUrlSuffixes(): array {
     return $this->urlSuffixes;
+  }
+
+  /**
+   * Sets the path of target URL.
+   *
+   * @param string $path
+   *   The path.
+   */
+  public function setPath(string|null $path): void {
+    $this->path = $path;
+  }
+
+  /**
+   * Gets the path of target URL.
+   *
+   * @return string|null
+   *   The path.
+   */
+  public function getPath(): ?string {
+    return $this->path ?? NULL;
   }
 
 }

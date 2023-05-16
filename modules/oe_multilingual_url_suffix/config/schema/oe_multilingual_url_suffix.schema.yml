@@ -8,3 +8,8 @@ oe_multilingual_url_suffix.settings:
       sequence:
         type: string
         label: 'Path suffix'
+    whitelisted_paths:
+      type: sequence
+      label: 'Whitelisted paths'
+      sequence:
+        type: string
