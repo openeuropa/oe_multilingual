@@ -8,6 +8,8 @@ oe_multilingual_url_suffix.settings:
       sequence:
         type: string
         label: 'Path suffix'
+    # List of whitelisted paths which can be used in \Drupal\oe_multilingual_url_suffix\Event\UrlSuffixesAlterEvent
+    # event subscribers to exclude some paths from processing for example for download links.
     whitelisted_paths:
       type: sequence
       label: 'Whitelisted paths'

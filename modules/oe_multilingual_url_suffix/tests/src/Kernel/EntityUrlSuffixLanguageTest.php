@@ -80,6 +80,8 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
     // Assert that the '_en' is not found, because of our test event subscriber.
     // @see: TestUrlSuffixesAlterEventSubscriber::alterUrlSuffixes().
     $this->assertTrue(strpos($this->entity->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_en') === FALSE);
+    // Test usage of 'whitelisted_paths' value
+    // in the src/Kernel/EntityUrlSuffixLanguageTest.php event subscriber.
     $config = $this->config('oe_multilingual_url_suffix.settings');
     $values = $config->getRawData();
     $values['whitelisted_paths'] = ['/entity_test/*'];

@@ -77,7 +77,7 @@ class TestUrlSuffixesAlterEventSubscriber implements EventSubscriberInterface {
     if (!is_array($blacklist)) {
       return;
     }
-
+    // Exclude some paths from processing in this event subscriber.
     $whitelisted_paths = $this->configFactory->get('oe_multilingual_url_suffix.settings')->get('whitelisted_paths') ?? [];
     if (!$event->getPath()) {
       return;
