@@ -155,15 +155,19 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
    * @return array
    *   The array of language suffixes.
    */
-  public function getUrlSuffixes(string $path = NULL): array {
+  public function getUrlSuffixes(string $path): array {
     $url_suffixes = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes') ?? [];
 
     // Allow other modules to alter the list of suffixes available to the
     // negotiator.
     $event = new UrlSuffixesAlterEvent($url_suffixes);
+
+    // Set path value into context.
+    $context = [];
     if ($path) {
-      $event->setPath($path);
+      $context['path'] = $path;
     }
+    $event->setContext($context);
     $this->eventDispatcher->dispatch($event, UrlSuffixesAlterEvent::EVENT);
 
     return $event->getUrlSuffixes();

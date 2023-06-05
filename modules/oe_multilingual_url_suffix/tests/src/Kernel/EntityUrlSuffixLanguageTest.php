@@ -76,17 +76,14 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
     $this->assertTrue(strpos($this->entity->getTranslation('fr')->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_fr') !== FALSE);
 
     // Set the state to trigger our test event subscriber.
-    $this->container->get('state')->set(TestUrlSuffixesAlterEventSubscriber::STATE, ['en']);
+    $this->container->get('state')->set(TestUrlSuffixesAlterEventSubscriber::BLACKLISTED_SUFFIXES, ['en']);
     // Assert that the '_en' is not found, because of our test event subscriber.
     // @see: TestUrlSuffixesAlterEventSubscriber::alterUrlSuffixes().
     $this->assertTrue(strpos($this->entity->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_en') === FALSE);
-    // Test usage of 'whitelisted_paths' value
-    // in the src/Kernel/EntityUrlSuffixLanguageTest.php event subscriber.
-    $config = $this->config('oe_multilingual_url_suffix.settings');
-    $values = $config->getRawData();
-    $values['whitelisted_paths'] = ['/entity_test/*'];
-    $config->setData($values);
-    $config->save();
+    // Assert that the '_en' is found, because in our test event subscriber used
+    // path matching from context.
+    // @see: TestUrlSuffixesAlterEventSubscriber::alterUrlSuffixes().
+    $this->container->get('state')->set(TestUrlSuffixesAlterEventSubscriber::WHITELISTED_PATHS, ['/entity_test/*']);
     $this->assertTrue(strpos($this->entity->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_en') !== FALSE);
   }
 

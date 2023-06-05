@@ -24,11 +24,11 @@ class UrlSuffixesAlterEvent extends Event {
   protected $urlSuffixes;
 
   /**
-   * The path.
+   * The context.
    *
-   * @var string
+   * @var array
    */
-  protected string $path;
+  protected array $context;
 
   /**
    * The UrlSuffixesAlterEvent constructor.
@@ -61,23 +61,23 @@ class UrlSuffixesAlterEvent extends Event {
   }
 
   /**
-   * Sets the path of target URL.
+   * Sets the context with information about the current request.
    *
-   * @param string $path
-   *   The path.
+   * @param array $context
+   *   The context.
    */
-  public function setPath(string|null $path): void {
-    $this->path = $path;
+  public function setContext(array $context = []): void {
+    $this->context = $context;
   }
 
   /**
-   * Gets the path of target URL.
+   * Gets the context with information about the current request.
    *
-   * @return string|null
-   *   The path.
+   * @return array
+   *   The context.
    */
-  public function getPath(): ?string {
-    return $this->path ?? NULL;
+  public function getContext(): array {
+    return $this->context ?? [];
   }
 
 }
