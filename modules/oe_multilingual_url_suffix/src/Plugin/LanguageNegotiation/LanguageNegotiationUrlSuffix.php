@@ -149,7 +149,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
   /**
    * Get the list of url suffixes from config.
    *
-   * @param string|null $path
+   * @param string $path
    *   The path.
    *
    * @return array
@@ -164,9 +164,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
 
     // Set path value into context.
     $context = [];
-    if ($path) {
-      $context['path'] = $path;
-    }
+    $context['path'] = $path;
     $event->setContext($context);
     $this->eventDispatcher->dispatch($event, UrlSuffixesAlterEvent::EVENT);
 
