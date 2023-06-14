@@ -3,9 +3,9 @@
 namespace Drupal\oe_multilingual_front_page;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\path_alias\AliasManager;
 use Drupal\Core\PathProcessor\OutboundPathProcessorInterface;
 use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\path_alias\AliasManager;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

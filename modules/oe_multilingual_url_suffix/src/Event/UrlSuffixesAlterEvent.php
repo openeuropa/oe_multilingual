@@ -24,6 +24,13 @@ class UrlSuffixesAlterEvent extends Event {
   protected $urlSuffixes;
 
   /**
+   * The context.
+   *
+   * @var array
+   */
+  protected array $context;
+
+  /**
    * The UrlSuffixesAlterEvent constructor.
    *
    * @param array $url_suffixes
@@ -51,6 +58,26 @@ class UrlSuffixesAlterEvent extends Event {
    */
   public function getUrlSuffixes(): array {
     return $this->urlSuffixes;
+  }
+
+  /**
+   * Sets the context with information about the current request.
+   *
+   * @param array $context
+   *   The context.
+   */
+  public function setContext(array $context = []): void {
+    $this->context = $context;
+  }
+
+  /**
+   * Gets the context with information about the current request.
+   *
+   * @return array
+   *   The context.
+   */
+  public function getContext(): array {
+    return $this->context ?? [];
   }
 
 }

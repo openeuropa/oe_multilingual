@@ -7,13 +7,13 @@ namespace Drupal\oe_multilingual\Plugin\Block;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Access\AccessResultInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\language\Plugin\Block\LanguageBlock;
-use Drupal\oe_multilingual\MultilingualHelperInterface;
 use Drupal\oe_multilingual\ContentLanguageSwitcherProvider;
+use Drupal\oe_multilingual\MultilingualHelperInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\oe_multilingual_front_page\Unit;
 
+use Drupal\Core\Url;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
-use Drupal\Core\Url;
 use Drupal\Tests\Traits\Core\PathAliasTestTrait;
 
 /**

@@ -23,6 +23,7 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
    * @var array
    */
   protected static $modules = [
+    'system',
     'entity_test',
     'language',
     'user',
@@ -61,6 +62,7 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
       LanguageNegotiationUrlSuffix::METHOD_ID => 0,
     ]);
     $config->save();
+    $this->config('system.site')->set('page.front', '/')->save();
 
     $this->createTranslatableEntity();
   }
@@ -74,10 +76,15 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
     $this->assertTrue(strpos($this->entity->getTranslation('fr')->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_fr') !== FALSE);
 
     // Set the state to trigger our test event subscriber.
-    $this->container->get('state')->set(TestUrlSuffixesAlterEventSubscriber::STATE, ['en']);
+    $this->container->get('state')->set(TestUrlSuffixesAlterEventSubscriber::BLACKLISTED_SUFFIXES, ['en']);
     // Assert that the '_en' is not found, because of our test event subscriber.
     // @see: TestUrlSuffixesAlterEventSubscriber::alterUrlSuffixes().
     $this->assertTrue(strpos($this->entity->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_en') === FALSE);
+    // Assert that the '_en' is found, because in our test event subscriber used
+    // path matching from context.
+    // @see: TestUrlSuffixesAlterEventSubscriber::alterUrlSuffixes().
+    $this->container->get('state')->set(TestUrlSuffixesAlterEventSubscriber::WHITELISTED_PATHS, ['/entity_test/*']);
+    $this->assertTrue(strpos($this->entity->toUrl()->toString(), '/entity_test/' . $this->entity->id() . '_en') !== FALSE);
   }
 
   /**
