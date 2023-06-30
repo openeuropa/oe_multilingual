@@ -1,11 +1,20 @@
 # Changelog
 
+## [1.15.0](https://github.com/openeuropa/oe_multilingual/tree/1.15.0) (2023-06-30)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.14.0...1.15.0)
+
+**Merged pull requests:**
+
+- EWPP-3175: Add possibility to use whitelisted paths in event subscriber for URL suffixes. [\#144](https://github.com/openeuropa/oe_multilingual/pull/144) ([sergepavle](https://github.com/sergepavle))
+
 ## [1.14.0](https://github.com/openeuropa/oe_multilingual/tree/1.14.0) (2023-03-21)
 
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.13.0...1.14.0)
 
 **Merged pull requests:**
 
+- Release-1.14.0: Update changelog. [\#143](https://github.com/openeuropa/oe_multilingual/pull/143) ([nagyad](https://github.com/nagyad))
 - EWPP-3180: Add deprecation notice when route match is not provided. [\#142](https://github.com/openeuropa/oe_multilingual/pull/142) ([nagyad](https://github.com/nagyad))
 - EWPP-3180: Use route match to get the language switch links. [\#141](https://github.com/openeuropa/oe_multilingual/pull/141) ([nagyad](https://github.com/nagyad))
 
