@@ -23,3 +23,4 @@ url_suffixes:
   sl: sl
   fi: fi
   sv: sv
+check_entity_translation: false

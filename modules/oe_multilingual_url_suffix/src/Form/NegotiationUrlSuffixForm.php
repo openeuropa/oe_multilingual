@@ -107,6 +107,13 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
       ];
     }
 
+    $form['check_entity_translation'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Check entity translation'),
+      '#description' => $this->t('Only negotiate a language if the route contains an entity translated in that language.'),
+      '#default_value' => '',
+    ];
+
     $form_state->setRedirect('language.negotiation');
 
     return parent::buildForm($form, $form_state);
@@ -153,6 +160,7 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
     // Save configured suffixes.
     $this->config('oe_multilingual_url_suffix.settings')
       ->set('url_suffixes', $form_state->getValue('suffix'))
+      ->set('check_entity_translation', (bool) $form_state->getValue('check_entity_translation'))
       ->save();
 
     parent::submitForm($form, $form_state);
