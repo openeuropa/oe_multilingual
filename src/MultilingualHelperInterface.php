@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace Drupal\oe_multilingual;
 
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Interface for multilingual helper service.
@@ -29,5 +31,18 @@ interface MultilingualHelperInterface {
    *   The entity translation.
    */
   public function getCurrentLanguageEntityTranslation(EntityInterface $entity): EntityInterface;
+
+  /**
+   * Returns the entity from the route.
+   *
+   * It tries to get the relevant entity from the canonical route if possible.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request.
+   *
+   * @return \Drupal\Core\Entity\ContentEntityInterface|null
+   *   The entity if found.
+   */
+  public function getRequestCanonicalEntity(Request $request): ?ContentEntityInterface;
 
 }

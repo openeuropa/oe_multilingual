@@ -111,7 +111,7 @@ class NegotiationUrlSuffixForm extends ConfigFormBase {
       '#type' => 'checkbox',
       '#title' => $this->t('Check entity translation'),
       '#description' => $this->t('Only negotiate a language if the route contains an entity translated in that language.'),
-      '#default_value' => '',
+      '#default_value' => $config->get('check_entity_translation'),
     ];
 
     $form_state->setRedirect('language.negotiation');

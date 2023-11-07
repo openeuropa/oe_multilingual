@@ -6,16 +6,14 @@ namespace Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Language\LanguageInterface;
-use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\Core\Url;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
-use Drupal\oe_multilingual_url_suffix\Event\UrlSuffixesAlterEvent;
+use Drupal\oe_multilingual\MultilingualHelperInterface;
+use Drupal\oe_multilingual_url_suffix\UrlSuffixTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\RouterInterface;
 
 /**
  * Identifies the language via a URL suffix.
@@ -35,6 +33,8 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements ContainerFactoryPluginInterface {
 
+  use UrlSuffixTrait;
+
   /**
    * The language negotiation method id.
    */
@@ -53,33 +53,23 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
   protected $eventDispatcher;
 
   /**
-   * The router.
+   * The multilingual helper.
    *
-   * @var \Symfony\Component\Routing\RouterInterface
+   * @var \Drupal\oe_multilingual\MultilingualHelperInterface
    */
-  protected $router;
-
-  /**
-   * The path validator.
-   *
-   * @var \Drupal\Core\Path\PathValidatorInterface
-   */
-  protected $pathValidator;
+  protected $multilingualHelper;
 
   /**
    * Constructs a new LanguageNegotiationUrlSuffix instance.
    *
    * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
    *   The event dispatcher.
-   * @param \Symfony\Component\Routing\RouterInterface $router
-   *   The router.
-   * @param \Drupal\Core\Path\PathValidatorInterface $path_validator
-   *   The path validator.
+   * @param \Drupal\oe_multilingual\MultilingualHelperInterface $multilingual_helper
+   *   The multilingual helper.
    */
-  public function __construct(EventDispatcherInterface $event_dispatcher, RouterInterface $router, PathValidatorInterface $path_validator) {
+  public function __construct(EventDispatcherInterface $event_dispatcher, MultilingualHelperInterface $multilingual_helper) {
     $this->eventDispatcher = $event_dispatcher;
-    $this->router = $router;
-    $this->pathValidator = $path_validator;
+    $this->multilingualHelper = $multilingual_helper;
   }
 
   /**
@@ -88,8 +78,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $container->get('event_dispatcher'),
-      $container->get('router.no_access_checks'),
-      $container->get('path.validator')
+      $container->get('oe_multilingual.helper')
     );
   }
 
@@ -104,9 +93,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
 
     $url_suffixes = $this->getUrlSuffixes($request->getPathInfo());
     if ($request && $this->languageManager && $url_suffixes) {
-      $request_path = urldecode(trim($request->getPathInfo(), '/'));
-      $parts = explode(static::SUFFIX_DELIMITER, $request_path);
-      $suffix = array_pop($parts);
+      $suffix = $this->getSuffixFromPath($request->getPathInfo());
 
       // Search suffix within added languages.
       $negotiated_language = FALSE;
@@ -124,7 +111,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
           return $langcode;
         }
 
-        $entity = $this->getResolvedRouteEntity($request);
+        $entity = $this->multilingualHelper->getRequestCanonicalEntity($request);
         if (!$entity instanceof ContentEntityInterface) {
           // If we couldn't resolve an entity, we don't do anything.
           return $langcode;
@@ -149,7 +136,6 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
   public function processInbound($path, Request $request) {
     $url_suffixes = $this->getUrlSuffixes($path);
     if (!empty($url_suffixes) && is_array($url_suffixes)) {
-
       // Split the path by the defined delimiter.
       $parts = explode(static::SUFFIX_DELIMITER, trim($path, '/'));
 
@@ -191,77 +177,6 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
     }
 
     return $path;
-  }
-
-  /**
-   * Get the list of url suffixes from config.
-   *
-   * @param string $path
-   *   The path.
-   *
-   * @return array
-   *   The array of language suffixes.
-   */
-  public function getUrlSuffixes(string $path): array {
-    $url_suffixes = $this->config->get('oe_multilingual_url_suffix.settings')->get('url_suffixes') ?? [];
-
-    // Allow other modules to alter the list of suffixes available to the
-    // negotiator.
-    $event = new UrlSuffixesAlterEvent($url_suffixes);
-
-    // Set path value into context.
-    $context = [];
-    $context['path'] = $path;
-    $event->setContext($context);
-    $this->eventDispatcher->dispatch($event, UrlSuffixesAlterEvent::EVENT);
-
-    return $event->getUrlSuffixes();
-  }
-
-  /**
-   * Returns the entity from the route.
-   *
-   * It tries to get the relevant entity from the canonical route if possible.
-   *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *   The current request.
-   *
-   * @return \Drupal\Core\Entity\ContentEntityInterface|null
-   *   The entity if found.
-   *
-   * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-   * @SuppressWarnings(PHPMD.NPathComplexity)
-   */
-  protected function getResolvedRouteEntity(Request $request): ?ContentEntityInterface {
-    $url_object = $this->pathValidator->getUrlIfValid($request->getPathInfo());
-    if (!$url_object instanceof Url) {
-      return NULL;
-    }
-
-    if (!$url_object->isRouted()) {
-      return NULL;
-    }
-
-    // We only support the entity canonical route.
-    $parts = explode('.', $url_object->getRouteName());
-    if (count($parts) !== 3 || $parts[0] !== 'entity' || $parts['2'] !== 'canonical') {
-      return NULL;
-    }
-
-    $route_parameters = $url_object->getrouteParameters();
-    $match = $this->router->matchRequest($request);
-    foreach ($route_parameters as $key => $id) {
-      if (isset($match[$key])) {
-        $entity = $match[$key];
-        if ($entity instanceof ContentEntityInterface && $entity->hasLinkTemplate('canonical')) {
-          return $entity;
-        }
-      }
-
-      return NULL;
-    }
-
-    return NULL;
   }
 
 }
