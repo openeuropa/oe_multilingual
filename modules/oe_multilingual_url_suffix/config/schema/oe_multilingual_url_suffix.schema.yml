@@ -8,3 +8,6 @@ oe_multilingual_url_suffix.settings:
       sequence:
         type: string
         label: 'Path suffix'
+    check_entity_translation:
+      type: boolean
+      label: Check entity translation

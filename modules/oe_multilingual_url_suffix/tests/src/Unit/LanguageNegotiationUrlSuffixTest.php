@@ -108,7 +108,9 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
     ]);
 
     $request = Request::create('/foo_' . $suffix, 'GET');
-    $method = new LanguageNegotiationUrlSuffix($this->eventDispatcher);
+    $router = $this->createMock('\Symfony\Component\Routing\RouterInterface');
+    $path_validator = $this->createMock('\Drupal\Core\Path\PathValidatorInterface');
+    $method = new LanguageNegotiationUrlSuffix($this->eventDispatcher, $router, $path_validator);
     $method->setLanguageManager($this->languageManager);
     $method->setConfig($config);
     $method->setCurrentUser($this->user);
