@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Drupal\Tests\oe_multilingual_url_suffix\Unit;
 
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix;
@@ -109,7 +110,8 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
 
     $request = Request::create('/foo_' . $suffix, 'GET');
     $helper = $this->createMock('\Drupal\oe_multilingual\MultilingualHelperInterface');
-    $method = new LanguageNegotiationUrlSuffix($this->eventDispatcher, $helper);
+    $module_handler = $this->createMock(ModuleHandlerInterface::class);
+    $method = new LanguageNegotiationUrlSuffix($this->eventDispatcher, $helper, $module_handler);
     $method->setLanguageManager($this->languageManager);
     $method->setConfig($config);
     $method->setCurrentUser($this->user);
