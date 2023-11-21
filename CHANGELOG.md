@@ -1,11 +1,25 @@
 # Changelog
 
+## [1.16.0](https://github.com/openeuropa/oe_multilingual/tree/1.16.0) (2023-11-21)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.15.0...1.16.0)
+
+**Closed issues:**
+
+- URL suffix not working after OE Multilingual Selection Page enabled [\#136](https://github.com/openeuropa/oe_multilingual/issues/136)
+
+**Merged pull requests:**
+
+- EWPP-3215: Helper method on the multilingual helper service. [\#147](https://github.com/openeuropa/oe_multilingual/pull/147) ([upchuk](https://github.com/upchuk))
+- EWPP-3214: Suffix negotiator option to check entity translation. [\#146](https://github.com/openeuropa/oe_multilingual/pull/146) ([upchuk](https://github.com/upchuk))
+
 ## [1.15.0](https://github.com/openeuropa/oe_multilingual/tree/1.15.0) (2023-06-30)
 
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.14.0...1.15.0)
 
 **Merged pull requests:**
 
+- Release-1.15.0: Update changelog. [\#145](https://github.com/openeuropa/oe_multilingual/pull/145) ([nagyad](https://github.com/nagyad))
 - EWPP-3175: Add possibility to use whitelisted paths in event subscriber for URL suffixes. [\#144](https://github.com/openeuropa/oe_multilingual/pull/144) ([sergepavle](https://github.com/sergepavle))
 
 ## [1.14.0](https://github.com/openeuropa/oe_multilingual/tree/1.14.0) (2023-03-21)
