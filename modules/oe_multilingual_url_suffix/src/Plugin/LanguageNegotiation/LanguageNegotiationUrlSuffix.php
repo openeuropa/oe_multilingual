@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation;
 
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\BubbleableMetadata;
@@ -60,16 +61,26 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
   protected $multilingualHelper;
 
   /**
+   * The module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
    * Constructs a new LanguageNegotiationUrlSuffix instance.
    *
    * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
    *   The event dispatcher.
    * @param \Drupal\oe_multilingual\MultilingualHelperInterface $multilingual_helper
    *   The multilingual helper.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
+   *   The module handler.
    */
-  public function __construct(EventDispatcherInterface $event_dispatcher, MultilingualHelperInterface $multilingual_helper) {
+  public function __construct(EventDispatcherInterface $event_dispatcher, MultilingualHelperInterface $multilingual_helper, ModuleHandlerInterface $moduleHandler) {
     $this->eventDispatcher = $event_dispatcher;
     $this->multilingualHelper = $multilingual_helper;
+    $this->moduleHandler = $moduleHandler;
   }
 
   /**
@@ -78,7 +89,8 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $container->get('event_dispatcher'),
-      $container->get('oe_multilingual.helper')
+      $container->get('oe_multilingual.helper'),
+      $container->get('module_handler')
     );
   }
 
@@ -120,6 +132,9 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
         // If we did resolve an entity, we only return the negotiated langcode
         // if the entity has a translation.
         if ($entity->hasTranslation($langcode)) {
+          // Allow other modules to control the langcode if the entity
+          // translation checking is enabled.
+          $this->moduleHandler->alter('language_negotiation_suffix_entity_translation_langcode', $langcode, $entity);
           return $langcode;
         }
 
