@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.17.0](https://github.com/openeuropa/oe_multilingual/tree/1.17.0) (2024-01-15)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.16.0...1.17.0)
+
+**Merged pull requests:**
+
+- EWPP-3905: Make sure to use phpunit 9. [\#151](https://github.com/openeuropa/oe_multilingual/pull/151) ([imanoleguskiza](https://github.com/imanoleguskiza))
+- EWPP-3393: Allow other modules to alter the langcode of the suffix negotiator if translation check is on. [\#148](https://github.com/openeuropa/oe_multilingual/pull/148) ([upchuk](https://github.com/upchuk))
+
 ## [1.16.0](https://github.com/openeuropa/oe_multilingual/tree/1.16.0) (2023-11-21)
 
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.15.0...1.16.0)
@@ -10,6 +19,7 @@
 
 **Merged pull requests:**
 
+- Prepare release 1.16.0 [\#149](https://github.com/openeuropa/oe_multilingual/pull/149) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - EWPP-3215: Helper method on the multilingual helper service. [\#147](https://github.com/openeuropa/oe_multilingual/pull/147) ([upchuk](https://github.com/upchuk))
 - EWPP-3214: Suffix negotiator option to check entity translation. [\#146](https://github.com/openeuropa/oe_multilingual/pull/146) ([upchuk](https://github.com/upchuk))
 
