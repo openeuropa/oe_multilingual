@@ -22,6 +22,7 @@
         "openeuropa/code-review": "^2.0.0-alpha6",
         "openeuropa/task-runner-drupal-project-symlink": "^1.0-beta6",
         "phpspec/prophecy-phpunit": "^2",
+        "phpunit/phpunit": "^9.0",
         "symfony/phpunit-bridge": "^6.2",
         "symfony/validator": "~v4.4.48 || ~v6.2.5"
     },
