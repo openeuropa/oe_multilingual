@@ -70,9 +70,9 @@ pipeline:
 
 matrix:
   include:
-    - CORE_VERSION: 10.1
+    - CORE_VERSION: 10.1.8
       PHP_VERSION: 8.1
-    - CORE_VERSION: 10.1
+    - CORE_VERSION: 10.1.8
       PHP_VERSION: 8.2
     - CORE_VERSION: 10.2
       PHP_VERSION: 8.1
