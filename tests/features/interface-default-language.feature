@@ -5,7 +5,7 @@ Feature: Interface default language.
   I want the interface language to be in the site default language
 
   Scenario: As an admin, I should see admin pages in the default site language
-    Given I am logged in as a user with the "access administration pages" permission
+    Given I am logged in as a user with the "administer blocks, access administration pages" permission
     # We need to ensure locale stores the string for the first time.
     And I am on "the English administration home page"
     And I translate "Structure" in "French" to "French STR"
