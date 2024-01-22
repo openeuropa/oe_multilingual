@@ -6,30 +6,29 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.0",
-        "drupal/core": "^9.4 || ^10",
+        "php": ">=8.1",
+        "drupal/core": "^10.2.2",
         "drupal/language_selection_page": "^2.11",
-        "drupal/pathauto": "^1.8"
+        "drupal/pathauto": "^1.11"
     },
     "require-dev": {
         "composer/installers": "^1.11",
-        "drupal/core-composer-scaffold": "^9.4 || ^10",
+        "drupal/core-composer-scaffold": "^10",
         "drupal/drupal-extension": "^5.0",
         "drupal/redirect": "^1.6",
-        "drush/drush": "^11.1",
+        "drush/drush": "^12.4",
         "mikey179/vfsstream": "^1.6.10",
         "openeuropa/behat-transformation-context": "^0.2",
         "openeuropa/code-review": "^2.0.0-alpha6",
         "openeuropa/task-runner-drupal-project-symlink": "^1.0-beta6",
         "phpspec/prophecy-phpunit": "^2",
-        "phpunit/phpunit": "^9.0",
-        "symfony/phpunit-bridge": "^6.2",
-        "symfony/validator": "~v4.4.48 || ~v6.2.5"
+        "phpunit/phpunit": "^9.6",
+        "symfony/phpunit-bridge": "^6.4",
+        "symfony/validator": "~v6.4"
     },
     "_readme": [
         "Explicit minimum version requirement of symfony/phpunit-bridge to replace drupal/core-dev testing classes and traits.",
-        "Explicit requirement of mikey179/vfsstream to remove when drupal/core-dev is reinstated.",
-        "Using symfony/validator v6.2.5 for D10 like core-recommended does because 6.3 breaks BC with the signature changes to the ExecutionContextInterface. Remove after 6.3.1 is released."
+        "Explicit requirement of mikey179/vfsstream to remove when drupal/core-dev is reinstated."
     ],
     "scripts": {
         "post-install-cmd": "./vendor/bin/run drupal:site-setup",
