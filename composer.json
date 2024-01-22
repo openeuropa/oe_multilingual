@@ -7,7 +7,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.1",
-        "drupal/core": "^10.2",
+        "drupal/core": "^10",
         "drupal/language_selection_page": "^2.12",
         "drupal/pathauto": "^1.12"
     },
