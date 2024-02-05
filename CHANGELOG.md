@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.18.0](https://github.com/openeuropa/oe_multilingual/tree/1.18.0) (2024-02-05)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.17.0...1.18.0)
+
+**Merged pull requests:**
+
+- EWPP-3861: Support D10.2 and drop D9. [\#152](https://github.com/openeuropa/oe_multilingual/pull/152) ([nagyad](https://github.com/nagyad))
+
 ## [1.17.0](https://github.com/openeuropa/oe_multilingual/tree/1.17.0) (2024-01-15)
 
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.16.0...1.17.0)
@@ -7,6 +15,7 @@
 **Merged pull requests:**
 
 - EWPP-3905: Make sure to use phpunit 9. [\#151](https://github.com/openeuropa/oe_multilingual/pull/151) ([imanoleguskiza](https://github.com/imanoleguskiza))
+- Prepare release 1.17.0. [\#150](https://github.com/openeuropa/oe_multilingual/pull/150) ([imanoleguskiza](https://github.com/imanoleguskiza))
 - EWPP-3393: Allow other modules to alter the langcode of the suffix negotiator if translation check is on. [\#148](https://github.com/openeuropa/oe_multilingual/pull/148) ([upchuk](https://github.com/upchuk))
 
 ## [1.16.0](https://github.com/openeuropa/oe_multilingual/tree/1.16.0) (2023-11-21)
