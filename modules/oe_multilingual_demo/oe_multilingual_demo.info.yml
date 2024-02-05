@@ -1,7 +1,7 @@
 name: 'OE Multilingual Demo'
 type: module
 description: 'Demo module for OpenEuropa Multilingual project.'
-core_version_requirement: ^9.4 || ^10
+core_version_requirement: ^10
 package: 'OpenEuropa'
 
 dependencies:
