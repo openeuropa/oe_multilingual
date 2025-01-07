@@ -5,7 +5,7 @@
  * Post update hooks.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /**
  * Updates the language selection page to not include the private files.

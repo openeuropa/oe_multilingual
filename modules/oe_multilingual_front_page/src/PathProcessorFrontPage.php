@@ -43,7 +43,7 @@ class PathProcessorFrontPage implements OutboundPathProcessorInterface {
   /**
    * {@inheritdoc}
    */
-  public function processOutbound($path, &$options = [], Request $request = NULL, BubbleableMetadata $bubbleable_metadata = NULL) {
+  public function processOutbound($path, &$options = [], ?Request $request = NULL, ?BubbleableMetadata $bubbleable_metadata = NULL) {
     // Ensure front-page path has the configured alias of the front-page
     // in order to avoid links pointing to "/_[language_suffix]".
     if (in_array($path, ['/<front>', '/'])) {
