@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\oe_multilingual\Plugin\LanguageNegotiation;
 
@@ -28,7 +28,7 @@ class LanguageNegotiationAdmin extends LanguageNegotiationUserAdmin {
   /**
    * {@inheritdoc}
    */
-  public function getLangcode(Request $request = NULL): ?string {
+  public function getLangcode(?Request $request = NULL): ?string {
     $langcode = NULL;
 
     if ($this->currentUser->hasPermission('access administration pages') && $this->isAdminPath($request)) {

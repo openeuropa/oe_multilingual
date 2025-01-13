@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\Tests\oe_multilingual_url_suffix\Unit;
 
@@ -96,7 +96,7 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
    *
    * @dataProvider providerTestPathSuffix
    */
-  public function testPathSuffix(string $suffix, array $suffixes, string $expected_langcode = NULL): void {
+  public function testPathSuffix(string $suffix, array $suffixes, ?string $expected_langcode = NULL): void {
     $language_code = (in_array($expected_langcode, ['en', 'de'])) ? $expected_langcode : 'en';
     $this->languageManager->expects($this->any())
       ->method('getCurrentLanguage')

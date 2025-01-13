@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation;
 
@@ -100,7 +100,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
    * @SuppressWarnings(PHPMD.CyclomaticComplexity)
    * @SuppressWarnings(PHPMD.NPathComplexity)
    */
-  public function getLangcode(Request $request = NULL) {
+  public function getLangcode(?Request $request = NULL) {
     $langcode = NULL;
 
     $url_suffixes = $this->getUrlSuffixes($request->getPathInfo());
@@ -170,7 +170,7 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
   /**
    * {@inheritdoc}
    */
-  public function processOutbound($path, &$options = [], Request $request = NULL, BubbleableMetadata $bubbleable_metadata = NULL) {
+  public function processOutbound($path, &$options = [], ?Request $request = NULL, ?BubbleableMetadata $bubbleable_metadata = NULL) {
     $languages = array_flip(array_keys($this->languageManager->getLanguages()));
     // Language can be passed as an option, or we go for current URL language.
     if (!isset($options['language'])) {

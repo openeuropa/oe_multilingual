@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\oe_multilingual;
 
@@ -190,6 +190,7 @@ class LocalTranslationsBatcher {
       $this->fileSystem->dirname($extension['info']['interface translation server pattern']),
       '/.*-(' . implode('|', $langcodes) . ')\.po/'
     );
+    $message = '';
     foreach ($files as $file) {
       preg_match('/(' . implode('|', $langcodes) . ')$/', $file->name, $matches);
       $file->langcode = $matches[0];
@@ -198,12 +199,14 @@ class LocalTranslationsBatcher {
           'not_customized' => TRUE,
         ],
       ]);
-
-      $context['message'] = $this->t('Imported translation for %project (%langcode).', [
+      // Drush won't print the message for each file of the same extension, so
+      // build a single message per extension to be printed at the end.
+      $message = $message . $this->t("Imported translation for %project (%langcode).\n", [
         '%project' => $extension['name'],
         '%langcode' => $file->langcode,
       ]);
     }
+    $context['message'] = $message;
   }
 
 }

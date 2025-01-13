@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\Tests\oe_multilingual_url_suffix\Functional;
 
@@ -73,7 +73,7 @@ class LanguageNegotiationUrlSuffixTest extends BrowserTestBase {
       'language_content[enabled][language-url]' => 0,
     ];
     $this->drupalGet('admin/config/regional/language/detection');
-    $this->submitForm($edit, t('Save settings'));
+    $this->submitForm($edit, 'Save settings');
   }
 
   /**
@@ -88,14 +88,14 @@ class LanguageNegotiationUrlSuffixTest extends BrowserTestBase {
       'suffix[en]' => 'eng',
     ];
     $this->drupalGet('/admin/config/regional/language/detection/url-suffix_en', ['external' => FALSE]);
-    $this->submitForm($edit, $this->t('Save configuration'));
+    $this->submitForm($edit, 'Save configuration');
 
     $nodeValues = [
       'title[0][value]' => 'Test',
       'path[0][alias]' => '/test_eng',
     ];
     $this->drupalGet('/node/add/article_eng', ['external' => FALSE]);
-    $this->submitForm($nodeValues, $this->t('Save'));
+    $this->submitForm($nodeValues, 'Save');
     $this->assertSession()->statusCodeEquals(200);
 
     $this->drupalGet('/test_eng_eng', ['external' => FALSE]);

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\oe_multilingual;
 
@@ -57,7 +57,7 @@ class MultilingualHelper implements MultilingualHelperInterface {
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface|null $entity_type_manager
    *   The entity type manager.
    */
-  public function __construct(EntityRepositoryInterface $entity_repository, RouteMatchInterface $current_route_match, PathValidatorInterface $path_validator = NULL, EntityTypeManagerInterface $entity_type_manager = NULL) {
+  public function __construct(EntityRepositoryInterface $entity_repository, RouteMatchInterface $current_route_match, ?PathValidatorInterface $path_validator = NULL, ?EntityTypeManagerInterface $entity_type_manager = NULL) {
     if (!$path_validator) {
       $path_validator = \Drupal::service('path.validator');
     }

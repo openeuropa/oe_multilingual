@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Drupal\oe_multilingual;
 
@@ -56,7 +56,7 @@ class ContentLanguageSwitcherProvider {
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
    *   The current route match.
    */
-  public function __construct(LanguageManagerInterface $language_manager, PathMatcherInterface $path_matcher, MultilingualHelperInterface $multilingual_helper, RouteMatchInterface $route_match = NULL) {
+  public function __construct(LanguageManagerInterface $language_manager, PathMatcherInterface $path_matcher, MultilingualHelperInterface $multilingual_helper, ?RouteMatchInterface $route_match = NULL) {
     $this->languageManager = $language_manager;
     $this->pathMatcher = $path_matcher;
     $this->multilingualHelper = $multilingual_helper;
