@@ -53,6 +53,7 @@ class MultilingualCommands extends DrushCommands {
 
     drush_backend_batch_process();
     // Update config translations.
+    // @phpstan-ignore-next-line
     if ($batch = locale_config_batch_update_components([])) {
       $this->logger()->notice('Importing configuration translations...');
       batch_set($batch);
