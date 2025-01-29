@@ -1,15 +1,22 @@
-# Changelog
+# Change Log
+
+## [1.19.0](https://github.com/openeuropa/oe_multilingual/tree/1.19.0) (2025-01-29)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.18.0...1.19.0)
+
+**Merged pull requests:**
+
+- EWPP-4991: Ensure PHP8.3 compatibility. [\#158](https://github.com/openeuropa/oe_multilingual/pull/158) ([nagyad](https://github.com/nagyad))
+- EWPP-3578: Fix the message of the import-local-translations drush command. [\#157](https://github.com/openeuropa/oe_multilingual/pull/157) ([22Alexandra](https://github.com/22Alexandra))
 
 ## [1.18.0](https://github.com/openeuropa/oe_multilingual/tree/1.18.0) (2024-02-05)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.17.0...1.18.0)
 
 **Merged pull requests:**
 
+- Release-1.18.0: Update changelog. [\#153](https://github.com/openeuropa/oe_multilingual/pull/153) ([nagyad](https://github.com/nagyad))
 - EWPP-3861: Support D10.2 and drop D9. [\#152](https://github.com/openeuropa/oe_multilingual/pull/152) ([nagyad](https://github.com/nagyad))
 
 ## [1.17.0](https://github.com/openeuropa/oe_multilingual/tree/1.17.0) (2024-01-15)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.16.0...1.17.0)
 
 **Merged pull requests:**
@@ -19,7 +26,6 @@
 - EWPP-3393: Allow other modules to alter the langcode of the suffix negotiator if translation check is on. [\#148](https://github.com/openeuropa/oe_multilingual/pull/148) ([upchuk](https://github.com/upchuk))
 
 ## [1.16.0](https://github.com/openeuropa/oe_multilingual/tree/1.16.0) (2023-11-21)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.15.0...1.16.0)
 
 **Closed issues:**
@@ -33,7 +39,6 @@
 - EWPP-3214: Suffix negotiator option to check entity translation. [\#146](https://github.com/openeuropa/oe_multilingual/pull/146) ([upchuk](https://github.com/upchuk))
 
 ## [1.15.0](https://github.com/openeuropa/oe_multilingual/tree/1.15.0) (2023-06-30)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.14.0...1.15.0)
 
 **Merged pull requests:**
@@ -42,7 +47,6 @@
 - EWPP-3175: Add possibility to use whitelisted paths in event subscriber for URL suffixes. [\#144](https://github.com/openeuropa/oe_multilingual/pull/144) ([sergepavle](https://github.com/sergepavle))
 
 ## [1.14.0](https://github.com/openeuropa/oe_multilingual/tree/1.14.0) (2023-03-21)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.13.0...1.14.0)
 
 **Merged pull requests:**
@@ -52,7 +56,6 @@
 - EWPP-3180: Use route match to get the language switch links. [\#141](https://github.com/openeuropa/oe_multilingual/pull/141) ([nagyad](https://github.com/nagyad))
 
 ## [1.13.0](https://github.com/openeuropa/oe_multilingual/tree/1.13.0) (2023-03-03)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.12.0...1.13.0)
 
 **Closed issues:**
@@ -65,7 +68,6 @@
 - EWPP-2963: Drupal 10 compatibility. [\#139](https://github.com/openeuropa/oe_multilingual/pull/139) ([brummbar](https://github.com/brummbar))
 
 ## [1.12.0](https://github.com/openeuropa/oe_multilingual/tree/1.12.0) (2023-01-03)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.11.0...1.12.0)
 
 **Merged pull requests:**
@@ -74,7 +76,6 @@
 - EWPP-2787: Update to PHP 8.1. [\#137](https://github.com/openeuropa/oe_multilingual/pull/137) ([22Alexandra](https://github.com/22Alexandra))
 
 ## [1.11.0](https://github.com/openeuropa/oe_multilingual/tree/1.11.0) (2022-08-02)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.10.0...1.11.0)
 
 **Merged pull requests:**
@@ -84,7 +85,6 @@
 - EWPP-2358: Drupal 9.4 support. [\#133](https://github.com/openeuropa/oe_multilingual/pull/133) ([yenyasinn](https://github.com/yenyasinn))
 
 ## [1.10.0](https://github.com/openeuropa/oe_multilingual/tree/1.10.0) (2022-01-26)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.9.0...1.10.0)
 
 **Merged pull requests:**
@@ -93,7 +93,6 @@
 - EWPP-1907: Update to PHP8. [\#130](https://github.com/openeuropa/oe_multilingual/pull/130) ([22Alexandra](https://github.com/22Alexandra))
 
 ## [1.9.0](https://github.com/openeuropa/oe_multilingual/tree/1.9.0) (2021-10-25)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.8.0...1.9.0)
 
 **Merged pull requests:**
@@ -102,7 +101,6 @@
 - EWPP-1618: Updating language\_selection\_page version. [\#128](https://github.com/openeuropa/oe_multilingual/pull/128) ([upchuk](https://github.com/upchuk))
 
 ## [1.8.0](https://github.com/openeuropa/oe_multilingual/tree/1.8.0) (2021-07-26)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.7.0...1.8.0)
 
 **Merged pull requests:**
@@ -111,7 +109,6 @@
 - \[EWPP-1142\] EWPP-1278: Move access check to appropriate method. [\#125](https://github.com/openeuropa/oe_multilingual/pull/125) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [1.7.0](https://github.com/openeuropa/oe_multilingual/tree/1.7.0) (2021-06-15)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.6.0...1.7.0)
 
 **Merged pull requests:**
@@ -122,7 +119,6 @@
 - EWPP-721: Update xdebug configuration. [\#118](https://github.com/openeuropa/oe_multilingual/pull/118) ([22Alexandra](https://github.com/22Alexandra))
 
 ## [1.6.0](https://github.com/openeuropa/oe_multilingual/tree/1.6.0) (2021-03-11)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.5.0...1.6.0)
 
 **Merged pull requests:**
@@ -133,7 +129,6 @@
 - EWPP-516: Update docker images. [\#113](https://github.com/openeuropa/oe_multilingual/pull/113) ([22Alexandra](https://github.com/22Alexandra))
 
 ## [1.5.0](https://github.com/openeuropa/oe_multilingual/tree/1.5.0) (2020-06-23)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.4.0...1.5.0)
 
 **Merged pull requests:**
@@ -142,7 +137,6 @@
 - OPENEUROPA-3191: Add event for language url suffix alteration. [\#111](https://github.com/openeuropa/oe_multilingual/pull/111) ([nagyad](https://github.com/nagyad))
 
 ## [1.4.0](https://github.com/openeuropa/oe_multilingual/tree/1.4.0) (2020-04-08)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.3.2...1.4.0)
 
 **Merged pull requests:**
@@ -154,7 +148,6 @@
 - OPENEUROPA-2604: Update pathauto to prepare for Drupal 8.8. [\#97](https://github.com/openeuropa/oe_multilingual/pull/97) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [1.3.2](https://github.com/openeuropa/oe_multilingual/tree/1.3.2) (2020-02-19)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.3.1...1.3.2)
 
 **Merged pull requests:**
@@ -164,7 +157,6 @@
 - OPENEUROPA-2768: Remove presave that forces language configuration. [\#99](https://github.com/openeuropa/oe_multilingual/pull/99) ([nagyad](https://github.com/nagyad))
 
 ## [1.3.1](https://github.com/openeuropa/oe_multilingual/tree/1.3.1) (2020-02-05)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.3.0...1.3.1)
 
 **Merged pull requests:**
@@ -174,7 +166,6 @@
 - OPENEUROPA-0000: Prepare for 1.3.0 release. [\#96](https://github.com/openeuropa/oe_multilingual/pull/96) ([hernani](https://github.com/hernani))
 
 ## [1.3.0](https://github.com/openeuropa/oe_multilingual/tree/1.3.0) (2019-11-25)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.2.0...1.3.0)
 
 **Merged pull requests:**
@@ -185,7 +176,6 @@
 - OPENEUROPA-2258: Use PHP 7.2 in drone and docker image. [\#88](https://github.com/openeuropa/oe_multilingual/pull/88) ([dxvargas](https://github.com/dxvargas))
 
 ## [1.2.0](https://github.com/openeuropa/oe_multilingual/tree/1.2.0) (2019-10-16)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.1.4...1.2.0)
 
 **Merged pull requests:**
@@ -195,7 +185,6 @@
 - OPENEUROPA-2097: Language negotiation using URL suffix. [\#79](https://github.com/openeuropa/oe_multilingual/pull/79) ([sergepavle](https://github.com/sergepavle))
 
 ## [1.1.4](https://github.com/openeuropa/oe_multilingual/tree/1.1.4) (2019-09-23)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.1.3...1.1.4)
 
 **Merged pull requests:**
@@ -204,7 +193,6 @@
 - OPENEUROPA-2111: Remove English translations. [\#86](https://github.com/openeuropa/oe_multilingual/pull/86) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [1.1.3](https://github.com/openeuropa/oe_multilingual/tree/1.1.3) (2019-08-26)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.1.2...1.1.3)
 
 **Merged pull requests:**
@@ -213,7 +201,6 @@
 - OPENEUROPA-2147: Hotfix regarding changes in service. [\#84](https://github.com/openeuropa/oe_multilingual/pull/84) ([sergepavle](https://github.com/sergepavle))
 
 ## [1.1.2](https://github.com/openeuropa/oe_multilingual/tree/1.1.2) (2019-08-26)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.1.1...1.1.2)
 
 **Merged pull requests:**
@@ -222,7 +209,6 @@
 - OPENEUROPA-2147: Implementation of third approach with local import translations. [\#82](https://github.com/openeuropa/oe_multilingual/pull/82) ([sergepavle](https://github.com/sergepavle))
 
 ## [1.1.1](https://github.com/openeuropa/oe_multilingual/tree/1.1.1) (2019-07-02)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.1.0...1.1.1)
 
 **Merged pull requests:**
@@ -231,7 +217,6 @@
 - OPENEUROPA-2031: Blacklist language selection on private files. [\#75](https://github.com/openeuropa/oe_multilingual/pull/75) ([upchuk](https://github.com/upchuk))
 
 ## [1.1.0](https://github.com/openeuropa/oe_multilingual/tree/1.1.0) (2019-06-25)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.0.1...1.1.0)
 
 **Merged pull requests:**
@@ -241,7 +226,6 @@
 - OPENEUROPA-1922: Ensure config localization when site is installed from config. [\#71](https://github.com/openeuropa/oe_multilingual/pull/71) ([upchuk](https://github.com/upchuk))
 
 ## [1.0.1](https://github.com/openeuropa/oe_multilingual/tree/1.0.1) (2019-05-20)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.0.0...1.0.1)
 
 **Merged pull requests:**
@@ -250,7 +234,6 @@
 - OPENEUROPA-1922: Do not modify configuration in hook\_install\(\) if configuration is in syncing mode. [\#68](https://github.com/openeuropa/oe_multilingual/pull/68) ([ademarco](https://github.com/ademarco))
 
 ## [1.0.0](https://github.com/openeuropa/oe_multilingual/tree/1.0.0) (2019-05-15)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.5.0...1.0.0)
 
 **Closed issues:**
@@ -262,7 +245,6 @@
 - OPENEUROPA-1864: Create release 1.0.0. [\#67](https://github.com/openeuropa/oe_multilingual/pull/67) ([dxvargas](https://github.com/dxvargas))
 
 ## [0.5.0](https://github.com/openeuropa/oe_multilingual/tree/0.5.0) (2019-05-07)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.4.2...0.5.0)
 
 **Merged pull requests:**
@@ -271,7 +253,6 @@
 - OPENEUROPA-1813: Upgrade to 8.7 [\#63](https://github.com/openeuropa/oe_multilingual/pull/63) ([upchuk](https://github.com/upchuk))
 
 ## [0.4.2](https://github.com/openeuropa/oe_multilingual/tree/0.4.2) (2019-05-07)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.4.1...0.4.2)
 
 **Merged pull requests:**
@@ -280,7 +261,6 @@
 - OPENEUROPA-1766: Update container on drone. [\#62](https://github.com/openeuropa/oe_multilingual/pull/62) ([voidtek](https://github.com/voidtek))
 
 ## [0.4.1](https://github.com/openeuropa/oe_multilingual/tree/0.4.1) (2019-04-25)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.4.0...0.4.1)
 
 **Merged pull requests:**
@@ -289,7 +269,6 @@
 - OPENEUROPA-1794: Bug in the OE Multilingual uninstallation. [\#60](https://github.com/openeuropa/oe_multilingual/pull/60) ([upchuk](https://github.com/upchuk))
 
 ## [0.4.0](https://github.com/openeuropa/oe_multilingual/tree/0.4.0) (2019-04-23)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.3.1...0.4.0)
 
 **Merged pull requests:**
@@ -299,7 +278,6 @@
 - OPENEUROPA-1811: Fix issue with image styles generating related to language selection page. [\#57](https://github.com/openeuropa/oe_multilingual/pull/57) ([sergepavle](https://github.com/sergepavle))
 
 ## [0.3.1](https://github.com/openeuropa/oe_multilingual/tree/0.3.1) (2019-04-08)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.3.0...0.3.1)
 
 **Merged pull requests:**
@@ -308,7 +286,6 @@
 - OPENEUROPA-1754: Move content language switcher to header. [\#55](https://github.com/openeuropa/oe_multilingual/pull/55) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [0.3.0](https://github.com/openeuropa/oe_multilingual/tree/0.3.0) (2019-03-27)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.2.3...0.3.0)
 
 **Merged pull requests:**
@@ -323,7 +300,6 @@
 - OPENEUROPA-1522: Make sure we don't use Drupal paths in Behat scenarios. [\#46](https://github.com/openeuropa/oe_multilingual/pull/46) ([sergepavle](https://github.com/sergepavle))
 
 ## [0.2.3](https://github.com/openeuropa/oe_multilingual/tree/0.2.3) (2018-12-18)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.2.2...0.2.3)
 
 **Merged pull requests:**
@@ -333,7 +309,6 @@
 - OPENEUROPA-1382: Assert that the language switcher has appropriate li… [\#43](https://github.com/openeuropa/oe_multilingual/pull/43) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [0.2.2](https://github.com/openeuropa/oe_multilingual/tree/0.2.2) (2018-12-03)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.2.1...0.2.2)
 
 **Merged pull requests:**
@@ -342,7 +317,6 @@
 - OPENEUROPA-1386: Adding back the multilingual patch. [\#40](https://github.com/openeuropa/oe_multilingual/pull/40) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [0.2.1](https://github.com/openeuropa/oe_multilingual/tree/0.2.1) (2018-11-27)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.2.0...0.2.1)
 
 **Merged pull requests:**
@@ -351,7 +325,6 @@
 - OPENEUROPA-1345: Add tests for language translations. [\#37](https://github.com/openeuropa/oe_multilingual/pull/37) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [0.2.0](https://github.com/openeuropa/oe_multilingual/tree/0.2.0) (2018-11-27)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.6...0.2.0)
 
 **Merged pull requests:**
@@ -365,7 +338,6 @@
 - OPENEUROPA-660: Make it impossible for a content editor to create an initial version of a content in any language other than the default language [\#29](https://github.com/openeuropa/oe_multilingual/pull/29) ([sergepavle](https://github.com/sergepavle))
 
 ## [0.1.6](https://github.com/openeuropa/oe_multilingual/tree/0.1.6) (2018-09-27)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.5...0.1.6)
 
 **Merged pull requests:**
@@ -376,7 +348,6 @@
 - Update README to suggest installation of stable release [\#23](https://github.com/openeuropa/oe_multilingual/pull/23) ([pfrenssen](https://github.com/pfrenssen))
 
 ## [0.1.5](https://github.com/openeuropa/oe_multilingual/tree/0.1.5) (2018-08-09)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.4...0.1.5)
 
 **Merged pull requests:**
@@ -387,7 +358,6 @@
 - OPENEUROPA-721: Update code-review and grump.yml.dist file. [\#20](https://github.com/openeuropa/oe_multilingual/pull/20) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [0.1.4](https://github.com/openeuropa/oe_multilingual/tree/0.1.4) (2018-07-19)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.3...0.1.4)
 
 **Merged pull requests:**
@@ -398,7 +368,6 @@
 - OPENEUROPA-676: Make sure that Multilingual module does not depend on the OpenEuropa Theme [\#13](https://github.com/openeuropa/oe_multilingual/pull/13) ([ademarco](https://github.com/ademarco))
 
 ## [0.1.3](https://github.com/openeuropa/oe_multilingual/tree/0.1.3) (2018-06-22)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.2...0.1.3)
 
 **Merged pull requests:**
@@ -407,7 +376,6 @@
 - OPENEUROPA-652: Add European Union language list and change language weight. [\#14](https://github.com/openeuropa/oe_multilingual/pull/14) ([voidtek](https://github.com/voidtek))
 
 ## [0.1.2](https://github.com/openeuropa/oe_multilingual/tree/0.1.2) (2018-06-15)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.1...0.1.2)
 
 **Merged pull requests:**
@@ -417,7 +385,6 @@
 - OPENEUROPA-630: Fix administration\_language\_negotiation version. [\#9](https://github.com/openeuropa/oe_multilingual/pull/9) ([ademarco](https://github.com/ademarco))
 
 ## [0.1.1](https://github.com/openeuropa/oe_multilingual/tree/0.1.1) (2018-06-12)
-
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/0.1.0...0.1.1)
 
 **Merged pull requests:**
@@ -441,4 +408,4 @@
 
 
 
-\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
+\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
