@@ -50,15 +50,16 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
    * {@inheritdoc}
    */
   protected function setUp(): void {
+    parent::setUp();
     // Set up some languages to be used by the language-based path processor.
     $language_de = $this->createMock('\Drupal\Core\Language\LanguageInterface');
     $language_de->expects($this->any())
       ->method('getId')
-      ->will($this->returnValue('de'));
+      ->willReturn('de');
     $language_en = $this->createMock('\Drupal\Core\Language\LanguageInterface');
     $language_en->expects($this->any())
       ->method('getId')
-      ->will($this->returnValue('en'));
+      ->willReturn('en');
     $this->languages = [
       'de' => $language_de,
       'en' => $language_en,
@@ -71,7 +72,7 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
     $language_manager = $this->createMock('Drupal\language\ConfigurableLanguageManagerInterface');
     $language_manager->expects($this->any())
       ->method('getLanguages')
-      ->will($this->returnValue($this->languages));
+      ->willReturn($this->languages);
     $this->languageManager = $language_manager;
 
     // Create a user stub.
@@ -100,7 +101,7 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
     $language_code = (in_array($expected_langcode, ['en', 'de'])) ? $expected_langcode : 'en';
     $this->languageManager->expects($this->any())
       ->method('getCurrentLanguage')
-      ->will($this->returnValue($this->languages[$language_code]));
+      ->willReturn($this->languages[$language_code]);
 
     $config = $this->getConfigFactoryStub([
       'oe_multilingual_url_suffix.settings' => [
@@ -137,7 +138,7 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
    * @return array
    *   An array of data for checking the path suffix negotiation.
    */
-  public function providerTestPathSuffix(): array {
+  public static function providerTestPathSuffix(): array {
     $url_suffix_configuration[] = [
       'suffix' => 'de',
       'suffixes' => [
