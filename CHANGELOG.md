@@ -1,10 +1,18 @@
 # Change Log
 
+## [1.20.0](https://github.com/openeuropa/oe_multilingual/tree/1.20.0) (2025-02-26)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.19.0...1.20.0)
+
+**Merged pull requests:**
+
+- EWPP-4627: D11 update. [\#160](https://github.com/openeuropa/oe_multilingual/pull/160) ([piotrsmykaj](https://github.com/piotrsmykaj))
+
 ## [1.19.0](https://github.com/openeuropa/oe_multilingual/tree/1.19.0) (2025-01-29)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.18.0...1.19.0)
 
 **Merged pull requests:**
 
+- Release-1.19.0: Update changelog. [\#159](https://github.com/openeuropa/oe_multilingual/pull/159) ([nagyad](https://github.com/nagyad))
 - EWPP-4991: Ensure PHP8.3 compatibility. [\#158](https://github.com/openeuropa/oe_multilingual/pull/158) ([nagyad](https://github.com/nagyad))
 - EWPP-3578: Fix the message of the import-local-translations drush command. [\#157](https://github.com/openeuropa/oe_multilingual/pull/157) ([22Alexandra](https://github.com/22Alexandra))
 
