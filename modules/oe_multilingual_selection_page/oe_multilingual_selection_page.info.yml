@@ -1,7 +1,7 @@
 name: 'OpenEuropa Multilingual Selection Page'
 type: module
 description: 'Generates a Language Selection Page used on first access to a multilingual site.'
-core_version_requirement: ^10
+core_version_requirement: ^10.3 || ^11
 package: 'OpenEuropa'
 
 dependencies:
