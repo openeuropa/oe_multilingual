@@ -138,7 +138,9 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
           return $langcode;
         }
 
-        return NULL;
+        $langcode = NULL;
+        $this->moduleHandler->alter('language_negotiation_suffix_entity_translation_langcode', $langcode, $entity);
+        return $langcode;
       }
     }
 
