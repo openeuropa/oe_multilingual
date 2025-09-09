@@ -1,10 +1,20 @@
 # Change Log
 
+## [1.21.0](https://github.com/openeuropa/oe_multilingual/tree/1.21.0) (2025-09-09)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.20.0...1.21.0)
+
+**Merged pull requests:**
+
+- EWPP-5768: Update Drupal to 10.5. [\#164](https://github.com/openeuropa/oe_multilingual/pull/164) ([intelektron](https://github.com/intelektron))
+- EWPP-5699: Update docker PHP image. [\#163](https://github.com/openeuropa/oe_multilingual/pull/163) ([nagyad](https://github.com/nagyad))
+- EWPP-5481: Fixing language\_negotiation\_suffix\_entity\_translation\_langcode. [\#162](https://github.com/openeuropa/oe_multilingual/pull/162) ([upchuk](https://github.com/upchuk))
+
 ## [1.20.0](https://github.com/openeuropa/oe_multilingual/tree/1.20.0) (2025-02-26)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.19.0...1.20.0)
 
 **Merged pull requests:**
 
+- Release-1.20.0: Update changelog. [\#161](https://github.com/openeuropa/oe_multilingual/pull/161) ([nagyad](https://github.com/nagyad))
 - EWPP-4627: D11 update. [\#160](https://github.com/openeuropa/oe_multilingual/pull/160) ([piotrsmykaj](https://github.com/piotrsmykaj))
 
 ## [1.19.0](https://github.com/openeuropa/oe_multilingual/tree/1.19.0) (2025-01-29)
