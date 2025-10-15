@@ -1,0 +1,4 @@
+services:
+  Drupal\oe_multilingual_url_suffix\Hook\OeMultilingualUrlSuffixHooks:
+    class: Drupal\oe_multilingual_url_suffix\Hook\OeMultilingualUrlSuffixHooks
+    autowire: true
