@@ -1,5 +1,14 @@
 # Change Log
 
+## [1.22.0](https://github.com/openeuropa/oe_multilingual/tree/1.22.0) (2025-11-17)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.21.0...1.22.0)
+
+**Merged pull requests:**
+
+- EWPP-6063: Upgrade to Drupal 11.2. [\#168](https://github.com/openeuropa/oe_multilingual/pull/168) ([sergepavle](https://github.com/sergepavle))
+- EWPP-6038: Support gitlab CI. [\#166](https://github.com/openeuropa/oe_multilingual/pull/166) ([hernani](https://github.com/hernani))
+
 ## [1.21.0](https://github.com/openeuropa/oe_multilingual/tree/1.21.0) (2025-09-09)
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.20.0...1.21.0)
 
