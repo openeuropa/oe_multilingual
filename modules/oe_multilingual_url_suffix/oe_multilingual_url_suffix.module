@@ -7,9 +7,8 @@
 
 declare(strict_types=1);
 
-use Drupal\Core\Language\LanguageInterface;
-use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrlFallback;
-use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotiationUrlSuffix;
+use Drupal\Core\Hook\Attribute\LegacyHook;
+use Drupal\oe_multilingual_url_suffix\Hook\OeMultilingualUrlSuffixHooks;
 
 /**
  * Implements hook_language_types_info_alter().
@@ -22,10 +21,9 @@ use Drupal\oe_multilingual_url_suffix\Plugin\LanguageNegotiation\LanguageNegotia
  * manager) that rely exclusively on the URL type.
  *
  * @see \language_language_types_info_alter()
+ * @phpstan-ignore-next-line
  */
+#[LegacyHook]
 function oe_multilingual_url_suffix_language_types_info_alter(array &$language_types) {
-  $language_types[LanguageInterface::TYPE_URL]['fixed'] = [
-    LanguageNegotiationUrlSuffix::METHOD_ID,
-    LanguageNegotiationUrlFallback::METHOD_ID,
-  ];
+  return \Drupal::service(OeMultilingualUrlSuffixHooks::class)->languageTypesInfoAlter($language_types);
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\oe_multilingual_front_page\Unit;
+namespace Drupal\Tests\oe_multilingual_front_page\Kernel;
 
 use Drupal\Core\Url;
 use Drupal\KernelTests\KernelTestBase;

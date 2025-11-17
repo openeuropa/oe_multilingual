@@ -1,2 +1,5 @@
 includes:
   - ./vendor/openeuropa/code-review-drupal/dist/phpstan.drupal.neon
+parameters:
+  # @todo Remove when removing '@phpstan-ignore' from Drupal\oe_multilingual_url_suffix\Hook\OeMultilingualUrlSuffixHooks class.
+  reportUnmatchedIgnoredErrors: false
