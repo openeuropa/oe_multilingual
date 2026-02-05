@@ -161,7 +161,8 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
 
       // If the suffix is one of the configured language suffix, rebuild the
       // path to remove it.
-      if (array_search($suffix, $url_suffixes)) {
+      $langcode = array_search($suffix, $url_suffixes);
+      if ($langcode) {
         $path = '/' . implode(static::SUFFIX_DELIMITER, $parts);
       }
     }
