@@ -34,6 +34,7 @@ class PathProcessorFrontPageTest extends KernelTestBase {
   protected static $modules = [
     'entity_test',
     'node',
+    'node_storage_body_field',
     'system',
     'path',
     'field',
@@ -58,7 +59,7 @@ class PathProcessorFrontPageTest extends KernelTestBase {
     $this->installEntitySchema('user');
     $this->installEntitySchema('node');
     $this->installEntitySchema('path_alias');
-    $this->installConfig(['system', 'node', 'filter']);
+    $this->installConfig(['system', 'node', 'node_storage_body_field', 'filter']);
 
     ConfigurableLanguage::createFromLangcode('fr')->save();
   }

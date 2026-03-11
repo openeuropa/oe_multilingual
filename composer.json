@@ -7,6 +7,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.1",
+        "drupal/backport_node_storage_body_field": "^1 || ^2",
         "drupal/core": "^10.3 || ^11",
         "drupal/language_selection_page": "^3.0",
         "drupal/pathauto": "^1.12"

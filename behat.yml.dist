@@ -29,13 +29,12 @@ default:
           browserName: chrome
           version: '*'
           extra_capabilities:
-            chromeOptions:
-              w3c: false
+            goog:chromeOptions:
+              w3c: true
               args:
                 - '--no-sandbox'
-                - '--start-maximized'
+                - '--window-size=1920,1080'
                 - '--disable-gpu'
-                - '--window-size=1280,800'
                 - '--disable-dev-shm-usage'
                 - '--disable-setuid-sandbox'
                 - '--disable-web-security'
