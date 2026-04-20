@@ -1,4 +1,15 @@
-# Change Log
+# Changelog
+
+## [1.23.0](https://github.com/openeuropa/oe_multilingual/tree/1.23.0) (2026-04-20)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.22.0...1.23.0)
+
+**Merged pull requests:**
+
+- EWPP-6671: Unlock drupal-extension. [\#177](https://github.com/openeuropa/oe_multilingual/pull/177) ([intelektron](https://github.com/intelektron))
+- EWPP-3782: Ensure language specific redirects work. [\#172](https://github.com/openeuropa/oe_multilingual/pull/172) ([nagyad](https://github.com/nagyad))
+- EWPP-6400: Update testing matrix. [\#171](https://github.com/openeuropa/oe_multilingual/pull/171) ([nagyad](https://github.com/nagyad))
+- EWPP-6261: Bump composer/installers to 2.x. [\#170](https://github.com/openeuropa/oe_multilingual/pull/170) ([nagyad](https://github.com/nagyad))
 
 ## [1.22.0](https://github.com/openeuropa/oe_multilingual/tree/1.22.0) (2025-11-17)
 
@@ -6,6 +17,7 @@
 
 **Merged pull requests:**
 
+- Release-1.22.0: Update changelog. [\#169](https://github.com/openeuropa/oe_multilingual/pull/169) ([hernani](https://github.com/hernani))
 - EWPP-6063: Upgrade to Drupal 11.2. [\#168](https://github.com/openeuropa/oe_multilingual/pull/168) ([sergepavle](https://github.com/sergepavle))
 - EWPP-6038: Support gitlab CI. [\#166](https://github.com/openeuropa/oe_multilingual/pull/166) ([hernani](https://github.com/hernani))
 
