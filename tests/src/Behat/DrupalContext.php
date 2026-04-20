@@ -154,7 +154,7 @@ class DrupalContext extends RawDrupalContext {
    */
   public function theDefaultSiteLanguageIs(string $name): void {
     $language = $this->getLanguageIdByName($name);
-    $this->configContext->setConfig('system.site', 'default_langcode', $language);
+    $this->configContext->setBasicConfig('system.site', 'default_langcode', $language);
   }
 
   /**
@@ -328,16 +328,25 @@ class DrupalContext extends RawDrupalContext {
     $enabled_interface_methods = $config->get('negotiation.' . LanguageInterface::TYPE_INTERFACE . '.enabled');
     $enabled_interface_methods[LanguageNegotiationUrlSuffix::METHOD_ID] = $enabled_interface_methods[LanguageNegotiationUrl::METHOD_ID] ?? -19;
     unset($enabled_interface_methods[LanguageNegotiationUrl::METHOD_ID]);
-    $this->configContext->setConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_INTERFACE . '.enabled', $enabled_interface_methods);
-    $this->configContext->setConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_INTERFACE . '.method_weights', $enabled_interface_methods);
+    $node_array = [['key', 'value']];
+    foreach ($enabled_interface_methods as $key => $method) {
+      $node_array[] = [(string) $key, (string) $method];
+    }
+    $this->configContext->setComplexConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_INTERFACE . '.enabled', new TableNode($node_array));
+    $this->configContext->setComplexConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_INTERFACE . '.method_weights', new TableNode($node_array));
 
     // Replace the default prefix URL negotiator with our suffix Url negotiator
     // on the content negotiation methods.
     $enabled_content_methods = $config->get('negotiation.' . LanguageInterface::TYPE_CONTENT . '.enabled');
     $enabled_content_methods[LanguageNegotiationUrlSuffix::METHOD_ID] = $enabled_content_methods[LanguageNegotiationUrl::METHOD_ID] ?? -19;
     unset($enabled_content_methods[LanguageNegotiationUrl::METHOD_ID]);
-    $this->configContext->setConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_CONTENT . '.enabled', $enabled_content_methods);
-    $this->configContext->setConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_CONTENT . '.method_weights', $enabled_content_methods);
+
+    $node_array = [['key', 'value']];
+    foreach ($enabled_interface_methods as $key => $method) {
+      $node_array[] = [(string) $key, (string) $method];
+    }
+    $this->configContext->setComplexConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_CONTENT . '.enabled', new TableNode($node_array));
+    $this->configContext->setComplexConfig(LanguageNegotiationSetter::CONFIG_NAME, 'negotiation.' . LanguageInterface::TYPE_CONTENT . '.method_weights', new TableNode($node_array));
   }
 
   /**
