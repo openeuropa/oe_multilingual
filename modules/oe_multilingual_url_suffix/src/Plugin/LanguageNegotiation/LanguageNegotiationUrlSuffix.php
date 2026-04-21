@@ -12,6 +12,7 @@ use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Drupal\oe_multilingual\MultilingualHelperInterface;
 use Drupal\oe_multilingual_url_suffix\UrlSuffixTrait;
+use Drupal\path_alias\AliasManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,6 +69,13 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
   protected $moduleHandler;
 
   /**
+   * The alias manager.
+   *
+   * @var \Drupal\path_alias\AliasManagerInterface
+   */
+  protected $aliasManager;
+
+  /**
    * Constructs a new LanguageNegotiationUrlSuffix instance.
    *
    * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
@@ -76,11 +84,14 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
    *   The multilingual helper.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    *   The module handler.
+   * @param \Drupal\path_alias\AliasManagerInterface $alias_manager
+   *   The alias manager.
    */
-  public function __construct(EventDispatcherInterface $event_dispatcher, MultilingualHelperInterface $multilingual_helper, ModuleHandlerInterface $moduleHandler) {
+  public function __construct(EventDispatcherInterface $event_dispatcher, MultilingualHelperInterface $multilingual_helper, ModuleHandlerInterface $moduleHandler, AliasManagerInterface $alias_manager) {
     $this->eventDispatcher = $event_dispatcher;
     $this->multilingualHelper = $multilingual_helper;
     $this->moduleHandler = $moduleHandler;
+    $this->aliasManager = $alias_manager;
   }
 
   /**
@@ -90,7 +101,8 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
     return new static(
       $container->get('event_dispatcher'),
       $container->get('oe_multilingual.helper'),
-      $container->get('module_handler')
+      $container->get('module_handler'),
+      $container->get('path_alias.manager')
     );
   }
 
@@ -163,7 +175,15 @@ class LanguageNegotiationUrlSuffix extends LanguageNegotiationUrl implements Con
       // path to remove it.
       $langcode = array_search($suffix, $url_suffixes);
       if ($langcode) {
-        $path = '/' . implode(static::SUFFIX_DELIMITER, $parts);
+        $stripped = '/' . implode(static::SUFFIX_DELIMITER, $parts);
+        // When the stripped path also ends with a language suffix, only
+        // use it if an alias exists. Without this check, a wrong path such as
+        // "/foo_en_en" could match a redirect source "/foo_en" and loop (503).
+        if ($parts && in_array(end($parts), $url_suffixes, TRUE)
+          && $this->aliasManager->getPathByAlias($stripped, $langcode) === $stripped) {
+          return $path;
+        }
+        $path = $stripped;
       }
     }
 
