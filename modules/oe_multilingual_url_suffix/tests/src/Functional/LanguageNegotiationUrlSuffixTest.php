@@ -103,6 +103,11 @@ class LanguageNegotiationUrlSuffixTest extends BrowserTestBase {
 
     $this->drupalGet('/test_eng');
     $this->assertSession()->statusCodeEquals(404);
+
+    // A double language suffix on a path with no alias must 404 without
+    // stripping, so it cannot match a redirect source and loop (503).
+    $this->drupalGet('/unknown_eng_eng', ['external' => FALSE]);
+    $this->assertSession()->statusCodeEquals(404);
   }
 
   /**

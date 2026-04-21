@@ -112,7 +112,8 @@ class LanguageNegotiationUrlSuffixTest extends UnitTestCase {
     $request = Request::create('/foo_' . $suffix, 'GET');
     $helper = $this->createMock('\Drupal\oe_multilingual\MultilingualHelperInterface');
     $module_handler = $this->createMock(ModuleHandlerInterface::class);
-    $method = new LanguageNegotiationUrlSuffix($this->eventDispatcher, $helper, $module_handler);
+    $alias_manager = $this->createMock('\Drupal\path_alias\AliasManagerInterface');
+    $method = new LanguageNegotiationUrlSuffix($this->eventDispatcher, $helper, $module_handler, $alias_manager);
     $method->setLanguageManager($this->languageManager);
     $method->setConfig($config);
     $method->setCurrentUser($this->user);
