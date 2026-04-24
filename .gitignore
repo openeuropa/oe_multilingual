@@ -8,6 +8,7 @@ junit-export
 node_modules
 npm-debug.log
 package-lock.json
+recipes
 runner.yml
 vendor
 yarn.lock
