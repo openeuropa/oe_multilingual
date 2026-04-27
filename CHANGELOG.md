@@ -1,8 +1,8 @@
 # Changelog
 
-## [1.24Ω.0](https://github.com/openeuropa/oe_multilingual/tree/1.24Ω.0) (2026-04-27)
+## [1.24.0](https://github.com/openeuropa/oe_multilingual/tree/1.24.0) (2026-04-27)
 
-[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.23.0...1.24Ω.0)
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.23.0...1.24.0)
 
 **Merged pull requests:**
 
