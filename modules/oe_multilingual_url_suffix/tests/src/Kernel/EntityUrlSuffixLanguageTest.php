@@ -26,6 +26,7 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
     'system',
     'entity_test',
     'language',
+    'path_alias',
     'user',
     'oe_multilingual',
     'oe_multilingual_url_suffix',
@@ -47,6 +48,7 @@ class EntityUrlSuffixLanguageTest extends LanguageTestBase {
 
     $this->installEntitySchema('entity_test');
     $this->installEntitySchema('configurable_language');
+    $this->installEntitySchema('path_alias');
     $this->installConfig([
       'language',
       'oe_multilingual',
