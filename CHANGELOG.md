@@ -1,11 +1,20 @@
 # Changelog
 
+## [1.25.0](https://github.com/openeuropa/oe_multilingual/tree/1.25.0) (2026-06-02)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.24.0...1.25.0)
+
+**Merged pull requests:**
+
+- EWPP-6549: Do not rebuild paths containing double language codes to avoid redirect loops. [\#178](https://github.com/openeuropa/oe_multilingual/pull/178) ([22Alexandra](https://github.com/22Alexandra))
+
 ## [1.24.0](https://github.com/openeuropa/oe_multilingual/tree/1.24.0) (2026-04-27)
 
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.23.0...1.24.0)
 
 **Merged pull requests:**
 
+- Release-1.24.0: Update changelog. [\#179](https://github.com/openeuropa/oe_multilingual/pull/179) ([nagyad](https://github.com/nagyad))
 - EWPP-6514: Support D11.3. [\#175](https://github.com/openeuropa/oe_multilingual/pull/175) ([nagyad](https://github.com/nagyad))
 
 ## [1.23.0](https://github.com/openeuropa/oe_multilingual/tree/1.23.0) (2026-04-20)
