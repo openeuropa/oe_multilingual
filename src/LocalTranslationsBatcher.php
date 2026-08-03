@@ -164,8 +164,14 @@ class LocalTranslationsBatcher {
   protected function getExtensionsToTranslate(): array {
     $extensions = [];
     $all_extensions = array_merge($this->moduleExtensionList->getList(), $this->themeExtensionList->getList(), $this->profileExtensionList->getList());
-    foreach ($all_extensions as $name => $module) {
-      if (!isset($module->info['interface translation project'])) {
+    foreach ($all_extensions as $name => $extension) {
+      if (!isset($extension->info['interface translation project'])) {
+        continue;
+      }
+
+      // Only extensions that declare where their local translations live can be
+      // imported.
+      if (!isset($extension->info['interface translation server pattern'])) {
         continue;
       }
 
@@ -174,10 +180,16 @@ class LocalTranslationsBatcher {
         continue;
       }
 
-      $extensions[] = $name;
+      // Build the project definition directly from the extension info, keyed by
+      // the translation project name.
+      $project = $extension->info['interface translation project'];
+      $extensions[$project] = [
+        'name' => $project,
+        'info' => $extension->info,
+      ];
     }
 
-    return array_intersect_key(locale_translation_project_list(), array_combine($extensions, $extensions));
+    return $extensions;
   }
 
   /**
