@@ -169,9 +169,20 @@ class LocalTranslationsBatcher {
         continue;
       }
 
+      // Extensions may also supply the server pattern dynamically via
+      // hook_locale_translation_projects_alter().
+      $info = $extension->info;
+      if (!isset($info['interface translation server pattern'])) {
+        $projects = [
+          $info['interface translation project'] => ['info' => $info],
+        ];
+        $this->moduleHandler->alter('locale_translation_projects', $projects);
+        $info = reset($projects)['info'];
+      }
+
       // Only extensions that declare where their local translations live can be
       // imported.
-      if (!isset($extension->info['interface translation server pattern'])) {
+      if (!isset($info['interface translation server pattern'])) {
         continue;
       }
 
@@ -182,10 +193,10 @@ class LocalTranslationsBatcher {
 
       // Build the project definition directly from the extension info, keyed by
       // the translation project name.
-      $project = $extension->info['interface translation project'];
+      $project = $info['interface translation project'];
       $extensions[$project] = [
         'name' => $project,
-        'info' => $extension->info,
+        'info' => $info,
       ];
     }
 
