@@ -31,7 +31,7 @@ class LanguageNegotiationAdmin extends LanguageNegotiationUserAdmin {
   public function getLangcode(?Request $request = NULL): ?string {
     $langcode = NULL;
 
-    if ($this->currentUser->hasPermission('access administration pages') && $this->isAdminPath($request)) {
+    if ($this->currentUser->id() && $this->currentUser->hasPermission('access administration pages') && $this->isAdminPath($request)) {
       $langcode = $this->languageManager->getDefaultLanguage()->getId();
     }
 

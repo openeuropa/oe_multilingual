@@ -49,6 +49,9 @@ trait UrlSuffixTrait {
    *   The suffix.
    */
   public function getSuffixFromPath(string $path): string {
+    if (str_ends_with($path, '.md')) {
+      $path = str_replace('.md', '', $path);
+    }
     $parsed = UrlHelper::parse($path);
     $path = urldecode(trim($parsed['path'], '/'));
     $parts = explode(LanguageNegotiationUrlSuffix::SUFFIX_DELIMITER, $path);
