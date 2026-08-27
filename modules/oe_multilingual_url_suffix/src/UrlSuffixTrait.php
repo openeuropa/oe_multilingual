@@ -49,8 +49,7 @@ trait UrlSuffixTrait {
    *   The suffix.
    */
   public function getSuffixFromPath(string $path): string {
-    $parsed = UrlHelper::parse($path);
-    $path = urldecode(trim($parsed['path'], '/'));
+    $path = urldecode(trim($path, '/'));
     $parts = explode(LanguageNegotiationUrlSuffix::SUFFIX_DELIMITER, $path);
     return $parts ? array_pop($parts) : '';
   }
