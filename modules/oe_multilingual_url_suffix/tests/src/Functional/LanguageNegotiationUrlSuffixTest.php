@@ -74,6 +74,12 @@ class LanguageNegotiationUrlSuffixTest extends BrowserTestBase {
     ];
     $this->drupalGet('admin/config/regional/language/detection');
     $this->submitForm($edit, 'Save settings');
+
+    // Reload config that has changed.
+    // @todo Use a less aggressive method.
+    $this->rebuildContainer();
+    // Check if the ->drupalLogin() method works with language suffix.
+    $this->drupalLogin($this->user);
   }
 
   /**
