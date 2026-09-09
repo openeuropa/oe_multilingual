@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.26.0](https://github.com/openeuropa/oe_multilingual/tree/1.26.0) (2026-09-09)
+
+[Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.25.0...1.26.0)
+
+**Merged pull requests:**
+
+- EWPP-7142: Allow dynamic definition of local translations path. [\#184](https://github.com/openeuropa/oe_multilingual/pull/184) ([intelektron](https://github.com/intelektron))
+- EWPP-6988: Trigger pipeline. [\#182](https://github.com/openeuropa/oe_multilingual/pull/182) ([nagyad](https://github.com/nagyad))
+
 ## [1.25.0](https://github.com/openeuropa/oe_multilingual/tree/1.25.0) (2026-06-02)
 
 [Full Changelog](https://github.com/openeuropa/oe_multilingual/compare/1.24.0...1.25.0)
